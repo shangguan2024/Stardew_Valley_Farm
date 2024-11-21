@@ -1,0 +1,103 @@
+# --- 操作系统相关 ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Cocos2d-x 临时文件 ---
+cocos2d/cocos/2d/Debug.win32/
+cocos2d/cocos/2d/Release.win32/
+cocos2d/cocos/2d/libcocos2d.pch
+
+# --- 运行时生成文件 ---
+*.log
+*.tmp
+*.bak
+
+# --- Xcode 相关 ---
+build/
+xcuserdata/
+*.xcuserstate
+
+# --- Visual Studio 相关 ---
+*.sdf
+*.opensdf
+*.sou
+*.VC.db
+*.VC.VC.opendb
+ipch/
+.vs/
+
+# 忽略 proj.win32 文件夹下的 VS 临时文件
+proj.win32/Debug.win32/
+proj.win32/Release.win32/
+proj.win32/.vs/
+
+# 忽略所有 `.pch` 和 `.ipch` 文件
+*.pch
+*.ipch
+
+# 忽略具体超大文件
+proj.win32/.vs/Stardew_Valley_Farm/v17/ipch/
+proj.win32/.vs/Stardew_Valley_Farm/v17/ipch/1bf3d56e3eced4ef.ipch
+proj.win32/.vs/Stardew_Valley_Farm/v17/ipch/AutoPCH/
+
+# --- Android Studio/Gradle 相关 ---
+.gradle/
+local.properties
+.idea/
+*.iml
+build/
+
+# --- Cocos2d-x 项目相关 ---
+proj.android/app/build/
+proj.android/.externalNativeBuild/
+proj.android/local.properties
+proj.android/.cxx/
+proj.android/.gradle/
+proj.android/.idea/
+
+# --- CMake 相关 ---
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# --- 编译输出文件 ---
+bin/
+lib/
+*.o
+*.obj
+*.so
+*.a
+*.dylib
+*.dll
+*.exe
+*.lib
+*.pdb
+
+# --- User-specific Files ---
+*.swp
+*.swo
+*.user
+*.session
+*.ncb
+*.class
+*.pyc
+*.pyo
+*.pyd
+
+# --- 通用规则 ---
+# 忽略生成的目录
+*.log
+*.tmp
+*.bak
+*.pid
+*.seed
+*.sync
+*.swp
+*.db
+
+# --- 资源文件备选 ---
+# 如果你不希望某些资源（比如大的图片或音频）被提交，可以单独配置路径
+# assets/raw/
+# res/high_resolution/
