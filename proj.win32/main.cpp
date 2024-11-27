@@ -1,7 +1,7 @@
 /****************************************************************************
- Copyright (c) 2017-2018 Xiamen Yaji Software Co., Ltd.
- 
- http://www.cocos2d-x.org
+ MIT License
+
+ Copyright (c) 2024 Xiang Zhang
  
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
@@ -22,9 +22,12 @@
  THE SOFTWARE.
  ****************************************************************************/
 
-#include "main.h"
+#define WIN32_LEAN_AND_MEAN // Exclude rarely-used stuff from Windows headers
+
+#include <Windows.h>
+#include <tchar.h>
+#include "platform/CCStdC.h"
 #include "AppDelegate/AppDelegate.h"
-#include "cocos2d.h"
 
 USING_NS_CC;
 
