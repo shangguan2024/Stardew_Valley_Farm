@@ -25,6 +25,7 @@
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
 
+
 USING_NS_CC;
 
 Scene* HelloWorld::createScene()
@@ -86,10 +87,11 @@ bool HelloWorld::init()
     // add a label shows "Hello World"
     // create and initialize a label
 
-    auto label = Label::createWithTTF("Hello World", "fonts/Marker Felt.ttf", 24);
+
+    auto label = Label::createWithTTF("你好", "fonts/FangZhengZhaoGeYuan.ttf", 24);
     if (label == nullptr)
     {
-        problemLoading("'fonts/Marker Felt.ttf'");
+        problemLoading("'fonts/FangZhengZhaoGeYuan.ttf'");
     }
     else
     {
