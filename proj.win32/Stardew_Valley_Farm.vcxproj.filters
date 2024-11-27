@@ -18,7 +18,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="Main.cpp">
       <Filter>Win32</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\AppDelegate\AppDelegate.cpp">
@@ -29,7 +29,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="main.h">
+    <ClInclude Include="Main.h">
       <Filter>Win32</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\AppDelegate\AppDelegate.h">
@@ -40,7 +40,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="game.rc">
+    <ResourceCompile Include="Icon.rc">
       <Filter>Resource</Filter>
     </ResourceCompile>
   </ItemGroup>
