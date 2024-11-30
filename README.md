@@ -14,7 +14,7 @@ Stardew_Valley_Farm
 # 项目组成
 
 # 项目实现功能与项目技术细节
-
+- 本项目所使用所有游戏素材均来自 [星露谷wiki百科](https://zh.stardewvalleywiki.com/Stardew_Valley_Wiki) 
 # 项目开发日志
 ## 2024/11/23
 - Python 环境配置
