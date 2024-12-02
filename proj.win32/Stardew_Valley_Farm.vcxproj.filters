@@ -16,6 +16,24 @@
     <Filter Include="Classes\Scene">
       <UniqueIdentifier>{431587d8-847e-4e5f-b45a-ec193003c503}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Button">
+      <UniqueIdentifier>{35fec0de-c4d7-441d-adfa-39b2d8954f43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Layer">
+      <UniqueIdentifier>{bffa381f-ced2-4778-a214-b314b84c5c42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Sprite">
+      <UniqueIdentifier>{8abbea65-744d-4d06-83f1-09739050405f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Map">
+      <UniqueIdentifier>{7dcc8eb3-dc3e-401e-9129-fd4ac1ea0bd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Player">
+      <UniqueIdentifier>{27707bc5-b48a-4d15-84bb-d875400efcbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Item">
+      <UniqueIdentifier>{d99e5f8a-957a-44e1-953d-005a3c78c6b7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -24,19 +42,109 @@
     <ClCompile Include="..\Classes\AppDelegate\AppDelegate.cpp">
       <Filter>Classes\AppDelegate</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Scene\HelloWorldScene.cpp">
+    <ClCompile Include="..\Classes\Button\HoverButton.cpp">
+      <Filter>Classes\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Scene\MenuScene.cpp">
       <Filter>Classes\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Layer\BackPackLayer.cpp">
+      <Filter>Classes\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Layer\ChatLayer.cpp">
+      <Filter>Classes\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Scene\SaveLoadScene.cpp">
+      <Filter>Classes\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Sprite\NPC.cpp">
+      <Filter>Classes\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Sprite\Animal.cpp">
+      <Filter>Classes\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Map\FarmHouseScene.cpp">
+      <Filter>Classes\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Map\FarmYardScene.cpp">
+      <Filter>Classes\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Player\Player.cpp">
+      <Filter>Classes\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Item\Tool.cpp">
+      <Filter>Classes\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Item\Seed.cpp">
+      <Filter>Classes\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Item\Item.cpp">
+      <Filter>Classes\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Sprite\Plant.cpp">
+      <Filter>Classes\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Player\Bag.cpp">
+      <Filter>Classes\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Player\SkillTree.cpp">
+      <Filter>Classes\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate\AppDelegate.h">
       <Filter>Classes\AppDelegate</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Scene\HelloWorldScene.h">
+    <ClInclude Include="Constant.h">
+      <Filter>Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Button\HoverButton.h">
+      <Filter>Classes\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Scene\MenuScene.h">
       <Filter>Classes\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>Win32</Filter>
+    <ClInclude Include="..\Classes\Layer\BackPackLayer.h">
+      <Filter>Classes\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Layer\ChatLayer.h">
+      <Filter>Classes\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Scene\SaveLoadScene.h">
+      <Filter>Classes\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Sprite\NPC.h">
+      <Filter>Classes\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Sprite\Animal.h">
+      <Filter>Classes\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Map\FarmHouseScene.h">
+      <Filter>Classes\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Map\FarmYardScene.h">
+      <Filter>Classes\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Player\Player.h">
+      <Filter>Classes\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Item\Tool.h">
+      <Filter>Classes\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Item\Seed.h">
+      <Filter>Classes\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Item\Item.h">
+      <Filter>Classes\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Sprite\Plant.h">
+      <Filter>Classes\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Player\Bag.h">
+      <Filter>Classes\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Player\SkillTree.h">
+      <Filter>Classes\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
