@@ -1,3 +1,11 @@
+/****************************************************************
+ * Project Name:  Stardew_Valley_Farm
+ * File Name:     MenuScene.h
+ * File Function: MenuScene类的定义
+ * Author:        张翔
+ * Update Date:   2024/12/3
+ ****************************************************************/
+
 #ifndef __MENU_SCENE_H__
 #define __MENU_SCENE_H__
 

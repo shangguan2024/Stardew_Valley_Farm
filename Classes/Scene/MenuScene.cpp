@@ -1,5 +1,15 @@
+/****************************************************************
+ * Project Name:  Stardew_Valley_Farm
+ * File Name:     MenuScene.h
+ * File Function: MenuScene类的实现
+ * Author:        张翔
+ * Update Date:   2024/12/3
+ ****************************************************************/
 #include "MenuScene.h"
 #include "Button/HoverButton.h"
+#include "../Map/FarmYardScene.h"
+#include "SaveLoadScene.h"
+#include "proj.win32/Constant.h"
 
 USING_NS_CC;
 
@@ -16,7 +26,7 @@ Scene* MenuScene::createScene()
 bool MenuScene::init()
 {
     // 创建场景
-    if (!Scene::init()){
+    if (!Scene::init()) {
         return false;
     }
 
@@ -30,15 +40,44 @@ bool MenuScene::init()
     auto newGameButton = HoverButton::create("../Resources/Buttons/MenuSceneButtons/CreateButton.png",
         "../Resources/Buttons/MenuSceneButtons/CreateButton.png",
         "../Resources/Buttons/MenuSceneButtons/CreateButton.png");
-    auto loadGameButton = HoverButton::create("../Resources/Buttons/MenuSceneButtons/ExitButton.png",
-        "../Resources/Buttons/MenuSceneButtons/ExitButton.png",
-        "../Resources/Buttons/MenuSceneButtons/ExitButton.png");
-    auto exitGameButton = HoverButton::create("../Resources/Buttons/MenuSceneButtons/LoadButton.png",
+    auto loadGameButton = HoverButton::create("../Resources/Buttons/MenuSceneButtons/LoadButton.png",
         "../Resources/Buttons/MenuSceneButtons/LoadButton.png",
         "../Resources/Buttons/MenuSceneButtons/LoadButton.png");
+    auto exitGameButton = HoverButton::create("../Resources/Buttons/MenuSceneButtons/ExitButton.png",
+        "../Resources/Buttons/MenuSceneButtons/ExitButton.png",
+        "../Resources/Buttons/MenuSceneButtons/ExitButton.png");
+
+    // 设置按钮位置
+    newGameButton->setPosition(Vec2(screenSize.width / 2 + MENU_SCENE_NEW_GAME_BUTTON_OFFSET_X, screenSize.height / 2 + MENU_SCENE_BUTTONS_OFFSET_Y));
+    loadGameButton->setPosition(Vec2(screenSize.width / 2 + MENU_SCENE_LOAD_GAME_BUTTON_OFFSET_X, screenSize.height / 2 + MENU_SCENE_BUTTONS_OFFSET_Y));
+    exitGameButton->setPosition(Vec2(screenSize.width / 2 + MENU_SCENE_EXIT_GAME_BUTTON_OFFSET_X, screenSize.height / 2 + MENU_SCENE_BUTTONS_OFFSET_Y));
+
+    // 为按钮添加事件处理器
+    newGameButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
+        if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
 
 
+            
+        }
+        });
 
+    loadGameButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
+        if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
+
+
+            
+        }
+        });
+
+    exitGameButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
+        if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
+
+
+            Director::getInstance()->end();
+        }
+        });
+
+    // 将按钮加入场景
     this->addChild(newGameButton);
     this->addChild(loadGameButton);
     this->addChild(exitGameButton);

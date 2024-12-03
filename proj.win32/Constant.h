@@ -10,8 +10,13 @@ constexpr int MEDIUM_RESOLUTION_HEIGHT = 720;                             // 中
 constexpr int LARGE_RESOLUTION_WIDTH = 1920;                              // 大分辨率宽度
 constexpr int LARGE_RESOLUTION_HEIGHT = 1080;                             // 大分辨率高度
 constexpr float FRAME_RATE = 60.0f;                                       // 应用程序帧率
-const std::string APPLICATION_TITLE = u8"星露谷物语 Stardew Valley";      // 应用程序标题
+const std::string APPLICATION_TITLE = "星露谷物语 Stardew Valley";        // 应用程序标题
 
+constexpr float SCENE_TRANSITION_DURATION = 0.3f;                         // 场景转换时长
 
+constexpr int MENU_SCENE_BUTTONS_OFFSET_Y = -200;
+constexpr int MENU_SCENE_NEW_GAME_BUTTON_OFFSET_X = -400;
+constexpr int MENU_SCENE_LOAD_GAME_BUTTON_OFFSET_X = 0;
+constexpr int MENU_SCENE_EXIT_GAME_BUTTON_OFFSET_X = 400;
 
 #endif // _CONSTANT_H_
