@@ -1,6 +1,8 @@
 
 # --- Cocos2d-x ---
 cocos2d/
+.cocos-project.json
+CMakeLists.txt
 
 # --- proj.win32 文件夹下的 VS 临时文件 ---
 proj.win32/Debug.win32/
