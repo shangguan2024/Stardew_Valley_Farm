@@ -1,8 +1,8 @@
 #ifndef _CONSTANT_H_
 #define _CONSTANT_H_
 
-constexpr int DESIGN_RESOLUTION_WIDTH = 1920;                             // 设计分辨率宽度
-constexpr int DESIGN_RESOLUTION_HEIGHT = 1080;                            // 设计分辨率高度
+constexpr int DESIGN_RESOLUTION_WIDTH = 1280;                             // 设计分辨率宽度
+constexpr int DESIGN_RESOLUTION_HEIGHT = 720;                            // 设计分辨率高度
 constexpr int SMALL_RESOLUTION_WIDTH = 960;                               // 小分辨率宽度
 constexpr int SMALL_RESOLUTION_HEIGHT = 540;                              // 小分辨率高度
 constexpr int MEDIUM_RESOLUTION_WIDTH = 1280;                             // 中分辨率宽度

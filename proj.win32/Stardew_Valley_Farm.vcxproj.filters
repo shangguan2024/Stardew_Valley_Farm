@@ -90,6 +90,9 @@
     <ClCompile Include="..\Classes\Player\SkillTree.cpp">
       <Filter>Classes\Player</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Scene\BackgroundTiledMap.cpp">
+      <Filter>Classes\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate\AppDelegate.h">
@@ -146,10 +149,18 @@
     <ClInclude Include="..\Classes\Player\SkillTree.h">
       <Filter>Classes\Player</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\Scene\BackgroundTiledMap.h">
+      <Filter>Classes\Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Icon.rc">
       <Filter>Resource</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Resources\TiledMap\Farm_map_simple.tmx">
+      <Filter>Resource</Filter>
+    </None>
   </ItemGroup>
 </Project>

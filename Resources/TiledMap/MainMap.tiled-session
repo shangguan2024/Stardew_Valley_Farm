@@ -1,0 +1,72 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "C:/Users/liuzh/~/MyCompany/MyGame/Resources/Farm_Combat1.tmx",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "fileStates": {
+        "C:/Users/liuzh/~/MyCompany/MyGame/Resources/Farm_Combat1.tmx": {
+            "expandedObjectLayers": [
+                4,
+                2,
+                6
+            ],
+            "scale": 1,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 628.5,
+                "y": 457
+            }
+        },
+        "C:/Users/liuzh/~/MyCompany/MyGame/Resources/Farm_Combat1.tmx#Paths": {
+            "scaleInDock": 1
+        },
+        "C:/Users/liuzh/~/MyCompany/MyGame/Resources/Farm_Combat1.tmx#extra": {
+            "scaleInDock": 1
+        },
+        "C:/Users/liuzh/~/MyCompany/MyGame/Resources/Farm_Combat1.tmx#untitled tile sheet": {
+            "scaleInDock": 1
+        },
+        "C:/Users/liuzh/~/MyCompany/MyGame/Resources/Farm_Combat1.tmx#v16_Outdoors2": {
+            "scaleInDock": 1
+        },
+        "Farm_map_simple.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 1.97421875,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 295.55995251286106,
+                "y": 319.87336762960035
+            }
+        },
+        "Farm_map_simple.tmx#spring_outdoorsTileSheets": {
+            "scaleInDock": 2
+        }
+    },
+    "last.imagePath": "C:/Users/liuzh/Documents/Stardew_Valley_Farm/Resources/TiledMap",
+    "map.height": 40,
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "map.width": 40,
+    "openFiles": [
+        "Farm_map_simple.tmx",
+        "C:/Users/liuzh/~/MyCompany/MyGame/Resources/Farm_Combat1.tmx"
+    ],
+    "project": "MainMap.tiled-project",
+    "property.type": "int",
+    "recentFiles": [
+        "Farm_map_simple.tmx",
+        "C:/Users/liuzh/~/MyCompany/MyGame/Resources/Farm_Combat1.tmx"
+    ],
+    "tileset.embedInMap": true,
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
+}
