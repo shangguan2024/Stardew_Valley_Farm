@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 #include "Player.h"
 
 USING_NS_CC;
@@ -159,15 +158,3 @@ void PlayerPosition::updateViewByCurrentFrame()
 	this->setSpriteFrame(SpriteFrameCache::getInstance()->getSpriteFrameByName(texName));
 	delete texName;
 }
-=======
-/****************************************************************
- * Project Name:  Stardew_Valley_Farm
- * File Name:     Player.cpp
- * File Function: Player类的实现
- * Author:        
- * Update Date:   2024/12/4
- ****************************************************************/
-
-#include "Player.h"
-
->>>>>>> Stashed changes

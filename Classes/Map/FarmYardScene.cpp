@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 #include "FarmYardScene.h"
 
 USING_NS_CC;
@@ -49,44 +48,4 @@ bool FarmYardBackground::init()
 	MapBg::LoadTMXMap(files_name);
 
 	return true;
-=======
-/****************************************************************
- * Project Name:  Stardew_Valley_Farm
- * File Name:     FarmYardScene.cpp
- * File Function: FarmYardScene类的实现
- * Author:        张翔
- * Update Date:   2024/12/4
- ****************************************************************/
-
-#include "FarmYardScene.h"
-#include "../Player/Player.h"
-
-USING_NS_CC;
-
-Scene* FarmYardScene::createScene()
-{
-	auto scene = Scene::create();
-	auto layer = FarmYardScene::create();
-	scene->addChild(layer);
-	return scene;
-}
-
-bool FarmYardScene::init()
-{
-	if (!Scene::init()) {
-		return false;
-	}
-
-
-
-    // 启用帧更新
-    this->scheduleUpdate();
-
-    return true;
-}
-
-void FarmYardScene::update(float delta)
-{
-
->>>>>>> Stashed changes
 }

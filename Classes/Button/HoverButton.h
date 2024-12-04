@@ -21,6 +21,7 @@ public:
 
     // 初始化 HoverButton 实例
     bool init(const std::string& defaultButtonImage, const std::string& hoverButtonImage, const std::string& activeButtonImage);
+
 private:
     std::string defaultButtonImage; // 默认状态按钮图片路径
     std::string hoverButtonImage;   // 悬停状态按钮图片路径

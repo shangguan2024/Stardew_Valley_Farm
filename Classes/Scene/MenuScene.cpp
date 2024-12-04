@@ -57,7 +57,7 @@ bool MenuScene::init()
         if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
 
 
-            Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, FarmYardScene::createScene(), cocos2d::Color3B::WHITE));
+            
         }
         });
 

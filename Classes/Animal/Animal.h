@@ -11,7 +11,7 @@
 
 #include "cocos2d.h"
 
-class Animal : public cocos2d::Node
+class Animal : public cocos2d::Sprite
 {
 
 };
