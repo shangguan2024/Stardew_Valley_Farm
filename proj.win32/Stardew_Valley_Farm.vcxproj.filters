@@ -87,9 +87,6 @@
     <ClCompile Include="..\Classes\Player\SkillTree.cpp">
       <Filter>Classes\Player</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Scene\BackgroundTiledMap.cpp">
-      <Filter>Classes\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\NPC\NPC.cpp">
       <Filter>Classes\NPC</Filter>
     </ClCompile>
@@ -146,9 +143,6 @@
     <ClInclude Include="..\Classes\Player\SkillTree.h">
       <Filter>Classes\Player</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Scene\BackgroundTiledMap.h">
-      <Filter>Classes\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\NPC\NPC.h">
       <Filter>Classes\NPC</Filter>
     </ClInclude>
@@ -163,10 +157,5 @@
     <ResourceCompile Include="Icon.rc">
       <Filter>Resource</Filter>
     </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\Resources\TiledMap\Farm_map_simple.tmx">
-      <Filter>Resource</Filter>
-    </None>
   </ItemGroup>
 </Project>
