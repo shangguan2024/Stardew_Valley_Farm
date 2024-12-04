@@ -16,10 +16,10 @@ bool FarmYardScene::init()
 
 	MapBg* farm_map = FarmYardBackground::create();
 	addChild(farm_map);
-	//添加场景地图
+
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	PlayerPosition* player = PlayerPosition::create(visibleSize.width / 2, visibleSize.height / 2);
-	//此处仅为放置player的位置
+
 	addChild(player);
 	return true;
 }
@@ -46,6 +46,6 @@ bool FarmYardBackground::init()
 	this->addChild(farm_map, 0, 100);
 #endif
 	MapBg::LoadTMXMap(files_name);
-	//添加TMX地图
+
 	return true;
 }

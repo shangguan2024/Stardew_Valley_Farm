@@ -48,7 +48,7 @@ void PlayerPosition::KeyPressedDuration(EventKeyboard::KeyCode keyCode)
 	}
 	p_x_speed = offsetX;
 	p_y_speed = offsetY;
-	//更新速度
+	
 	}
 
 bool PlayerPosition::init() 
@@ -59,7 +59,7 @@ bool PlayerPosition::init()
 	}
 
 	auto listener = EventListenerKeyboard::create();
-	//键盘监听器
+
 	listener->onKeyPressed = [=](EventKeyboard::KeyCode keyCode, Event* event)
 		{
 			keys[keyCode] = true;
@@ -71,7 +71,7 @@ bool PlayerPosition::init()
 			keys[keyCode] = false;
 		};
 	Texture2D* tex = Director::getInstance()->getTextureCache()->addImage("PlayerImage/player_01.png");
-	//添加图集player_01 用于后续取用
+
 	SpriteFrame* tframe;
 	char* tname;
 	for (int i = 0; i < 4; i++)
@@ -79,9 +79,9 @@ bool PlayerPosition::init()
 		for (int j = 0; j < 4; j++) 
 		{
 			tname = new char[10];
-			sprintf(tname, "role_0%d", 4 * i + (j + 1));//为动画每一帧取名
-			tframe = SpriteFrame::createWithTexture(tex, Rect(32 * j, 48 * i, 32, 48));//定位 取出动画帧
-			SpriteFrameCache::getInstance()->addSpriteFrame(tframe, tname);//放到缓存区cache中
+			sprintf(tname, "role_0%d", 4 * i + (j + 1));
+			tframe = SpriteFrame::createWithTexture(tex, Rect(32 * j, 48 * i, 32, 48));
+			SpriteFrameCache::getInstance()->addSpriteFrame(tframe, tname);
 		}
 	}
 
@@ -89,7 +89,7 @@ bool PlayerPosition::init()
 	{
 		this->scheduleUpdate();
 		return true;
-	}//用第一帧初始化角色
+	}
 
 	return true;
 }
@@ -135,10 +135,10 @@ void PlayerPosition::update(float dt)
 
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 
-	if (target_x >= 0 && target_x <= visibleSize.width && target_y >= 0 && target_y <= visibleSize.height)//限制在屏幕范围内
+	if (target_x >= 0 && target_x <= visibleSize.width && target_y >= 0 && target_y <= visibleSize.height)//锟斤拷锟斤拷锟斤拷锟斤拷幕锟斤拷围锟斤拷
 	{
 		this->setPosition(target_x, target_y);
-		//更新位置
+		
 		p_x = target_x;
 		p_y = target_y;
 	}

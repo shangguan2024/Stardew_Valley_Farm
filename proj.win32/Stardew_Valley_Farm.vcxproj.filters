@@ -22,9 +22,6 @@
     <Filter Include="Classes\Layer">
       <UniqueIdentifier>{bffa381f-ced2-4778-a214-b314b84c5c42}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\Sprite">
-      <UniqueIdentifier>{8abbea65-744d-4d06-83f1-09739050405f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes\Map">
       <UniqueIdentifier>{7dcc8eb3-dc3e-401e-9129-fd4ac1ea0bd0}</UniqueIdentifier>
     </Filter>
@@ -33,6 +30,15 @@
     </Filter>
     <Filter Include="Classes\Item">
       <UniqueIdentifier>{d99e5f8a-957a-44e1-953d-005a3c78c6b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\NPC">
+      <UniqueIdentifier>{8abbea65-744d-4d06-83f1-09739050405f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Animal">
+      <UniqueIdentifier>{49076dce-93f0-4115-a452-e68567641038}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Plant">
+      <UniqueIdentifier>{e8db757f-6110-4b2b-b5d5-9178b7f4951d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -57,12 +63,6 @@
     <ClCompile Include="..\Classes\Scene\SaveLoadScene.cpp">
       <Filter>Classes\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Sprite\NPC.cpp">
-      <Filter>Classes\Sprite</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Sprite\Animal.cpp">
-      <Filter>Classes\Sprite</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Map\FarmHouseScene.cpp">
       <Filter>Classes\Map</Filter>
     </ClCompile>
@@ -81,9 +81,6 @@
     <ClCompile Include="..\Classes\Item\Item.cpp">
       <Filter>Classes\Item</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Sprite\Plant.cpp">
-      <Filter>Classes\Sprite</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Player\Bag.cpp">
       <Filter>Classes\Player</Filter>
     </ClCompile>
@@ -92,6 +89,15 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Scene\BackgroundTiledMap.cpp">
       <Filter>Classes\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\NPC\NPC.cpp">
+      <Filter>Classes\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Animal\Animal.cpp">
+      <Filter>Classes\Animal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Plant\Plant.cpp">
+      <Filter>Classes\Plant</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -116,12 +122,6 @@
     <ClInclude Include="..\Classes\Scene\SaveLoadScene.h">
       <Filter>Classes\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Sprite\NPC.h">
-      <Filter>Classes\Sprite</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Sprite\Animal.h">
-      <Filter>Classes\Sprite</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Map\FarmHouseScene.h">
       <Filter>Classes\Map</Filter>
     </ClInclude>
@@ -140,9 +140,6 @@
     <ClInclude Include="..\Classes\Item\Item.h">
       <Filter>Classes\Item</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Sprite\Plant.h">
-      <Filter>Classes\Sprite</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Player\Bag.h">
       <Filter>Classes\Player</Filter>
     </ClInclude>
@@ -151,6 +148,15 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Scene\BackgroundTiledMap.h">
       <Filter>Classes\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\NPC\NPC.h">
+      <Filter>Classes\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Animal\Animal.h">
+      <Filter>Classes\Animal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Plant\Plant.h">
+      <Filter>Classes\Plant</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
