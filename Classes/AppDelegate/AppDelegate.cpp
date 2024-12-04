@@ -29,7 +29,7 @@ using namespace CocosDenshion;
 
 USING_NS_CC;
 
-static cocos2d::Size designResolutionSize = cocos2d::Size(DESIGN_RESOLUTION_WIDTH, DESIGN_RESOLUTION_HEIGHT);
+static cocos2d::Size designResolutionSize = cocos2d::Size(DESIGN_RESOLUTION_WIDTH, DESIGN_RESOLUTION_HEIGHT);//默认采用1280*720
 static cocos2d::Size smallResolutionSize = cocos2d::Size(SMALL_RESOLUTION_WIDTH, SMALL_RESOLUTION_HEIGHT);
 static cocos2d::Size mediumResolutionSize = cocos2d::Size(MEDIUM_RESOLUTION_WIDTH, MEDIUM_RESOLUTION_HEIGHT);
 static cocos2d::Size largeResolutionSize = cocos2d::Size(LARGE_RESOLUTION_WIDTH, LARGE_RESOLUTION_HEIGHT);
@@ -82,7 +82,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     // set FPS.
     director->setAnimationInterval(1.0 / FRAME_RATE);
-
+#if 0//强制设置分辨率为默认分辨率
+    
     // Set the design resolution
     glview->setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height, ResolutionPolicy::NO_BORDER);
     const auto frameSize = glview->getFrameSize();
@@ -104,7 +105,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     }
 
     register_all_packages();
-
+#endif
     // create a scene. it's an autorelease object
     auto scene = MenuScene::createScene();
 
