@@ -14,9 +14,9 @@ const std::string APPLICATION_TITLE = "星露谷物语 Stardew Valley";        /
 
 constexpr float SCENE_TRANSITION_DURATION = 0.3f;                         // 场景转换时长
 
-constexpr int MENU_SCENE_BUTTONS_OFFSET_Y = -200;
-constexpr int MENU_SCENE_NEW_GAME_BUTTON_OFFSET_X = -400;
+constexpr int MENU_SCENE_BUTTONS_OFFSET_Y = -250;
+constexpr int MENU_SCENE_NEW_GAME_BUTTON_OFFSET_X = -380;
 constexpr int MENU_SCENE_LOAD_GAME_BUTTON_OFFSET_X = 0;
-constexpr int MENU_SCENE_EXIT_GAME_BUTTON_OFFSET_X = 400;
+constexpr int MENU_SCENE_EXIT_GAME_BUTTON_OFFSET_X = 380;
 
 #endif // _CONSTANT_H_

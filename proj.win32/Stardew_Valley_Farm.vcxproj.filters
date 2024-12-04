@@ -35,10 +35,17 @@
       <UniqueIdentifier>{8abbea65-744d-4d06-83f1-09739050405f}</UniqueIdentifier>
     </Filter>
     <Filter Include="Classes\Animal">
+<<<<<<< Updated upstream
       <UniqueIdentifier>{49076dce-93f0-4115-a452-e68567641038}</UniqueIdentifier>
     </Filter>
     <Filter Include="Classes\Plant">
       <UniqueIdentifier>{e8db757f-6110-4b2b-b5d5-9178b7f4951d}</UniqueIdentifier>
+=======
+      <UniqueIdentifier>{5be13f91-5dd9-4c72-9aed-7bbe3bd86cf7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Plant">
+      <UniqueIdentifier>{1f883bd9-6de9-46b0-8462-4951f4333af3}</UniqueIdentifier>
+>>>>>>> Stashed changes
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -87,6 +94,7 @@
     <ClCompile Include="..\Classes\Player\SkillTree.cpp">
       <Filter>Classes\Player</Filter>
     </ClCompile>
+<<<<<<< Updated upstream
     <ClCompile Include="..\Classes\Scene\BackgroundTiledMap.cpp">
       <Filter>Classes\Scene</Filter>
     </ClCompile>
@@ -99,6 +107,11 @@
     <ClCompile Include="..\Classes\Plant\Plant.cpp">
       <Filter>Classes\Plant</Filter>
     </ClCompile>
+=======
+    <ClCompile Include="..\Classes\NPC\NPC.cpp">
+      <Filter>Classes\NPC</Filter>
+    </ClCompile>
+>>>>>>> Stashed changes
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate\AppDelegate.h">
@@ -146,6 +159,7 @@
     <ClInclude Include="..\Classes\Player\SkillTree.h">
       <Filter>Classes\Player</Filter>
     </ClInclude>
+<<<<<<< Updated upstream
     <ClInclude Include="..\Classes\Scene\BackgroundTiledMap.h">
       <Filter>Classes\Scene</Filter>
     </ClInclude>
@@ -158,6 +172,11 @@
     <ClInclude Include="..\Classes\Plant\Plant.h">
       <Filter>Classes\Plant</Filter>
     </ClInclude>
+=======
+    <ClInclude Include="..\Classes\NPC\NPC.h">
+      <Filter>Classes\NPC</Filter>
+    </ClInclude>
+>>>>>>> Stashed changes
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Icon.rc">
