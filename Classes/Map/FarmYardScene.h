@@ -2,20 +2,14 @@
  * Project Name:  Stardew_Valley_Farm
  * File Name:     FarmYardScene.h
  * File Function: FarmYardScene类的定义
-<<<<<<< HEAD
- * Author:        刘逸飞 张翔
-=======
  * Author:        张翔
->>>>>>> parent of 1a6d180 (Merge pull request #2 from soyolovealexs/main)
- * Update Date:   2024/12/3
+ * Update Date:   2024/12/5
  ****************************************************************/
 
 #ifndef _FARM_YARD_SCENE_H_
 #define _FARM_YARD_SCENE_H_
 
 #include "cocos2d.h"
-#include "Scene/MenuScene.h"
-#include "Player/Player.h"
 
 
 class FarmYardScene : public cocos2d::Scene {

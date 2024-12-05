@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="100" height="80" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="5">
+ <tileset firstgid="1" source="spring_outdoorsTileSheet.tsx"/>
+ <tileset firstgid="1976" source="Houses.tsx"/>
+ <layer id="1" name="Ground" width="100" height="80">
+  <data encoding="base64" compression="zlib">
+   eJzt1jEKwzAMBVDn/ltPkkPlIJ0KhZq4Jg4/gje8JXj5EpJytNYOAAAAAAAAbrUvls5T3XctX9tvfXvfzt6k81RnPp5ldhZGb9N5qjur7Ux/Pu/Teaqzr55ltt6jm5/OU12vprN7ynys78eK+6Ef9/bDfOT6cWVHuR/r+zHaVf/2K52nuiuz0fsHSOepzv0AAAAAAAAAAAAAAAAAAAAAAAAAIO0NetWbcg==
+  </data>
+ </layer>
+ <layer id="6" name="Buildings" width="100" height="80">
+  <data encoding="base64" compression="zlib">
+   eJzt0bdSlgEURdG/5PlETC2goq2iqK0ZWpAgrQmhVTG1BgRbBAxP4n6KT2dYa2b3d84djQAAAAAAAAD+XyfGRqPxOlkTdapO15k6W+fG/vWFx8tke0/VdJ2vC3WxZupSXfaPQV1p76s1W9fqes3VjbpZt/xjULfb+07drXt1vx7Uw5qvBf8Y1GJ7L9WjWq6VWq21elzr/jGoJ+39tJ7V83pRG/WyNmvLPwb1qr1f15varrf1rt7Xh/roH4P61N6f60t9rZ36Vru1V9/9Y1D77f2jDuqwjupn/arf9cc/AAAAAAAAAAAAAAAAAAAAAAAAAAA4Jv4Cc6kzQw==
+  </data>
+ </layer>
+ <objectgroup id="3" name="Event">
+  <object id="4" name="SpawnPoint" x="808" y="407.5"/>
+ </objectgroup>
+</map>

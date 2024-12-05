@@ -32,20 +32,20 @@ bool MenuScene::init()
 
     // 加载背景
     const auto screenSize = cocos2d::Director::getInstance()->getVisibleSize();
-    const auto background = Sprite::create("../Resources/Scenes/MenuScene.png");
+    const auto background = Sprite::create("Scenes/MenuScene.png");
     background->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2));
     this->addChild(background);
 
     // 创建按钮
-    auto newGameButton = HoverButton::create("../Resources/Buttons/MenuSceneButtons/CreateButton.png",
-        "../Resources/Buttons/MenuSceneButtons/CreateButton.png",
-        "../Resources/Buttons/MenuSceneButtons/CreateButton.png");
-    auto loadGameButton = HoverButton::create("../Resources/Buttons/MenuSceneButtons/LoadButton.png",
-        "../Resources/Buttons/MenuSceneButtons/LoadButton.png",
-        "../Resources/Buttons/MenuSceneButtons/LoadButton.png");
-    auto exitGameButton = HoverButton::create("../Resources/Buttons/MenuSceneButtons/ExitButton.png",
-        "../Resources/Buttons/MenuSceneButtons/ExitButton.png",
-        "../Resources/Buttons/MenuSceneButtons/ExitButton.png");
+    auto newGameButton = HoverButton::create("Buttons/MenuSceneButtons/CreateButton.png",
+        "Buttons/MenuSceneButtons/CreateButton.png",
+        "Buttons/MenuSceneButtons/CreateButton.png");
+    auto loadGameButton = HoverButton::create("Buttons/MenuSceneButtons/LoadButton.png",
+        "Buttons/MenuSceneButtons/LoadButton.png",
+        "Buttons/MenuSceneButtons/LoadButton.png");
+    auto exitGameButton = HoverButton::create("Buttons/MenuSceneButtons/ExitButton.png",
+        "Buttons/MenuSceneButtons/ExitButton.png",
+        "Buttons/MenuSceneButtons/ExitButton.png");
 
     // 设置按钮位置
     newGameButton->setPosition(Vec2(screenSize.width / 2 + MENU_SCENE_NEW_GAME_BUTTON_OFFSET_X, screenSize.height / 2 + MENU_SCENE_BUTTONS_OFFSET_Y));
@@ -57,7 +57,7 @@ bool MenuScene::init()
         if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
 
 
-            
+            Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, FarmYardScene::createScene(), cocos2d::Color3B::WHITE));
         }
         });
 
