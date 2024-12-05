@@ -27,4 +27,5 @@ Stardew_Valley_Farm
 ## 2024/12/3
 - 明确分工和代码规范性
 - 实现 `MenuScene` 类
-
+## 2024/12/5
+- 实现 `Player` 类
