@@ -19,9 +19,6 @@
     <Filter Include="Classes\Button">
       <UniqueIdentifier>{35fec0de-c4d7-441d-adfa-39b2d8954f43}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\Layer">
-      <UniqueIdentifier>{bffa381f-ced2-4778-a214-b314b84c5c42}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes\Map">
       <UniqueIdentifier>{7dcc8eb3-dc3e-401e-9129-fd4ac1ea0bd0}</UniqueIdentifier>
     </Filter>
@@ -40,6 +37,12 @@
     <Filter Include="Classes\Plant">
       <UniqueIdentifier>{e8db757f-6110-4b2b-b5d5-9178b7f4951d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Bag">
+      <UniqueIdentifier>{b918723f-da05-4c7f-b4aa-2213bffc5742}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\SkillTree">
+      <UniqueIdentifier>{653b52ae-9ea4-400c-a1c8-9a3db77f57db}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -53,12 +56,6 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Scene\MenuScene.cpp">
       <Filter>Classes\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Layer\BackPackLayer.cpp">
-      <Filter>Classes\Layer</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Layer\ChatLayer.cpp">
-      <Filter>Classes\Layer</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Scene\SaveLoadScene.cpp">
       <Filter>Classes\Scene</Filter>
@@ -81,12 +78,6 @@
     <ClCompile Include="..\Classes\Item\Item.cpp">
       <Filter>Classes\Item</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Player\Bag.cpp">
-      <Filter>Classes\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Player\SkillTree.cpp">
-      <Filter>Classes\Player</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\NPC\NPC.cpp">
       <Filter>Classes\NPC</Filter>
     </ClCompile>
@@ -95,6 +86,18 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Plant\Plant.cpp">
       <Filter>Classes\Plant</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\NPC\ChatLayer.cpp">
+      <Filter>Classes\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Bag\BackPackLayer.cpp">
+      <Filter>Classes\Bag</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Bag\Bag.cpp">
+      <Filter>Classes\Bag</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SkillTree\SkillTree.cpp">
+      <Filter>Classes\SkillTree</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -109,12 +112,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Scene\MenuScene.h">
       <Filter>Classes\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Layer\BackPackLayer.h">
-      <Filter>Classes\Layer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Layer\ChatLayer.h">
-      <Filter>Classes\Layer</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Scene\SaveLoadScene.h">
       <Filter>Classes\Scene</Filter>
@@ -137,12 +134,6 @@
     <ClInclude Include="..\Classes\Item\Item.h">
       <Filter>Classes\Item</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Player\Bag.h">
-      <Filter>Classes\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Player\SkillTree.h">
-      <Filter>Classes\Player</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\NPC\NPC.h">
       <Filter>Classes\NPC</Filter>
     </ClInclude>
@@ -151,6 +142,18 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Plant\Plant.h">
       <Filter>Classes\Plant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\NPC\ChatLayer.h">
+      <Filter>Classes\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Bag\BackPackLayer.h">
+      <Filter>Classes\Bag</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Bag\Bag.h">
+      <Filter>Classes\Bag</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SkillTree\SkillTree.h">
+      <Filter>Classes\SkillTree</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
