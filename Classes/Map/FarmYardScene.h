@@ -28,6 +28,7 @@ public:
 
 private:
 
+    cocos2d::Camera* _camera;
 };
 
 #endif // _FARM_YARD_SCENE_H_

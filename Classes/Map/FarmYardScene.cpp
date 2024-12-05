@@ -5,8 +5,8 @@
  * Author:        张翔
  * Update Date:   2024/12/5
  ****************************************************************/
-#include "FarmYardScene.h"
 #include "../Player/Player.h"
+#include "FarmYardScene.h"
 
 USING_NS_CC;
 
@@ -26,6 +26,12 @@ bool FarmYardScene::init()
 		return false;
 	}
 
+	// 创建摄像机
+	_camera = Camera::create();
+	_camera->setCameraFlag(CameraFlag::USER1);
+
+	this->addChild(_camera);
+
 	// 加载瓦片地图
 	auto FarmYard = TMXTiledMap::create("Maps/FarmYardScene.tmx");
 	if (!FarmYard) {
@@ -35,6 +41,9 @@ bool FarmYardScene::init()
 
 	this->addChild(FarmYard, 0, "FarmYard");
 
+	FarmYard->setCameraMask(unsigned short(CameraFlag::USER1));
+
+	// 获取地图的基础属性
 	auto mapSize = FarmYard->getMapSize();
 	auto tileSize = FarmYard->getTileSize();
 	auto mapCenter = Vec2(mapSize.width * tileSize.width / 2, mapSize.height * tileSize.height / 2);
@@ -60,9 +69,11 @@ bool FarmYardScene::init()
 
 	auto player = Player::getInstance();
 
-	player->setPosition(100, 100);
+	player->setPosition(spawnX, mapSize.height * tileSize.height - spawnY);
 
 	this->addChild(player);
+
+	player->setCameraMask(unsigned short(CameraFlag::USER1));
 
 	this->scheduleUpdate();
 
@@ -73,11 +84,22 @@ void FarmYardScene::update(float delta)
 {
 	Player* player = Player::getInstance();
 
+	// 获得玩家的当前位置方向和速度
 	Vec2 _direction = player->getDirection();
 	float _speed = player->getSpeed();
 	Vec2 currentPosition = player->getPosition();
 
+	// 计算更新后的位置
 	Vec2 newPosition = currentPosition + _direction * _speed * delta;
 
+	// 更新玩家位置
 	player->setPosition(newPosition);
+
+	// 计算摄像机的位置
+	Vec3 currentCameraPos = _camera->getPosition3D();
+	Vec3 targetCameraPos(newPosition.x, newPosition.y, currentCameraPos.z);
+
+	// 平滑移动摄像机
+	Vec3 smoothedPos = currentCameraPos.lerp(targetCameraPos, 0.1f); // 平滑系数
+	_camera->setPosition3D(smoothedPos);
 }
