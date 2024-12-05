@@ -9,7 +9,7 @@
  </layer>
  <layer id="6" name="Buildings" width="100" height="80">
   <data encoding="base64" compression="zlib">
-   eJzt0bdSlgEURdG/5PlETC2goq2iqK0ZWpAgrQmhVTG1BgRbBAxP4n6KT2dYa2b3d84djQAAAAAAAAD+XyfGRqPxOlkTdapO15k6W+fG/vWFx8tke0/VdJ2vC3WxZupSXfaPQV1p76s1W9fqes3VjbpZt/xjULfb+07drXt1vx7Uw5qvBf8Y1GJ7L9WjWq6VWq21elzr/jGoJ+39tJ7V83pRG/WyNmvLPwb1qr1f15varrf1rt7Xh/roH4P61N6f60t9rZ36Vru1V9/9Y1D77f2jDuqwjupn/arf9cc/AAAAAAAAAAAAAAAAAAAAAAAAAAA4Jv4Cc6kzQw==
+   eJzt2EtTz2Ech+H/steXlGyFoqUIbR0qts61dSxbhNo6aysJr8T9IsxPM65r5t4/8/nuntEIAAAAAAAA4PAaHxuNjtREHa3JmqpjNV3Hx/71C/8vJ9p7pk7WqTpdszVXZ+qsewzqXHsv1Pm6UIt1sS7V5Vpyj0Fdae+rda2u13Kt1GrdqJvuMahb7X277tTdulf360Gt1bp7DOphez+qx/Wkntaz2qjNeu4eg3rR3i/rVW3V63pTb2u7dtxjUO/a+319qI/1qT7Xl/pau+4xqG/tvVffa79+1EH9rF/12z0AAAAAAA6teX+4AAAAAAAAAAAAAAAAAAAAf9Ufc+Uztw==
   </data>
  </layer>
  <objectgroup id="3" name="Event">

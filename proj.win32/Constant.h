@@ -19,4 +19,6 @@ constexpr int MENU_SCENE_NEW_GAME_BUTTON_OFFSET_X = -400;
 constexpr int MENU_SCENE_LOAD_GAME_BUTTON_OFFSET_X = 0;
 constexpr int MENU_SCENE_EXIT_GAME_BUTTON_OFFSET_X = 400;
 
+constexpr float NOMAL_PLAYER_SPEED = 100;
+
 #endif // _CONSTANT_H_

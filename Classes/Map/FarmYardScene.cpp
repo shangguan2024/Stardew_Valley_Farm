@@ -6,6 +6,7 @@
  * Update Date:   2024/12/5
  ****************************************************************/
 #include "FarmYardScene.h"
+#include "../Player/Player.h"
 
 USING_NS_CC;
 
@@ -26,20 +27,19 @@ bool FarmYardScene::init()
 	}
 
 	// 加载瓦片地图
-	auto tileMap = TMXTiledMap::create("Maps/FarmYardScene.tmx");
-	if (!tileMap) {
+	auto FarmYard = TMXTiledMap::create("Maps/FarmYardScene.tmx");
+	if (!FarmYard) {
 		CCLOG("Failed to load tile map");
 		return false;
 	}
 
-	auto mapSize = tileMap->getMapSize();
-	auto tileSize = tileMap->getTileSize();
+	this->addChild(FarmYard, 0, "FarmYard");
+
+	auto mapSize = FarmYard->getMapSize();
+	auto tileSize = FarmYard->getTileSize();
 	auto mapCenter = Vec2(mapSize.width * tileSize.width / 2, mapSize.height * tileSize.height / 2);
-	this->setPosition(mapCenter);
 
-	this->addChild(tileMap, 0, "TileMap");
-
-	auto objectGroup = tileMap->getObjectGroup("Event");
+	auto objectGroup = FarmYard->getObjectGroup("Event");
 	if (!objectGroup) {
 		CCLOG("Failed to load object layer: Event");
 		return false;
@@ -51,16 +51,33 @@ bool FarmYardScene::init()
 		return false;
 	}
 
-	float x = spawnPoint.count("x") > 0 ? spawnPoint["x"].asFloat() : 0.0f;
-	float y = spawnPoint.count("y") > 0 ? spawnPoint["y"].asFloat() : 0.0f;
-	CCLOG("Spawn point at (%f, %f)", x, y);
+	// 提取出生点的 x 和 y 坐标
+	float spawnX = spawnPoint["x"].asFloat();
+	float spawnY = spawnPoint["y"].asFloat();
+	CCLOG("Spawn point coordinates: (%f, %f)", spawnX, spawnY);
 
+	FarmYard->setPosition(0,0);
 
+	auto player = Player::getInstance();
+
+	player->setPosition(100, 100);
+
+	this->addChild(player);
+
+	this->scheduleUpdate();
 
 	return true;
 }
 
 void FarmYardScene::update(float delta)
 {
+	Player* player = Player::getInstance();
 
+	Vec2 _direction = player->getDirection();
+	float _speed = player->getSpeed();
+	Vec2 currentPosition = player->getPosition();
+
+	Vec2 newPosition = currentPosition + _direction * _speed * delta;
+
+	player->setPosition(newPosition);
 }

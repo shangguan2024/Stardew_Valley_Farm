@@ -2,7 +2,7 @@
  * Project Name:  Stardew_Valley_Farm
  * File Name:     Player.h
  * File Function: Player类的定义
- * Author:        张翔
+ * Author:        上官思杨、李昊、张翔
  * Update Date:   2024/12/3
  ****************************************************************/
 
@@ -11,41 +11,49 @@
 
 #include "Bag.h"
 #include "SkillTree.h"
+#include "proj.win32/Constant.h"
 #include "cocos2d.h"
 
 class Player : public cocos2d::Sprite
 {
 public:
-	// 创建 Player 对象
-	static Player* create(const std::string& name, const std::string& spriteFile);
+    // 获取单例实例
+    static Player* getInstance();
 
-    // 获取经验值
-    int getExperience() const { return experience; }
+    // 初始化
+    virtual bool init() override;
 
-    // 增加经验值
-    void gainExperience(int exp);
+    // 设置方向
+    void setDirection(const cocos2d::Vec2& direction);
+    cocos2d::Vec2 getDirection() const;
 
-    // 获取金钱
-    int getMoney() const { return money; }
+    // 每帧更新
+    virtual void update(float delta) override;
 
-    // 修改金钱
-    void addMoney(int amount);
-    bool spendMoney(int amount);
+    // 注册键盘监听器
+    void registerKeyboardListener();
 
-    // 获取背包
-    Bag& getBag() { return bag; }
+    // 销毁实例
+    static void destroyInstance();
 
-    // 获取技能树
-    SkillTree& getSkillTree() { return skillTree; }
+    // 设置速度
+    void setSpeed(const float speed);
+    float getSpeed() const;
 
 private:
+    Player();  // 构造函数私有化
+    ~Player(); // 析构函数私有化
 
-    std::string name;       // 玩家名字
-    int experience;         // 玩家经验值
-    int money;              // 玩家金钱
-    Bag bag;                // 玩家背包
-    SkillTree skillTree;    // 玩家技能树
+    // 禁止拷贝和赋值
+    Player(const Player&) = delete;
+    Player& operator=(const Player&) = delete;
 
+    cocos2d::Vec2 _direction; // 玩家移动方向向量
+    float _speed;             // 玩家速度
+
+    cocos2d::EventListenerKeyboard* _keyboardListener; // 键盘监听器
+
+    static Player* _instance; // 静态实例指针
 };
 
 #endif // _PLAYER_H_
