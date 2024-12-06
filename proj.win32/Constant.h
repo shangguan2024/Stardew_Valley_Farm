@@ -20,6 +20,13 @@ constexpr int MENU_SCENE_NEW_GAME_BUTTON_OFFSET_X = -400;                 // 菜
 constexpr int MENU_SCENE_LOAD_GAME_BUTTON_OFFSET_X = 0;                   // 菜单界面载入按钮X轴偏移量
 constexpr int MENU_SCENE_EXIT_GAME_BUTTON_OFFSET_X = 400;                 // 菜单界面结束按钮X轴偏移量
 
-constexpr float NOMAL_PLAYER_SPEED = 100;                                 // 人物默认移动速度
+constexpr float NOMAL_PLAYER_SPEED = 100;                                                      // 人物默认移动速度
+constexpr int PLAYER_IMAGE_WIDTH = 128;                                                        // 人物移动图集宽度
+constexpr int PLAYER_IMAGE_HEIGHT = 192;                                                       // 人物移动图集高度
+constexpr int PLAYER_FRAME_RATE = 4;                                                           // 人物移动帧数
+constexpr int PLAYER_DIRECTION_NUM = 4;                                                        // 人物可移动方向数
+constexpr int PLAYER_FRAME_WIDTH = PLAYER_IMAGE_WIDTH / PLAYER_FRAME_RATE;                     // 每帧宽度（图片宽度/帧数）
+constexpr int PLAYER_FRAME_HEIGHT = PLAYER_IMAGE_HEIGHT / PLAYER_DIRECTION_NUM;                // 每帧高度（图片高度/行数）
+constexpr float PLAYER_FRAME_DELAY = 0.1f;                                                     // 每帧动画延迟
 
 #endif // _CONSTANT_H_

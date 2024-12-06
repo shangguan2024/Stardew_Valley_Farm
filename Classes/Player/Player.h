@@ -46,8 +46,9 @@ private:
     Player(const Player&) = delete;
     Player& operator=(const Player&) = delete;
 
-    cocos2d::Vec2 _direction; // 玩家移动方向向量
-    float _speed;             // 玩家速度
+    cocos2d::Vec2 _direction;     // 玩家移动方向向量
+    float _speed;                 // 玩家速度
+    size_t _currentAnimationHash; // 当前播放的动画
 
     cocos2d::EventListenerKeyboard* _keyboardListener; // 键盘监听器
 

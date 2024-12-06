@@ -30,6 +30,12 @@ bool FarmYardScene::init()
 	_camera = Camera::create();
 	_camera->setCameraFlag(CameraFlag::USER1);
 
+	// 设置摄像机的位置
+	Vec3 cameraPosition = _camera->getPosition3D();
+	// 调低 Z 轴视角，减小 Z 值
+	cameraPosition.z -= 100; 
+	_camera->setPosition3D(cameraPosition);
+
 	this->addChild(_camera);
 
 	// 加载瓦片地图
