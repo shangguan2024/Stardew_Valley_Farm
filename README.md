@@ -29,3 +29,6 @@ Stardew_Valley_Farm
 - 实现 `MenuScene` 类
 ## 2024/12/5
 - 实现 `Player` 类
+## 2024/12/6
+- 补充 `Player` 类中移动动画的实现
+- 开始实现 `FarmYardScene` 类中的物体碰撞
