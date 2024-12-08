@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="100" height="80" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="5">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="100" height="80" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="5">
  <tileset firstgid="1" source="spring_outdoorsTileSheet.tsx"/>
  <tileset firstgid="1976" source="Houses.tsx"/>
  <layer id="1" name="Ground" width="100" height="80">
   <data encoding="base64" compression="zlib">
-   eJzt1jEKwzAMBVDn/ltPkkPlIJ0KhZq4Jg4/gje8JXj5EpJytNYOAAAAAAAAbrUvls5T3XctX9tvfXvfzt6k81RnPp5ldhZGb9N5qjur7Ux/Pu/Teaqzr55ltt6jm5/OU12vprN7ynys78eK+6Ef9/bDfOT6cWVHuR/r+zHaVf/2K52nuiuz0fsHSOepzv0AAAAAAAAAAAAAAAAAAAAAAAAAIO0NetWbcg==
+   eJzt1sENwjAMBdDQFRBbAFsA+zEJa7BHB2kuSEhULVFT3Ih3eBeUQ+0v2/QppR4AAAAAAIBVPSqLrqd177287z77O/bb1JvoelpnPraldBbm3kbX07qp3pbk83ofXU/r7KttKe333M2Prqd1Yz0t3VPmo34eNe6HPNbNw3zE5bFkR7kf9fOY21Xf5hVdT+uWzMbYf4DoelrnfgDwS/supWe+4Ycu/ltI6ZhzOGVneWzCJedwzW7yAAAAAAAAAAAAAAAAAAAAAAD+0ABYbpXJ
   </data>
  </layer>
  <layer id="6" name="Buildings" width="100" height="80">
@@ -15,4 +15,9 @@
  <objectgroup id="3" name="Event">
   <object id="4" name="SpawnPoint" x="808" y="407.5"/>
  </objectgroup>
+ <layer id="7" name="Meta" width="100" height="80">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T+1hDaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAbn0AAAE=
+  </data>
+ </layer>
 </map>

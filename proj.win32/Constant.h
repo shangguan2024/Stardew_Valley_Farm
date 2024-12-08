@@ -29,4 +29,6 @@ constexpr int PLAYER_FRAME_WIDTH = PLAYER_IMAGE_WIDTH / PLAYER_FRAME_RATE;      
 constexpr int PLAYER_FRAME_HEIGHT = PLAYER_IMAGE_HEIGHT / PLAYER_DIRECTION_NUM;                // 每帧高度（图片高度/行数）
 constexpr float PLAYER_FRAME_DELAY = 0.1f;                                                     // 每帧动画延迟
 
+constexpr int DEFAULT_CAPACITY = 20;                                      // 默认背包容量
+
 #endif // _CONSTANT_H_
