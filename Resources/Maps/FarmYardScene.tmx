@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="100" height="80" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="5">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="100" height="80" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="5">
  <tileset firstgid="1" source="spring_outdoorsTileSheet.tsx"/>
  <tileset firstgid="1976" source="Houses.tsx"/>
- <layer id="1" name="Ground" width="100" height="80">
+ <tileset firstgid="2435" source="hoeDirt.tsx"/>
+ <tileset firstgid="2467" source="Meta.tsx"/>
+ <layer id="1" name="Background" width="100" height="80">
   <data encoding="base64" compression="zlib">
-   eJzt1sENwjAMBdDQFRBbAFsA+zEJa7BHB2kuSEhULVFT3Ih3eBeUQ+0v2/QppR4AAAAAAIBVPSqLrqd177287z77O/bb1JvoelpnPraldBbm3kbX07qp3pbk83ofXU/r7KttKe333M2Prqd1Yz0t3VPmo34eNe6HPNbNw3zE5bFkR7kf9fOY21Xf5hVdT+uWzMbYf4DoelrnfgDwS/supWe+4Ycu/ltI6ZhzOGVneWzCJedwzW7yAAAAAAAAAAAAAAAAAAAAAAD+0ABYbpXJ
+   eJzt18FtwjAUgGGHFRq2ALYo3a9HpmAN9mAQ3EMkKpJAwNGL4Tt8EkQ+4PfLsTiklM4AAAAAAADM6lhY9H5qdz3L3+Z2vn3Phta0Tfx+alfybOhRtscjZ2FsrR5legx1mNKnWx+9n9q5z5dl6rzv3fnR+6ld30ynvqecj/I9Stwfeszbw/mI6/HKO8r9Ub7HvXfVo72i91O7oVn//bdrm//fx5p1n6P3U7u+WXct2qa/jfMxn+vZj4n+nZ9Cj2XRY1me7fG1SumUn69X8Xt4J8/22OQO22ynxyJ85w777EcPAAAAAAAAAAAAAAAAAAAAAOADXQClL2XN
+  </data>
+ </layer>
+ <layer id="8" name="Ground" width="100" height="80">
+  <data encoding="base64" compression="zlib">
+   eJzt0TENAAAIwDBedGOcGwEEjjaZgkUAAAAAAAAAAAAAAAAAAOyrnHHLj1/8AAAAAAAAAAAAAAAAAAAAAD5pjo8GkQ==
+  </data>
+ </layer>
+ <layer id="10" name="Character" width="100" height="80">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T+1hDaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAbn0AAAE=
   </data>
  </layer>
  <layer id="6" name="Buildings" width="100" height="80">
@@ -12,12 +24,17 @@
    eJzt2EtTz2Ech+H/steXlGyFoqUIbR0qts61dSxbhNo6aysJr8T9IsxPM65r5t4/8/nuntEIAAAAAAAA4PAaHxuNjtREHa3JmqpjNV3Hx/71C/8vJ9p7pk7WqTpdszVXZ+qsewzqXHsv1Pm6UIt1sS7V5Vpyj0Fdae+rda2u13Kt1GrdqJvuMahb7X277tTdulf360Gt1bp7DOphez+qx/Wkntaz2qjNeu4eg3rR3i/rVW3V63pTb2u7dtxjUO/a+319qI/1qT7Xl/pau+4xqG/tvVffa79+1EH9rF/12z0AAAAAAA6teX+4AAAAAAAAAAAAAAAAAAAAf9Ufc+Uztw==
   </data>
  </layer>
+ <layer id="9" name="Decoration" width="100" height="80">
+  <data encoding="base64" compression="zlib">
+   eJzt1cEJwCAMQFEzR9dw/9l6tqBSQYzw3sWrRL4pBQAAAAAAACCfGqdvADDnrwLgL7sjJ+8CwAr74x5PtCf7fLvQSW6jJvRylvlDq9eEVgAAAAAAAAAAAAAAAAAAAABgrxdJqgI4
+  </data>
+ </layer>
  <objectgroup id="3" name="Event">
   <object id="4" name="SpawnPoint" x="808" y="407.5"/>
  </objectgroup>
  <layer id="7" name="Meta" width="100" height="80">
   <data encoding="base64" compression="zlib">
-   eJztwTEBAAAAwqD1T+1hDaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAbn0AAAE=
+   eJzt0bENgDAAA8G02X8EGJQapChUjos7yQv4xwAAAAAAAABWrvke53xbaHLOqoUmWbsOmmTp0UWPLnp00aPL7nc9svQAAACAjHv+Gxl6dNGjix5d9AAAAAAAAAAAAAAAAAAAAMh7AJPyXZc=
   </data>
  </layer>
 </map>

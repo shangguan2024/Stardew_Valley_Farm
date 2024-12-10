@@ -6,8 +6,9 @@
  * Update Date:   2024/12/3
  ****************************************************************/
 #include "MenuScene.h"
-#include "Button/HoverButton.h"
+#include "../Button/HoverButton.h"
 #include "../Map/FarmYardScene.h"
+#include "../Music/AudioPlayer.h"
 #include "SaveLoadScene.h"
 #include "proj.win32/Constant.h"
 
@@ -55,7 +56,8 @@ bool MenuScene::init()
     // 为按钮添加事件处理器
     newGameButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
         if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
-
+            // 简单音频播放
+            audioPlayer("../Resources/ClickSoundEffect.mp3", false);
 
             Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, FarmYardScene::createScene(), cocos2d::Color3B::WHITE));
         }

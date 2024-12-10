@@ -8,8 +8,7 @@
 
 #ifndef _AUDIO_PLAYER_H_
 #define _AUDIO_PLAYER_H_
-
-#include "AudioEngine.h"
+#include "audio/include/AudioEngine.h"
 
  // 音频引擎设置
 extern int g_backgroundMusicSign;

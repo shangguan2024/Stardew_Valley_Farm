@@ -20,6 +20,14 @@ public:
     // 初始化场景
     virtual bool init();
 
+    // 鼠标滚动监听器
+    void registerMouseScrollListener();
+    void onMouseScroll(cocos2d::EventMouse* event);
+
+    // 鼠标点击监听器
+    void registerMouseClickListener();
+    void onMouseClick(cocos2d::EventMouse* event);
+
     // 每一帧被自动调用的 update 方法
     virtual void update(float delta);
 
@@ -27,8 +35,15 @@ public:
     CREATE_FUNC(FarmYardScene);
 
 private:
-
+    // 定义摄像机
     cocos2d::Camera* _camera;
+
+    // 鼠标滚动幅度
+    float scrollDelta = 0.0f;
+
+    // 鼠标点击位置和按键
+    cocos2d::Vec2 mouseLocation = cocos2d::Vec2::ZERO;
+    cocos2d::EventMouse::MouseButton _mouseButton;
 };
 
 #endif // _FARM_YARD_SCENE_H_
