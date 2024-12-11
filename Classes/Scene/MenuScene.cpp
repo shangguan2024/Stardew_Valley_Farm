@@ -56,8 +56,7 @@ bool MenuScene::init()
     // 为按钮添加事件处理器
     newGameButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
         if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
-            // 简单音频播放
-            audioPlayer("../Resources/ClickSoundEffect.mp3", false);
+
 
             Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, FarmYardScene::createScene(), cocos2d::Color3B::WHITE));
         }

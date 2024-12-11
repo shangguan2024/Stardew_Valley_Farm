@@ -38,12 +38,6 @@ private:
     // 定义摄像机
     cocos2d::Camera* _camera;
 
-    // 鼠标滚动幅度
-    float scrollDelta = 0.0f;
-
-    // 鼠标点击位置和按键
-    cocos2d::Vec2 mouseLocation = cocos2d::Vec2::ZERO;
-    cocos2d::EventMouse::MouseButton _mouseButton;
 };
 
 #endif // _FARM_YARD_SCENE_H_
