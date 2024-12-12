@@ -156,6 +156,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Bag\BackPackLayer.cpp" />
     <ClCompile Include="..\Classes\Bag\Bag.cpp" />
     <ClCompile Include="..\Classes\Button\HoverButton.cpp" />
+    <ClCompile Include="..\Classes\GameTime\GameTime.cpp" />
     <ClCompile Include="..\Classes\Item\Item.cpp" />
     <ClCompile Include="..\Classes\Item\Seed.cpp" />
     <ClCompile Include="..\Classes\Item\Tool.cpp" />
@@ -177,6 +178,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Bag\BackPackLayer.h" />
     <ClInclude Include="..\Classes\Bag\Bag.h" />
     <ClInclude Include="..\Classes\Button\HoverButton.h" />
+    <ClInclude Include="..\Classes\GameTime\GameTime.h" />
     <ClInclude Include="..\Classes\Item\Item.h" />
     <ClInclude Include="..\Classes\Item\Seed.h" />
     <ClInclude Include="..\Classes\Item\Tool.h" />
