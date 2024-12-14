@@ -1,3 +1,11 @@
+/****************************************************************
+ * Project Name:  Stardew_Valley_Farm
+ * File Name:     Constant.h
+ * File Function: 常变量的定义
+ * Author:        张翔
+ * Update Date:   2024/12/11
+ ****************************************************************/
+
 #ifndef _CONSTANT_H_
 #define _CONSTANT_H_
 #include <string>
@@ -24,14 +32,64 @@ constexpr int DEFAULT_MUSIC_SIGN = -1;                                          
 constexpr float DEFAULT_MUSIC_VOLUMN = 0.5f;                                                 // 缺省音量大小
 
 constexpr float NOMAL_PLAYER_SPEED = 100;                                                    // 人物默认移动速度
-constexpr int PLAYER_IMAGE_WIDTH = 128;                                                      // 人物移动图集宽度
-constexpr int PLAYER_IMAGE_HEIGHT = 192;                                                     // 人物移动图集高度
+constexpr int PLAYER_IMAGE_WIDTH = 64;                                                      // 人物移动图集宽度
+constexpr int PLAYER_IMAGE_HEIGHT = 128;                                                     // 人物移动图集高度
 constexpr int PLAYER_FRAME_RATE = 4;                                                         // 人物移动帧数
 constexpr int PLAYER_DIRECTION_NUM = 4;                                                      // 人物可移动方向数
 constexpr int PLAYER_FRAME_WIDTH = PLAYER_IMAGE_WIDTH / PLAYER_FRAME_RATE;                   // 每帧宽度（图片宽度/帧数）
 constexpr int PLAYER_FRAME_HEIGHT = PLAYER_IMAGE_HEIGHT / PLAYER_DIRECTION_NUM;              // 每帧高度（图片高度/行数）
 constexpr float PLAYER_FRAME_DELAY = 0.1f;                                                   // 每帧动画延迟
 
-constexpr int DEFAULT_CAPACITY = 20;                                                         // 默认背包容量
+constexpr int MAP_TILE_WIDTH = 16;
+constexpr int MAP_TILE_HEIGHT = 16;
+constexpr int FARMYARD_MAP_WIDTH = 100;
+constexpr int FARMYARD_MAP_HEIGHT = 80;
+
+constexpr int DEFAULT_CAPACITY = 30;                                                         // 默认背包容量
+constexpr int DEFAULT_BAR = 10;                                                              // 默认物品栏容量
+
+// 物品种类枚举
+enum ItemType {
+	SEED,          // 种子
+	TOOL,          // 工具
+ 	CROP           // 作物 
+};
+
+// 每种物品的具体描述
+const std::string SEED_DESCRIPTION = " ";
+const std::string TOOL_DESCRIPTION = " ";
+const std::string CROP_DESCRIPTION = " ";
+
+// 工具类型枚举
+enum ToolType {
+    HOE,           // 锄头
+    WATERING_CAN,  // 浇水壶
+    PICKAXE,       // 镐子
+    AXE,           // 斧头
+    SCYTHE,        // 镰刀
+    FISHING_ROD    // 钓鱼竿
+};
+
+// 每种功能的具体描述
+const std::string TOOL_HOE_DESCRIPTION = " ";
+const std::string TOOL_WATERING_CAN_DESCRIPTION = " ";
+const std::string TOOL_PICKAXE_DESCRIPTION = " ";
+const std::string TOOL_AXE_DESCRIPTION = " ";
+const std::string TOOL_SCYTHE_DESCRIPTION = " ";
+const std::string TOOL_FISHING_ROD_DESCRIPTION = " ";
+
+// 种子类型枚举
+enum SeedType {
+    RADISH_SEED,
+    POTATO_SEED,
+    WHRAT_SEED,
+};
+
+// 每种种子的具体描述
+const std::string SEED_RADISH_DESCRIPTION = " ";
+const std::string SEED_POTATO_DESCRIPTION = " ";
+const std::string SEED_WHRAT_DESCRIPTION = " ";
+
+
 
 #endif // _CONSTANT_H_

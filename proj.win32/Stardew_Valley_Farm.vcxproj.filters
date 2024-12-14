@@ -37,9 +37,6 @@
     <Filter Include="Classes\Plant">
       <UniqueIdentifier>{e8db757f-6110-4b2b-b5d5-9178b7f4951d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\Bag">
-      <UniqueIdentifier>{b918723f-da05-4c7f-b4aa-2213bffc5742}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes\SkillTree">
       <UniqueIdentifier>{653b52ae-9ea4-400c-a1c8-9a3db77f57db}</UniqueIdentifier>
     </Filter>
@@ -48,6 +45,9 @@
     </Filter>
     <Filter Include="Classes\GameTime">
       <UniqueIdentifier>{7f0b0786-e012-4aa7-8b98-9a4b6d31c9eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Inventory">
+      <UniqueIdentifier>{b918723f-da05-4c7f-b4aa-2213bffc5742}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -96,12 +96,6 @@
     <ClCompile Include="..\Classes\NPC\ChatLayer.cpp">
       <Filter>Classes\NPC</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Bag\BackPackLayer.cpp">
-      <Filter>Classes\Bag</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Bag\Bag.cpp">
-      <Filter>Classes\Bag</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\SkillTree\SkillTree.cpp">
       <Filter>Classes\SkillTree</Filter>
     </ClCompile>
@@ -110,6 +104,15 @@
     </ClCompile>
     <ClCompile Include="..\Classes\GameTime\GameTime.cpp">
       <Filter>Classes\GameTime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Inventory\Slot.cpp">
+      <Filter>Classes\Inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Inventory\Inventory.cpp">
+      <Filter>Classes\Inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Inventory\InventoryLayer.cpp">
+      <Filter>Classes\Inventory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -158,12 +161,6 @@
     <ClInclude Include="..\Classes\NPC\ChatLayer.h">
       <Filter>Classes\NPC</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Bag\BackPackLayer.h">
-      <Filter>Classes\Bag</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Bag\Bag.h">
-      <Filter>Classes\Bag</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\SkillTree\SkillTree.h">
       <Filter>Classes\SkillTree</Filter>
     </ClInclude>
@@ -172,6 +169,15 @@
     </ClInclude>
     <ClInclude Include="..\Classes\GameTime\GameTime.h">
       <Filter>Classes\GameTime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Inventory\InventoryLayer.h">
+      <Filter>Classes\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Inventory\Slot.h">
+      <Filter>Classes\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Inventory\Inventory.h">
+      <Filter>Classes\Inventory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
