@@ -26,21 +26,45 @@ GameTime* GameTime::getInstance()
 	return instance;
 }
 
-GameTime::GameTime(int y = 2024, int m = 1, int d = 1, int h = 0, int min = 0, double speed = 1.0) :year(y), month(m), day(d), hour(h), minute(min), timeSpeed(speed), running(false)
+GameTime::GameTime(int y, int m, int d, int h, int min, double speed) :year(y), month(m), day(d), hour(h), minute(min), timeSpeed(speed), running(false)
 {
 	normalize();
 }
 
 void GameTime::normalize()
 {
-
+	if (minute >= 60)
+	{
+		minute = 0;
+		hour++;
+		if (hour >= 24) 
+		{
+			hour = 0;
+			day++;
+			if (day > 30) 
+			{
+				day = 1;
+				month++;
+				if (month > 4) 
+				{
+					month = 1;
+					year++;
+				}
+			}
+		}
+	}
+	// 如果时间有错就重新更新
+	if (minute > 60 || hour >= 24 || day > 30 || month > 4) 
+	{
+		GameTime::normalize();
+	}
 }
 
 void GameTime::updateLoop()
 {
 	while (running) {
 		// 更新间隔
-		std::this_thread::sleep_for(std::chrono::milliseconds(100));
+		std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 		// 添加时间
 		addSeconds(1); 
 	}
@@ -71,5 +95,14 @@ void GameTime::addSeconds(int realMinutes)
 
 std::string GameTime::toString() const
 {
-
+	std::string _time = std::to_string(year);
+	_time += " ";
+	_time += (month < 10) ? "0" + std::to_string(month) : std::to_string(month);
+	_time += " ";
+	_time += (day < 10) ? "0" + std::to_string(day) : std::to_string(day);
+	_time += " ";
+	_time += (hour < 10) ? "0" + std::to_string(hour) : std::to_string(hour);
+	_time += " ";
+	_time += (minute < 10) ? "0" + std::to_string(minute) : std::to_string(minute);
+	return _time;
 }

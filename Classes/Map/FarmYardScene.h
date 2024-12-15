@@ -10,7 +10,7 @@
 #define _FARM_YARD_SCENE_H_
 
 #include "cocos2d.h"
-
+#include "../GameTime/GameTime.h"
 
 class FarmYardScene : public cocos2d::Scene {
 public:
@@ -37,10 +37,7 @@ public:
 private:
     // 定义摄像机
     cocos2d::Camera* _camera;
-
-    // 坐标转换
-    cocos2d::Vec2 convertToTileCoords(const cocos2d::Vec2& pos);
-
+    GameTime* gametime;
 };
 
 #endif // _FARM_YARD_SCENE_H_
