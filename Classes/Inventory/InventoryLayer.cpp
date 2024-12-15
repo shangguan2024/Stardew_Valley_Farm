@@ -8,6 +8,8 @@
 
 #include "InventoryLayer.h"
 
+#if 0
+
 InventoryLayer* InventoryLayer::create()
 {
 
@@ -19,3 +21,5 @@ bool InventoryLayer::init()
 }
 
 InventoryLayer::~InventoryLayer() {}
+
+#endif

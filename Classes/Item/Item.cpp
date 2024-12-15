@@ -12,8 +12,6 @@ Item::Item(ItemType _type, std::string _image, int _maxstack, int _price)
 	:type(_type), image(_image), maxstack(_maxstack), price(_price) {
 }
 
-Item::~Item() {}
-
 std::string Item::getDescription() const
 {
 	if (this->type == SEED)
@@ -22,7 +20,8 @@ std::string Item::getDescription() const
 		return TOOL_DESCRIPTION;
 	else if (this->type == CROP)
 		return CROP_DESCRIPTION;
-	
+	else
+		return " ";
 }
 
 const ItemType& Item::getType() const

@@ -31,12 +31,16 @@ public:
     // 每一帧被自动调用的 update 方法
     virtual void update(float delta);
 
+    // 转变坐标成瓦片坐标
+    cocos2d::Vec2 convertToTileCoords(const cocos2d::Vec2& pos);
+
     // 实现 FarmYardScene 类的 create 方法
     CREATE_FUNC(FarmYardScene);
 
 private:
     // 定义摄像机
     cocos2d::Camera* _camera;
+
     GameTime* gametime;
 };
 

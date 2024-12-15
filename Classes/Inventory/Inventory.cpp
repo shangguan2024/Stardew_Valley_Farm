@@ -58,6 +58,8 @@ void Inventory::changeCurrHeldItem(int change)
 	currentHeldItemIndex %= DEFAULT_BAR;
 }
 
+#if 0
+
 bool Inventory::addItem(std::shared_ptr<Item> item, int quantity)
 {
 	// 先检查背包里有没有这种物品
@@ -69,6 +71,8 @@ bool Inventory::changeItemQuantity(std::shared_ptr<Item> item, int quantity)
 {
 
 }
+
+#endif
 
 bool Inventory::swapItems(int index1, int index2)
 {

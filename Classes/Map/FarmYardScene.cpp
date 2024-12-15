@@ -36,13 +36,6 @@ bool FarmYardScene::init()
 	_camera->setCameraFlag(CameraFlag::USER1);
 	this->addChild(_camera);
 
-	// 创建鼠标滚轮事件监听器
-	auto listener = EventListenerMouse::create();
-	listener->onMouseScroll = CC_CALLBACK_1(FarmYardScene::onMouseScroll, this);
-
-	// 获取事件分发器并添加监听器
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
-
 	// 加载瓦片地图
 	auto FarmYard = TMXTiledMap::create("Maps/FarmYardScene.tmx");
 	if (!FarmYard) {
@@ -261,7 +254,6 @@ void FarmYardScene::update(float delta)
 	timeLabel->setPosition(Vec2(_camera->getPosition3D().x + Director::getInstance()->getVisibleSize().width / 2 - timeLabel->getContentSize().width, _camera->getPosition3D().y + Director::getInstance()->getVisibleSize().height / 2 - timeLabel->getContentSize().height));
 	this->addChild(timeLabel, 10, "timelabel");
 	timeLabel->setCameraMask(unsigned short(CameraFlag::USER1));
-	
 
 	// 计算摄像头目标位置
 	Vec3 targetCameraPos(newPosition.x, newPosition.y, currentCameraPos.z);
