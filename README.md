@@ -36,3 +36,7 @@ Stardew_Valley_Farm
 - 基本实现物体碰撞功能
 - 基本实现 `FarmYardScene` 类中的鼠标交互功能
 - 实现 `AudioEngine` 类
+## 2024/12/14
+- 初步实现 `Item` 类
+## 2024/12/15
+- 实现 `GameTime` 类
