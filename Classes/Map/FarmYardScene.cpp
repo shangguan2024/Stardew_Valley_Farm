@@ -7,6 +7,7 @@
  ****************************************************************/
 #include "../Player/Player.h"
 #include "FarmYardScene.h"
+#include "../GameTime/GameTime.h"
 
 USING_NS_CC;
 
@@ -25,6 +26,10 @@ bool FarmYardScene::init()
 	if (!Scene::init()) {
 		return false;
 	}
+
+	// 创建计时
+	gametime = GameTime::getInstance();
+	gametime->start();
 
 	// 创建摄像机
 	_camera = Camera::create();
@@ -244,6 +249,15 @@ void FarmYardScene::update(float delta)
 
 	// 更新玩家位置
 	player->setPosition(newPosition);
+
+	auto removelabel = this->getChildByName("timelabel");
+	if (removelabel != nullptr)
+	{
+		removelabel->removeFromParentAndCleanup(true);
+	}
+	auto timeLabel = Label::createWithSystemFont(gametime->toString(), "Arial", 30);
+	timeLabel->setPosition(Vec2(Director::getInstance()->getVisibleSize().width - timeLabel->getContentSize().width, cocos2d::Director::getInstance()->getVisibleSize().height - timeLabel->getContentSize().height));
+	this->addChild(timeLabel, 100, "timelabel");
 
 	// 计算摄像头目标位置
 	Vec3 targetCameraPos(newPosition.x, newPosition.y, currentCameraPos.z);
