@@ -53,9 +53,7 @@ bool FarmYardScene::init()
 	FarmYard->setCameraMask(unsigned short(CameraFlag::USER1));
 
 	// 获取地图的基础属性
-	auto mapSize = FarmYard->getMapSize();
-	auto tileSize = FarmYard->getTileSize();
-	auto mapCenter = Vec2(mapSize.width * tileSize.width / 2, mapSize.height * tileSize.height / 2);
+	auto mapCenter = Vec2(FARMYARD_MAP_WIDTH * MAP_TILE_WIDTH / 2, FARMYARD_MAP_HEIGHT * MAP_TILE_HEIGHT / 2);
 
 	auto objectGroup = FarmYard->getObjectGroup("Event");
 	if (!objectGroup) {
@@ -87,6 +85,14 @@ bool FarmYardScene::init()
 	this->scheduleUpdate();
 
 	return true;
+}
+
+Vec2 FarmYardScene::convertToTileCoords(const Vec2& pos)
+{
+	// 将玩家的新位置转换为瓦片坐标
+	Vec2 tile = Vec2(int(pos.x / MAP_TILE_WIDTH), int((FARMYARD_MAP_HEIGHT * MAP_TILE_HEIGHT - pos.y) / MAP_TILE_HEIGHT));
+
+	return tile;
 }
 
 void FarmYardScene::registerMouseScrollListener()
@@ -130,8 +136,6 @@ void FarmYardScene::onMouseClick(cocos2d::EventMouse* event)
 
 	// 获取 FarmYard 地图对象
 	auto FarmYard = (TMXTiledMap*)this->getChildByName("FarmYard");
-	Size mapSize = FarmYard->getMapSize();
-	Size tileSize = FarmYard->getTileSize();
 
 	// 获取瓦片图层
 	auto tileLayer = FarmYard->getLayer("Meta");
@@ -143,8 +147,7 @@ void FarmYardScene::onMouseClick(cocos2d::EventMouse* event)
 
 	// 获得玩家的当前位置并转换为瓦片坐标
 	Vec2 currentPosition = player->getPosition();
-	int playerX = currentPosition.x / tileSize.width;
-	int playerY = (mapSize.height * tileSize.height - currentPosition.y) / tileSize.height;
+	Vec2 currenttile = convertToTileCoords(currentPosition);
 
 	// 获取鼠标点击位置
 	auto Location = event->getLocation();
@@ -154,19 +157,19 @@ void FarmYardScene::onMouseClick(cocos2d::EventMouse* event)
 	offset.x += Location.x;
 	offset.y -= Location.y;
 	// 将鼠标的位置转换为瓦片坐标
-	int mouseX = offset.x / tileSize.width;
-	int mouseY = (mapSize.height * tileSize.height - offset.y) / tileSize.height;
+	Vec2 mousetile= convertToTileCoords(offset);
+
 	// 计算玩家和鼠标之间的瓦片距离
-	float distance = sqrt(pow(playerX - mouseX, 2) + pow(playerY - mouseY, 2));
+	float distance = sqrt(pow(currenttile.x - mousetile.x, 2) + pow(currenttile.y - mousetile.y, 2));
 
 	// 判断鼠标点击的按钮
 	auto mouseButton = event->getMouseButton();
 	if (mouseButton == EventMouse::MouseButton::BUTTON_LEFT) {
-		CCLOG("Left mouse button clicked at: (%f, %f)", Location.x, Location.y);
+		CCLOG("Left mouse button clicked at: (%f, %f)", mousetile.x, mousetile.y);
 		// 执行左键点击相关操作
 	}
 	else if (mouseButton == EventMouse::MouseButton::BUTTON_RIGHT) {
-		CCLOG("Right mouse button clicked at: (%f, %f)", Location.x, Location.y);
+		CCLOG("Right mouse button clicked at: (%f, %f)", mousetile.x, mousetile.y);
 		// 执行右键点击相关操作
 	}
 
@@ -176,7 +179,7 @@ void FarmYardScene::onMouseClick(cocos2d::EventMouse* event)
 	}
 	else {
 		// 获取鼠标位置的瓦片 GID
-		int mouseGID = tileLayer->getTileGIDAt(Vec2(mouseX, mouseY));
+		int mouseGID = tileLayer->getTileGIDAt(mousetile);
 
 		// 如果 GID 不为空，表示该位置可以交互
 		if (mouseGID) {
@@ -186,6 +189,11 @@ void FarmYardScene::onMouseClick(cocos2d::EventMouse* event)
 				// 判断瓦片是否具有 "Plowable" 属性且为 true
 				if (properties["Plowable"].asBool()) {
 					// 执行交互操作
+					auto Soil = Sprite::create("DrySoil.png");
+					Soil->setAnchorPoint(Vec2(0, 0));
+					this->addChild(Soil);
+					Soil->setPosition(Vec2(mousetile.x * MAP_TILE_WIDTH, (FARMYARD_MAP_HEIGHT - mousetile.y) * MAP_TILE_HEIGHT));
+					Soil->setCameraMask(unsigned short(CameraFlag::USER1));
 					CCLOG("Interacting with plowable tile");
 				}
 			}
@@ -202,16 +210,13 @@ void FarmYardScene::update(float delta)
 
 	// 获取 FarmYard 地图对象
 	auto FarmYard = (TMXTiledMap*)this->getChildByName("FarmYard");
-	Size mapSize = FarmYard->getMapSize();
-	Size tileSize = FarmYard->getTileSize();
 
 	// 计算摄像机的位置
 	Vec3 currentCameraPos = _camera->getPosition3D();
 
 	// 获得玩家的当前位置并转换为瓦片坐标
 	Vec2 currentPosition = player->getPosition();
-	int playerX = currentPosition.x / tileSize.width;
-	int playerY = (mapSize.height * tileSize.height - currentPosition.y) / tileSize.height;
+	Vec2 currenttile = convertToTileCoords(currentPosition);
 
 	// 获取瓦片图层
 	auto tileLayer = FarmYard->getLayer("Meta");
@@ -223,12 +228,8 @@ void FarmYardScene::update(float delta)
 	// 计算更新后的位置
 	Vec2 newPosition = currentPosition + player->getDirection() * player->getSpeed() * delta;
 
-	// 将玩家的新位置转换为瓦片坐标
-	int tileX = newPosition.x / tileSize.width;
-	int tileY = (mapSize.height * tileSize.height - newPosition.y) / tileSize.height;
-
 	// 获取玩家目标位置的瓦片GID
-	int tileGID = tileLayer->getTileGIDAt(Vec2(tileX, tileY));
+	int tileGID = tileLayer->getTileGIDAt(convertToTileCoords(newPosition));
 
 	if (tileGID) {
 		// 获取瓦片属性

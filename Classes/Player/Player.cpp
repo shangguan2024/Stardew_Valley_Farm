@@ -20,7 +20,7 @@ Player* Player::getInstance()
         // 使用 no-throw 分配内存
         _instance = new (std::nothrow) Player(); 
         // 初始化失败则销毁实例
-        if (_instance && !_instance->init()) {   
+        if (!_instance || !_instance->init()) {   
             CC_SAFE_DELETE(_instance);
         }
     }
@@ -57,7 +57,7 @@ bool Player::init()
     }
 
     // 初始化动画缓存
-    auto texture = Director::getInstance()->getTextureCache()->addImage("Player/Dana.png");
+    auto texture = Director::getInstance()->getTextureCache()->addImage("Player/Sandy.png");
 
    // 裁剪初始图像
     Rect rect(0, PLAYER_IMAGE_HEIGHT - PLAYER_FRAME_HEIGHT, PLAYER_FRAME_WIDTH, PLAYER_FRAME_HEIGHT);

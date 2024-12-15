@@ -38,6 +38,9 @@ private:
     // 定义摄像机
     cocos2d::Camera* _camera;
 
+    // 坐标转换
+    cocos2d::Vec2 convertToTileCoords(const cocos2d::Vec2& pos);
+
 };
 
 #endif // _FARM_YARD_SCENE_H_
