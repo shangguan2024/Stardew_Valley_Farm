@@ -41,7 +41,9 @@ private:
     // 定义摄像机
     cocos2d::Camera* _camera;
 
-    GameTime* gametime;
+    // 玩家面朝的位置
+    cocos2d::Sprite* targettile;
+
 };
 
 #endif // _FARM_YARD_SCENE_H_

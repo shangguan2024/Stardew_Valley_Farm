@@ -25,6 +25,9 @@ public:
     void setDirection(const cocos2d::Vec2& direction);
     cocos2d::Vec2 getDirection() const;
 
+    // 获得朝向
+    cocos2d::Vec2 getFaceto() const;
+
     // 每帧更新
     virtual void update(float delta) override;
 
@@ -38,6 +41,8 @@ public:
     void setSpeed(const float speed);
     float getSpeed() const;
 
+
+
 private:
     Player();  // 构造函数私有化
     ~Player(); // 析构函数私有化
@@ -47,6 +52,7 @@ private:
     Player& operator=(const Player&) = delete;
 
     cocos2d::Vec2 _direction;     // 玩家移动方向向量
+    cocos2d::Vec2 _faceto;        // 玩家的朝向
     float _speed;                 // 玩家速度
     size_t _currentAnimationHash; // 当前播放的动画
 

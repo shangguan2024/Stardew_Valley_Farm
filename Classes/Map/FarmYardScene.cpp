@@ -7,7 +7,7 @@
  ****************************************************************/
 #include "../Player/Player.h"
 #include "FarmYardScene.h"
-#include "../GameTime/GameTime.h"
+
 
 USING_NS_CC;
 
@@ -15,8 +15,10 @@ USING_NS_CC;
 Scene* FarmYardScene::createScene()
 {
 	auto scene = Scene::create();
-	auto layer = FarmYardScene::create();
-	scene->addChild(layer);
+	auto farmlayer = FarmYardScene::create();
+	scene->addChild(farmlayer, 0);
+	auto uilayer = Layer::create();
+	scene->addChild(uilayer, 10);
 	return scene;
 }
 
@@ -27,9 +29,11 @@ bool FarmYardScene::init()
 		return false;
 	}
 
+#if 0
 	// 创建计时
 	gametime = GameTime::getInstance();
 	gametime->start();
+#endif
 
 	// 创建摄像机
 	_camera = Camera::create();
@@ -51,7 +55,6 @@ bool FarmYardScene::init()
 	FarmYard->setCameraMask(unsigned short(CameraFlag::USER1));
 
 	// 获取地图的基础属性
-	auto mapCenter = Vec2(FARMYARD_MAP_WIDTH * MAP_TILE_WIDTH / 2, FARMYARD_MAP_HEIGHT * MAP_TILE_HEIGHT / 2);
 
 	auto objectGroup = FarmYard->getObjectGroup("Event");
 	if (!objectGroup) {
@@ -74,6 +77,11 @@ bool FarmYardScene::init()
 	this->addChild(player, 1, "player");
 	player->setPosition(spawnX, spawnY);
 	player->setCameraMask(unsigned short(CameraFlag::USER1));
+
+	targettile = cocos2d::Sprite::create("Items/DrySoil.png");
+	targettile->setAnchorPoint(Vec2(0, 0));
+	this->addChild(targettile, 1, "targettile");
+	targettile->setCameraMask(unsigned short(CameraFlag::USER1));
 
 	// 创建并注册鼠标滚轮和鼠标点击事件监听器
 	registerMouseScrollListener();
@@ -111,7 +119,7 @@ void FarmYardScene::onMouseScroll(cocos2d::EventMouse* event)
 	// 计算摄像机的位置
 	Vec3 currentCameraPos = _camera->getPosition3D();
 	// 计算摄像头目标位置
-	Vec3 targetCameraPos(currentCameraPos.x, currentCameraPos.y, currentCameraPos.z);
+	Vec3 targetCameraPos(currentCameraPos.x, currentCameraPos.y, currentCameraPos.z + 100 * scrollDelta);
 	// 平滑移动摄像机
 	_camera->setPosition3D(currentCameraPos.lerp(targetCameraPos, 0.1f));
 }
@@ -143,6 +151,9 @@ void FarmYardScene::onMouseClick(cocos2d::EventMouse* event)
 		return;
 	}
 
+
+
+#if 0
 	// 获得玩家的当前位置并转换为瓦片坐标
 	Vec2 currentPosition = player->getPosition();
 	Vec2 currenttile = convertToTileCoords(currentPosition);
@@ -200,6 +211,8 @@ void FarmYardScene::onMouseClick(cocos2d::EventMouse* event)
 			CCLOG("Nothing to interact");
 		}
 	}
+#endif
+
 }
 
 void FarmYardScene::update(float delta)
@@ -214,7 +227,7 @@ void FarmYardScene::update(float delta)
 
 	// 获得玩家的当前位置并转换为瓦片坐标
 	Vec2 currentPosition = player->getPosition();
-	Vec2 currenttile = convertToTileCoords(currentPosition);
+	
 
 	// 获取瓦片图层
 	auto tileLayer = FarmYard->getLayer("Meta");
@@ -244,16 +257,21 @@ void FarmYardScene::update(float delta)
 	// 更新玩家位置
 	player->setPosition(newPosition);
 
+	Vec2 newtile = convertToTileCoords(newPosition);
+	Vec2 faceto = player->getFaceto();
+	targettile->setPosition(Vec2((newtile.x + faceto.x) * MAP_TILE_WIDTH, (FARMYARD_MAP_HEIGHT - newtile.y - 1 + faceto.y) * MAP_TILE_HEIGHT));
+
+#if 0
 	// 更新时间显示
 	auto removelabel = this->getChildByName("timelabel");
-	if (removelabel != nullptr)
-	{
+	if (removelabel != nullptr){
 		removelabel->removeFromParentAndCleanup(true);
 	}
 	auto timeLabel = Label::createWithSystemFont(gametime->toString(), "Arial", 30);
 	timeLabel->setPosition(Vec2(_camera->getPosition3D().x + Director::getInstance()->getVisibleSize().width / 2 - timeLabel->getContentSize().width, _camera->getPosition3D().y + Director::getInstance()->getVisibleSize().height / 2 - timeLabel->getContentSize().height));
 	this->addChild(timeLabel, 10, "timelabel");
 	timeLabel->setCameraMask(unsigned short(CameraFlag::USER1));
+#endif
 
 	// 计算摄像头目标位置
 	Vec3 targetCameraPos(newPosition.x, newPosition.y, currentCameraPos.z);

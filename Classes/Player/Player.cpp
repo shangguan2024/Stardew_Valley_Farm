@@ -28,7 +28,7 @@ Player* Player::getInstance()
 }
 
 // 构造函数
-Player::Player() : _direction(Vec2::ZERO), _keyboardListener(nullptr), _speed(NOMAL_PLAYER_SPEED), _currentAnimationHash(0) {}
+Player::Player() : _direction(Vec2::ZERO),_faceto(Vec2::ZERO), _keyboardListener(nullptr), _speed(NOMAL_PLAYER_SPEED), _currentAnimationHash(0) {}
 
 // 析构函数
 Player::~Player()
@@ -128,6 +128,11 @@ Vec2 Player::getDirection() const
     return _direction;
 }
 
+Vec2 Player::getFaceto() const
+{
+    return _faceto;
+}
+
 // 设置速度
 void Player::setSpeed(const float speed)
 {
@@ -194,16 +199,16 @@ void Player::registerKeyboardListener()
     eventListener->onKeyPressed = [this](EventKeyboard::KeyCode keyCode, Event* event) {
         switch (keyCode) {
             case EventKeyboard::KeyCode::KEY_W:
-                _direction = Vec2(0, 1);
+                _direction = _faceto = Vec2(0, 1);
                 break;
             case EventKeyboard::KeyCode::KEY_S:
-                _direction = Vec2(0, -1);
+                _direction = _faceto = Vec2(0, -1);
                 break;
             case EventKeyboard::KeyCode::KEY_A:
-                _direction = Vec2(-1, 0);
+                _direction = _faceto = Vec2(-1, 0);
                 break;
             case EventKeyboard::KeyCode::KEY_D:
-                _direction = Vec2(1, 0);
+                _direction = _faceto = Vec2(1, 0);
                 break;
             default:
                 break;

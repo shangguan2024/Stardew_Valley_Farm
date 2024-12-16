@@ -164,6 +164,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Map\FarmHouseScene.cpp" />
     <ClCompile Include="..\Classes\Map\FarmYardScene.cpp" />
     <ClCompile Include="..\Classes\Map\TownCenterScene.cpp" />
+    <ClCompile Include="..\Classes\Map\UiLayer.cpp" />
     <ClCompile Include="..\Classes\Music\AudioPlayer.cpp" />
     <ClCompile Include="..\Classes\NPC\ChatLayer.cpp" />
     <ClCompile Include="..\Classes\NPC\NPC.cpp" />
@@ -188,6 +189,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Map\FarmHouseScene.h" />
     <ClInclude Include="..\Classes\Map\FarmYardScene.h" />
     <ClInclude Include="..\Classes\Map\TownCenterScene.h" />
+    <ClInclude Include="..\Classes\Map\UiLayer.h" />
     <ClInclude Include="..\Classes\Music\AudioPlayer.h" />
     <ClInclude Include="..\Classes\NPC\ChatLayer.h" />
     <ClInclude Include="..\Classes\NPC\NPC.h" />
