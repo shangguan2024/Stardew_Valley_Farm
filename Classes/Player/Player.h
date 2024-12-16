@@ -1,13 +1,5 @@
-/****************************************************************
- * Project Name:  Stardew_Valley_Farm
- * File Name:     Player.h
- * File Function: Playerç±»çš„å®šä¹‰
- * Author:        å¼ ç¿”ã€ä¸Šå®˜æ€æ¨ã€ææ˜Š
- * Update Date:   2024/12/3
- ****************************************************************/
-
-#ifndef _PLAYER_H_
-#define _PLAYER_H_
+#ifndef __PLAYER_H__
+#define __PLAYER_H__
 
 #include "proj.win32/Constant.h"
 #include "cocos2d.h"
@@ -15,44 +7,44 @@
 class Player : public cocos2d::Sprite
 {
 public:
-    // è·å–å•ä¾‹å®ä¾‹
+    // »ñÈ¡µ¥ÀıÊµÀı
     static Player* getInstance();
 
-    // åˆå§‹åŒ–
+    // ³õÊ¼»¯
     virtual bool init() override;
 
-    // è®¾ç½®æ–¹å‘
+    // ÉèÖÃ·½Ïò
     void setDirection(const cocos2d::Vec2& direction);
     cocos2d::Vec2 getDirection() const;
 
-    // æ¯å¸§æ›´æ–°
+    // Ã¿Ö¡¸üĞÂ
     virtual void update(float delta) override;
 
-    // æ³¨å†Œé”®ç›˜ç›‘å¬å™¨
+    // ×¢²á¼üÅÌ¼àÌıÆ÷
     void registerKeyboardListener();
 
-    // é”€æ¯å®ä¾‹
+    // Ïú»ÙÊµÀı
     static void destroyInstance();
 
-    // è®¾ç½®é€Ÿåº¦
+    // ÉèÖÃËÙ¶È
     void setSpeed(const float speed);
     float getSpeed() const;
 
 private:
-    Player();  // æ„é€ å‡½æ•°ç§æœ‰åŒ–
-    ~Player(); // ææ„å‡½æ•°ç§æœ‰åŒ–
+    Player();  // ¹¹Ôìº¯ÊıË½ÓĞ»¯
+    ~Player(); // Îö¹¹º¯ÊıË½ÓĞ»¯
 
-    // ç¦æ­¢æ‹·è´å’Œèµ‹å€¼
+    // ½ûÖ¹¿½±´ºÍ¸³Öµ
     Player(const Player&) = delete;
     Player& operator=(const Player&) = delete;
 
-    cocos2d::Vec2 _direction;     // ç©å®¶ç§»åŠ¨æ–¹å‘å‘é‡
-    float _speed;                 // ç©å®¶é€Ÿåº¦
-    size_t _currentAnimationHash; // å½“å‰æ’­æ”¾çš„åŠ¨ç”»
+    cocos2d::Vec2 _direction;     // Íæ¼ÒÒÆ¶¯·½ÏòÏòÁ¿
+    float _speed;                 // Íæ¼ÒËÙ¶È
+    size_t _currentAnimationHash; // µ±Ç°²¥·ÅµÄ¶¯»­
 
-    cocos2d::EventListenerKeyboard* _keyboardListener; // é”®ç›˜ç›‘å¬å™¨
+    cocos2d::EventListenerKeyboard* _keyboardListener; // ¼üÅÌ¼àÌıÆ÷
 
-    static Player* _instance; // é™æ€å®ä¾‹æŒ‡é’ˆ
+    static Player* _instance; // ¾²Ì¬ÊµÀıÖ¸Õë
 };
 
-#endif // _PLAYER_H_
+#endif

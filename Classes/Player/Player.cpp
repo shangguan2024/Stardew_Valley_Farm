@@ -1,25 +1,17 @@
-/****************************************************************
- * Project Name:  Stardew_Valley_Farm
- * File Name:     Player.cpp
- * File Function: Playerç±»çš„å®ç°
- * Author:        å¼ ç¿”ã€ä¸Šå®˜æ€æ¨ã€ææ˜Š
- * Update Date:   2024/12/5
- ****************************************************************/
-
 #include "Player.h"
 
 USING_NS_CC;
 
-// é™æ€å®ä¾‹åˆå§‹åŒ–
+// ¾²Ì¬ÊµÀı³õÊ¼»¯
 Player* Player::_instance = nullptr;
 
-// è·å–å•ä¾‹å®ä¾‹
+// »ñÈ¡µ¥ÀıÊµÀı
 Player* Player::getInstance() 
 {
     if (_instance == nullptr) {
-        // ä½¿ç”¨ no-throw åˆ†é…å†…å­˜
+        // Ê¹ÓÃ no-throw ·ÖÅäÄÚ´æ
         _instance = new (std::nothrow) Player(); 
-        // åˆå§‹åŒ–å¤±è´¥åˆ™é”€æ¯å®ä¾‹
+        // ³õÊ¼»¯Ê§°ÜÔòÏú»ÙÊµÀı
         if (!_instance || !_instance->init()) {   
             CC_SAFE_DELETE(_instance);
         }
@@ -27,46 +19,46 @@ Player* Player::getInstance()
     return _instance;
 }
 
-// æ„é€ å‡½æ•°
+// ¹¹Ôìº¯Êı
 Player::Player() : _direction(Vec2::ZERO), _keyboardListener(nullptr), _speed(NOMAL_PLAYER_SPEED), _currentAnimationHash(0) {}
 
-// ææ„å‡½æ•°
+// Îö¹¹º¯Êı
 Player::~Player()
 {
     if (_keyboardListener) {
-        // æ£€æŸ¥ç›‘å¬å™¨æ˜¯å¦è¿˜åœ¨äº‹ä»¶è°ƒåº¦å™¨ä¸­
+        // ¼ì²é¼àÌıÆ÷ÊÇ·ñ»¹ÔÚÊÂ¼şµ÷¶ÈÆ÷ÖĞ
         _eventDispatcher->removeEventListener(_keyboardListener);
-        _keyboardListener = nullptr; // é¿å…æ‚¬ç©ºæŒ‡é’ˆ
+        _keyboardListener = nullptr; // ±ÜÃâĞü¿ÕÖ¸Õë
     }
 
-    // æ¸…é™¤äººç‰©ç§»åŠ¨åŠ¨ç”»ç¼“å­˜
+    // Çå³ıÈËÎïÒÆ¶¯¶¯»­»º´æ
     AnimationCache::getInstance()->removeAnimation("WALK_DOWN");
     AnimationCache::getInstance()->removeAnimation("WALK_RIGHT");
     AnimationCache::getInstance()->removeAnimation("WALK_UP");
     AnimationCache::getInstance()->removeAnimation("WALK_LEFT");
     
-    // è°ƒç”¨çˆ¶ç±»çš„ææ„å‡½æ•°ä»¥é‡Šæ”¾ Sprite èµ„æº
+    // µ÷ÓÃ¸¸ÀàµÄÎö¹¹º¯ÊıÒÔÊÍ·Å Sprite ×ÊÔ´
     Sprite::~Sprite();
 }
 
-// åˆå§‹åŒ–
+// ³õÊ¼»¯
 bool Player::init() 
 {
     if (!Sprite::init()) {
         return false;
     }
 
-    // åˆå§‹åŒ–åŠ¨ç”»ç¼“å­˜
+    // ³õÊ¼»¯¶¯»­»º´æ
     auto texture = Director::getInstance()->getTextureCache()->addImage("Player/Sandy.png");
 
-   // è£å‰ªåˆå§‹å›¾åƒ
+   // ²Ã¼ô³õÊ¼Í¼Ïñ
     Rect rect(0, PLAYER_IMAGE_HEIGHT - PLAYER_FRAME_HEIGHT, PLAYER_FRAME_WIDTH, PLAYER_FRAME_HEIGHT);
 
-    // åˆ›å»ºè£å‰ªå‡ºæ¥çš„ç²¾çµå¸§
+    // ´´½¨²Ã¼ô³öÀ´µÄ¾«ÁéÖ¡
     auto frame = SpriteFrame::createWithTexture(texture, rect);
 
     if (frame) {
-        // è®¾ç½®ç²¾çµçš„åˆå§‹å›¾åƒä¸ºè£å‰ªå‡ºæ¥çš„éƒ¨åˆ†
+        // ÉèÖÃ¾«ÁéµÄ³õÊ¼Í¼ÏñÎª²Ã¼ô³öÀ´µÄ²¿·Ö
         this->setSpriteFrame(frame);
     }
     else {
@@ -74,7 +66,7 @@ bool Player::init()
         return false;
     }
 
-    // æŒ‰æ–¹å‘åˆ›å»ºåŠ¨ç”»
+    // °´·½Ïò´´½¨¶¯»­
     for (int row = 0; row < PLAYER_DIRECTION_NUM; row++) {
         Vector<SpriteFrame*> frames;
         for (int col = 0; col < PLAYER_FRAME_RATE; col++) {
@@ -84,7 +76,7 @@ bool Player::init()
             frames.pushBack(frame);
         }
 
-        // è®¾ç½®åŠ¨ç”»é”®
+        // ÉèÖÃ¶¯»­¼ü
         std::string key;
         switch (row) {
             case 0: 
@@ -101,88 +93,88 @@ bool Player::init()
                 break;
         }
 
-        // ç¼“å­˜åŠ¨ç”»
+        // »º´æ¶¯»­
         auto animation = Animation::createWithSpriteFrames(frames, PLAYER_FRAME_DELAY);
         AnimationCache::getInstance()->addAnimation(animation, key);
     }
 
-    // æ³¨å†Œ update
+    // ×¢²á update
     this->scheduleUpdate();
 
-    // æ³¨å†Œé”®ç›˜ç›‘å¬å™¨
+    // ×¢²á¼üÅÌ¼àÌıÆ÷
     registerKeyboardListener();
 
     return true;
 }
 
-// è®¾ç½®æ–¹å‘
+// ÉèÖÃ·½Ïò
 void Player::setDirection(const Vec2& direction) 
 {
-    // ä¿è¯æ–¹å‘å‘é‡å½’ä¸€åŒ–
+    // ±£Ö¤·½ÏòÏòÁ¿¹éÒ»»¯
     _direction = direction.getNormalized(); 
 }
 
-// è·å–æ–¹å‘
+// »ñÈ¡·½Ïò
 Vec2 Player::getDirection() const 
 {
     return _direction;
 }
 
-// è®¾ç½®é€Ÿåº¦
+// ÉèÖÃËÙ¶È
 void Player::setSpeed(const float speed)
 {
     _speed = speed;
 }
 
-// è·å–é€Ÿåº¦
+// »ñÈ¡ËÙ¶È
 float Player::getSpeed() const
 {
     return _speed;
 }
 
-// æ¯å¸§æ›´æ–°
+// Ã¿Ö¡¸üĞÂ
 void Player::update(float delta) 
 {
-    // å¦‚æœæ²¡æœ‰æ–¹å‘è¾“å…¥ï¼Œåœæ­¢åŠ¨ç”»
+    // Èç¹ûÃ»ÓĞ·½ÏòÊäÈë£¬Í£Ö¹¶¯»­
     if (_direction.isZero()) {
-        this->stopActionByTag(_currentAnimationHash); // ä½¿ç”¨å½“å‰åŠ¨ç”»çš„å“ˆå¸Œå€¼æ¥åœæ­¢åŠ¨ç”»
+        this->stopActionByTag(_currentAnimationHash); // Ê¹ÓÃµ±Ç°¶¯»­µÄ¹şÏ£ÖµÀ´Í£Ö¹¶¯»­
         _currentAnimationHash = 0;
         return;
     }
 
-    // åˆ¤æ–­å½“å‰çš„æ–¹å‘å¹¶è®¾ç½®åŠ¨ç”»å…³é”®å­—
+    // ÅĞ¶Ïµ±Ç°µÄ·½Ïò²¢ÉèÖÃ¶¯»­¹Ø¼ü×Ö
     std::string animationKey;
     if (_direction.y > 0) {
-        animationKey = "WALK_UP";   // å‘ä¸Š
+        animationKey = "WALK_UP";   // ÏòÉÏ
     }
     else if (_direction.y < 0) {
-        animationKey = "WALK_DOWN"; // å‘ä¸‹
+        animationKey = "WALK_DOWN"; // ÏòÏÂ
     }
     else if (_direction.x < 0) {
-        animationKey = "WALK_LEFT"; // å‘å·¦
+        animationKey = "WALK_LEFT"; // Ïò×ó
     }
     else if (_direction.x > 0) {
-        animationKey = "WALK_RIGHT"; // å‘å³
+        animationKey = "WALK_RIGHT"; // ÏòÓÒ
     }
 
-    // è·å–åŠ¨ç”»çš„å“ˆå¸Œå€¼ï¼Œç”¨äºåˆ¤æ–­æ˜¯å¦é‡å¤æ’­æ”¾
+    // »ñÈ¡¶¯»­µÄ¹şÏ£Öµ£¬ÓÃÓÚÅĞ¶ÏÊÇ·ñÖØ¸´²¥·Å
     size_t animationHash = std::hash<std::string>()(animationKey);
 
-    // å¦‚æœå½“å‰æ­£åœ¨æ’­æ”¾ç›®æ ‡åŠ¨ç”»ï¼Œç›´æ¥è¿”å›
+    // Èç¹ûµ±Ç°ÕıÔÚ²¥·ÅÄ¿±ê¶¯»­£¬Ö±½Ó·µ»Ø
     if (_currentAnimationHash == animationHash) {
         return; 
     }
 
-    // åœæ­¢å½“å‰åŠ¨ç”»
+    // Í£Ö¹µ±Ç°¶¯»­
     this->stopActionByTag(_currentAnimationHash); 
     auto animation = AnimationCache::getInstance()->getAnimation(animationKey);
     if (animation) {
         auto animate = Animate::create(animation);
         auto repeat = RepeatForever::create(animate);
-        // ä½¿ç”¨åŠ¨ç”»å“ˆå¸Œå€¼ä½œä¸ºtag
+        // Ê¹ÓÃ¶¯»­¹şÏ£Öµ×÷Îªtag
         repeat->setTag(animationHash); 
         this->runAction(repeat);
-        // æ›´æ–°å½“å‰åŠ¨ç”»å“ˆå¸Œå€¼
+        // ¸üĞÂµ±Ç°¶¯»­¹şÏ£Öµ
         _currentAnimationHash = animationHash; 
     }
 }
@@ -236,7 +228,7 @@ void Player::registerKeyboardListener()
     _eventDispatcher->addEventListenerWithSceneGraphPriority(eventListener, this);
 }
 
-// é”€æ¯å®ä¾‹
+// Ïú»ÙÊµÀı
 void Player::destroyInstance() 
 {
     CC_SAFE_DELETE(_instance);
