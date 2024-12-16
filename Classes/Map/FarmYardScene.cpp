@@ -17,8 +17,6 @@ Scene* FarmYardScene::createScene()
 	auto scene = Scene::create();
 	auto farmlayer = FarmYardScene::create();
 	scene->addChild(farmlayer, 0);
-	auto uilayer = Layer::create();
-	scene->addChild(uilayer, 10);
 	return scene;
 }
 
