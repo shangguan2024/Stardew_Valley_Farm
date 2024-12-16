@@ -9,6 +9,7 @@
 #ifndef _CONSTANT_H_
 #define _CONSTANT_H_
 #include <string>
+#include <vector>
 
 constexpr int DESIGN_RESOLUTION_WIDTH = 1280;												 // 设计分辨率宽度
 constexpr int DESIGN_RESOLUTION_HEIGHT = 720;												 // 设计分辨率高度
@@ -49,7 +50,8 @@ constexpr int DEFAULT_CAPACITY = 30;                                            
 constexpr int DEFAULT_BAR = 10;                                                              // 默认物品栏容量
 
 // 物品种类枚举
-enum ItemType {
+enum ItemType 
+{
 	SEED,          // 种子
 	TOOL,          // 工具
  	CROP           // 作物 
@@ -61,13 +63,14 @@ const std::string TOOL_DESCRIPTION = " ";
 const std::string CROP_DESCRIPTION = " ";
 
 // 工具类型枚举
-enum ToolType {
+enum ToolType 
+{
     HOE,           // 锄头
     WATERING_CAN,  // 浇水壶
     PICKAXE,       // 镐子
     AXE,           // 斧头
     SCYTHE,        // 镰刀
-    FISHING_ROD    // 钓鱼竿
+    FISHING_ROD,   // 钓鱼竿
 };
 
 // 每种功能的具体描述
@@ -79,7 +82,8 @@ const std::string TOOL_SCYTHE_DESCRIPTION = " ";
 const std::string TOOL_FISHING_ROD_DESCRIPTION = " ";
 
 // 种子类型枚举
-enum SeedType {
+enum SeedType 
+{
     RADISH_SEED,
     POTATO_SEED,
     WHRAT_SEED,
@@ -90,6 +94,37 @@ const std::string SEED_RADISH_DESCRIPTION = " ";
 const std::string SEED_POTATO_DESCRIPTION = " ";
 const std::string SEED_WHRAT_DESCRIPTION = " ";
 
+// 
+enum NPCType
+{
+    ALEX,
+    ABIGAIL,
+    CAROLINE,
+    LEWIS,
+};
 
+const std::vector<std::string> NPC_ALEX_DIALOG = {
+    " ",
+    " ",
+    " ",
+};
+
+const std::vector<std::string> NPC_ABIGAIL_DIALOG = {
+    " ",
+    " ",
+    " ",
+};
+
+const std::vector<std::string> NPC_CAROLINE_DIALOG = {
+    " ",
+    " ",
+    " ",
+};
+
+const std::vector<std::string> NPC_LEWIS_DIALOG = {
+    " ",
+    " ",
+    " ",
+};
 
 #endif // _CONSTANT_H_

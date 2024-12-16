@@ -114,6 +114,9 @@
     <ClCompile Include="..\Classes\Inventory\InventoryLayer.cpp">
       <Filter>Classes\Inventory</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Map\TownCenterScene.cpp">
+      <Filter>Classes\Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate\AppDelegate.h">
@@ -178,6 +181,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Inventory\Inventory.h">
       <Filter>Classes\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Map\TownCenterScene.h">
+      <Filter>Classes\Map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
