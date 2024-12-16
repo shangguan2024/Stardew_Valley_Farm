@@ -1,0 +1,6 @@
+#ifndef _RESOURCEMANAGER_H_
+#define _RESOURCEMANAGER_H_
+
+
+
+#endif // _RESOURCEMANAGER_H_

@@ -9,7 +9,8 @@
 
 #include "AppDelegate.h"
 #include "proj.win32/Constant.h"
-#include "Scene/MenuScene.h"
+#include "../SceneManagement/SceneManager.h"
+#include "../SceneManagement/MainMenuScene.h"
 
 // #define USE_AUDIO_ENGINE 1
 // #define USE_SIMPLE_AUDIO_ENGINE 1
@@ -105,10 +106,12 @@ bool AppDelegate::applicationDidFinishLaunching() {
     register_all_packages();
 
     // create a scene. it's an autorelease object
-    auto scene = MenuScene::createScene();
+    auto scene = MainMenuScene::createScene();
 
     // run
     director->runWithScene(scene);
+
+    SceneManager::init();
 
     return true;
 }

@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Resource">
-      <UniqueIdentifier>{715254bc-d70b-4ec5-bf29-467dd3ace079}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes">
       <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
     </Filter>
@@ -45,6 +42,9 @@
     </Filter>
     <Filter Include="Classes\AppDelegate">
       <UniqueIdentifier>{3a2412f4-e656-42b7-8352-b451bc6a82d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\ResourceManagement">
+      <UniqueIdentifier>{e3ede960-5248-42ef-8e2b-06ce99c9cc18}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -135,6 +135,21 @@
     <ClCompile Include="..\Classes\AppDelegate\AppDelegate.cpp">
       <Filter>Classes\AppDelegate</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\UI\HoverButton.cpp">
+      <Filter>Classes\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ResourceManagement\AudioClip.cpp">
+      <Filter>Classes\ResourceManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ResourceManagement\ResourceManager.cpp">
+      <Filter>Classes\ResourceManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ResourceManagement\Texture.cpp">
+      <Filter>Classes\ResourceManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SceneManagement\FarmYardScene.cpp">
+      <Filter>Classes\SceneManagement</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Constant.h">
@@ -224,10 +239,20 @@
     <ClInclude Include="..\Classes\AppDelegate\AppDelegate.h">
       <Filter>Classes\AppDelegate</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Icon.rc">
-      <Filter>Resource</Filter>
-    </ResourceCompile>
+    <ClInclude Include="..\Classes\UI\HoverButton.h">
+      <Filter>Classes\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ResourceManagement\AudioClip.h">
+      <Filter>Classes\ResourceManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ResourceManagement\ResourceManager.h">
+      <Filter>Classes\ResourceManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ResourceManagement\Texture.h">
+      <Filter>Classes\ResourceManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SceneManagement\FarmYardScene.h">
+      <Filter>Classes\SceneManagement</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
