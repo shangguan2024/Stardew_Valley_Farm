@@ -80,8 +80,8 @@ bool FarmYardScene::init()
 	player->setCameraMask(unsigned short(CameraFlag::USER1));
 
 	// 创建并注册鼠标滚轮和鼠标点击事件监听器
-	registerMouseScrollListener();
-	registerMouseClickListener();
+	// registerMouseScrollListener();
+	// registerMouseClickListener();
 
 	// 启动每帧更新函数
 	this->scheduleUpdate();

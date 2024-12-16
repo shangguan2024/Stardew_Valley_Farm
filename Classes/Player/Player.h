@@ -16,12 +16,11 @@ public:
     // 设置方向
     void setDirection(const cocos2d::Vec2& direction);
     cocos2d::Vec2 getDirection() const;
+    void updateDirection();
 
     // 每帧更新
     virtual void update(float delta) override;
 
-    // 注册键盘监听器
-    void registerKeyboardListener();
 
     // 销毁实例
     static void destroyInstance();
@@ -41,8 +40,6 @@ private:
     cocos2d::Vec2 _direction;     // 玩家移动方向向量
     float _speed;                 // 玩家速度
     size_t _currentAnimationHash; // 当前播放的动画
-
-    cocos2d::EventListenerKeyboard* _keyboardListener; // 键盘监听器
 
     static Player* _instance; // 静态实例指针
 };
