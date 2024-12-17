@@ -2,6 +2,7 @@
 #define __UI_MANAGER_H__
 
 #include "cocos2d.h"
+#include "HUD.h"
 #include "InventoryUI.h"
 
 class UIManager : public cocos2d::Node {
@@ -17,6 +18,9 @@ public:
 
     // 切换 UI 激活状态（例如：打开背包、打开菜单等）
     void toggleUIActiveState(bool active);
+
+    void showHUD();
+    void hideHUD();
 
     void showInventoryUI();
     void hideInventoryUI();
@@ -45,6 +49,7 @@ private:
 
     static UIManager* instance;
 
+    HUD* hud;
     InventoryUI* inventoryUI;
 
     // 是否处于 UI 激活状态

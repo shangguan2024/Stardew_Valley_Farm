@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "ui/CocosGUI.h"
+#include "Items/Inventory.h"
 
 class InventoryUI : public cocos2d::ui::Widget {
 public:
@@ -16,6 +17,8 @@ public:
     void updateUI();  // 更新UI（比如更新物品列表）
 
 private:
+    static Inventory* inventory;
+
     cocos2d::ui::Button* closeButton;
     // 其他UI元素，比如物品格子、分页按钮等
 };

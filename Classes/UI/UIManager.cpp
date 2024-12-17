@@ -1,5 +1,4 @@
 #include "UIManager.h"
-#include "cocos2d.h"
 
 UIManager* UIManager::instance = nullptr;
 
@@ -8,6 +7,7 @@ UIManager::UIManager()
 	_keyboardListener(nullptr),
 	_mouseListener(nullptr),
 	_mousePosition(cocos2d::Vec2::ZERO),
+	hud(nullptr),
 	inventoryUI(nullptr)
 {
 }
@@ -28,15 +28,21 @@ UIManager* UIManager::getInstance()
 	if (!instance) {
 		instance = new UIManager();
 		instance->retain();  // 保证 UIManager 实例不会被销毁
+		instance->init();
 	}
 	return instance;
 }
 
 bool UIManager::init()
 {
+	hud = HUD::getInstance();
+	this->addChild(hud);
+	showHUD();
+
 	// 注册 UI 事件监听器
 	registerUIListeners();
 	this->scheduleUpdate();
+
 	return true;
 }
 
@@ -59,6 +65,16 @@ void UIManager::registerUIListeners()
 void UIManager::toggleUIActiveState(bool active)
 {
 	_isUIActive = active;
+}
+
+void UIManager::showHUD()
+{
+	hud->toggleVisibility(true);
+}
+
+void UIManager::hideHUD()
+{
+	hud->toggleVisibility(false);
 }
 
 void UIManager::showInventoryUI()
@@ -126,6 +142,6 @@ void UIManager::onMouseMove(cocos2d::Event* event)
 	if (_isUIActive) {
 		auto mouseEvent = static_cast<cocos2d::EventMouse*>(event);
 		_mousePosition = cocos2d::Vec2(mouseEvent->getCursorX(), mouseEvent->getCursorY());
-		CCLOG("UI Mouse Move at: (%f, %f)", _mousePosition.x, _mousePosition.y);
+		// CCLOG("UI Mouse Move at: (%f, %f)", _mousePosition.x, _mousePosition.y);
 	}
 }

@@ -1,4 +1,3 @@
-
 #include "FarmYardScene.h"
 #include "InputControl/InputManager.h"
 #include "Player/PlayerController.h"
@@ -218,8 +217,7 @@ void FarmYardScene::update(float delta)
 	}
 
 
-	while (player->getDirection().x)
-	{
+	if (player->getDirection().x) {
 		// 获得玩家的当前位置并转换为瓦片坐标
 		Vec2 currentPosition = player->getPosition();
 		Vec2 currenttile = convertToTileCoords(currentPosition);
@@ -230,19 +228,13 @@ void FarmYardScene::update(float delta)
 		// 获取玩家目标位置的瓦片GID
 		int tileGID = tileLayer->getTileGIDAt(convertToTileCoords(newPosition));
 
-		if (tileGID) {
-			// 获取瓦片属性
-			auto properties = FarmYard->getPropertiesForGID(tileGID).asValueMap();
-			if (!properties.empty())
-				break;
-		}
 		// 如果该瓦片可通行，则更新玩家位置
-		player->setPosition(newPosition);
-		break;
+		if (!tileGID || FarmYard->getPropertiesForGID(tileGID).asValueMap().empty()) {
+			player->setPosition(newPosition);
+		}
 	}
 
-	while (player->getDirection().y)
-	{
+	if (player->getDirection().y) {
 		// 获得玩家的当前位置并转换为瓦片坐标
 		Vec2 currentPosition = player->getPosition();
 		Vec2 currenttile = convertToTileCoords(currentPosition);
@@ -253,15 +245,10 @@ void FarmYardScene::update(float delta)
 		// 获取玩家目标位置的瓦片GID
 		int tileGID = tileLayer->getTileGIDAt(convertToTileCoords(newPosition));
 
-		if (tileGID) {
-			// 获取瓦片属性
-			auto properties = FarmYard->getPropertiesForGID(tileGID).asValueMap();
-			if (!properties.empty())
-				break;
-		}
 		// 如果该瓦片可通行，则更新玩家位置
-		player->setPosition(newPosition);
-		break;
+		if (!tileGID || FarmYard->getPropertiesForGID(tileGID).asValueMap().empty()) {
+			player->setPosition(newPosition);
+		}
 	}
 
 

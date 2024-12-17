@@ -10,7 +10,7 @@ public:
     HUD();
     ~HUD();
 
-    static HUD* create();
+    static HUD* getInstance();
 
     bool init() override;
 
@@ -21,12 +21,12 @@ public:
     void toggleVisibility(bool visible);
 
 private:
+    static HUD* create();
+
+    static HUD* instance;
+
     cocos2d::ProgressTimer* _healthBar;
     cocos2d::Label* _scoreLabel;
-    HoverButton* _hoverButton;
-
-    void onButtonHover(cocos2d::Event* event);
-    void onButtonClick(cocos2d::Ref* sender);
 };
 
 #endif // __HUD_H__
