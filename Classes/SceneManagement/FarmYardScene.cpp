@@ -87,12 +87,6 @@ bool FarmYardScene::init()
 	// 启动每帧更新函数
 	this->scheduleUpdate();
 
-	auto camera = Camera::create();
-	camera->setCameraFlag(CameraFlag::DEFAULT);
-	this->addChild(camera);
-	this->addChild(UIManager::getInstance());
-	UIManager::getInstance()->setCameraMask(static_cast<unsigned short>(CameraFlag::DEFAULT));
-
 	return true;
 }
 

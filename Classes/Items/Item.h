@@ -4,6 +4,7 @@
 #include "cocos2d.h"
 #include "Block.h"
 
+
 class Item : cocos2d::Sprite
 {
 public:
@@ -15,6 +16,8 @@ public:
     {
         idTable["Bream"] = 1;
         nameTable[1] = "Bream";
+
+        return true;
     }
 
 public:

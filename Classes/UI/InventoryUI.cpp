@@ -26,14 +26,14 @@ InventoryUI* InventoryUI::create()
 bool InventoryUI::init()
 {
     // 初始化界面
-    closeButton = cocos2d::ui::Button::create("Buttons/MenuSceneButtons/ExitButton.png");
+    closeButton = cocos2d::ui::Button::create("UI/Buttons/ExitButton.png");
     closeButton->setPosition(cocos2d::Vec2(400, 300));
     closeButton->addClickEventListener([this](Ref* sender) {
         UIManager::getInstance()->hideInventoryUI();  // 点击关闭时隐藏背包
         });
 
     this->addChild(closeButton);
-    auto testbackground = cocos2d::Sprite::create("Buttons/MenuSceneButtons/CreateButton.png");
+    auto testbackground = cocos2d::Sprite::create("UI/Buttons/CreateButton.png");
     testbackground->setPosition(cocos2d::Vec2(600, 500));
     this->addChild(testbackground);
 
