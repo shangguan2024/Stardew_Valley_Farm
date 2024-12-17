@@ -29,6 +29,12 @@ private:
     // 更新对话内容
     void updateDialog();
 
+    // 按钮的回调函数
+    void chatButtonCallBack(Ref* pSender);
+    void eventButtonCallBack(Ref* pSender);
+    void quitButtonCallBack(Ref* pSender);
+    void storequitButtonCallBack(Ref* pSender);
+
     // 关闭对话框
     void closeChat();
 
@@ -39,3 +45,18 @@ private:
 };
 
 #endif // _CHATLAYER_H_
+
+/* ChatLayer示例
+* 添加到FarmYardScene.cpp中生效
+auto npc = NPC::create("Player/Sandy.png", ALEX);
+if (!npc)
+{
+    CCLOG("Failed to create NPC!");
+}
+this->addChild(npc);
+auto chatlayer = ChatLayer::create(npc);
+this->addChild(chatlayer,1,"chatlayer");
+chatlayer->setAnchorPoint(Vec2(0, 0));
+chatlayer->setPosition(Vec2(_camera->getPosition3D().x, _camera->getPosition3D().y));
+chatlayer->setCameraMask(unsigned short(CameraFlag::USER1));
+*/

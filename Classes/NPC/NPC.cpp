@@ -60,11 +60,11 @@ std::string NPC::getDialog()
 
 void NPC::advanceDialog()
 {
-    if (dialogIndex < dialog.size()) {
+    if (dialogIndex < dialog.size() - 1) {
         dialogIndex++;
     }
     else {
-        CCLOG("对话结束！");
+        CCLOG("chat end");
     }
 }
 
@@ -74,6 +74,6 @@ void NPC::jumpToDialog(int index)
         dialogIndex = index;
     }
     else {
-        CCLOG("无效的对话索引！");
+        CCLOG("invalid session index");
     }
 }
