@@ -1,4 +1,5 @@
 #include "InputManager.h"
+#include "UI/UIManager.h"
 
 InputManager* InputManager::instance = nullptr;
 
@@ -79,9 +80,9 @@ void InputManager::popCurrentMouseControlMode()
 	mouseControlMode.pop();
 }
 
+// 处理键盘按下事件
 void InputManager::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
 {
-	// 处理键盘按下事件
 	CCLOG("Key pressed: %d", keyCode);
 	keyStates[keyCode] = true;
 	if (keyCallbackFuncs[keyControlMode.top()]) {
@@ -89,24 +90,30 @@ void InputManager::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d
 	}
 }
 
+// 处理键盘释放事件
 void InputManager::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
 {
-	// 处理键盘释放事件
 	keyStates[keyCode] = false;
 	CCLOG("Key released: %d", keyCode);
 }
 
+// 处理鼠标移动事件
 void InputManager::onMouseMove(cocos2d::Event* event)
 {
-	// 处理鼠标移动事件
+	if (UIManager::getInstance()->isUIActive()) {
+		return;
+	}
 	auto mouseEvent = static_cast<cocos2d::EventMouse*>(event);
 	// CCLOG("Mouse moved to position: (%f, %f)", mouseEvent->getCursorX(), mouseEvent->getCursorY());
 	mousePosition = cocos2d::Vec2(mouseEvent->getCursorX(), mouseEvent->getCursorY());
 }
 
+// 处理鼠标按下事件
 void InputManager::onMouseDown(cocos2d::Event* event)
 {
-	// 处理鼠标按下事件
+	if (UIManager::getInstance()->isUIActive()) {
+		return;
+	}
 	auto mouseEvent = static_cast<cocos2d::EventMouse*>(event);
 	CCLOG("Mouse button pressed: %d", mouseEvent->getMouseButton());
 	mouseButtonStates[mouseEvent->getMouseButton()] = true;
@@ -115,9 +122,9 @@ void InputManager::onMouseDown(cocos2d::Event* event)
 	}
 }
 
+// 处理鼠标释放事件
 void InputManager::onMouseUp(cocos2d::Event* event)
 {
-	// 处理鼠标释放事件
 	auto mouseEvent = static_cast<cocos2d::EventMouse*>(event);
 	CCLOG("Mouse button released: %d", mouseEvent->getMouseButton());
 	mouseButtonStates[mouseEvent->getMouseButton()] = false;

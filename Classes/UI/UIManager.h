@@ -9,6 +9,9 @@ public:
     UIManager();
     virtual ~UIManager();
 
+    // UI 是否激活
+    bool isUIActive() const;
+
     // 创建 UIManager 的实例
     static UIManager* getInstance();
 
@@ -24,9 +27,6 @@ private:
 
     // 注册所有的 UI 监听器（例如键盘、鼠标等）
     void registerUIListeners();
-
-    // UI 是否激活
-    bool isUIActive() const;
 
     // 处理键盘按下事件
     void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);

@@ -68,13 +68,17 @@ void UIManager::showInventoryUI()
 		this->addChild(inventoryUI);  // 添加到 UIManager 中
 	}
 	inventoryUI->setVisible(true);  // 显示背包UI
+	toggleUIActiveState(true);
 }
 
 void UIManager::hideInventoryUI()
 {
-	if (inventoryUI) {
-		inventoryUI->setVisible(false);  // 隐藏背包UI
+	if (!inventoryUI) {
+		CCLOG("UIManager::hideInventoryUI : inventoryUI doesn't exists.");
+		return;
 	}
+	inventoryUI->setVisible(false);  // 隐藏背包UI
+	toggleUIActiveState(false);
 }
 
 bool UIManager::isUIActive() const

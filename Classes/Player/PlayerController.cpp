@@ -75,5 +75,10 @@ void PlayerController::updateDirection()
 
 void PlayerController::toggleInventory()
 {
-	UIManager::getInstance()->showInventoryUI();
+	if (UIManager::getInstance()->isUIActive()) {
+		UIManager::getInstance()->hideInventoryUI();
+	}
+	else {
+		UIManager::getInstance()->showInventoryUI();
+	}
 }
