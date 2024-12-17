@@ -16,11 +16,9 @@ public:
     // 设置方向
     void setDirection(const cocos2d::Vec2& direction);
     cocos2d::Vec2 getDirection() const;
-    void updateDirection();
 
     // 每帧更新
     virtual void update(float delta) override;
-
 
     // 销毁实例
     static void destroyInstance();

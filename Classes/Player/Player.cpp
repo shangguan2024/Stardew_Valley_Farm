@@ -15,7 +15,6 @@ Player* Player::getInstance()
 		if (!_instance || !_instance->init()) {
 			CC_SAFE_DELETE(_instance);
 		}
-		InputManager::getInstance()->setCurrentKeyControlMode(KeyControlMode::PLAYER_CONTROL);
 	}
 	return _instance;
 }
@@ -128,7 +127,6 @@ float Player::getSpeed() const
 void Player::update(float delta)
 {
 	// 如果没有方向输入，停止动画
-	updateDirection();
 	if (_direction.isZero()) {
 		this->stopActionByTag(_currentAnimationHash); // 使用当前动画的哈希值来停止动画
 		_currentAnimationHash = 0;
@@ -170,27 +168,6 @@ void Player::update(float delta)
 		// 更新当前动画哈希值
 		_currentAnimationHash = animationHash;
 	}
-}
-
-void Player::updateDirection()
-{
-	cocos2d::Vec2 dir = Vec2::ZERO;
-	auto inputManager = InputManager::getInstance();
-
-	if (inputManager->isKeyPressed(cocos2d::EventKeyboard::KeyCode::KEY_W, KeyControlMode::PLAYER_CONTROL)) {
-		dir.y += 1.0f;
-	}
-	if (inputManager->isKeyPressed(cocos2d::EventKeyboard::KeyCode::KEY_A, KeyControlMode::PLAYER_CONTROL)) {
-		dir.x -= 1.0f;
-	}
-	if (inputManager->isKeyPressed(cocos2d::EventKeyboard::KeyCode::KEY_S, KeyControlMode::PLAYER_CONTROL)) {
-		dir.y -= 1.0f;
-	}
-	if (inputManager->isKeyPressed(cocos2d::EventKeyboard::KeyCode::KEY_D, KeyControlMode::PLAYER_CONTROL)) {
-		dir.x += 1.0f;
-	}
-
-	setDirection(dir);
 }
 
 // 销毁实例
