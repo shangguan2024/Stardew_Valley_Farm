@@ -78,7 +78,7 @@ bool FarmYardScene::init()
 	player->setCameraMask(unsigned short(CameraFlag::USER1));
 
 	// 创建并注册鼠标滚轮和鼠标点击事件监听器
-	// registerMouseScrollListener();
+	registerMouseScrollListener();
 	InputManager::getInstance()->registerMouseCallbackFunc(MouseControlMode::SCENE, [this](cocos2d::EventMouse::MouseButton mouseButton) {
 		this->onMouseClick(mouseButton);
 		});
@@ -122,6 +122,9 @@ void FarmYardScene::onMouseScroll(cocos2d::EventMouse* event)
 	// 计算摄像机的位置
 	Vec3 currentCameraPos = _camera->getPosition3D();
 	// 计算摄像头目标位置
+	currentCameraPos.z += 15 * scrollDelta;
+	if (currentCameraPos.z > 750.0)currentCameraPos.z = 750.0;
+	else if (currentCameraPos.z < 250.0)currentCameraPos.z = 250.0;
 	Vec3 targetCameraPos(currentCameraPos.x, currentCameraPos.y, currentCameraPos.z);
 	// 平滑移动摄像机
 	_camera->setPosition3D(currentCameraPos.lerp(targetCameraPos, 0.1f));
