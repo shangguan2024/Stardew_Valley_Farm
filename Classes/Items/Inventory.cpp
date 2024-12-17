@@ -66,5 +66,9 @@ void Inventory::click(int row, int col)
 bool Inventory::init()
 {
 	// 在此可以进行初始化操作
+	backpack[0][0] = 1;
+	backpack[0][1] = 2;
+	backpack[1][0] = 2;
+	backpack[2][0] = 2;
 	return true;
 }

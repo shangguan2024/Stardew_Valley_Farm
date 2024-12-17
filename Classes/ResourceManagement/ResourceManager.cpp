@@ -33,15 +33,18 @@ ResourceManager* ResourceManager::getInstance()
 
 bool ResourceManager::init()
 {
-    updateRect();
     loadResouces();
+    updateRect();
 
     return true;
 }
 
 void ResourceManager::updateRect()
 {
-    itemRect[1] = Rect(5*16, 12*16, 16, 16);
+    itemRect[1] = tileSlot(5 , 12, 1, 1).toRect();    // Bream
+    itemRsc[1] = springobjects;
+    itemRect[2] = tileSlot(9 , 0 , 1, 1).toRect();    // Bread
+    itemRsc[2] = springobjects;
 }
 
 
@@ -52,7 +55,7 @@ void ResourceManager::loadResouces()
 
 void ResourceManager::loadUIPath()
 {
-    inventory = "Inventory.png";
+    inventory = "UI/Inventory.png";
 }
 
 cocos2d::Sprite* ResourceManager::getItem(Item::id id)
@@ -60,7 +63,8 @@ cocos2d::Sprite* ResourceManager::getItem(Item::id id)
     cocos2d::Texture2D* texture = itemRsc[id];
     const Rect region = itemRect[id];
     auto spriteFrame = SpriteFrame::createWithTexture(texture, region);
-    return Sprite::createWithSpriteFrame(spriteFrame);
+    auto itemSprite = Sprite::createWithSpriteFrame(spriteFrame);
+    return itemSprite;
 }
 
 inline cocos2d::Sprite* ResourceManager::getItem(std::string name)

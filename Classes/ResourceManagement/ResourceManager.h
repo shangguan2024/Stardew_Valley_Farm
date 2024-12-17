@@ -20,6 +20,22 @@ class ResourceManager
 {
 public:
     
+    struct tileSlot
+    {
+        int row;
+        int col;
+        int width;
+        int height;
+
+        tileSlot(int r, int c, int w, int h)
+            : row(r), col(c), width(w), height(h) {}
+
+        Rect toRect()
+        {
+            return Rect(col*16, row*16, width*16, height*16);
+        }
+    };
+
     static ResourceManager* getInstance();
     bool init();
 
