@@ -1,6 +1,9 @@
 
 #include "ResourceManager.h"
 
+ResourceManager* ResourceManager::instance = nullptr;
+
+
 Rect ResourceManager::itemRect[1024];
 Rect ResourceManager::blockRect[1024];
 cocos2d::Texture2D* ResourceManager::itemRsc[1024] = {};
@@ -8,12 +11,17 @@ cocos2d::Texture2D* ResourceManager::blockRsc[1024] = {};
 cocos2d::Texture2D* ResourceManager::springobjects = nullptr;
 cocos2d::Texture2D* ResourceManager::blockTexture = nullptr;
 
+std::string ResourceManager::inventory;
+
 ResourceManager* ResourceManager::getInstance()
-{
-    ResourceManager* ret = new ResourceManager();
+{   
+    if (instance)
+        return instance;
+
+    ResourceManager* ret = new ResourceManager;
     if (ret && ret->init())
     {
-        return ret;
+        return instance = ret;
     }
     else
     {

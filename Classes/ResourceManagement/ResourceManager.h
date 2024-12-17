@@ -36,6 +36,8 @@ public:
 
 
 private:
+    static ResourceManager* instance;
+
     // A Rectangent region of some Texture in where the required item is
     // the index is id
     static Rect itemRect[1024];

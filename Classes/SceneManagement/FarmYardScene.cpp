@@ -1,15 +1,8 @@
-/****************************************************************
- * Project Name:  Stardew_Valley_Farm
- * File Name:     FarmYardScene.cpp
- * File Function: FarmYardScene类的实现
- * Author:        张翔
- * Update Date:   2024/12/5
- ****************************************************************/
+
 #include "FarmYardScene.h"
 #include "InputControl/InputManager.h"
 #include "Player/PlayerController.h"
 #include "UI/UIManager.h"
- // #include "../GameTime/GameTime.h"
 
 USING_NS_CC;
 
@@ -76,6 +69,13 @@ bool FarmYardScene::init()
 	this->addChild(player, 1, "player");
 	player->setPosition(spawnX, spawnY);
 	player->setCameraMask(unsigned short(CameraFlag::USER1));
+
+	// UI
+	auto camera = Camera::create();
+	camera->setCameraFlag(CameraFlag::DEFAULT);
+	this->addChild(camera);
+	this->addChild(UIManager::getInstance());
+	UIManager::getInstance()->setCameraMask(static_cast<unsigned short>(CameraFlag::DEFAULT));
 
 	// 创建并注册鼠标滚轮和鼠标点击事件监听器
 	registerMouseScrollListener();
@@ -210,10 +210,6 @@ void FarmYardScene::update(float delta)
 	// 计算摄像机的位置
 	Vec3 currentCameraPos = _camera->getPosition3D();
 
-	// 获得玩家的当前位置并转换为瓦片坐标
-	Vec2 currentPosition = player->getPosition();
-	Vec2 currenttile = convertToTileCoords(currentPosition);
-
 	// 获取瓦片图层
 	auto tileLayer = FarmYard->getLayer("Meta");
 	if (!tileLayer) {
@@ -221,40 +217,57 @@ void FarmYardScene::update(float delta)
 		return;
 	}
 
-	// 计算更新后的位置
-	Vec2 newPosition = currentPosition + player->getDirection() * player->getSpeed() * delta;
 
-	// 获取玩家目标位置的瓦片GID
-	int tileGID = tileLayer->getTileGIDAt(convertToTileCoords(newPosition));
+	while (player->getDirection().x)
+	{
+		// 获得玩家的当前位置并转换为瓦片坐标
+		Vec2 currentPosition = player->getPosition();
+		Vec2 currenttile = convertToTileCoords(currentPosition);
 
-	if (tileGID) {
-		// 获取瓦片属性
-		auto properties = FarmYard->getPropertiesForGID(tileGID).asValueMap();
-		if (!properties.empty()) {
-			// 判断瓦片是否具有 "Collidable" 属性且为 true
-			if (properties["Collidable"].asBool()) {
-				// 如果该瓦片不可通行，则直接返回，不更新玩家位置
-				return;
-			}
+		// 计算更新后的位置
+		Vec2 newPosition = player->getPosition() + Vec2(player->getDirection().x, 0) * player->getSpeed() * delta;
+
+		// 获取玩家目标位置的瓦片GID
+		int tileGID = tileLayer->getTileGIDAt(convertToTileCoords(newPosition));
+
+		if (tileGID) {
+			// 获取瓦片属性
+			auto properties = FarmYard->getPropertiesForGID(tileGID).asValueMap();
+			if (!properties.empty())
+				break;
 		}
+		// 如果该瓦片可通行，则更新玩家位置
+		player->setPosition(newPosition);
+		break;
 	}
 
-	// 更新玩家位置
-	player->setPosition(newPosition);
+	while (player->getDirection().y)
+	{
+		// 获得玩家的当前位置并转换为瓦片坐标
+		Vec2 currentPosition = player->getPosition();
+		Vec2 currenttile = convertToTileCoords(currentPosition);
 
-	// 更新时间显示
-	// auto removelabel = this->getChildByName("timelabel");
-	// if (removelabel != nullptr) {
-	//	removelabel->removeFromParentAndCleanup(true);
-	// }
-	// auto timeLabel = Label::createWithSystemFont(gametime->toString(), "Arial", 30);
-	// timeLabel->setPosition(Vec2(_camera->getPosition3D().x + Director::getInstance()->getVisibleSize().width / 2 - timeLabel->getContentSize().width, _camera->getPosition3D().y + Director::getInstance()->getVisibleSize().height / 2 - timeLabel->getContentSize().height));
-	// this->addChild(timeLabel, 10, "timelabel");
-	// timeLabel->setCameraMask(unsigned short(CameraFlag::USER1));
+		// 计算更新后的位置
+		Vec2 newPosition = player->getPosition() + Vec2(0, player->getDirection().y) * player->getSpeed() * delta;
+
+		// 获取玩家目标位置的瓦片GID
+		int tileGID = tileLayer->getTileGIDAt(convertToTileCoords(newPosition));
+
+		if (tileGID) {
+			// 获取瓦片属性
+			auto properties = FarmYard->getPropertiesForGID(tileGID).asValueMap();
+			if (!properties.empty())
+				break;
+		}
+		// 如果该瓦片可通行，则更新玩家位置
+		player->setPosition(newPosition);
+		break;
+	}
+
 
 	// 计算摄像头目标位置
-	Vec3 targetCameraPos(newPosition.x, newPosition.y, currentCameraPos.z);
+	Vec3 targetCameraPos(player->getPosition().x, player->getPosition().y, currentCameraPos.z);
 
 	// 平滑移动摄像机
-	_camera->setPosition3D(currentCameraPos.lerp(targetCameraPos, 0.1f)); // 平滑系数
+	_camera->setPosition3D(currentCameraPos.lerp(targetCameraPos, 1.0f)); // 平滑系数
 }

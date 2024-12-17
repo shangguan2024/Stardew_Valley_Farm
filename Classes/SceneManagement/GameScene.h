@@ -21,8 +21,6 @@ public:
     // 鼠标滚动监听器
     void registerMouseScrollListener();
     void onMouseScroll(cocos2d::EventMouse *event);
-
-    // 鼠标点击监听器
     void onMouseClick(cocos2d::EventMouse::MouseButton mouseButton);
 
     // 每一帧被自动调用的 update 方法
