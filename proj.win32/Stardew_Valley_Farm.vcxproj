@@ -159,6 +159,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Entities\NPC.cpp" />
     <ClCompile Include="..\Classes\Entities\QuestNPC.cpp" />
     <ClCompile Include="..\Classes\InputControl\InputManager.cpp" />
+    <ClCompile Include="..\Classes\Items\Block.cpp" />
     <ClCompile Include="..\Classes\Items\FoodItem.cpp" />
     <ClCompile Include="..\Classes\Items\Inventory.cpp" />
     <ClCompile Include="..\Classes\Items\Item.cpp" />
@@ -194,6 +195,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Entities\NPC.h" />
     <ClInclude Include="..\Classes\Entities\QuestNPC.h" />
     <ClInclude Include="..\Classes\InputControl\InputManager.h" />
+    <ClInclude Include="..\Classes\Items\Block.h" />
     <ClInclude Include="..\Classes\Items\FoodItem.h" />
     <ClInclude Include="..\Classes\Items\Inventory.h" />
     <ClInclude Include="..\Classes\Items\Item.h" />
