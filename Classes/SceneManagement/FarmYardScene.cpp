@@ -5,15 +5,16 @@
  * Author:        张翔
  * Update Date:   2024/12/5
  ****************************************************************/
-#include "Player/Player.h"
 #include "FarmYardScene.h"
 #include "InputControl/InputManager.h"
-// #include "../GameTime/GameTime.h"
+#include "Player/PlayerController.h"
+#include "UI/UIManager.h"
+ // #include "../GameTime/GameTime.h"
 
 USING_NS_CC;
 
 // 创建场景
-Scene *FarmYardScene::createScene()
+Scene* FarmYardScene::createScene()
 {
 	auto scene = Scene::create();
 	auto layer = FarmYardScene::create();
@@ -24,8 +25,7 @@ Scene *FarmYardScene::createScene()
 // 初始化场景
 bool FarmYardScene::init()
 {
-	if (!Scene::init())
-	{
+	if (!Scene::init()) {
 		return false;
 	}
 
@@ -40,8 +40,7 @@ bool FarmYardScene::init()
 
 	// 加载瓦片地图
 	auto FarmYard = TMXTiledMap::create("Maps/FarmYardScene.tmx");
-	if (!FarmYard)
-	{
+	if (!FarmYard) {
 		CCLOG("Failed to load tile map");
 		return false;
 	}
@@ -57,15 +56,13 @@ bool FarmYardScene::init()
 	auto mapCenter = Vec2(FARMYARD_MAP_WIDTH * MAP_TILE_WIDTH / 2, FARMYARD_MAP_HEIGHT * MAP_TILE_HEIGHT / 2);
 
 	auto objectGroup = FarmYard->getObjectGroup("Event");
-	if (!objectGroup)
-	{
+	if (!objectGroup) {
 		CCLOG("Failed to load object layer: Event");
 		return false;
 	}
 
 	auto spawnPoint = objectGroup->getObject("SpawnPoint");
-	if (spawnPoint.empty())
-	{
+	if (spawnPoint.empty()) {
 		CCLOG("SpawnPoint not found in Event layer.");
 		return false;
 	}
@@ -90,10 +87,16 @@ bool FarmYardScene::init()
 	// 启动每帧更新函数
 	this->scheduleUpdate();
 
+	auto camera = Camera::create();
+	camera->setCameraFlag(CameraFlag::DEFAULT);
+	this->addChild(camera);
+	this->addChild(UIManager::getInstance());
+	UIManager::getInstance()->setCameraMask(static_cast<unsigned short>(CameraFlag::DEFAULT));
+
 	return true;
 }
 
-Vec2 FarmYardScene::convertToTileCoords(const Vec2 &pos)
+Vec2 FarmYardScene::convertToTileCoords(const Vec2& pos)
 {
 	// 将玩家的新位置转换为瓦片坐标
 	Vec2 tile = Vec2(int(pos.x / MAP_TILE_WIDTH), int((FARMYARD_MAP_HEIGHT * MAP_TILE_HEIGHT - pos.y) / MAP_TILE_HEIGHT));
@@ -112,7 +115,7 @@ void FarmYardScene::registerMouseScrollListener()
 }
 
 // 鼠标滚轮事件回调
-void FarmYardScene::onMouseScroll(cocos2d::EventMouse *event)
+void FarmYardScene::onMouseScroll(cocos2d::EventMouse* event)
 {
 	auto scrollDelta = event->getScrollY(); // 获取滚动增量
 	CCLOG("Mouse Scroll Delta: %f", scrollDelta);
@@ -127,17 +130,16 @@ void FarmYardScene::onMouseScroll(cocos2d::EventMouse *event)
 // 鼠标点击事件回调
 void FarmYardScene::onMouseClick(cocos2d::EventMouse::MouseButton mouseButton)
 {
-	Player *player = Player::getInstance();
+	Player* player = Player::getInstance();
 	InputManager* inputManager = InputManager::getInstance();
 
 	// 获取 FarmYard 地图对象
-	auto FarmYard = (TMXTiledMap *)this->getChildByName("FarmYard");
+	auto FarmYard = (TMXTiledMap*)this->getChildByName("FarmYard");
 
 	// 获取瓦片图层
 	auto tileLayer = FarmYard->getLayer("Meta");
 	auto groundLayer = FarmYard->getLayer("Ground");
-	if (!tileLayer || !groundLayer)
-	{
+	if (!tileLayer || !groundLayer) {
 		CCLOG("Layer not found");
 		return;
 	}
@@ -160,37 +162,30 @@ void FarmYardScene::onMouseClick(cocos2d::EventMouse::MouseButton mouseButton)
 	float distance = sqrt(pow(currenttile.x - mousetile.x, 2) + pow(currenttile.y - mousetile.y, 2));
 
 	// 判断鼠标点击的按钮
-	if (mouseButton == EventMouse::MouseButton::BUTTON_LEFT)
-	{
+	if (mouseButton == EventMouse::MouseButton::BUTTON_LEFT) {
 		CCLOG("Left mouse button clicked at: (%f, %f)", mousetile.x, mousetile.y);
 		// 执行左键点击相关操作
 	}
-	else if (mouseButton == EventMouse::MouseButton::BUTTON_RIGHT)
-	{
+	else if (mouseButton == EventMouse::MouseButton::BUTTON_RIGHT) {
 		CCLOG("Right mouse button clicked at: (%f, %f)", mousetile.x, mousetile.y);
 		// 执行右键点击相关操作
 	}
 
 	// 判断距离是否小于交互范围（假设交互范围为 2）
-	if (distance > 2)
-	{
+	if (distance > 2) {
 		CCLOG("Too far to interact");
 	}
-	else
-	{
+	else {
 		// 获取鼠标位置的瓦片 GID
 		int mouseGID = tileLayer->getTileGIDAt(mousetile);
 
 		// 如果 GID 不为空，表示该位置可以交互
-		if (mouseGID)
-		{
+		if (mouseGID) {
 			// 获取瓦片属性
 			auto properties = FarmYard->getPropertiesForGID(mouseGID).asValueMap();
-			if (!properties.empty())
-			{
+			if (!properties.empty()) {
 				// 判断瓦片是否具有 "Plowable" 属性且为 true
-				if (properties["Plowable"].asBool())
-				{
+				if (properties["Plowable"].asBool()) {
 					// 执行交互操作
 					auto Soil = Sprite::create("DrySoil.png");
 					Soil->setAnchorPoint(Vec2(0, 0));
@@ -201,8 +196,7 @@ void FarmYardScene::onMouseClick(cocos2d::EventMouse::MouseButton mouseButton)
 				}
 			}
 		}
-		else
-		{
+		else {
 			CCLOG("Nothing to interact");
 		}
 	}
@@ -210,10 +204,11 @@ void FarmYardScene::onMouseClick(cocos2d::EventMouse::MouseButton mouseButton)
 
 void FarmYardScene::update(float delta)
 {
-	Player *player = Player::getInstance();
+	PlayerController::getInstance()->update();
+	Player* player = Player::getInstance();
 
 	// 获取 FarmYard 地图对象
-	auto FarmYard = (TMXTiledMap *)this->getChildByName("FarmYard");
+	auto FarmYard = (TMXTiledMap*)this->getChildByName("FarmYard");
 
 	// 计算摄像机的位置
 	Vec3 currentCameraPos = _camera->getPosition3D();
@@ -224,8 +219,7 @@ void FarmYardScene::update(float delta)
 
 	// 获取瓦片图层
 	auto tileLayer = FarmYard->getLayer("Meta");
-	if (!tileLayer)
-	{
+	if (!tileLayer) {
 		CCLOG("Layer not found");
 		return;
 	}
@@ -236,15 +230,12 @@ void FarmYardScene::update(float delta)
 	// 获取玩家目标位置的瓦片GID
 	int tileGID = tileLayer->getTileGIDAt(convertToTileCoords(newPosition));
 
-	if (tileGID)
-	{
+	if (tileGID) {
 		// 获取瓦片属性
 		auto properties = FarmYard->getPropertiesForGID(tileGID).asValueMap();
-		if (!properties.empty())
-		{
+		if (!properties.empty()) {
 			// 判断瓦片是否具有 "Collidable" 属性且为 true
-			if (properties["Collidable"].asBool())
-			{
+			if (properties["Collidable"].asBool()) {
 				// 如果该瓦片不可通行，则直接返回，不更新玩家位置
 				return;
 			}
@@ -255,11 +246,10 @@ void FarmYardScene::update(float delta)
 	player->setPosition(newPosition);
 
 	// 更新时间显示
-	auto removelabel = this->getChildByName("timelabel");
-	if (removelabel != nullptr)
-	{
-		removelabel->removeFromParentAndCleanup(true);
-	}
+	// auto removelabel = this->getChildByName("timelabel");
+	// if (removelabel != nullptr) {
+	//	removelabel->removeFromParentAndCleanup(true);
+	// }
 	// auto timeLabel = Label::createWithSystemFont(gametime->toString(), "Arial", 30);
 	// timeLabel->setPosition(Vec2(_camera->getPosition3D().x + Director::getInstance()->getVisibleSize().width / 2 - timeLabel->getContentSize().width, _camera->getPosition3D().y + Director::getInstance()->getVisibleSize().height / 2 - timeLabel->getContentSize().height));
 	// this->addChild(timeLabel, 10, "timelabel");

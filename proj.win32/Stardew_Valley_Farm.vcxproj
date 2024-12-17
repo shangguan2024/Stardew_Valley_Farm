@@ -179,6 +179,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\SceneManagement\TransitionScene.cpp" />
     <ClCompile Include="..\Classes\UI\HoverButton.cpp" />
     <ClCompile Include="..\Classes\UI\HUD.cpp" />
+    <ClCompile Include="..\Classes\UI\InventoryUI.cpp" />
     <ClCompile Include="..\Classes\UI\UIManager.cpp" />
     <ClCompile Include="..\Classes\Utils\Logger.cpp" />
     <ClCompile Include="..\Classes\Utils\Timer.cpp" />
@@ -206,6 +207,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Quest\Quest.h" />
     <ClInclude Include="..\Classes\Quest\QuestManager.h" />
     <ClInclude Include="..\Classes\ResourceManagement\AudioClip.h" />
+    <ClInclude Include="..\Classes\ResourceManagement\Constant.h" />
     <ClInclude Include="..\Classes\ResourceManagement\ResourceManager.h" />
     <ClInclude Include="..\Classes\ResourceManagement\Texture.h" />
     <ClInclude Include="..\Classes\SceneManagement\FarmYardScene.h" />
@@ -215,12 +217,12 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\SceneManagement\TransitionScene.h" />
     <ClInclude Include="..\Classes\UI\HoverButton.h" />
     <ClInclude Include="..\Classes\UI\HUD.h" />
+    <ClInclude Include="..\Classes\UI\InventoryUI.h" />
     <ClInclude Include="..\Classes\UI\UIManager.h" />
     <ClInclude Include="..\Classes\Utils\Logger.h" />
     <ClInclude Include="..\Classes\Utils\Timer.h" />
     <ClInclude Include="..\Classes\World\Map.h" />
     <ClInclude Include="..\Classes\World\WorldManager.h" />
-    <ClInclude Include="Constant.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\cocos2d\cocos\2d\libcocos2d.vcxproj">

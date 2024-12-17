@@ -147,6 +147,9 @@
     <ClCompile Include="..\Classes\SceneManagement\FarmYardScene.cpp">
       <Filter>Classes\SceneManagement</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\UI\InventoryUI.cpp">
+      <Filter>Classes\UI</Filter>
+    </ClCompile>
     <ClCompile Include="..\Classes\Items\Block.cpp">
       <Filter>Classes\Items</Filter>
     </ClCompile>
@@ -248,8 +251,11 @@
     <ClInclude Include="..\Classes\SceneManagement\FarmYardScene.h">
       <Filter>Classes\SceneManagement</Filter>
     </ClInclude>
-    <ClInclude Include="Constant.h">
+    <ClInclude Include="..\Classes\ResourceManagement\Constant.h">
       <Filter>Classes\ResourceManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\UI\InventoryUI.h">
+      <Filter>Classes\UI</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Items\Block.h">
       <Filter>Classes\Items</Filter>
