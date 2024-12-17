@@ -8,7 +8,7 @@
  ****************************************************************/
 
 #include "AppDelegate.h"
-#include "proj.win32/Constant.h"
+#include "ResourceManagement/Constant.h"
 #include "../SceneManagement/SceneManager.h"
 #include "../SceneManagement/MainMenuScene.h"
 

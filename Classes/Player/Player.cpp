@@ -1,5 +1,4 @@
 #include "Player.h"
-#include "InputControl/InputManager.h"
 
 USING_NS_CC;
 
@@ -16,6 +15,7 @@ Player* Player::getInstance()
 		if (!_instance || !_instance->init()) {
 			CC_SAFE_DELETE(_instance);
 		}
+		InputManager::getInstance()->setCurrentKeyControlMode(KeyControlMode::PLAYER_CONTROL);
 	}
 	return _instance;
 }
@@ -177,17 +177,17 @@ void Player::updateDirection()
 	cocos2d::Vec2 dir = Vec2::ZERO;
 	auto inputManager = InputManager::getInstance();
 
-	if (inputManager->isKeyPressed(cocos2d::EventKeyboard::KeyCode::KEY_W)) {
-		dir += Vec2(0, 1.0f);
+	if (inputManager->isKeyPressed(cocos2d::EventKeyboard::KeyCode::KEY_W, KeyControlMode::PLAYER_CONTROL)) {
+		dir.y += 1.0f;
 	}
-	if (inputManager->isKeyPressed(cocos2d::EventKeyboard::KeyCode::KEY_A)) {
-		dir += Vec2(-1.0f, 0);
+	if (inputManager->isKeyPressed(cocos2d::EventKeyboard::KeyCode::KEY_A, KeyControlMode::PLAYER_CONTROL)) {
+		dir.x -= 1.0f;
 	}
-	if (inputManager->isKeyPressed(cocos2d::EventKeyboard::KeyCode::KEY_S)) {
-		dir += Vec2(0, -1.0f);
+	if (inputManager->isKeyPressed(cocos2d::EventKeyboard::KeyCode::KEY_S, KeyControlMode::PLAYER_CONTROL)) {
+		dir.y -= 1.0f;
 	}
-	if (inputManager->isKeyPressed(cocos2d::EventKeyboard::KeyCode::KEY_D)) {
-		dir += Vec2(1.0f, 0);
+	if (inputManager->isKeyPressed(cocos2d::EventKeyboard::KeyCode::KEY_D, KeyControlMode::PLAYER_CONTROL)) {
+		dir.x += 1.0f;
 	}
 
 	setDirection(dir);
@@ -196,5 +196,6 @@ void Player::updateDirection()
 // Ïú»ÙÊµÀý
 void Player::destroyInstance()
 {
+	InputManager::getInstance()->popCurrentKeyControlMode();
 	CC_SAFE_DELETE(_instance);
 }

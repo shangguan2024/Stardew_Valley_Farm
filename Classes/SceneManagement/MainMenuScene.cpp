@@ -3,7 +3,7 @@
 #include "../UI/HoverButton.h"
 #include "FarmYardScene.h"
 // #include "../Music/AudioPlayer.h"
-#include "proj.win32/Constant.h"
+#include "ResourceManagement/Constant.h"
 
 USING_NS_CC;
 

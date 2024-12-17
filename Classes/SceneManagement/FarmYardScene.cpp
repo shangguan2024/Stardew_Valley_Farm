@@ -5,8 +5,9 @@
  * Author:        张翔
  * Update Date:   2024/12/5
  ****************************************************************/
-#include "../Player/Player.h"
+#include "Player/Player.h"
 #include "FarmYardScene.h"
+#include "InputControl/InputManager.h"
 // #include "../GameTime/GameTime.h"
 
 USING_NS_CC;
@@ -81,7 +82,10 @@ bool FarmYardScene::init()
 
 	// 创建并注册鼠标滚轮和鼠标点击事件监听器
 	// registerMouseScrollListener();
-	// registerMouseClickListener();
+	InputManager::getInstance()->registerMouseCallbackFunc(MouseControlMode::SCENE, [this](cocos2d::EventMouse::MouseButton mouseButton) {
+		this->onMouseClick(mouseButton);
+		});
+	InputManager::getInstance()->setCurrentMouseControlMode(MouseControlMode::SCENE);
 
 	// 启动每帧更新函数
 	this->scheduleUpdate();
@@ -120,21 +124,11 @@ void FarmYardScene::onMouseScroll(cocos2d::EventMouse *event)
 	_camera->setPosition3D(currentCameraPos.lerp(targetCameraPos, 0.1f));
 }
 
-// 注册鼠标点击监听器
-void FarmYardScene::registerMouseClickListener()
-{
-	// 创建鼠标点击事件监听器
-	auto listener = EventListenerMouse::create();
-	listener->onMouseDown = CC_CALLBACK_1(FarmYardScene::onMouseClick, this);
-
-	// 获取事件分发器并添加监听器
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
-}
-
 // 鼠标点击事件回调
-void FarmYardScene::onMouseClick(cocos2d::EventMouse *event)
+void FarmYardScene::onMouseClick(cocos2d::EventMouse::MouseButton mouseButton)
 {
 	Player *player = Player::getInstance();
+	InputManager* inputManager = InputManager::getInstance();
 
 	// 获取 FarmYard 地图对象
 	auto FarmYard = (TMXTiledMap *)this->getChildByName("FarmYard");
@@ -153,12 +147,12 @@ void FarmYardScene::onMouseClick(cocos2d::EventMouse *event)
 	Vec2 currenttile = convertToTileCoords(currentPosition);
 
 	// 获取鼠标点击位置
-	auto Location = event->getLocation();
+	auto Location = inputManager->getMousePosition(MouseControlMode::SCENE);
 	// 计算偏移量
 	Vec2 screenCenter = Vec2(Director::getInstance()->getVisibleSize().width / 2, Director::getInstance()->getVisibleSize().height / 2);
 	Vec2 offset = Vec2(currentPosition.x - screenCenter.x, currentPosition.y + screenCenter.y);
-	offset.x += Location.x;
-	offset.y -= Location.y;
+	offset.x += Location->x;
+	offset.y -= Location->y;
 	// 将鼠标的位置转换为瓦片坐标
 	Vec2 mousetile = convertToTileCoords(offset);
 
@@ -166,7 +160,6 @@ void FarmYardScene::onMouseClick(cocos2d::EventMouse *event)
 	float distance = sqrt(pow(currenttile.x - mousetile.x, 2) + pow(currenttile.y - mousetile.y, 2));
 
 	// 判断鼠标点击的按钮
-	auto mouseButton = event->getMouseButton();
 	if (mouseButton == EventMouse::MouseButton::BUTTON_LEFT)
 	{
 		CCLOG("Left mouse button clicked at: (%f, %f)", mousetile.x, mousetile.y);

@@ -48,6 +48,23 @@ constexpr int FARMYARD_MAP_HEIGHT = 80;
 constexpr int DEFAULT_CAPACITY = 30;                                                         // 默认背包容量
 constexpr int DEFAULT_BAR = 10;                                                              // 默认物品栏容量
 
+// 键鼠控制状态
+enum class KeyControlMode {
+    PLAYER_CONTROL
+};
+enum class MouseControlMode {
+    INVENTORY_CONTROL,
+    SCENE
+};
+
+// 键鼠回调状态
+enum class KeyCallbackMode {
+
+};
+enum class MouseCallbackMode {
+
+};
+
 // 物品种类枚举
 enum ItemType {
 	SEED,          // 种子

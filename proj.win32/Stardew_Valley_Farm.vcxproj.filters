@@ -69,9 +69,6 @@
     <ClCompile Include="..\Classes\Entities\QuestNPC.cpp">
       <Filter>Classes\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\InputControl\EventDispatcher.cpp">
-      <Filter>Classes\InputControl</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\InputControl\InputManager.cpp">
       <Filter>Classes\InputControl</Filter>
     </ClCompile>
@@ -152,9 +149,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Constant.h">
-      <Filter>Win32</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Audio\AudioManager.h">
       <Filter>Classes\Audio</Filter>
     </ClInclude>
@@ -172,9 +166,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Entities\QuestNPC.h">
       <Filter>Classes\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\InputControl\EventDispatcher.h">
-      <Filter>Classes\InputControl</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\InputControl\InputManager.h">
       <Filter>Classes\InputControl</Filter>
@@ -253,6 +244,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\SceneManagement\FarmYardScene.h">
       <Filter>Classes\SceneManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="Constant.h">
+      <Filter>Classes\ResourceManagement</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

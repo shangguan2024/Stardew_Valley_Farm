@@ -1,8 +1,8 @@
 #ifndef __PLAYER_H__
 #define __PLAYER_H__
 
-#include "proj.win32/Constant.h"
 #include "cocos2d.h"
+#include "InputControl/InputManager.h"
 
 class Player : public cocos2d::Sprite
 {
