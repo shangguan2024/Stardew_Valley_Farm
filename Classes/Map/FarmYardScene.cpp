@@ -7,8 +7,8 @@
  ****************************************************************/
 #include "../Player/Player.h"
 #include "FarmYardScene.h"
-
-
+#include "../Classes/NPC/ChatLayer.h"
+#include "../Classes/NPC/NPC.h"
 USING_NS_CC;
 
 // 创建场景
@@ -269,6 +269,31 @@ void FarmYardScene::update(float delta)
 	timeLabel->setPosition(Vec2(_camera->getPosition3D().x + Director::getInstance()->getVisibleSize().width / 2 - timeLabel->getContentSize().width, _camera->getPosition3D().y + Director::getInstance()->getVisibleSize().height / 2 - timeLabel->getContentSize().height));
 	this->addChild(timeLabel, 10, "timelabel");
 	timeLabel->setCameraMask(unsigned short(CameraFlag::USER1));
+
+	// 添加时间显示的背景
+	auto removelabel1 = this->getChildByName("layercolor");
+	if (removelabel1 != nullptr)
+	{
+		removelabel1->removeFromParentAndCleanup(true);
+	}
+	auto layercolor = LayerColor::create(Color4B(0, 255, 0, 128));
+	layercolor->setContentSize(Size(timeLabel->getContentSize().width, timeLabel->getContentSize().height + 5));
+	layercolor->setAnchorPoint(Vec2(0, 0));
+	layercolor->setPosition(timeLabel->getPosition() - timeLabel->getContentSize() / 2);
+	this->addChild(layercolor, 8, "layercolor");
+	layercolor->setCameraMask(unsigned short(CameraFlag::USER1));
+
+	auto removelabel2 = this->getChildByName("sprite");
+	if (removelabel2 != nullptr)
+	{
+		removelabel2->removeFromParentAndCleanup(true);
+	}
+	auto sprite = Sprite::create("chatBox.png");
+	sprite->setContentSize(layercolor->getContentSize());
+	sprite->setAnchorPoint(Vec2(0, 0));
+	sprite->setPosition(timeLabel->getPosition() - timeLabel->getContentSize() / 2);
+	this->addChild(sprite, 9, "sprite");
+	sprite->setCameraMask(unsigned short(CameraFlag::USER1));
 #endif
 
 	// 计算摄像头目标位置

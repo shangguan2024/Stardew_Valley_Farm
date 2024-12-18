@@ -26,7 +26,7 @@ GameTime* GameTime::getInstance()
 	return instance;
 }
 
-GameTime::GameTime(int y, int m, int d, int h, int min, double speed) :year(y), month(m), day(d), hour(h), minute(min), timeSpeed(speed), running(false)
+GameTime::GameTime(int y, int m, int d, int h, int min, double speed) :year(y), month(m), day(d), dayofweek(1), hour(h), minute(min), timeSpeed(speed), running(false)
 {
 	normalize();
 }
@@ -41,6 +41,11 @@ void GameTime::normalize()
 		{
 			hour = 0;
 			day++;
+			dayofweek++;
+			if (dayofweek > 7) 
+			{
+				dayofweek = 1;
+			}
 			if (day > 30) 
 			{
 				day = 1;
@@ -54,7 +59,7 @@ void GameTime::normalize()
 		}
 	}
 	// 如果时间有错就重新更新
-	if (minute > 60 || hour >= 24 || day > 30 || month > 4) 
+	if (minute >= 60 || hour >= 24 || day > 30 || month > 4) 
 	{
 		GameTime::normalize();
 	}
@@ -101,8 +106,57 @@ std::string GameTime::toString() const
 	_time += " ";
 	_time += (day < 10) ? "0" + std::to_string(day) : std::to_string(day);
 	_time += " ";
-	_time += (hour < 10) ? "0" + std::to_string(hour) : std::to_string(hour);
+	switch (dayofweek)
+	{
+		case 1:
+			_time += "Mon";
+			break;
+		case 2:
+			_time += "Tue";
+			break;
+		case 3:
+			_time += "Wed";
+			break;
+		case 4:
+			_time += "Thu";
+			break;
+		case 5:
+			_time += "Fri";
+			break;
+		case 6:
+			_time += "Sat";
+			break;
+		case 7:
+			_time += "Sun";
+			break;
+	}
 	_time += " ";
+	_time += (hour < 10) ? "0" + std::to_string(hour) : std::to_string(hour);
+	_time += ":";
 	_time += (minute < 10) ? "0" + std::to_string(minute) : std::to_string(minute);
+	_time += " ";
 	return _time;
+}
+
+std::string GameTime::judgeTime()
+{
+	if (hour >= 6 && hour < 18) 
+	{
+		return "day";
+	}
+	else if (hour>=18) 
+	{
+		return "night";
+	}
+	else 
+	{
+		return "midnight";
+	}
+}
+
+void GameTime::setnextday() 
+{
+	minute = 0;
+	hour = 6;
+	day++;
 }
