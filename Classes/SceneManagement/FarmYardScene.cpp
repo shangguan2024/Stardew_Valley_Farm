@@ -27,7 +27,7 @@ bool FarmYardScene::init()
 	this->addChild(_camera);
 
 	// ¼ÓÔØÍßÆ¬µØÍ¼
-	auto FarmYard = TMXTiledMap::create("Maps/FarmYardScene.tmx");
+	auto FarmYard = TMXTiledMap::create("World/FarmYardScene.tmx");
 	if (!FarmYard) {
 		CCLOG("Failed to load tile map");
 		return false;

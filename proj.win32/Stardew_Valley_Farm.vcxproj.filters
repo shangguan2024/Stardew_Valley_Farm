@@ -267,7 +267,7 @@
       <Filter>Classes\GameTime</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\ResourceManagement\Texture.h">
-      <Filter>Classes\SceneManagement</Filter>
+      <Filter>Classes\ResourceManagement</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

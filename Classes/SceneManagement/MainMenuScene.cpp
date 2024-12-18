@@ -31,15 +31,15 @@ bool MainMenuScene::init()
 	this->addChild(background);
 
 	// 创建按钮
-	auto newGameButton = HoverButton::create("Buttons/MenuSceneButtons/CreateButton.png",
-		"Buttons/MenuSceneButtons/CreateButton.png",
-		"Buttons/MenuSceneButtons/CreateButton.png");
-	auto loadGameButton = HoverButton::create("Buttons/MenuSceneButtons/LoadButton.png",
-		"Buttons/MenuSceneButtons/LoadButton.png",
-		"Buttons/MenuSceneButtons/LoadButton.png");
-	auto exitGameButton = HoverButton::create("Buttons/MenuSceneButtons/ExitButton.png",
-		"Buttons/MenuSceneButtons/ExitButton.png",
-		"Buttons/MenuSceneButtons/ExitButton.png");
+	auto newGameButton = HoverButton::create("UI/Buttons/CreateButton.png",
+		"UI/Buttons/CreateButton.png",
+		"UI/Buttons/CreateButton.png");
+	auto loadGameButton = HoverButton::create("UI/Buttons/LoadButton.png",
+		"UI/Buttons/LoadButton.png",
+		"UI/Buttons/LoadButton.png");
+	auto exitGameButton = HoverButton::create("UI/Buttons/ExitButton.png",
+		"UI/Buttons/ExitButton.png",
+		"UI/Buttons/ExitButton.png");
 
 	// 设置按钮位置
 	newGameButton->setPosition(Vec2(screenSize.width / 2 + MENU_SCENE_NEW_GAME_BUTTON_OFFSET_X, screenSize.height / 2 + MENU_SCENE_BUTTONS_OFFSET_Y));

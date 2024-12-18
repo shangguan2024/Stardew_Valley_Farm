@@ -64,14 +64,14 @@ void InventoryUI::updateUI()
 
 			auto itemSprite = rscManager->getItem(itemId);
 			itemSprite->setAnchorPoint(cocos2d::Vec2(0, 0));
-			itemSprite->setScale(4);
+			itemSprite->setScale(3.5);
 			int x = 256, y = 0;
 			if (row == 0)
 				y = 480;
 			else if (row == 1)
 				y = 400;
 			else if (row == 2)
-				y = 326;
+				y = 334;
 
 			itemSprite->setPosition(x + col * 4 * 16, y);
 			this->addChild(itemSprite);

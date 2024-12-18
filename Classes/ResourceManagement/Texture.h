@@ -8,64 +8,64 @@ class Texture
 {
 public:
     // Animals
-    const std::string BabyBrownChicken  = "Entities/Animals/BabyBrown Chicken..png";
-    const std::string BabySheep         = "Entities/Animals/BabySheep..png";
-    const std::string BabyWhiteChicken  = "Entities/Animals/BabyWhite Chicken..png";
-    const std::string BrownChicken      = "Entities/Animals/Brown Chicken..png";
-    const std::string Sheep             = "Entities/Animals/Sheep..png";
-    const std::string WhiteChicken      = "Entities/Animals/White Chicken..png";
+    static const std::string BabyBrownChicken;
+    static const std::string BabySheep;       
+    static const std::string BabyWhiteChicken;
+    static const std::string BrownChicken;    
+    static const std::string Sheep;           
+    static const std::string WhiteChicken;    
 
     // Characters & Portraits
-    const std::string EmilyCharacter    = "Entities/Characters/Emily..png";
-    const std::string LewisCharacter    = "Entities/Characters/Lewis..png";
-    const std::string PierreCharacter   = "Entities/Characters/Pierre..png";
-    const std::string RobinCharacter    = "Entities/Characters/Robin..png";
-    const std::string EmilyPortrait     = "Entities/Portraits/Emily..png";
-    const std::string LewisPortrait     = "Entities/Portraits/Lewis..png";
-    const std::string PierrePortrait    = "Entities/Portraits/Pierre..png";
-    const std::string RobinPortrait     = "Entities/Portraits/Robin..png";
+    static const std::string EmilyCharacter; 
+    static const std::string LewisCharacter; 
+    static const std::string PierreCharacter;
+    static const std::string RobinCharacter; 
+    static const std::string EmilyPortrait;  
+    static const std::string LewisPortrait;  
+    static const std::string PierrePortrait; 
+    static const std::string RobinPortrait;  
 
     // Fonts
-    const std::string BorderFont_BR = "Fonts/BorderFont.pt-BR.texture.png";
+    static const std::string BorderFont_BR;
 
     // Items
-    const std::string Craftables    = "Items/Craftables..png";
-    const std::string crops         = "Items/crops..png";
-    const std::string hoeDirt       = "Items/hoeDirt..png";
-    const std::string hoeDirtDark   = "Items/hoeDirtDark..png";
-    const std::string rain          = "Items/rain..png";
-    const std::string tools         = "Items/tools..png";
-    const std::string weapons       = "Items/weapons..png";
-    const std::string springobjects = "Items/springobjects..png";
+    static const std::string Craftables;   
+    static const std::string crops;        
+    static const std::string hoeDirt;      
+    static const std::string hoeDirtDark;  
+    static const std::string rain;         
+    static const std::string tools;        
+    static const std::string weapons;      
+    static const std::string springobjects;
 
     // Player
-    const std::string Dana      = "Player/Dana.png";
-    const std::string Sandy     = "Player/Sandy.png";
-    const std::string emotes    = "Player/emotes..png";
+    static const std::string Dana;     
+    static const std::string Sandy;    
+    static const std::string emotes;   
 
     // Scenes
-    const std::string MenuScene     = "Scenes/MenuScene.png";
+    static const std::string MenuScene;
 
     // UI
-    const std::string Billboard      = "Billboard..png";
-    const std::string Cursors        = "Cursors..png";
-    const std::string Inventory      = "Inventory.png";
-    const std::string letterBG       = "letterBG..png";
-    const std::string logo           = "logo..png";
-    const std::string TitleButtons   = "TitleButtons..png";
+    static const std::string Billboard;      
+    static const std::string Cursors;        
+    static const std::string Inventory;      
+    static const std::string letterBG;       
+    static const std::string logo;           
+    static const std::string TitleButtons;   
 
     // World
-    const std::string bushes          = "World/bushes..png";
-    const std::string tree1_fall      = "World/tree1_fall..png";
-    const std::string tree2_fall      = "World/tree2_fall..png";
-    const std::string tree3_fall      = "World/tree3_fall..png";
-    const std::string ElliottSeaTiles = "ElliottSeaTiles..png";
-    const std::string houses          = "houses..png";
-    const std::string Mill            = "Mill..png";
-    const std::string Well            = "Well..png";
-    const std::string fall_outdoorsTileSheet    = "fall_outdoorsTileSheet..png";
-    const std::string fall_beach                = "fall_beach..png";
-    const std::string fall_town                 = "fall_town..png";
+    static const std::string bushes;         
+    static const std::string tree1_fall;     
+    static const std::string tree2_fall;     
+    static const std::string tree3_fall;     
+    static const std::string ElliottSeaTiles;
+    static const std::string houses;          
+    static const std::string Mill;            
+    static const std::string Well;            
+    static const std::string fall_outdoorsTileSheet;
+    static const std::string fall_beach;            
+    static const std::string fall_town;             
                       
 };
 
