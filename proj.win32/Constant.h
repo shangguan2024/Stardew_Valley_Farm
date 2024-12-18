@@ -113,9 +113,9 @@ enum NPCType
 };
 
 const std::vector<std::string> NPC_ALEX_DIALOG = {
-    " ",
-    " ",
-    " ",
+    " 1",
+    " 2",
+    " 3",
 };
 
 const std::vector<std::string> NPC_ABIGAIL_DIALOG = {
