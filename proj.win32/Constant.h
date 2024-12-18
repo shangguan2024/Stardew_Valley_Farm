@@ -8,6 +8,7 @@
 
 #ifndef _CONSTANT_H_
 #define _CONSTANT_H_
+
 #include <string>
 #include <vector>
 
@@ -33,7 +34,7 @@ constexpr int DEFAULT_MUSIC_SIGN = -1;                                          
 constexpr float DEFAULT_MUSIC_VOLUMN = 0.5f;                                                 // 缺省音量大小
 
 constexpr float NOMAL_PLAYER_SPEED = 100;                                                    // 人物默认移动速度
-constexpr int PLAYER_IMAGE_WIDTH = 64;                                                      // 人物移动图集宽度
+constexpr int PLAYER_IMAGE_WIDTH = 64;                                                       // 人物移动图集宽度
 constexpr int PLAYER_IMAGE_HEIGHT = 128;                                                     // 人物移动图集高度
 constexpr int PLAYER_FRAME_RATE = 4;                                                         // 人物移动帧数
 constexpr int PLAYER_DIRECTION_NUM = 4;                                                      // 人物可移动方向数
@@ -41,10 +42,18 @@ constexpr int PLAYER_FRAME_WIDTH = PLAYER_IMAGE_WIDTH / PLAYER_FRAME_RATE;      
 constexpr int PLAYER_FRAME_HEIGHT = PLAYER_IMAGE_HEIGHT / PLAYER_DIRECTION_NUM;              // 每帧高度（图片高度/行数）
 constexpr float PLAYER_FRAME_DELAY = 0.1f;                                                   // 每帧动画延迟
 
-constexpr int MAP_TILE_WIDTH = 16;                                                           // 
-constexpr int MAP_TILE_HEIGHT = 16;
-constexpr int FARMYARD_MAP_WIDTH = 100;
-constexpr int FARMYARD_MAP_HEIGHT = 80;
+constexpr int DEFAULT_VIEW_HEIGHT = 400;                                                     // 默认视角高度
+constexpr int MAX_VIEW_HEIGHT = 500;                                                         // 地图中最大视角高度
+constexpr int MIN_VIEW_HEIGHT = 200;                                                         // 地图中最小视角高度
+
+constexpr int MAP_TILE_WIDTH = 16;                                                           // 地图瓦片宽度
+constexpr int MAP_TILE_HEIGHT = 16;                                                          // 地图瓦片高度 
+constexpr int FARMYARD_MAP_WIDTH = 100;                                                      // FarmYard地图宽度
+constexpr int FARMYARD_MAP_HEIGHT = 80;                                                      // FarmYard地图高度
+constexpr int FARMHOUSE_MAP_WIDTH = 14;                                                      // FarmHouse地图宽度
+constexpr int FARMHOUSE_MAP_HEIGHT = 14;                                                     // FarmHouse地图高度
+constexpr int TOWNCENTER_MAP_WIDTH = 60;                                                     // TownCenter地图宽度
+constexpr int TOWNCENTER_MAP_HEIGHT = 50;                                                    // TownCenter地图高度
 
 constexpr int DEFAULT_CAPACITY = 30;                                                         // 默认背包容量
 constexpr int DEFAULT_BAR = 10;                                                              // 默认物品栏容量

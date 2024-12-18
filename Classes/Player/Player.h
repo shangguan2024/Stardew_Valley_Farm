@@ -34,6 +34,9 @@ public:
     // 注册键盘监听器
     void registerKeyboardListener();
 
+    // 注销键盘监听器
+    void removeKeyboardListener();
+
     // 销毁实例
     static void destroyInstance();
 
@@ -41,7 +44,8 @@ public:
     void setSpeed(const float speed);
     float getSpeed() const;
 
-
+    // 
+    void resetInit();
 
 private:
     Player();  // 构造函数私有化
@@ -54,7 +58,9 @@ private:
     cocos2d::Vec2 _direction;     // 玩家移动方向向量
     cocos2d::Vec2 _faceto;        // 玩家的朝向
     float _speed;                 // 玩家速度
+    bool isinit;                  // 玩家是否初始化（动画是否加载）
     size_t _currentAnimationHash; // 当前播放的动画
+    
 
     cocos2d::EventListenerKeyboard* _keyboardListener; // 键盘监听器
 

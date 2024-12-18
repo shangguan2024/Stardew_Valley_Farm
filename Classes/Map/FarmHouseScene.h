@@ -11,7 +11,8 @@
 
 #include "cocos2d.h"
 
-class FarmHouseScene : public cocos2d::Scene {
+class FarmHouseScene : public cocos2d::Scene 
+{
 public:
     // 创建场景
     static cocos2d::Scene* createScene();
@@ -26,6 +27,14 @@ public:
     CREATE_FUNC(FarmHouseScene);
 
 private:
+    // 转变坐标成瓦片坐标
+    cocos2d::Vec2 convertToTileCoords(const cocos2d::Vec2& pos);
+
+    // 定义摄像机
+    cocos2d::Camera* camera;
+
+    // 由室内转入农场的判断框
+    cocos2d::Rect houseToYardRect;
 
 };
 

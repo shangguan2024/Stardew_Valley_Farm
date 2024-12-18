@@ -28,7 +28,7 @@ Player* Player::getInstance()
 }
 
 // 构造函数
-Player::Player() : _direction(Vec2::ZERO),_faceto(Vec2::ZERO), _keyboardListener(nullptr), _speed(NOMAL_PLAYER_SPEED), _currentAnimationHash(0) {}
+Player::Player() : _direction(Vec2::ZERO), _faceto(Vec2::ZERO), _keyboardListener(nullptr), _speed(NOMAL_PLAYER_SPEED), _currentAnimationHash(0), isinit(false) {}
 
 // 析构函数
 Player::~Player()
@@ -52,6 +52,12 @@ Player::~Player()
 // 初始化
 bool Player::init() 
 {
+    // 根据是否初始化来判断是否要重新加载动画
+    if (isinit) {
+        return true;
+    }
+    isinit = true;
+
     if (!Sprite::init()) {
         return false;
     }
@@ -59,7 +65,7 @@ bool Player::init()
     // 初始化动画缓存
     auto texture = Director::getInstance()->getTextureCache()->addImage("Player/Sandy.png");
 
-   // 裁剪初始图像
+    // 裁剪初始图像
     Rect rect(0, PLAYER_IMAGE_HEIGHT - PLAYER_FRAME_HEIGHT, PLAYER_FRAME_WIDTH, PLAYER_FRAME_HEIGHT);
 
     // 创建裁剪出来的精灵帧
@@ -74,6 +80,9 @@ bool Player::init()
         return false;
     }
 
+    // 设置锚点到脚的中间位置
+    this->setAnchorPoint(Vec2(0.5f, 0.0f));
+
     // 按方向创建动画
     for (int row = 0; row < PLAYER_DIRECTION_NUM; row++) {
         Vector<SpriteFrame*> frames;
@@ -87,17 +96,17 @@ bool Player::init()
         // 设置动画键
         std::string key;
         switch (row) {
-            case 0: 
-                key = "WALK_DOWN"; 
+            case 0:
+                key = "WALK_DOWN";
                 break;
             case 1:
-                key = "WALK_RIGHT"; 
+                key = "WALK_RIGHT";
                 break;
-            case 2: 
-                key = "WALK_UP"; 
+            case 2:
+                key = "WALK_UP";
                 break;
-            case 3: 
-                key = "WALK_LEFT"; 
+            case 3:
+                key = "WALK_LEFT";
                 break;
         }
 
@@ -113,6 +122,7 @@ bool Player::init()
     registerKeyboardListener();
 
     return true;
+
 }
 
 // 设置方向
@@ -143,6 +153,11 @@ void Player::setSpeed(const float speed)
 float Player::getSpeed() const
 {
     return _speed;
+}
+
+void Player::resetInit() 
+{
+    isinit = false;
 }
 
 // 每帧更新
@@ -194,51 +209,65 @@ void Player::update(float delta)
 
 void Player::registerKeyboardListener()
 {
-    auto eventListener = EventListenerKeyboard::create();
+    if (_keyboardListener != nullptr)
+        return;
 
-    eventListener->onKeyPressed = [this](EventKeyboard::KeyCode keyCode, Event* event) {
+    // 创建新的键盘事件监听器
+    _keyboardListener = EventListenerKeyboard::create();
+
+    _keyboardListener->onKeyPressed = [this](EventKeyboard::KeyCode keyCode, Event* event) {
         switch (keyCode) {
             case EventKeyboard::KeyCode::KEY_W:
-                _direction = _faceto = Vec2(0, 1);
+                _direction = _faceto = Vec2(0, 1); // 向上移动
                 break;
             case EventKeyboard::KeyCode::KEY_S:
-                _direction = _faceto = Vec2(0, -1);
+                _direction = _faceto = Vec2(0, -1); // 向下移动
                 break;
             case EventKeyboard::KeyCode::KEY_A:
-                _direction = _faceto = Vec2(-1, 0);
+                _direction = _faceto = Vec2(-1, 0); // 向左移动
                 break;
             case EventKeyboard::KeyCode::KEY_D:
-                _direction = _faceto = Vec2(1, 0);
+                _direction = _faceto = Vec2(1, 0); // 向右移动
                 break;
             default:
                 break;
         }
         };
 
-    eventListener->onKeyReleased = [this](EventKeyboard::KeyCode keyCode, Event* event) {
+    _keyboardListener->onKeyReleased = [this](EventKeyboard::KeyCode keyCode, Event* event) {
+        // 当按键松开时，停止对应方向的移动
         switch (keyCode) {
-            case EventKeyboard::KeyCode::KEY_W: 
-                if (_direction.y == 1) 
+            case EventKeyboard::KeyCode::KEY_W:
+                if (_direction.y == 1)
                     _direction.y = 0;
                 break;
-            case EventKeyboard::KeyCode::KEY_S: 
-                if (_direction.y == -1) 
+            case EventKeyboard::KeyCode::KEY_S:
+                if (_direction.y == -1)
                     _direction.y = 0;
                 break;
             case EventKeyboard::KeyCode::KEY_A:
-                if (_direction.x == -1) 
+                if (_direction.x == -1)
                     _direction.x = 0;
                 break;
-            case EventKeyboard::KeyCode::KEY_D: 
-                if (_direction.x == 1) 
+            case EventKeyboard::KeyCode::KEY_D:
+                if (_direction.x == 1)
                     _direction.x = 0;
                 break;
-            default: 
+            default:
                 break;
         }
         };
 
-    _eventDispatcher->addEventListenerWithSceneGraphPriority(eventListener, this);
+    // 将监听器添加到事件调度器中，并绑定到 Player 节点
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(_keyboardListener, this);
+}
+
+void Player::removeKeyboardListener()
+{
+    if (_keyboardListener) {
+        _eventDispatcher->removeEventListener(_keyboardListener); // 移除监听器
+        _keyboardListener = nullptr;  // 释放监听器
+    }
 }
 
 // 销毁实例

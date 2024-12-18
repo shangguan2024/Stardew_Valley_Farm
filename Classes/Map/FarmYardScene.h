@@ -31,18 +31,24 @@ public:
     // 每一帧被自动调用的 update 方法
     virtual void update(float delta);
 
-    // 转变坐标成瓦片坐标
-    cocos2d::Vec2 convertToTileCoords(const cocos2d::Vec2& pos);
-
     // 实现 FarmYardScene 类的 create 方法
     CREATE_FUNC(FarmYardScene);
 
 private:
-    // 定义摄像机
-    cocos2d::Camera* _camera;
+    // 转变坐标成瓦片坐标
+    cocos2d::Vec2 convertToTileCoords(const cocos2d::Vec2& pos);
 
-    // 玩家面朝的位置
+    // 定义摄像机
+    cocos2d::Camera* camera;
+
+    // 玩家正在处理的位置
     cocos2d::Sprite* targettile;
+
+    // 由农场转入房子的判断框
+    cocos2d::Rect yardToHouseRect;
+
+    // 由农场转入城镇的判断框
+    cocos2d::Rect yardToTownRect;
 
 };
 
