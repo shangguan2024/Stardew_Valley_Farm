@@ -90,6 +90,7 @@ bool FarmYardScene::init()
 	float spawnY = spawnPoint["y"].asFloat();
 
 	auto player = Player::getInstance();
+	player->init();
 	this->addChild(player, 1, "player");
 	player->setPosition(spawnX, spawnY);
 	player->setCameraMask(unsigned short(CameraFlag::USER1));
@@ -229,14 +230,16 @@ void FarmYardScene::update(float delta)
 	player->setPosition(newPosition);
 
 	if (yardToHouseRect.containsPoint(newPosition)) {
-
+		// 在切换场景之前，先禁用更新
+		this->unscheduleUpdate();
 
 		this->removeChild(player);
 		player->resetInit();
 		Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, FarmHouseScene::createScene(), cocos2d::Color3B::WHITE));
 	}
 	else if (yardToTownRect.containsPoint(newPosition)) {
-
+		// 在切换场景之前，先禁用更新
+		this->unscheduleUpdate();
 
 		this->removeChild(player);
 		player->resetInit();

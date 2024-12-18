@@ -115,6 +115,9 @@ bool Player::init()
         AnimationCache::getInstance()->addAnimation(animation, key);
     }
 
+    // 重置速度和方向
+    _direction = _faceto = Vec2::ZERO;
+
     // 注册 update
     this->scheduleUpdate();
 

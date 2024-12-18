@@ -127,7 +127,8 @@ void FarmHouseScene::update(float delta)
 	player->setPosition(newPosition);
 
 	if (houseToYardRect.containsPoint(newPosition)) {
-		
+		// 在切换场景之前，先禁用更新
+		this->unscheduleUpdate();
 
 		this->removeChild(player);
 		player->resetInit();
