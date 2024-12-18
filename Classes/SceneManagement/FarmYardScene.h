@@ -10,35 +10,19 @@
 #define _FARM_YARD_SCENE_H_
 
 #include "cocos2d.h"
+#include "GameScene.h"
 
-class FarmYardScene : public cocos2d::Scene
+class FarmYardScene : public GameScene
 {
 public:
-    // 创建场景
-    static cocos2d::Scene *createScene();
+    static cocos2d::Scene* createScene();
 
-    // 初始化场景
-    virtual bool init();
-
-    // 鼠标滚动监听器
-    void registerMouseScrollListener();
-    void onMouseScroll(cocos2d::EventMouse *event);
-
-    // 鼠标点击监听器
-    void onMouseClick(cocos2d::EventMouse::MouseButton mouseButton);
-
-    // 每一帧被自动调用的 update 方法
-    virtual void update(float delta);
-
-    // 转变坐标成瓦片坐标
-    cocos2d::Vec2 convertToTileCoords(const cocos2d::Vec2 &pos);
-
-    // 实现 FarmYardScene 类的 create 方法
-    CREATE_FUNC(FarmYardScene);
+protected:
+    void initConstants() override;
 
 private:
-    // 定义摄像机
-    cocos2d::Camera *_camera;
+    // 实现 FarmYardScene 类的 create 方法
+    CREATE_FUNC(FarmYardScene);
 };
 
 #endif // _FARM_YARD_SCENE_H_

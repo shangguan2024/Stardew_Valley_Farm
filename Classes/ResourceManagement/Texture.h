@@ -66,7 +66,9 @@ public:
     static const std::string fall_outdoorsTileSheet;
     static const std::string fall_beach;            
     static const std::string fall_town;             
-                      
+    
+    // Tile Maps
+    static const std::string FarmYardScene;
 };
 
 #endif

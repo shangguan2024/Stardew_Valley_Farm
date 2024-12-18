@@ -1,15 +1,9 @@
 #include "GameScene.h"
+#include "InputControl/InputManager.h"
+#include "Player/PlayerController.h"
+#include "UI/UIManager.h"
 
 USING_NS_CC;
-
-// 创建场景
-Scene* GameScene::createScene()
-{
-	auto scene = Scene::create();
-	auto layer = GameScene::create();
-	scene->addChild(layer);
-	return scene;
-}
 
 // 初始化场景
 bool GameScene::init()
@@ -18,9 +12,7 @@ bool GameScene::init()
 		return false;
 	}
 
-	// 创建计时
-	// gametime = GameTime::getInstance();
-	// gametime->start();
+	initConstants();
 
 	// 创建摄像机
 	_camera = Camera::create();
@@ -28,7 +20,7 @@ bool GameScene::init()
 	this->addChild(_camera);
 
 	// 加载瓦片地图
-	auto FarmYard = TMXTiledMap::create("Maps/GameScene.tmx");
+	auto FarmYard = TMXTiledMap::create(tileMapPath);
 	if (!FarmYard) {
 		CCLOG("Failed to load tile map");
 		return false;
@@ -37,7 +29,7 @@ bool GameScene::init()
 	auto tileLayer = FarmYard->getLayer("Meta");
 	tileLayer->setVisible(false);
 
-	this->addChild(FarmYard, 0, "FarmYard");
+	this->addChild(FarmYard, 0, sceneName);
 	FarmYard->setPosition(0, 0);
 	FarmYard->setCameraMask(unsigned short(CameraFlag::USER1));
 
@@ -66,6 +58,13 @@ bool GameScene::init()
 	player->setPosition(spawnX, spawnY);
 	player->setCameraMask(unsigned short(CameraFlag::USER1));
 
+	// UI
+	auto camera = Camera::create();
+	camera->setCameraFlag(CameraFlag::DEFAULT);
+	this->addChild(camera);
+	this->addChild(UIManager::getInstance());
+	UIManager::getInstance()->setCameraMask(static_cast<unsigned short>(CameraFlag::DEFAULT));
+
 	// 创建并注册鼠标滚轮和鼠标点击事件监听器
 	registerMouseScrollListener();
 	InputManager::getInstance()->registerMouseCallbackFunc(MouseControlMode::SCENE, [this](cocos2d::EventMouse::MouseButton mouseButton) {
@@ -77,6 +76,12 @@ bool GameScene::init()
 	this->scheduleUpdate();
 
 	return true;
+}
+
+void GameScene::initConstants()
+{
+	sceneName = "name of this scene";
+	tileMapPath = "path/to/tilemap.tmx";
 }
 
 Vec2 GameScene::convertToTileCoords(const Vec2& pos)
@@ -119,12 +124,12 @@ void GameScene::onMouseClick(cocos2d::EventMouse::MouseButton mouseButton)
 	Player* player = Player::getInstance();
 	InputManager* inputManager = InputManager::getInstance();
 
-	// 获取 FarmYard 地图对象
-	auto FarmYard = (TMXTiledMap*)this->getChildByName("FarmYard");
+	// 获取地图对象
+	auto tileMap = (TMXTiledMap*)this->getChildByName(sceneName);
 
 	// 获取瓦片图层
-	auto tileLayer = FarmYard->getLayer("Meta");
-	auto groundLayer = FarmYard->getLayer("Ground");
+	auto tileLayer = tileMap->getLayer("Meta");
+	auto groundLayer = tileMap->getLayer("Ground");
 	if (!tileLayer || !groundLayer) {
 		CCLOG("Layer not found");
 		return;
@@ -168,7 +173,7 @@ void GameScene::onMouseClick(cocos2d::EventMouse::MouseButton mouseButton)
 		// 如果 GID 不为空，表示该位置可以交互
 		if (mouseGID) {
 			// 获取瓦片属性
-			auto properties = FarmYard->getPropertiesForGID(mouseGID).asValueMap();
+			auto properties = tileMap->getPropertiesForGID(mouseGID).asValueMap();
 			if (!properties.empty()) {
 				// 判断瓦片是否具有 "Plowable" 属性且为 true
 				if (properties["Plowable"].asBool()) {
@@ -188,32 +193,26 @@ void GameScene::onMouseClick(cocos2d::EventMouse::MouseButton mouseButton)
 	}
 }
 
-void playerPosUpdate(float delta)
-{
-
-}
-
 void GameScene::update(float delta)
 {
 	PlayerController::getInstance()->update();
 	Player* player = Player::getInstance();
 
 	// 获取 FarmYard 地图对象
-	auto FarmYard = (TMXTiledMap*)this->getChildByName("FarmYard");
+	auto tileMap = (TMXTiledMap*)this->getChildByName(sceneName);
 
 	// 计算摄像机的位置
 	Vec3 currentCameraPos = _camera->getPosition3D();
 
 	// 获取瓦片图层
-	auto tileLayer = FarmYard->getLayer("Meta");
+	auto tileLayer = tileMap->getLayer("Meta");
 	if (!tileLayer) {
 		CCLOG("Layer not found");
 		return;
 	}
 
 
-	while (player->getDirection().x)
-	{
+	if (player->getDirection().x) {
 		// 获得玩家的当前位置并转换为瓦片坐标
 		Vec2 currentPosition = player->getPosition();
 		Vec2 currenttile = convertToTileCoords(currentPosition);
@@ -224,19 +223,13 @@ void GameScene::update(float delta)
 		// 获取玩家目标位置的瓦片GID
 		int tileGID = tileLayer->getTileGIDAt(convertToTileCoords(newPosition));
 
-		if (tileGID) {
-			// 获取瓦片属性
-			auto properties = FarmYard->getPropertiesForGID(tileGID).asValueMap();
-			if (!properties.empty())
-				break;
-		}
 		// 如果该瓦片可通行，则更新玩家位置
-		player->setPosition(newPosition);
-		break;
+		if (!tileGID || tileMap->getPropertiesForGID(tileGID).asValueMap().empty() || !tileMap->getPropertiesForGID(tileGID).asValueMap()["Collidable"].asBool()) {
+			player->setPosition(newPosition);
+		}
 	}
 
-	while (player->getDirection().y)
-	{
+	if (player->getDirection().y) {
 		// 获得玩家的当前位置并转换为瓦片坐标
 		Vec2 currentPosition = player->getPosition();
 		Vec2 currenttile = convertToTileCoords(currentPosition);
@@ -247,15 +240,10 @@ void GameScene::update(float delta)
 		// 获取玩家目标位置的瓦片GID
 		int tileGID = tileLayer->getTileGIDAt(convertToTileCoords(newPosition));
 
-		if (tileGID) {
-			// 获取瓦片属性
-			auto properties = FarmYard->getPropertiesForGID(tileGID).asValueMap();
-			if (!properties.empty())
-				break;
-		}
 		// 如果该瓦片可通行，则更新玩家位置
-		player->setPosition(newPosition);
-		break;
+		if (!tileGID || tileMap->getPropertiesForGID(tileGID).asValueMap().empty() || !tileMap->getPropertiesForGID(tileGID).asValueMap()["Collidable"].asBool()) {
+			player->setPosition(newPosition);
+		}
 	}
 
 
