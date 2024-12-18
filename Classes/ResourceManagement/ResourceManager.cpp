@@ -1,15 +1,18 @@
 
+
 #include "ResourceManager.h"
+
+USING_NS_CC;
 
 ResourceManager* ResourceManager::instance = nullptr;
 
 
 Rect ResourceManager::itemRect[1024];
 Rect ResourceManager::blockRect[1024];
-cocos2d::Texture2D* ResourceManager::itemRsc[1024] = {};
-cocos2d::Texture2D* ResourceManager::blockRsc[1024] = {};
-cocos2d::Texture2D* ResourceManager::springobjects = nullptr;
-cocos2d::Texture2D* ResourceManager::blockTexture = nullptr;
+Texture2D* ResourceManager::itemRsc[1024] = {};
+Texture2D* ResourceManager::blockRsc[1024] = {};
+Texture2D* ResourceManager::springobjects = nullptr;
+Texture2D* ResourceManager::blockTexture = nullptr;
 
 std::string ResourceManager::inventory;
 
@@ -45,6 +48,8 @@ void ResourceManager::updateRect()
     itemRsc[1] = springobjects;
     itemRect[2] = tileSlot(9 , 0 , 1, 1).toRect();    // Bread
     itemRsc[2] = springobjects;
+
+
 }
 
 

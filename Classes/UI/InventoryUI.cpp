@@ -63,7 +63,7 @@ void InventoryUI::updateUI()
 				continue;
 
 			auto itemSprite = rscManager->getItem(itemId);
-			itemSprite->setAnchorPoint(Vec2(0, 0));
+			itemSprite->setAnchorPoint(cocos2d::Vec2(0, 0));
 			itemSprite->setScale(4);
 			int x = 256, y = 0;
 			if (row == 0)

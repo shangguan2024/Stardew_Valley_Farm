@@ -251,9 +251,6 @@
     <ClInclude Include="..\Classes\ResourceManagement\ResourceManager.h">
       <Filter>Classes\ResourceManagement</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\ResourceManagement\Texture.h">
-      <Filter>Classes\ResourceManagement</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\SceneManagement\FarmYardScene.h">
       <Filter>Classes\SceneManagement</Filter>
     </ClInclude>
@@ -268,6 +265,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\GameTime\GameTime.h">
       <Filter>Classes\GameTime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ResourceManagement\Texture.h">
+      <Filter>Classes\SceneManagement</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

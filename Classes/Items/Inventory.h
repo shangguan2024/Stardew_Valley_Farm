@@ -8,26 +8,45 @@
 class Inventory
 {
 public:
-    static Inventory* getInstance();  // 获取实例声明
+    struct Slot
+    {
+        Item::id id;
+        size_t num;
 
-    Item::id getItemId(int row, int col);  // 获取物品ID声明
-    size_t getItemNum(int row, int col);  // 获取物品数量声明
+        Slot(Item::id new_id, size_t new_num)
+            : id(new_id), num(new_num) {}
+        Slot() : Slot(Item::NIL, 0) {}
 
-    void click(int row, int col);  // 点击操作声明
+        inline bool operator==(Slot other) { return this->id == other.id; }
+        inline bool operator!=(Slot other) { return this->id != other.id; }
+        inline bool operator==(Item::id other_id) { return this->id == other_id; }
+        inline bool operator!=(Item::id other_id) { return this->id != other_id; }
+    };
 
-    bool init();  // 初始化声明
+    static Inventory* getInstance();
+
+    Item::id getItemId(int row, int col);
+    size_t getItemNum(int row, int col);
+    Slot getSlot(int row, int col);
+
+
+    void click(int row, int col);  // 点击物品槽位，更新悬挂物品
+    void detach();    // 解除悬挂物品，还原位置
+    void merge(int row, int col, int num);
+    bool pick(Item::id item, size_t num);
+
+    bool init();
 
 private:
     Inventory();
     ~Inventory();
 
     static Inventory* instance;
+    static Slot inventory[3][12];  // 背包物品ID和数量
+    Slot attached;
 
-    static Item::id backpack[3][12];  // 背包物品ID
-    static size_t itemNum[3][12];  // 背包物品数量
+    int lastClickRow, lastClickCol;
 
-    Item::id suspended;  // 挂起物品ID
-    size_t suspendedNum;  // 挂起物品数量
 };
 
 #endif
