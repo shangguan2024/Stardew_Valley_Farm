@@ -60,7 +60,6 @@ private:
     float _speed;                 // 玩家速度
     bool isinit;                  // 玩家是否初始化（动画是否加载）
     size_t _currentAnimationHash; // 当前播放的动画
-    
 
     cocos2d::EventListenerKeyboard* _keyboardListener; // 键盘监听器
 

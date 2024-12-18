@@ -5,9 +5,11 @@
  * Author:        张翔
  * Update Date:   2024/12/5
  ****************************************************************/
-#include "../Player/Player.h"
+
 #include "FarmYardScene.h"
 #include "FarmHouseScene.h"
+#include "TownCenterScene.h"
+#include "../Player/Player.h"
 #include "../NPC/ChatLayer.h"
 #include "../NPC/NPC.h"
 
@@ -48,9 +50,9 @@ bool FarmYardScene::init()
 	}
 	FarmYard->getLayer("Meta")->setVisible(false);
 
-	this->addChild(FarmYard, 0, "FarmYard");
 	FarmYard->setPosition(0, 0);
 	FarmYard->setCameraMask(unsigned short(CameraFlag::USER1));
+	this->addChild(FarmYard, 0, "FarmYard");
 
 	// 获取地图的基础属性
 	auto objectGroup = FarmYard->getObjectGroup("Event");
@@ -63,42 +65,24 @@ bool FarmYardScene::init()
 	auto yardToHouse = objectGroup->getObject("YardToHouse");
 	auto yardToTown = objectGroup->getObject("YardToTown");
 	if (spawnPoint.empty()|| yardToHouse.empty() || yardToTown.empty()) {
-		CCLOG("SpawnPoint not found in Event layer.");
+		CCLOG("Event not found in Event layer.");
 		return false;
 	}
 
-	// 获取 YardToHouse 的位置和大小
-	float x = yardToHouse["x"].asFloat();
-	float y = yardToHouse["y"].asFloat();
-	float width = yardToHouse["width"].asFloat();
-	float height = yardToHouse["height"].asFloat();
-
-	// 创建一个矩形表示 YardToHouse 区域
-	yardToHouseRect.setRect(x, y, width, height);
-
-	// 获取 YardToTown 的位置和大小
-	x = yardToTown["x"].asFloat();
-	y = yardToTown["y"].asFloat();
-	width = yardToTown["width"].asFloat();
-	height = yardToTown["height"].asFloat();
-
-	// 创建一个矩形表示 YardToTown 区域
-	yardToTownRect.setRect(x, y, width, height);
-
-	// 提取出生点的 x 和 y 坐标
-	float spawnX = spawnPoint["x"].asFloat();
-	float spawnY = spawnPoint["y"].asFloat();
+	// 初始化传送点
+	yardToHouseRect.setRect(yardToHouse["x"].asFloat(), yardToHouse["y"].asFloat(), yardToHouse["width"].asFloat(), yardToHouse["height"].asFloat());
+	yardToTownRect.setRect(yardToTown["x"].asFloat(), yardToTown["y"].asFloat(), yardToTown["width"].asFloat(), yardToTown["height"].asFloat());
 
 	auto player = Player::getInstance();
 	player->init();
-	this->addChild(player, 1, "player");
-	player->setPosition(spawnX, spawnY);
+	player->setPosition(spawnPoint["x"].asFloat(), spawnPoint["y"].asFloat());
 	player->setCameraMask(unsigned short(CameraFlag::USER1));
+	this->addChild(player, 1, "player");
 
 	targettile = cocos2d::Sprite::create("Items/DrySoil.png");
 	targettile->setAnchorPoint(Vec2(0, 0));
-	this->addChild(targettile, 1, "targettile");
 	targettile->setCameraMask(unsigned short(CameraFlag::USER1));
+	this->addChild(targettile, 1, "targettile");
 
 	// 创建并注册鼠标滚轮和鼠标点击事件监听器
 	registerMouseScrollListener();
@@ -198,7 +182,7 @@ void FarmYardScene::update(float delta)
 	// 计算摄像机的位置
 	Vec3 currentCameraPos = camera->getPosition3D();
 
-	// 获得玩家的当前位置并转换为瓦片坐标
+	// 获得玩家的当前位置
 	Vec2 currentPosition = player->getPosition();
 
 	// 获取瓦片图层
@@ -213,16 +197,14 @@ void FarmYardScene::update(float delta)
 
 	// 获取玩家目标位置的瓦片GID
 	int tileGID = tileLayer->getTileGIDAt(convertToTileCoords(newPosition));
-
 	if (tileGID) {
 		// 获取瓦片属性
 		auto properties = FarmYard->getPropertiesForGID(tileGID).asValueMap();
-		if (!properties.empty()) {
+		if (!properties.empty()&& properties["Collidable"].asBool()) {
 			// 判断瓦片是否具有 "Collidable" 属性且为 true
-			if (properties["Collidable"].asBool()) {
-				// 如果该瓦片不可通行，则直接返回，不更新玩家位置
-				return;
-			}
+			// 如果该瓦片不可通行，则直接返回，不更新玩家位置
+			return;
+
 		}
 	}
 
@@ -243,7 +225,7 @@ void FarmYardScene::update(float delta)
 
 		this->removeChild(player);
 		player->resetInit();
-		Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, FarmHouseScene::createScene(), cocos2d::Color3B::WHITE));
+		Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, TownCenterScene::createScene(), cocos2d::Color3B::WHITE));
 	}
 
 	Vec2 newtile = convertToTileCoords(newPosition);
@@ -285,7 +267,6 @@ void FarmYardScene::update(float delta)
 
 	// 计算摄像头目标位置
 	Vec3 targetCameraPos(newPosition.x, newPosition.y, currentCameraPos.z);
-
 	// 平滑移动摄像机
 	camera->setPosition3D(currentCameraPos.lerp(targetCameraPos, 0.1f));// 平滑系数
 }

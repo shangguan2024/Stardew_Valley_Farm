@@ -44,10 +44,9 @@ bool FarmHouseScene::init()
 		return false;
 	}
 	FarmHouse->getLayer("Meta")->setVisible(false);
-
-	this->addChild(FarmHouse, 0, "FarmHouse");
 	FarmHouse->setPosition(0, 0);
 	FarmHouse->setCameraMask(unsigned short(CameraFlag::USER1));
+	this->addChild(FarmHouse, 0, "FarmHouse");
 
 	// 获取地图的基础属性
 	auto objectGroup = FarmHouse->getObjectGroup("Event");
@@ -63,24 +62,15 @@ bool FarmHouseScene::init()
 		return false;
 	}
 
-	// 获取 HouseToYard 的位置和大小
-	float x = houseToYard["x"].asFloat();
-	float y = houseToYard["y"].asFloat();
-	float width = houseToYard["width"].asFloat();
-	float height = houseToYard["height"].asFloat();
-
 	// 创建一个矩形表示 houseToYard 区域
-	houseToYardRect.setRect(x, y, width, height);
-
-	// 提取出生点的 x 和 y 坐标
-	Vec2 spwan = Vec2(spawnPoint["x"].asFloat(), spawnPoint["y"].asFloat());
+	houseToYardRect.setRect(houseToYard["x"].asFloat(), houseToYard["y"].asFloat(), houseToYard["width"].asFloat(), houseToYard["height"].asFloat());
 
 	// 创建玩家
 	auto player = Player::getInstance();
 	player->init();
-	this->addChild(player, 1, "player");
-	player->setPosition(spwan);
+	player->setPosition(spawnPoint["x"].asFloat(), spawnPoint["y"].asFloat());
 	player->setCameraMask(unsigned short(CameraFlag::USER1));
+	this->addChild(player, 1, "player");
 
 	// 启动每帧更新函数
 	this->scheduleUpdate();
@@ -98,28 +88,18 @@ void FarmHouseScene::update(float delta)
 	// 获得玩家的当前位置
 	Vec2 currentPosition = player->getPosition();
 
-	// 获取瓦片图层
-	auto metaLayer = FarmHouse->getLayer("Meta");
-	if (!metaLayer) {
-		CCLOG("Layer not found");
-		return;
-	}
-
 	// 计算更新后的位置
 	Vec2 newPosition = currentPosition + player->getDirection() * player->getSpeed() * delta;
 
 	// 获取玩家目标位置的瓦片GID
-	int tileGID = metaLayer->getTileGIDAt(convertToTileCoords(newPosition));
-
+	int tileGID = FarmHouse->getLayer("Meta")->getTileGIDAt(convertToTileCoords(newPosition));
 	if (tileGID) {
 		// 获取瓦片属性
 		auto properties = FarmHouse->getPropertiesForGID(tileGID).asValueMap();
-		if (!properties.empty()) {
+		if (!properties.empty()&& properties["Collidable"].asBool()) {
 			// 判断瓦片是否具有 "Collidable" 属性且为 true
-			if (properties["Collidable"].asBool()) {
-				// 如果该瓦片不可通行，则直接返回，不更新玩家位置
-				return;
-			}
+		    // 如果该瓦片不可通行，则直接返回，不更新玩家位置
+			return;
 		}
 	}
 

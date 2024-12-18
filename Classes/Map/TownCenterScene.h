@@ -23,7 +23,13 @@ public:
     CREATE_FUNC(TownCenterScene);
 
 private:
+    // 转变坐标成瓦片坐标
+    cocos2d::Vec2 convertToTileCoords(const cocos2d::Vec2& pos);
 
+    // 定义摄像机
+    cocos2d::Camera* camera;
 
+    // 由室内转入农场的判断框
+    cocos2d::Rect townToYardRect;
 
 };
