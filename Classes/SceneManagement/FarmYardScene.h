@@ -10,7 +10,6 @@
 #define _FARM_YARD_SCENE_H_
 
 #include "cocos2d.h"
-// #include "../GameTime/GameTime.h"
 
 class FarmYardScene : public cocos2d::Scene
 {
@@ -40,8 +39,6 @@ public:
 private:
     // ∂®“Â…„œÒª˙
     cocos2d::Camera *_camera;
-
-    // GameTime* gametime;
 };
 
 #endif // _FARM_YARD_SCENE_H_

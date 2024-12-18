@@ -21,10 +21,6 @@ bool FarmYardScene::init()
 		return false;
 	}
 
-	// 创建计时
-	// gametime = GameTime::getInstance();
-	// gametime->start();
-
 	// 创建摄像机
 	_camera = Camera::create();
 	_camera->setCameraFlag(CameraFlag::USER1);
@@ -229,7 +225,7 @@ void FarmYardScene::update(float delta)
 		int tileGID = tileLayer->getTileGIDAt(convertToTileCoords(newPosition));
 
 		// 如果该瓦片可通行，则更新玩家位置
-		if (!tileGID || FarmYard->getPropertiesForGID(tileGID).asValueMap().empty()) {
+		if (!tileGID || FarmYard->getPropertiesForGID(tileGID).asValueMap().empty() || !FarmYard->getPropertiesForGID(tileGID).asValueMap()["Collidable"].asBool()) {
 			player->setPosition(newPosition);
 		}
 	}
@@ -246,7 +242,7 @@ void FarmYardScene::update(float delta)
 		int tileGID = tileLayer->getTileGIDAt(convertToTileCoords(newPosition));
 
 		// 如果该瓦片可通行，则更新玩家位置
-		if (!tileGID || FarmYard->getPropertiesForGID(tileGID).asValueMap().empty()) {
+		if (!tileGID || FarmYard->getPropertiesForGID(tileGID).asValueMap().empty() || !FarmYard->getPropertiesForGID(tileGID).asValueMap()["Collidable"].asBool()) {
 			player->setPosition(newPosition);
 		}
 	}

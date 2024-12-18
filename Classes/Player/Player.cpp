@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "UI/UIManager.h"
 
 USING_NS_CC;
 
@@ -20,7 +21,13 @@ Player* Player::getInstance()
 }
 
 // 构造函数
-Player::Player() : _direction(Vec2::ZERO), _speed(NOMAL_PLAYER_SPEED), _currentAnimationHash(0) {}
+Player::Player() :
+	_direction(Vec2::ZERO),
+	_speed(NOMAL_PLAYER_SPEED),
+	_currentAnimationHash(0),
+	_strength(PLAYER_MAX_STRENGTH)
+{
+}
 
 // 析构函数
 Player::~Player()
@@ -121,6 +128,24 @@ void Player::setSpeed(const float speed)
 float Player::getSpeed() const
 {
 	return _speed;
+}
+
+void Player::setStrength(const int strength)
+{
+	_strength = strength;
+	HUD::getInstance()->updateStrengthBarHUD();
+}
+
+int Player::getStrength() const
+{
+	return _strength;
+}
+
+void Player::addStrength(const int strength)
+{
+	_strength += strength;
+	_strength = std::max(std::min(_strength, PLAYER_MAX_STRENGTH), 0);
+	HUD::getInstance()->updateStrengthBarHUD();
 }
 
 // 每帧更新

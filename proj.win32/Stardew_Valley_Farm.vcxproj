@@ -158,6 +158,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Entities\Dog.cpp" />
     <ClCompile Include="..\Classes\Entities\NPC.cpp" />
     <ClCompile Include="..\Classes\Entities\QuestNPC.cpp" />
+    <ClCompile Include="..\Classes\GameTime\GameTime.cpp" />
     <ClCompile Include="..\Classes\InputControl\InputManager.cpp" />
     <ClCompile Include="..\Classes\Items\Block.cpp" />
     <ClCompile Include="..\Classes\Items\FoodItem.cpp" />
@@ -195,6 +196,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Entities\Dog.h" />
     <ClInclude Include="..\Classes\Entities\NPC.h" />
     <ClInclude Include="..\Classes\Entities\QuestNPC.h" />
+    <ClInclude Include="..\Classes\GameTime\GameTime.h" />
     <ClInclude Include="..\Classes\InputControl\InputManager.h" />
     <ClInclude Include="..\Classes\Items\Block.h" />
     <ClInclude Include="..\Classes\Items\FoodItem.h" />

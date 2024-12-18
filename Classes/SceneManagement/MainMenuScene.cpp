@@ -49,9 +49,8 @@ bool MainMenuScene::init()
 	// 为按钮添加事件处理器
 	newGameButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
 		if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
-			// Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, FarmYardScene::createScene(), cocos2d::Color3B::WHITE));
 			auto scene = FarmYardScene::createScene();
-			SceneManager::setSceneTransition(cocos2d::TransitionFade::create(1.0f, scene));
+			SceneManager::setSceneTransition(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, scene, cocos2d::Color3B::WHITE));
 			SceneManager::switchToScene(scene);
 		}
 		});

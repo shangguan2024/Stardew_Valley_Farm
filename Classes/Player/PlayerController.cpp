@@ -47,6 +47,9 @@ void PlayerController::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode)
 	case cocos2d::EventKeyboard::KeyCode::KEY_E:
 		toggleInventory();
 		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_T:
+		player->addStrength(-1);
+		break;
 	default:
 		break;
 	}
