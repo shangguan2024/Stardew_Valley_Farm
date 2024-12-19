@@ -23,8 +23,11 @@ public:
 	// 删去物品
 	void clearSlot();
 
+	// 判断物品是否足够
+	bool isQuantityEnough(int amount);
+
 	// 修改物品的数量
-	bool changeQuantity(int amount);
+	void changeQuantity(int amount);
 
 	// 获取当前物品的种类
 	std::shared_ptr<Item> getItem() const;

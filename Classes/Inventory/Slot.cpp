@@ -27,31 +27,19 @@ void Slot::clearSlot()
 	quantity = 0;
 }
 
-bool Slot::changeQuantity(int amount)
+bool Slot::isQuantityEnough(int amount)
 {
-    if (!item || quantity <= 0) {
-        CCLOG("Slot is empty or quantity is invalid.");
-        return false;
-    }
+	return quantity >= amount;
+}
 
-    if (amount <= 0) {
-        CCLOG("Reduction amount must be greater than zero.");
-        return false;
-    }
-
-    if (quantity < amount) {
-        CCLOG("Not enough items in the slot to reduce by %d.", amount);
-        return false;
-    }
-
+void Slot::changeQuantity(int amount)
+{
     quantity -= amount;
 
     // 如果数量变为 0，清空物品
     if (quantity == 0) {
         clearSlot();
     }
-
-    return true;
 }
 
 std::shared_ptr<Item> Slot::getItem() const
