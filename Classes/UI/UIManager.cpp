@@ -67,6 +67,16 @@ void UIManager::toggleUIActiveState(bool active)
 	_isUIActive = active;
 }
 
+void UIManager::pushMouseCallbackFunc(std::function<void(cocos2d::Vec2)> callback)
+{
+	mouseCallbackfunc.push(callback);
+}
+
+void UIManager::popMouseCallBackFunc()
+{
+	mouseCallbackfunc.pop();
+}
+
 void UIManager::showHUD()
 {
 	hud->toggleVisibility(true);
@@ -123,6 +133,9 @@ void UIManager::onMouseDown(cocos2d::Event* event)
 	if (_isUIActive) {
 		auto mouseEvent = static_cast<cocos2d::EventMouse*>(event);
 		_mousePosition = cocos2d::Vec2(mouseEvent->getCursorX(), mouseEvent->getCursorY());
+		if (!mouseCallbackfunc.empty()) {
+			mouseCallbackfunc.top()(_mousePosition);
+		}
 		CCLOG("UI Mouse Down at: (%f, %f)", _mousePosition.x, _mousePosition.y);
 		event->stopPropagation();  // 阻止事件继续传播
 	}

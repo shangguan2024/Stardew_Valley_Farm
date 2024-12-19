@@ -16,9 +16,6 @@
 class ResourceManager
 {
 public:
-
-public:
-    
     struct tileSlot
     {
         int row;

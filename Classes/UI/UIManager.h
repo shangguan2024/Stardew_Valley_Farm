@@ -19,6 +19,10 @@ public:
     // 切换 UI 激活状态（例如：打开背包、打开菜单等）
     void toggleUIActiveState(bool active);
 
+    // 回调函数出入栈
+    void pushMouseCallbackFunc(std::function<void(cocos2d::Vec2)> callback);
+    void popMouseCallBackFunc();
+
     void showHUD();
     void hideHUD();
 
@@ -54,6 +58,9 @@ private:
 
     // 是否处于 UI 激活状态
     bool _isUIActive;
+
+    // UI回调函数
+    std::stack<std::function<void(cocos2d::Vec2)>> mouseCallbackfunc;
 
     // 鼠标位置
     cocos2d::Vec2 _mousePosition;

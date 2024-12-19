@@ -106,6 +106,13 @@ const std::string SEED_RADISH_DESCRIPTION = " ";
 const std::string SEED_POTATO_DESCRIPTION = " ";
 const std::string SEED_WHRAT_DESCRIPTION = " ";
 
+// 地图名称枚举
+enum class MapName {
+    FarmYard,
+    FarmHouse,
+    Beach
+};
+
 // 地图瓦片属性
 const std::string TILE_COLLIDABLE = "Collidable";
 
