@@ -69,6 +69,7 @@ public:
     
     // Tile Maps
     static const std::string FarmYardScene;
+    static const std::string Beach;
 };
 
 #endif

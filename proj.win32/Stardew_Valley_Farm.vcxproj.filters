@@ -159,6 +159,9 @@
     <ClCompile Include="..\Classes\GameTime\GameTime.cpp">
       <Filter>Classes\GameTime</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\SceneManagement\Beach.cpp">
+      <Filter>Classes\SceneManagement</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\Audio\AudioManager.h">
@@ -268,6 +271,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\ResourceManagement\Texture.h">
       <Filter>Classes\ResourceManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SceneManagement\Beach.h">
+      <Filter>Classes\SceneManagement</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
