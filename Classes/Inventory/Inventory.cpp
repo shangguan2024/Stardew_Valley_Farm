@@ -11,7 +11,7 @@
 
 Inventory* Inventory::instance = nullptr;
 
-Inventory::Inventory() :coin(0), currentHeldItemIndex(0) {}
+Inventory::Inventory() {}
 
 Inventory* Inventory::getInstance() 
 {
@@ -51,18 +51,6 @@ Slot& Inventory::getSlot(int index)
 	}
 }
 
-int Inventory::getTotalItemCount() const
-{
-	int totalCount = 0;
-
-	// 遍历所有槽位
-	for (const auto& slot : slots)
-		if (!slot.isEmpty())
-			totalCount++;
-
-	return totalCount;
-}
-
 void Inventory::changeCurrHeldItem(int change)
 {
 	currentHeldItemIndex += change;
@@ -72,23 +60,16 @@ void Inventory::changeCurrHeldItem(int change)
 
 #if 0
 
-void Inventory::addItem(std::shared_ptr<Item> item, int quantity)
+bool Inventory::addItem(std::shared_ptr<Item> item, int quantity)
 {
 	// 先检查背包里有没有这种物品
 	// 如果有那么修改数量
 	// 如果没有那就新增这个物品
 }
 
-bool Inventory::isItemEnough(std::shared_ptr<Item> item, int quantity)
+bool Inventory::changeItemQuantity(std::shared_ptr<Item> item, int quantity)
 {
-	auto currslot = getSlot(findItem(item));
-	return currslot->isQuantityEnough(quantity)；
-}
 
-void Inventory::changeItemQuantity(std::shared_ptr<Item> item, int quantity)
-{
-	auto currslot = getSlot(findItem(item));
-	currslot->changeQuantity(quantity);
 }
 
 #endif
@@ -101,14 +82,4 @@ bool Inventory::swapItems(int index1, int index2)
 	// 交换两个槽位的物品
 	std::swap(slots[index1], slots[index2]);
 	return true;
-}
-
-bool Inventory::isCoinEnough(int price)
-{
-	return coin >= price;
-}
-
-void Inventory::changeCoimn(int amount)
-{
-	coin += amount;
 }

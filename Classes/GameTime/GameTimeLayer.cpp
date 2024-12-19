@@ -11,9 +11,9 @@ GameTimeLayer::GameTimeLayer()
 GameTimeLayer* GameTimeLayer::getInstance()
 {
 	if (instance == nullptr) {
-		// Ê¹ÓÃ nothrow ·ÖÅäÄÚ´æ
+		// ä½¿ç”¨ nothrow åˆ†é…å†…å­˜
 		instance = new (std::nothrow) GameTimeLayer();
-		// ³õÊ¼»¯Ê§°ÜÔòÏú»ÙÊµÀý
+		// åˆå§‹åŒ–å¤±è´¥åˆ™é”€æ¯å®žä¾‹
 		if (!instance) {
 			CC_SAFE_DELETE(instance);
 		}
@@ -23,7 +23,7 @@ GameTimeLayer* GameTimeLayer::getInstance()
 
 void GameTimeLayer::GameTimeLayerUpdate(Camera* camera) 
 {
-	// ¸üÐÂÊ±¼äÏÔÊ¾
+	// æ›´æ–°æ—¶é—´æ˜¾ç¤º
 	clean("timelabel");
 	gametime = GameTime::getInstance();
 	timeLabel = Label::createWithSystemFont(gametime->toString(), "Arial", 30);
@@ -33,7 +33,7 @@ void GameTimeLayer::GameTimeLayerUpdate(Camera* camera)
 	this->addChild(timeLabel, 10, "timelabel");
 	timeLabel->setCameraMask(unsigned short(CameraFlag::USER1));
 
-	// Ìí¼ÓÊ±¼äÏÔÊ¾µÄ±³¾°
+	// æ·»åŠ æ—¶é—´æ˜¾ç¤ºçš„èƒŒæ™¯
 	clean("layercolor");
 	layercolor = LayerColor::create(Color4B(0, 255, 0, 128));
 	layercolor->setContentSize(Size(timeLabel->getContentSize().width, timeLabel->getContentSize().height + 5));
@@ -41,7 +41,7 @@ void GameTimeLayer::GameTimeLayerUpdate(Camera* camera)
 	layercolor->setPosition(timeLabel->getPosition() - timeLabel->getContentSize() / 2);
 	this->addChild(layercolor, 8, "layercolor");
 	layercolor->setCameraMask(unsigned short(CameraFlag::USER1));
-	// Ìí¼ÓÊ±¼äÏÔÊ¾µÄÍâ¿ò
+	// æ·»åŠ æ—¶é—´æ˜¾ç¤ºçš„å¤–æ¡†
 	clean("sprite");
 	sprite = Sprite::create("chatBox.png");
 	sprite->setContentSize(layercolor->getContentSize());

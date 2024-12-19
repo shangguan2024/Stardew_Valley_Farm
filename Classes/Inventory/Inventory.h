@@ -32,29 +32,17 @@ public:
 	// 获取背包槽位
 	Slot& getSlot(int index);
 
-	// 获取背包当前已经装了多少东西
-	int getTotalItemCount() const;
-
 	// 修改当前手持物
 	void changeCurrHeldItem(int change);
 
-	// 添加物品到背包
-	void addItem(std::shared_ptr<Item> item, int quantity);
-
-	// 判断物品是否足够
-	bool isItemEnough(std::shared_ptr<Item> item, int quantity);
+	// 添加物品到背包，返回是否成功
+	bool addItem(std::shared_ptr<Item> item, int quantity);
 
 	// 修改物品数量
-	void changeItemQuantity(std::shared_ptr<Item> item, int quantity);
+	bool changeItemQuantity(std::shared_ptr<Item> item, int quantity);
 
 	// 交换槽位中的物品
 	bool swapItems(int index1, int index2);
-
-	// 判断金钱是否足够
-	bool isCoinEnough(int price);
-
-	// 修改金币数量
-	void changeCoimn(int amount);
 
 private:
 	Inventory();
@@ -65,11 +53,8 @@ private:
 	// 存储多个槽位
 	std::vector<Slot> slots;
 
-	// 金币数量
-	int coin;
-
 	// 当前手持物索引
-	int currentHeldItemIndex; 
+	int currentHeldItemIndex = 0; 
 
 };
 

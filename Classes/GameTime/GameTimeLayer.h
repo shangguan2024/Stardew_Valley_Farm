@@ -5,7 +5,7 @@
 class GameTimeLayer :public cocos2d::Layer
 {
 private:
-	// ¾²Ì¬ÊµÀıÖ¸Õë
+	// é™æ€å®ä¾‹æŒ‡é’ˆ
 	static GameTimeLayer* instance;
 public:
 	GameTime* gametime;

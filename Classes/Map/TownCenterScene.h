@@ -8,8 +8,7 @@
 
 #include "cocos2d.h"
 
-class TownCenterScene : public cocos2d::Scene
-{
+class TownCenterScene : public cocos2d::Scene {
 public:
     // 创建场景
     static cocos2d::Scene* createScene();
