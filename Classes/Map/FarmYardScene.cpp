@@ -56,7 +56,6 @@ bool FarmYardScene::init()
 		return false;
 	}
 	FarmYard->getLayer("Meta")->setVisible(false);
-
 	FarmYard->setPosition(0, 0);
 	FarmYard->setCameraMask(unsigned short(CameraFlag::USER1));
 	this->addChild(FarmYard, 0, "FarmYard");

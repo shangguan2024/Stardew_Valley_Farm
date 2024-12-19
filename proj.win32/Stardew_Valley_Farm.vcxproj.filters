@@ -34,9 +34,6 @@
     <Filter Include="Classes\Animal">
       <UniqueIdentifier>{49076dce-93f0-4115-a452-e68567641038}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\Plant">
-      <UniqueIdentifier>{e8db757f-6110-4b2b-b5d5-9178b7f4951d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes\SkillTree">
       <UniqueIdentifier>{653b52ae-9ea4-400c-a1c8-9a3db77f57db}</UniqueIdentifier>
     </Filter>
@@ -48,6 +45,9 @@
     </Filter>
     <Filter Include="Classes\Inventory">
       <UniqueIdentifier>{b918723f-da05-4c7f-b4aa-2213bffc5742}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Manager">
+      <UniqueIdentifier>{34c40644-4a22-44b8-bf06-f4ccae4c5386}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -90,9 +90,6 @@
     <ClCompile Include="..\Classes\Animal\Animal.cpp">
       <Filter>Classes\Animal</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Plant\Plant.cpp">
-      <Filter>Classes\Plant</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\NPC\ChatLayer.cpp">
       <Filter>Classes\NPC</Filter>
     </ClCompile>
@@ -119,6 +116,15 @@
     </ClCompile>
     <ClCompile Include="..\Classes\GameTime\GameTimeLayer.cpp">
       <Filter>Classes\GameTime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Manager\Manager.cpp">
+      <Filter>Classes\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Manager\Object.cpp">
+      <Filter>Classes\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Manager\FarmLand.cpp">
+      <Filter>Classes\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -161,9 +167,6 @@
     <ClInclude Include="..\Classes\Animal\Animal.h">
       <Filter>Classes\Animal</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Plant\Plant.h">
-      <Filter>Classes\Plant</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\NPC\ChatLayer.h">
       <Filter>Classes\NPC</Filter>
     </ClInclude>
@@ -190,6 +193,15 @@
     </ClInclude>
     <ClInclude Include="..\Classes\GameTime\GameTimeLayer.h">
       <Filter>Classes\GameTime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Manager\Manager.h">
+      <Filter>Classes\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Manager\Object.h">
+      <Filter>Classes\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Manager\FarmLand.h">
+      <Filter>Classes\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

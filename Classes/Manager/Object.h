@@ -1,20 +1,19 @@
 /****************************************************************
  * Project Name:  Stardew_Valley_Farm
- * File Name:     Plant.h
- * File Function: Plant类的定义
+ * File Name:     Object.h
+ * File Function: Object类的定义
  * Author:        张翔
- * Update Date:   2024/12/3
+ * Update Date:   2024/12/19
  ****************************************************************/
 
-#ifndef _PLANT_H_
-#define _PLANT_H_
+#ifndef _OBJECT_
+#define _OBJECT_
 
 #include "cocos2d.h"
 
-class Plant : public cocos2d::Sprite
+class Object
 {
 
 };
 
-#endif // _PLANT_H_
-
+#endif // _OBJECT_
