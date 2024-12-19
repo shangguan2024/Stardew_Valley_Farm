@@ -25,6 +25,9 @@ public:
 	void updateTime();
 	void jumpToNextMorning();
 
+	// 获取当前时间戳
+	int getTimeStamp();
+
 	// 以字符串形式获取时间信息
 	std::string toString() const;
 
@@ -34,7 +37,7 @@ private:
 	GameTime& operator=(const GameTime&) = delete;
 
 	// 构造函数
-	GameTime(int y = 2024, int m = 1, int d = 1, int h = 0, int min = 0, double speed = 1.0);
+	GameTime(int y = 2024, int m = 1, int d = 1, int h = 0, int min = 0, int timeStamp = 0, double speed = 1.0);
 
 	// 规范化时间和日期
 	void normalize();
@@ -45,6 +48,7 @@ private:
 	// 年月日
 	int year, month, day;
 	int hour, minute;
+	int timeStamp;
 
 	// 时间流动速度
 	double timeSpeed;

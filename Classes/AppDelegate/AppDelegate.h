@@ -1,40 +1,38 @@
 /****************************************************************
  * Project Name:  Stardew_Valley_Farm
  * File Name:     AppDelegate.h
- * File Function: AppDelegateç±»çš„å®šä¹‰
- * Author:        å¼ ç¿”
+ * File Function: AppDelegateÀàµÄ¶¨Òå
+ * Author:        ÕÅÏè
  * Update Date:   2024/12/3
  * License:       MIT License
  ****************************************************************/
 
-#ifndef  _APP_DELEGATE_H_
-#define  _APP_DELEGATE_H_
+#ifndef _APP_DELEGATE_H_
+#define _APP_DELEGATE_H_
 
 #include "cocos2d.h"
 
  /*
   * Class Name:     AppDelegate
-  * Class Function: Cocos2d-x åº”ç”¨ç¨‹åºç±»
+  * Class Function: Cocos2d-x Ó¦ÓÃ³ÌĞòÀà
   */
-class  AppDelegate : private cocos2d::Application
-{
+class AppDelegate : private cocos2d::Application {
 public:
-    AppDelegate();
-    // ææ„å‡½æ•°
-    virtual ~AppDelegate();
+	AppDelegate();
+	// Îö¹¹º¯Êı
+	virtual ~AppDelegate();
 
-    // åˆå§‹åŒ– OpenGL ä¸Šä¸‹æ–‡å±æ€§
-    virtual void initGLContextAttrs();
+	// ³õÊ¼»¯ OpenGL ÉÏÏÂÎÄÊôĞÔ
+	virtual void initGLContextAttrs();
 
-    // å½“åº”ç”¨ç¨‹åºå®Œæˆå¯åŠ¨å¹¶å‡†å¤‡è¿›å…¥ä¸»å¾ªç¯æ—¶è°ƒç”¨æ­¤å‡½æ•°
-    virtual bool applicationDidFinishLaunching();
+	// µ±Ó¦ÓÃ³ÌĞòÍê³ÉÆô¶¯²¢×¼±¸½øÈëÖ÷Ñ­»·Ê±µ÷ÓÃ´Ëº¯Êı
+	virtual bool applicationDidFinishLaunching();
 
-    // å½“åº”ç”¨ç¨‹åºè¿›å…¥åå°æ—¶è°ƒç”¨æ­¤å‡½æ•°
-    virtual void applicationDidEnterBackground();
+	// µ±Ó¦ÓÃ³ÌĞò½øÈëºóÌ¨Ê±µ÷ÓÃ´Ëº¯Êı
+	virtual void applicationDidEnterBackground();
 
-    // å½“åº”ç”¨ç¨‹åºä»åå°è¿”å›åˆ°å‰å°æ—¶è°ƒç”¨æ­¤å‡½æ•°
-    virtual void applicationWillEnterForeground();
+	// µ±Ó¦ÓÃ³ÌĞò´ÓºóÌ¨·µ»Øµ½Ç°Ì¨Ê±µ÷ÓÃ´Ëº¯Êı
+	virtual void applicationWillEnterForeground();
 };
 
 #endif // _APP_DELEGATE_H_
-

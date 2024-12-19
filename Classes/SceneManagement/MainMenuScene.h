@@ -5,12 +5,12 @@
 
 class MainMenuScene : public cocos2d::Scene {
 public:
-    // åˆ›å»ºåœºæ™¯
-    static cocos2d::Scene* createScene();
-    // åˆå§‹åŒ–åœºæ™¯
-    virtual bool init();
-    // å®ç° MenuScene ç±»çš„ create æ–¹æ³•
-    CREATE_FUNC(MainMenuScene);
+	// ´´½¨³¡¾°
+	static cocos2d::Scene* createScene();
+	// ³õÊ¼»¯³¡¾°
+	virtual bool init();
+	// ÊµÏÖ MenuScene ÀàµÄ create ·½·¨
+	CREATE_FUNC(MainMenuScene);
 };
 
 #endif // __MENU_SCENE_H__

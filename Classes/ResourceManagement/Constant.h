@@ -55,22 +55,19 @@ constexpr int DEFAULT_BAR = 12;      // 默认物品栏容量
 constexpr int PLAYER_MAX_STRENGTH = 100;
 
 // 键鼠控制状态
-enum class KeyControlMode
-{
-    PLAYER_CONTROL
+enum class KeyControlMode {
+	PLAYER_CONTROL
 };
-enum class MouseControlMode
-{
-    INVENTORY_CONTROL,
-    SCENE
+enum class MouseControlMode {
+	INVENTORY_CONTROL,
+	SCENE
 };
 
 // 物品种类枚举
-enum class ItemType
-{
-    SEED, // 种子
-    TOOL, // 工具
-    CROP  // 作物
+enum class ItemType {
+	SEED, // 种子
+	TOOL, // 工具
+	CROP  // 作物
 };
 
 // 每种物品的具体描述
@@ -79,14 +76,13 @@ const std::string TOOL_DESCRIPTION = " ";
 const std::string CROP_DESCRIPTION = " ";
 
 // 工具类型枚举
-enum class ToolType
-{
-    HOE,          // 锄头
-    WATERING_CAN, // 浇水壶
-    PICKAXE,      // 镐子
-    AXE,          // 斧头
-    SCYTHE,       // 镰刀
-    FISHING_ROD   // 钓鱼竿
+enum class ToolType {
+	HOE,          // 锄头
+	WATERING_CAN, // 浇水壶
+	PICKAXE,      // 镐子
+	AXE,          // 斧头
+	SCYTHE,       // 镰刀
+	FISHING_ROD   // 钓鱼竿
 };
 
 // 每种功能的具体描述
@@ -98,11 +94,10 @@ const std::string TOOL_SCYTHE_DESCRIPTION = " ";
 const std::string TOOL_FISHING_ROD_DESCRIPTION = " ";
 
 // 种子类型枚举
-enum class SeedType
-{
-    RADISH_SEED,
-    POTATO_SEED,
-    WHRAT_SEED
+enum class SeedType {
+	RADISH_SEED,
+	POTATO_SEED,
+	WHRAT_SEED
 };
 
 // 每种种子的具体描述
@@ -121,10 +116,15 @@ enum class MapName {
 // 地图瓦片属性
 const std::string TILE_COLLIDABLE = "Collidable";
 
+// 瓦片动态类型
+enum class TileType {
+	DrySoil,
+	WetSoil
+};
+
 // 按钮功能描述
-const enum ButtonType
-{
-    BUTTON_HIDE_INVENTORY
+enum ButtonType {
+	BUTTON_HIDE_INVENTORY
 };
 
 // 摄像机

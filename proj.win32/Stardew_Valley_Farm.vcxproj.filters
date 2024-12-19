@@ -138,7 +138,7 @@
     <ClCompile Include="..\Classes\SceneManagement\FarmYard.cpp">
       <Filter>Classes\SceneManagement</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Map\Map.cpp">
+    <ClCompile Include="..\Classes\Map\MapBase.cpp">
       <Filter>Classes\Map</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Map\MapManager.cpp">
@@ -239,7 +239,7 @@
     <ClInclude Include="..\Classes\SceneManagement\FarmYard.h">
       <Filter>Classes\SceneManagement</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Map\Map.h">
+    <ClInclude Include="..\Classes\Map\MapBase.h">
       <Filter>Classes\Map</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Map\MapManager.h">
