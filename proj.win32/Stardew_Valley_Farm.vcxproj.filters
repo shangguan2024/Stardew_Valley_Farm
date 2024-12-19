@@ -19,9 +19,6 @@
     <Filter Include="Classes\Items">
       <UniqueIdentifier>{ea2bde49-af8d-44ec-8692-609711582245}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\Physics">
-      <UniqueIdentifier>{a003936e-da9f-4551-ab7d-09a77a38567e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes\Player">
       <UniqueIdentifier>{ca2f1c21-db79-4a37-a15d-3c82f5605a54}</UniqueIdentifier>
     </Filter>
@@ -34,9 +31,6 @@
     <Filter Include="Classes\UI">
       <UniqueIdentifier>{144980ae-2d91-4629-9ab2-de03ec5012e1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\World">
-      <UniqueIdentifier>{ff0699ff-f8f0-4f61-8494-3799039a6fec}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes\Utils">
       <UniqueIdentifier>{365a8721-0347-4e48-b0fe-d14a37baea83}</UniqueIdentifier>
     </Filter>
@@ -48,6 +42,9 @@
     </Filter>
     <Filter Include="Classes\GameTime">
       <UniqueIdentifier>{9b8ee67b-23d0-4fa5-bb41-5a93adeadeae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Map">
+      <UniqueIdentifier>{ff0699ff-f8f0-4f61-8494-3799039a6fec}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -74,12 +71,6 @@
     </ClCompile>
     <ClCompile Include="..\Classes\InputControl\InputManager.cpp">
       <Filter>Classes\InputControl</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Physics\Collider.cpp">
-      <Filter>Classes\Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Physics\PhysicsEngine.cpp">
-      <Filter>Classes\Physics</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Items\FoodItem.cpp">
       <Filter>Classes\Items</Filter>
@@ -126,12 +117,6 @@
     <ClCompile Include="..\Classes\Utils\Timer.cpp">
       <Filter>Classes\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\World\Map.cpp">
-      <Filter>Classes\World</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\World\WorldManager.cpp">
-      <Filter>Classes\World</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\AppDelegate\AppDelegate.cpp">
       <Filter>Classes\AppDelegate</Filter>
     </ClCompile>
@@ -162,6 +147,12 @@
     <ClCompile Include="..\Classes\SceneManagement\Beach.cpp">
       <Filter>Classes\SceneManagement</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Map\Map.cpp">
+      <Filter>Classes\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Map\MapManager.cpp">
+      <Filter>Classes\Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\Audio\AudioManager.h">
@@ -184,12 +175,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\InputControl\InputManager.h">
       <Filter>Classes\InputControl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Physics\Collider.h">
-      <Filter>Classes\Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Physics\PhysicsEngine.h">
-      <Filter>Classes\Physics</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Items\FoodItem.h">
       <Filter>Classes\Items</Filter>
@@ -236,12 +221,6 @@
     <ClInclude Include="..\Classes\Utils\Timer.h">
       <Filter>Classes\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\World\Map.h">
-      <Filter>Classes\World</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\World\WorldManager.h">
-      <Filter>Classes\World</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\AppDelegate\AppDelegate.h">
       <Filter>Classes\AppDelegate</Filter>
     </ClInclude>
@@ -274,6 +253,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\SceneManagement\Beach.h">
       <Filter>Classes\SceneManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Map\Map.h">
+      <Filter>Classes\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Map\MapManager.h">
+      <Filter>Classes\Map</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

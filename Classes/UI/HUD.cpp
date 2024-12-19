@@ -5,10 +5,10 @@
 HUD* HUD::instance = nullptr;
 
 HUD::HUD() :
-	strengthBar(nullptr),
-	strengthLabel(nullptr),
 	gameTime(nullptr),
-	gameTimeLabel(nullptr)
+	gameTimeLabel(nullptr),
+	strengthBar(nullptr),
+	strengthLabel(nullptr)
 {
 }
 

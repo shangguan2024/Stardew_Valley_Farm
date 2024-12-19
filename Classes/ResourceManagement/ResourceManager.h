@@ -2,7 +2,7 @@
 #define _RESOURCEMANAGER_H_
 
 #include "cocos2d.h"
-#include <unordered_map>
+#include "Texture.h"
 
 // Entities
 #include "Entities/Animal.h"

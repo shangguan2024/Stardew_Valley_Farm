@@ -164,8 +164,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Items\FoodItem.cpp" />
     <ClCompile Include="..\Classes\Items\Inventory.cpp" />
     <ClCompile Include="..\Classes\Items\Item.cpp" />
-    <ClCompile Include="..\Classes\Physics\Collider.cpp" />
-    <ClCompile Include="..\Classes\Physics\PhysicsEngine.cpp" />
+    <ClCompile Include="..\Classes\Map\Map.cpp" />
+    <ClCompile Include="..\Classes\Map\MapManager.cpp" />
     <ClCompile Include="..\Classes\Player\Player.cpp" />
     <ClCompile Include="..\Classes\Player\PlayerController.cpp" />
     <ClCompile Include="..\Classes\Quest\Quest.cpp" />
@@ -185,8 +185,6 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\UI\UIManager.cpp" />
     <ClCompile Include="..\Classes\Utils\Logger.cpp" />
     <ClCompile Include="..\Classes\Utils\Timer.cpp" />
-    <ClCompile Include="..\Classes\World\Map.cpp" />
-    <ClCompile Include="..\Classes\World\WorldManager.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -203,8 +201,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Items\FoodItem.h" />
     <ClInclude Include="..\Classes\Items\Inventory.h" />
     <ClInclude Include="..\Classes\Items\Item.h" />
-    <ClInclude Include="..\Classes\Physics\Collider.h" />
-    <ClInclude Include="..\Classes\Physics\PhysicsEngine.h" />
+    <ClInclude Include="..\Classes\Map\Map.h" />
+    <ClInclude Include="..\Classes\Map\MapManager.h" />
     <ClInclude Include="..\Classes\Player\Player.h" />
     <ClInclude Include="..\Classes\Player\PlayerController.h" />
     <ClInclude Include="..\Classes\Quest\Quest.h" />
@@ -225,8 +223,6 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\UI\UIManager.h" />
     <ClInclude Include="..\Classes\Utils\Logger.h" />
     <ClInclude Include="..\Classes\Utils\Timer.h" />
-    <ClInclude Include="..\Classes\World\Map.h" />
-    <ClInclude Include="..\Classes\World\WorldManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\cocos2d\cocos\2d\libcocos2d.vcxproj">

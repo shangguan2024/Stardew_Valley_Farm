@@ -33,7 +33,7 @@ bool InventoryUI::init()
 
 	auto screenSize = cocos2d::Director::getInstance()->getVisibleSize();
 
-	auto inventoryMainUI = cocos2d::Sprite::create("UI/Inventory.png");
+	auto inventoryMainUI = cocos2d::Sprite::create(Texture::Inventory);
 	inventoryMainUI->setPosition(screenSize.width / 2, screenSize.height * 0.4);
 	this->addChild(inventoryMainUI);
 
