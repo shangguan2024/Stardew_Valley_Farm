@@ -63,13 +63,13 @@ enum ItemType
 {
 	SEED,          // 种子
 	TOOL,          // 工具
- 	CROP           // 作物 
+ 	OHTER,         // 其他 
 };
 
 // 每种物品的具体描述
 const std::string SEED_DESCRIPTION = " ";
 const std::string TOOL_DESCRIPTION = " ";
-const std::string CROP_DESCRIPTION = " ";
+const std::string OHTER_DESCRIPTION = " ";
 
 // 工具类型枚举
 enum ToolType 
@@ -103,7 +103,21 @@ const std::string SEED_RADISH_DESCRIPTION = " ";
 const std::string SEED_POTATO_DESCRIPTION = " ";
 const std::string SEED_WHRAT_DESCRIPTION = " ";
 
-// 
+enum ObjectType
+{
+    TREE,
+    WEED,
+    STONE,
+    CROP,
+};
+
+enum FarmLandState
+{
+    PLOWED, 
+    GROWN,
+};
+
+// NPC的种类
 enum NPCType
 {
     ALEX,
