@@ -67,14 +67,24 @@ void UIManager::toggleUIActiveState(bool active)
     _isUIActive = active;
 }
 
-void UIManager::pushMouseCallbackFunc(std::function<void(cocos2d::Vec2)> callback)
+void UIManager::pushMouseClickCallbackFunc(std::function<void(cocos2d::Vec2)> callback)
 {
-    mouseCallbackfunc.push(callback);
+    mouseClickCallbackFunc.push(callback);
 }
 
-void UIManager::popMouseCallBackFunc()
+void UIManager::popMouseClickCallBackFunc()
 {
-    mouseCallbackfunc.pop();
+    mouseClickCallbackFunc.pop();
+}
+
+void UIManager::pushMouseMoveCallbackFunc(std::function<void(cocos2d::Vec2)> callback)
+{
+    mouseMoveCallbackFunc.push(callback);
+}
+
+void UIManager::popMouseMoveCallBackFunc()
+{
+    mouseMoveCallbackFunc.pop();
 }
 
 void UIManager::showHUD()
@@ -94,9 +104,14 @@ void UIManager::showInventoryUI()
         this->addChild(inventoryUI);  // 添加到 UIManager 中
     }
     inventoryUI->setVisible(true);  // 显示背包UI
-    pushMouseCallbackFunc(
+    pushMouseClickCallbackFunc(
         std::function<void(cocos2d::Vec2)>([&](cocos2d::Vec2 position) {
             (inventoryUI->click)(position);  // 调用成员函数 click
+            })
+    );
+    pushMouseMoveCallbackFunc(
+        std::function<void(cocos2d::Vec2)>([&](cocos2d::Vec2 position) {
+            (inventoryUI->attach)(position);  // 调用成员函数 attach
             })
     );
     toggleUIActiveState(true);
@@ -109,7 +124,7 @@ void UIManager::hideInventoryUI()
         return;
     }
     inventoryUI->setVisible(false);  // 隐藏背包UI
-    popMouseCallBackFunc();
+    popMouseClickCallBackFunc();
     toggleUIActiveState(false);
 }
 
@@ -139,8 +154,8 @@ void UIManager::onMouseDown(cocos2d::Event* event)
     if (_isUIActive) {
         auto mouseEvent = static_cast<cocos2d::EventMouse*>(event);
         _mousePosition = cocos2d::Vec2(mouseEvent->getCursorX(), mouseEvent->getCursorY());
-        if (!mouseCallbackfunc.empty()) {
-            mouseCallbackfunc.top()(_mousePosition);
+        if (!mouseClickCallbackFunc.empty()) {
+            mouseClickCallbackFunc.top()(_mousePosition);
         }
         CCLOG("UI Mouse Down at: (%f, %f)", _mousePosition.x, _mousePosition.y);
         event->stopPropagation();  // 阻止事件继续传播
@@ -161,6 +176,9 @@ void UIManager::onMouseMove(cocos2d::Event* event)
     if (_isUIActive) {
         auto mouseEvent = static_cast<cocos2d::EventMouse*>(event);
         _mousePosition = cocos2d::Vec2(mouseEvent->getCursorX(), mouseEvent->getCursorY());
+        if (!mouseMoveCallbackFunc.empty()) {
+            mouseMoveCallbackFunc.top()(_mousePosition);
+        }
         // CCLOG("UI Mouse Move at: (%f, %f)", _mousePosition.x, _mousePosition.y);
     }
 }

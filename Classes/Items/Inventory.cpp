@@ -80,6 +80,11 @@ void Inventory::merge(int row, int col, int num)
 	inventory[row][col].num += num;
 }
 
+Inventory::Slot Inventory::getAttached()
+{
+	return attached;
+}
+
 bool Inventory::pick(Item::id item, size_t num)
 {
 	for (int i = 0; i < 3; ++i) {
@@ -102,6 +107,7 @@ bool Inventory::pick(Item::id item, size_t num)
 
 	return false;
 }
+
 
 bool Inventory::init()
 {

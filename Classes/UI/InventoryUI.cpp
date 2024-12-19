@@ -1,10 +1,10 @@
 #include "InventoryUI.h"
 #include "UI/UIManager.h"
-#include "ResourceManagement/ResourceManager.h"
 
 USING_NS_CC;
 
 Inventory* InventoryUI::inventory = nullptr;
+ResourceManager* InventoryUI::rscm = nullptr;
 
 InventoryUI::InventoryUI() :
 	closeButton(nullptr)
@@ -32,9 +32,10 @@ InventoryUI* InventoryUI::create()
 bool InventoryUI::init()
 {
 	inventory = Inventory::getInstance();
+	rscm = ResourceManager::getInstance();
 
 	itemLayer = Layer::create();
-	itemLayer->setTag(1);
+	attached = Layer::create();
 
 	auto screenSize = cocos2d::Director::getInstance()->getVisibleSize();
 	auto inventoryMainUI = cocos2d::Sprite::create(Texture::Inventory);
@@ -50,6 +51,7 @@ bool InventoryUI::init()
 	this->addChild(inventoryMainUI);
 	this->addChild(closeButton);
 	this->addChild(itemLayer);
+	this->addChild(attached);
 
 	updateUI();
 
@@ -60,11 +62,8 @@ bool InventoryUI::init()
 void InventoryUI::updateUI()
 {
 	auto screenSize = cocos2d::Director::getInstance()->getVisibleSize();
-	const auto rscManager = ResourceManager::getInstance();
 
-	if (auto layer = this->getChildByTag(1)) { // itemLayer
-		layer->removeAllChildrenWithCleanup(true); // Don't release
-	}
+	itemLayer->removeAllChildrenWithCleanup(true); // Release original item sprites
 
 	for (int row = 0; row < 3; ++row) {
 		for (int col = 0; col < 12; ++col) {
@@ -75,7 +74,7 @@ void InventoryUI::updateUI()
 				continue;
 
 			// 物品图像显示
-			auto itemSprite = rscManager->getItem(itemId);
+			auto itemSprite = rscm->getItem(itemId);
 			itemSprite->setAnchorPoint(cocos2d::Vec2(0, 0));
 			itemSprite->setScale(3.5);
 			itemSprite->setPosition(convertRCToXY(Vec2(row, col)));
@@ -88,7 +87,7 @@ void InventoryUI::updateUI()
 			// Turn a interger into string
 			char buffer[8];
 			snprintf(buffer, sizeof(buffer), "%d", itemNum);
-			auto numLabel = ResourceManager::getInstance()->getLabel(buffer);
+			auto numLabel = rscm->getLabel(buffer);
 			numLabel->setAnchorPoint(Vec2(0,0));
 			numLabel->setPosition(convertRCToXY(Vec2(row, col)) 
 									+ Vec2(16*2.7, -4));
@@ -102,8 +101,43 @@ void InventoryUI::updateUI()
 void InventoryUI::click(Vec2 pos)
 {
 	auto RC = convertXYToRC(pos);
+	if (RC.x < 0 || RC.x > 11 || RC.y < 0 || RC.y > 2)
+		return;
 	Inventory::getInstance()->click(RC.x, RC.y);
 	updateUI();
+	// 绘制悬挂物品
+	Inventory::Slot attachedSlot = inventory->getAttached();
+	if (attachedSlot != Item::NIL) {
+		auto attachedItem = rscm->getItem(attachedSlot.id);
+		attachedItem->setAnchorPoint(cocos2d::Vec2(0, 1));
+		attachedItem->setScale(3.5);
+
+		attached->addChild(attachedItem);
+
+		if (attachedSlot.num != 1)
+		{
+			char buffer[8];
+			snprintf(buffer, sizeof(buffer), "%d", attachedSlot.num);
+			auto attachedLabel = rscm->getLabel(buffer);
+			attachedLabel->setAnchorPoint(Vec2(0, 0));
+			attachedLabel->setPosition(Vec2(16*2.7, -16*4 + 4));
+
+			attached->addChild(attachedLabel);
+		}
+	}
+	else {
+		detach();
+	}
+}
+
+void InventoryUI::attach(Vec2 pos)
+{
+	attached->setPosition(pos);
+}
+
+void InventoryUI::detach()
+{
+	attached->removeAllChildrenWithCleanup(true); // Don't release
 }
 
 // Convert row and col in inventory into displayer coord
@@ -132,5 +166,4 @@ Vec2 InventoryUI::convertXYToRC(const Vec2& pos)
 	else if (y > 334 && y < 334 + 3.5 * 16)
 		row = 2;
 	return Vec2(row, col);
-
 }

@@ -20,8 +20,10 @@ public:
     void toggleUIActiveState(bool active);
 
     // 回调函数出入栈
-    void pushMouseCallbackFunc(std::function<void(cocos2d::Vec2)> callback);
-    void popMouseCallBackFunc();
+    void pushMouseClickCallbackFunc(std::function<void(cocos2d::Vec2)> callback);
+    void popMouseClickCallBackFunc();
+    void pushMouseMoveCallbackFunc(std::function<void(cocos2d::Vec2)> callback);
+    void popMouseMoveCallBackFunc();
 
     void showHUD();
     void hideHUD();
@@ -60,7 +62,8 @@ private:
     bool _isUIActive;
 
     // UI回调函数
-    std::stack<std::function<void(cocos2d::Vec2)>> mouseCallbackfunc;
+    std::stack<std::function<void(cocos2d::Vec2)>> mouseClickCallbackFunc;
+    std::stack<std::function<void(cocos2d::Vec2)>> mouseMoveCallbackFunc;
 
     // 鼠标位置
     cocos2d::Vec2 _mousePosition;
