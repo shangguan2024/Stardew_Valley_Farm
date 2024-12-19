@@ -1,13 +1,44 @@
+/****************************************************************
+ * Project Name:  Stardew_Valley_Farm
+ * File Name:     GameTimeLayer.cpp
+ * File Function: GameTimeLayer类的实现
+ * Author:        张翔
+ * Update Date:   2024/12/19
+ ****************************************************************/
+
 #include "GameTimeLayer.h"
 #include "../proj.win32/Constant.h"
+
 USING_NS_CC;
 
-GameTimeLayer* GameTimeLayer::instance = nullptr;
-
-GameTimeLayer::GameTimeLayer()
+bool GameTimeLayer::init()
 {
+	if (!Layer::init()){
+		return false;
+	}
+
+	// 设置时间显示背景
+	timeIcon = Sprite::create("defaulthead.png");
+	timeIcon->setPosition(Vec2(50, 50));  // 固定图标位置
+	this->addChild(timeIcon);
+
+	// 设置时间
+
+	// 每秒更新一次时间
+	this->schedule([this](float deltaTime) {
+		updateTime(deltaTime);
+		}, 1.0f, "update_time_key");
+
+	return true;
 }
 
+void GameTimeLayer::updateTime(float delta)
+{
+	// 更新 timeLabel
+}
+
+#if 0
+ 
 GameTimeLayer* GameTimeLayer::getInstance()
 {
 	if (instance == nullptr) {
@@ -59,3 +90,5 @@ void GameTimeLayer::clean(std::string name)
 		removelabel->removeFromParentAndCleanup(true);
 	}
 }
+
+#endif
