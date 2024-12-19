@@ -44,9 +44,9 @@ bool ResourceManager::init()
 
 void ResourceManager::updateRect()
 {
-    itemRect[1] = tileSlot(5 , 12, 1, 1).toRect();    // Bream
+    itemRect[1] = Tile(5 , 12, 1, 1).toRect();    // Bream
     itemRsc[1] = springobjects;
-    itemRect[2] = tileSlot(9 , 0 , 1, 1).toRect();    // Bread
+    itemRect[2] = Tile(9 , 0 , 1, 1).toRect();    // Bread
     itemRsc[2] = springobjects;
 
 
@@ -77,16 +77,32 @@ inline cocos2d::Sprite* ResourceManager::getItem(std::string name)
     return getBlock(Item::idTable[name]);
 }
 
-cocos2d::Sprite* ResourceManager::getBlock(Block::id id)
+Sprite* ResourceManager::getBlock(Block::id id)
 {
-    cocos2d::Texture2D* texture = blockRsc[id];
+    Texture2D* texture = blockRsc[id];
     const Rect region = blockRect[id];
     auto spriteFrame = SpriteFrame::createWithTexture(texture, region);
     return Sprite::createWithSpriteFrame(spriteFrame);
 }
 
 
-inline cocos2d::Sprite* ResourceManager::getBlock(std::string name)
+inline Sprite* ResourceManager::getBlock(std::string name)
 {
     return getBlock(Block::idTable[name]);
+}
+
+Label* ResourceManager::getLabel(const std::string& text)
+{
+    auto textLabel = Label::createWithTTF(text, Texture::Mojangles, 24);
+    textLabel->setTextColor(Color4B(112, 68, 23, 255)); // ÉîºÖÉ«
+    return textLabel;
+}
+
+// parameter is button function's description
+ui::Button* ResourceManager::getButton(ButtonType bfd)
+{
+    if (bfd == BUTTON_HIDE_INVENTORY)
+    {
+        return ui::Button::create(Texture::HideInventory);
+    }
 }

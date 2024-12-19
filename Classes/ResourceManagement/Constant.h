@@ -40,13 +40,16 @@ constexpr int PLAYER_FRAME_WIDTH = PLAYER_IMAGE_WIDTH / PLAYER_FRAME_RATE;      
 constexpr int PLAYER_FRAME_HEIGHT = PLAYER_IMAGE_HEIGHT / PLAYER_DIRECTION_NUM; // 每帧高度（图片高度/行数）
 constexpr float PLAYER_FRAME_DELAY = 0.1f;                                      // 每帧动画延迟
 
+// 地图
 constexpr int MAP_TILE_WIDTH = 16; //
 constexpr int MAP_TILE_HEIGHT = 16;
 constexpr int FARMYARD_MAP_WIDTH = 100;
 constexpr int FARMYARD_MAP_HEIGHT = 80;
+constexpr int BEACH_MAP_WIDTH = 50;
+constexpr int BEACH_MAP_HEIGHT = 50;
 
-constexpr int DEFAULT_CAPACITY = 30; // 默认背包容量
-constexpr int DEFAULT_BAR = 10;      // 默认物品栏容量
+constexpr int DEFAULT_CAPACITY = 36; // 默认背包容量
+constexpr int DEFAULT_BAR = 12;      // 默认物品栏容量
 
 constexpr int PLAYER_MAX_STRENGTH = 100;
 
@@ -115,5 +118,11 @@ enum class MapName {
 
 // 地图瓦片属性
 const std::string TILE_COLLIDABLE = "Collidable";
+
+// 按钮功能描述
+const enum ButtonType
+{
+    BUTTON_HIDE_INVENTORY
+};
 
 #endif // _CONSTANT_H_

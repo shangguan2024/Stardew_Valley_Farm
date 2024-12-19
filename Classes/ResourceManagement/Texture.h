@@ -27,6 +27,7 @@ public:
 
     // Fonts
     static const std::string BorderFont_BR;
+    static const std::string Mojangles;
 
     // Items
     static const std::string Craftables;   
@@ -53,6 +54,8 @@ public:
     static const std::string letterBG;       
     static const std::string logo;           
     static const std::string TitleButtons;   
+    // UI - Buttons
+    static const std::string HideInventory;
 
     // World
     static const std::string bushes;         

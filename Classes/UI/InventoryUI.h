@@ -15,10 +15,19 @@ public:
     bool init();
 
     void updateUI();  // 更新UI（比如更新物品列表）
+    void click(cocos2d::Vec2);
+
+    // Convert displayer coord into row and col in inventory
+    cocos2d::Vec2 convertXYToRC(const cocos2d::Vec2&);
+    // Convert row and col in inventory into displayer coord
+    cocos2d::Vec2 convertRCToXY(const cocos2d::Vec2&);
+
 
 private:
     static Inventory* inventory;
 
+    // 将所有物品精灵放在该Layer中，便于管理
+    cocos2d::Layer* itemLayer;
     cocos2d::ui::Button* closeButton;
     // 其他UI元素，比如物品格子、分页按钮等
 };

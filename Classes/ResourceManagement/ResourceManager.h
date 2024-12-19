@@ -2,7 +2,9 @@
 #define _RESOURCEMANAGER_H_
 
 #include "cocos2d.h"
+#include "UI/CocosGUI.h"
 #include "Texture.h"
+#include "Constant.h"
 
 // Entities
 #include "Entities/Animal.h"
@@ -16,14 +18,14 @@
 class ResourceManager
 {
 public:
-    struct tileSlot
+    struct Tile
     {
         int row;
         int col;
         int width;
         int height;
 
-        tileSlot(int r, int c, int w, int h)
+        Tile(int r, int c, int w, int h)
             : row(r), col(c), width(w), height(h) {}
 
         cocos2d::Rect toRect()
@@ -43,6 +45,8 @@ public:
     inline cocos2d::Sprite* getItem(std::string name);
     cocos2d::Sprite* getBlock(Block::id id);
     inline cocos2d::Sprite* getBlock(std::string name);
+    cocos2d::Label* getLabel(const std::string& text);
+    cocos2d::ui::Button* getButton(ButtonType bfd);
 
 
 

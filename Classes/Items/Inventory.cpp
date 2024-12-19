@@ -54,6 +54,10 @@ void Inventory::click(int row, int col)
 			inventory[row][col] = attached;
 			attached = Slot();
 		}
+		else if (inventory[row][col] == attached) {
+			merge(row, col, attached.num);
+			attached = Slot();
+		}
 		else if (inventory[row][col] != Item::NIL) {
 			std::swap(attached, inventory[row][col]);
 		}
@@ -102,9 +106,9 @@ bool Inventory::pick(Item::id item, size_t num)
 bool Inventory::init()
 {
 	// 在此可以进行初始化操作
-	inventory[0][0] = Slot(1, 1);
+	inventory[0][0] = Slot(1, 2);
 	inventory[0][1] = Slot(2, 1);
 	inventory[1][0] = Slot(2, 1);
-	inventory[2][0] = Slot(2, 1);
+	inventory[2][0] = Slot(2, 2);
 	return true;
 }

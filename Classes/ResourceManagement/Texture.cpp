@@ -22,6 +22,7 @@ const std::string Texture::RobinPortrait     = "Entities/Portraits/Robin..png";
 
 // Fonts
 const std::string Texture::BorderFont_BR = "Fonts/BorderFont.pt-BR.texture.png";
+const std::string Texture::Mojangles = "Fonts/Mojangles.ttf";
 
 // Items
 const std::string Texture::Craftables    = "Items/Craftables..png";
@@ -48,6 +49,8 @@ const std::string Texture::Inventory      = "UI/Inventory.png";
 const std::string Texture::letterBG       = "UI/letterBG..png";
 const std::string Texture::logo           = "UI/logo..png";
 const std::string Texture::TitleButtons   = "UI/TitleButtons..png";
+// UI - Buttons
+const std::string Texture::HideInventory  = "UI/Buttons/HideInventory.png";
 
 // World
 const std::string Texture::bushes          = "World/bushes..png";
