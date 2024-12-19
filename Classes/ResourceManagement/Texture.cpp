@@ -64,4 +64,4 @@ const std::string Texture::fall_town                 = "World/fall_town..png";
 
 // Tile Maps
 const std::string Texture::FarmYardScene    = "World/FarmYardScene.tmx";
-const std::string Texture::Beach            = "World/Beach.tmx";
+const std::string Texture::Beach            = "World/fall_beach.tmx";
