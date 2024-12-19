@@ -13,6 +13,7 @@
 #include "../NPC/ChatLayer.h"
 #include "../NPC/NPC.h"
 #include "../GameTime/GameTimeLayer.h"
+
 USING_NS_CC;
 
 // 创建场景
@@ -31,18 +32,22 @@ bool FarmYardScene::init()
 		return false;
 	}
 
-	// 创建计时
-	GameTime::getInstance()->start();
-	GameTimeLayer::getInstance();
-	addChild(GameTimeLayer::getInstance(), 10);
-
 	// 创建摄像机
 	camera = Camera::create();
 	camera->setCameraFlag(CameraFlag::USER1);
+	camera->setDepth(-1);
 	cocos2d::Vec3 currentPos = camera->getPosition3D();
 	currentPos.z = DEFAULT_VIEW_HEIGHT;
 	camera->setPosition3D(currentPos);
 	this->addChild(camera);
+
+#if 0
+	// 创建计时
+	GameTime::getInstance()->start();
+	auto gametimeLayer = GameTimeLayer::getInstance();
+	this->addChild(gametimeLayer, 10);
+	gametimeLayer->setCameraMask(unsigned short(CameraFlag::USER1));
+#endif
 
 	// 加载瓦片地图
 	auto FarmYard = TMXTiledMap::create("Maps/FarmYardScene.tmx");
@@ -81,10 +86,14 @@ bool FarmYardScene::init()
 	player->setCameraMask(unsigned short(CameraFlag::USER1));
 	this->addChild(player, 1, "player");
 
-	targettile = cocos2d::Sprite::create("Items/DrySoil.png");
+	targettile = cocos2d::Sprite::create("ImageElements/FarmLand/DrySoil.png");
 	targettile->setAnchorPoint(Vec2(0, 0));
 	targettile->setCameraMask(unsigned short(CameraFlag::USER1));
 	this->addChild(targettile, 1, "targettile");
+
+	auto gametimeLayer = GameTimeLayer::create();
+	gametimeLayer->setPosition(Vec2(0, 0));
+	this->addChild(gametimeLayer, 10);
 
 	// 创建并注册鼠标滚轮和鼠标点击事件监听器
 	registerMouseScrollListener();
@@ -234,9 +243,10 @@ void FarmYardScene::update(float delta)
 	Vec2 faceto = player->getFaceto();
 	targettile->setPosition(Vec2((newtile.x + faceto.x) * MAP_TILE_WIDTH, (FARMYARD_MAP_HEIGHT - newtile.y+ faceto.y) * MAP_TILE_HEIGHT));
 
+#if 0
 	//更新时间
 	GameTimeLayer::getInstance()->GameTimeLayerUpdate(camera);
-	GameTimeLayer::getInstance()->setCameraMask(unsigned short(CameraFlag::USER1));
+#endif
 
 	// 计算摄像头目标位置
 	Vec3 targetCameraPos(newPosition.x, newPosition.y, currentCameraPos.z);

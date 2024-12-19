@@ -117,6 +117,9 @@
     <ClCompile Include="..\Classes\Map\TownCenterScene.cpp">
       <Filter>Classes\Map</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\GameTime\GameTimeLayer.cpp">
+      <Filter>Classes\GameTime</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate\AppDelegate.h">
@@ -184,6 +187,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Map\TownCenterScene.h">
       <Filter>Classes\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameTime\GameTimeLayer.h">
+      <Filter>Classes\GameTime</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
