@@ -16,4 +16,9 @@
    <property name="Fishable" type="bool" value="true"/>
   </properties>
  </tile>
+ <tile id="3">
+  <properties>
+   <property name="Potable" type="bool" value="true"/>
+  </properties>
+ </tile>
 </tileset>
