@@ -7,7 +7,7 @@
 
 USING_NS_CC;
 
-// åˆ›å»ºåœºæ™¯
+// ´´½¨³¡¾°
 Scene* MainMenuScene::createScene()
 {
 	auto scene = Scene::create();
@@ -16,21 +16,21 @@ Scene* MainMenuScene::createScene()
 	return scene;
 }
 
-// åˆå§‹åŒ–åœºæ™¯
+// ³õÊ¼»¯³¡¾°
 bool MainMenuScene::init()
 {
-	// åˆ›å»ºåœºæ™¯
+	// ´´½¨³¡¾°
 	if (!Scene::init()) {
 		return false;
 	}
 
-	// åŠ è½½èƒŒæ™¯
+	// ¼ÓÔØ±³¾°
 	const auto screenSize = cocos2d::Director::getInstance()->getVisibleSize();
 	const auto background = Sprite::create("Scenes/MenuScene.png");
 	background->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2));
 	this->addChild(background);
 
-	// åˆ›å»ºæŒ‰é’®
+	// ´´½¨°´Å¥
 	auto newGameButton = HoverButton::create("UI/Buttons/CreateButton.png",
 		"UI/Buttons/CreateButton.png",
 		"UI/Buttons/CreateButton.png");
@@ -41,34 +41,31 @@ bool MainMenuScene::init()
 		"UI/Buttons/ExitButton.png",
 		"UI/Buttons/ExitButton.png");
 
-	// è®¾ç½®æŒ‰é’®ä½ç½®
+	// ÉèÖÃ°´Å¥Î»ÖÃ
 	newGameButton->setPosition(Vec2(screenSize.width / 2 + MENU_SCENE_NEW_GAME_BUTTON_OFFSET_X, screenSize.height / 2 + MENU_SCENE_BUTTONS_OFFSET_Y));
 	loadGameButton->setPosition(Vec2(screenSize.width / 2 + MENU_SCENE_LOAD_GAME_BUTTON_OFFSET_X, screenSize.height / 2 + MENU_SCENE_BUTTONS_OFFSET_Y));
 	exitGameButton->setPosition(Vec2(screenSize.width / 2 + MENU_SCENE_EXIT_GAME_BUTTON_OFFSET_X, screenSize.height / 2 + MENU_SCENE_BUTTONS_OFFSET_Y));
 
-	// ä¸ºæŒ‰é’®æ·»åŠ äº‹ä»¶å¤„ç†å™¨
+	// Îª°´Å¥Ìí¼ÓÊÂ¼þ´¦ÀíÆ÷
 	newGameButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
 		if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
 			auto scene = FarmYardScene::createScene();
 			SceneManager::setSceneTransition(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, scene, cocos2d::Color3B::WHITE));
 			SceneManager::switchToScene(scene);
-		}
-		});
-	loadGameButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
-		if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
+		} });
+		loadGameButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
+			if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
 
-		}
-		});
-	exitGameButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
-		if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
-			Director::getInstance()->end();
-		}
-		});
+			} });
+			exitGameButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
+				if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
+					Director::getInstance()->end();
+				} });
 
-	// å°†æŒ‰é’®åŠ å…¥åœºæ™¯
-	this->addChild(newGameButton);
-	this->addChild(loadGameButton);
-	this->addChild(exitGameButton);
+				// ½«°´Å¥¼ÓÈë³¡¾°
+				this->addChild(newGameButton);
+				this->addChild(loadGameButton);
+				this->addChild(exitGameButton);
 
-	return true;
+				return true;
 }

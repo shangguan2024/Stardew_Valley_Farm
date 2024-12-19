@@ -6,15 +6,21 @@
 
 class MapManager {
 public:
+	MapManager(const MapManager&) = delete;
+	MapManager operator=(const MapManager&) = delete;
+
 	struct TileData {
-		int x, y;
-		std::string property;
-		std::string state;
+		cocos2d::Vec2 position;
+		TileType tileType;
+		SeedType seedType;
+		int timeStamp;
 	};
 
 	static MapManager* getInstacne();
 
 	std::vector<TileData>& getTileData(MapName mapName);
+
+	static bool updateTileData(TileData& tileData);
 
 private:
 	MapManager();
