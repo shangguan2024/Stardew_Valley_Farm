@@ -4,6 +4,7 @@
 
 #include "cocos2d.h"
 #include "GameTime/GameTime.h"
+#include "ResourceManagement/ResourceManager.h"
 
 class HUD : public cocos2d::Layer {
 public:
@@ -25,14 +26,16 @@ private:
 
     static HUD* instance;
 
+    static ResourceManager* rscm;
+
     // ¸üÐÂ HUD ÄÚÈÝ
     void updateGameTimeHUD();
 
     GameTime* gameTime;
     cocos2d::Label* gameTimeLabel;
 
-    cocos2d::ProgressTimer* strengthBar;
-    cocos2d::Label* strengthLabel;
+    cocos2d::ProgressTimer* timerModel;
+    cocos2d::Label* energyLabel;
 };
 
 #endif // __HUD_H__

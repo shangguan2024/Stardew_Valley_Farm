@@ -1,5 +1,5 @@
-#ifndef __MAINMENUSCENE_H__
-#define __MAINMENUSCENE_H__
+#ifndef __MAIN_MENU_SCENE_H__
+#define __MAIN_MENU_SCENE_H__
 
 #include "cocos2d.h"
 

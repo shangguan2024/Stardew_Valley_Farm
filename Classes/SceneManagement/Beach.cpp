@@ -1,5 +1,4 @@
 #include "Beach.h"
-
 #include "InputControl/InputManager.h"
 #include "Player/PlayerController.h"
 #include "UI/UIManager.h"
@@ -17,6 +16,6 @@ Scene* Beach::createScene()
 
 void Beach::initConstants()
 {
-	sceneName = "Beach";
+	mapName = MapName::Beach;
 	tileMapPath = Texture::Beach;
 }

@@ -91,9 +91,9 @@ inline Sprite* ResourceManager::getBlock(std::string name)
     return getBlock(Block::idTable[name]);
 }
 
-Label* ResourceManager::getLabel(const std::string& text)
+Label* ResourceManager::getLabel(const std::string& text, const int SystemFontSize)
 {
-    auto textLabel = Label::createWithTTF(text, Texture::Mojangles, 24);
+    auto textLabel = Label::createWithTTF(text, Texture::Mojangles, SystemFontSize);
     textLabel->setTextColor(Color4B(112, 68, 23, 255)); // ÉîºÖÉ«
     return textLabel;
 }

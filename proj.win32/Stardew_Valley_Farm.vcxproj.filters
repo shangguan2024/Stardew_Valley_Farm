@@ -123,7 +123,7 @@
     <ClCompile Include="..\Classes\ResourceManagement\Texture.cpp">
       <Filter>Classes\ResourceManagement</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\SceneManagement\FarmYardScene.cpp">
+    <ClCompile Include="..\Classes\SceneManagement\Beach.cpp">
       <Filter>Classes\SceneManagement</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\UI\InventoryUI.cpp">
@@ -135,7 +135,7 @@
     <ClCompile Include="..\Classes\GameTime\GameTime.cpp">
       <Filter>Classes\GameTime</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\SceneManagement\Beach.cpp">
+    <ClCompile Include="..\Classes\SceneManagement\FarmYard.cpp">
       <Filter>Classes\SceneManagement</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Map\Map.cpp">
@@ -218,7 +218,7 @@
     <ClInclude Include="..\Classes\ResourceManagement\ResourceManager.h">
       <Filter>Classes\ResourceManagement</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\SceneManagement\FarmYardScene.h">
+    <ClInclude Include="..\Classes\SceneManagement\Beach.h">
       <Filter>Classes\SceneManagement</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\ResourceManagement\Constant.h">
@@ -236,7 +236,7 @@
     <ClInclude Include="..\Classes\ResourceManagement\Texture.h">
       <Filter>Classes\ResourceManagement</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\SceneManagement\Beach.h">
+    <ClInclude Include="..\Classes\SceneManagement\FarmYard.h">
       <Filter>Classes\SceneManagement</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Map\Map.h">

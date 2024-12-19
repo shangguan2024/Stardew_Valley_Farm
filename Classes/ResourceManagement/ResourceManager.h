@@ -45,7 +45,7 @@ public:
     inline cocos2d::Sprite* getItem(std::string name);
     cocos2d::Sprite* getBlock(Block::id id);
     inline cocos2d::Sprite* getBlock(std::string name);
-    cocos2d::Label* getLabel(const std::string& text);
+    cocos2d::Label* getLabel(const std::string& text, const int SystemFontSize = 24);
     cocos2d::ui::Button* getButton(ButtonType bfd);
 
 

@@ -28,7 +28,7 @@ public:
 
 	// strength
 	void setStrength(const int strength = PLAYER_MAX_STRENGTH);
-	int getStrength() const;
+	int getEnergy() const;
 	void addStrength(const int strength);
 
 private:

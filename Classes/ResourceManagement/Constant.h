@@ -43,6 +43,7 @@ constexpr float PLAYER_FRAME_DELAY = 0.1f;                                      
 // 地图
 constexpr int MAP_TILE_WIDTH = 16; //
 constexpr int MAP_TILE_HEIGHT = 16;
+constexpr int MAP_TILE_SIDE_LENGTH = 16; // if MAP_TILE_WIDTH == MAP_TILE_HEIGHT
 constexpr int FARMYARD_MAP_WIDTH = 100;
 constexpr int FARMYARD_MAP_HEIGHT = 80;
 constexpr int BEACH_MAP_WIDTH = 50;
@@ -111,6 +112,7 @@ const std::string SEED_WHRAT_DESCRIPTION = " ";
 
 // 地图名称枚举
 enum class MapName {
+    Null,
     FarmYard,
     FarmHouse,
     Beach
@@ -124,5 +126,10 @@ const enum ButtonType
 {
     BUTTON_HIDE_INVENTORY
 };
+
+// 摄像机
+constexpr float CAMERA_FOV = 60.0;
+constexpr float CAMERA_Z = 128.0;
+
 
 #endif // _CONSTANT_H_

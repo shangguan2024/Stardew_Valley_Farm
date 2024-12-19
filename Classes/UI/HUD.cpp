@@ -2,13 +2,16 @@
 #include "HUD.h"
 #include "Player/Player.h"
 
+USING_NS_CC;
+
 HUD* HUD::instance = nullptr;
+ResourceManager* HUD::rscm = nullptr;
 
 HUD::HUD() :
 	gameTime(nullptr),
 	gameTimeLabel(nullptr),
-	strengthBar(nullptr),
-	strengthLabel(nullptr)
+	timerModel(nullptr),
+	energyLabel(nullptr)
 {
 }
 
@@ -36,28 +39,41 @@ HUD* HUD::create()
 // ³õÊ¼»¯ HUD
 bool HUD::init()
 {
+	rscm = ResourceManager::getInstance();
+
+
+
+	auto visibleSize = Director::getInstance()->getVisibleSize();
+
+	auto energyBarBackground = Sprite::create("UI/Screen/EnergyBar.png");
+	energyBarBackground->setScale(4);
+	energyBarBackground->setAnchorPoint(Vec2(1, 0));
+	energyBarBackground->setPosition(visibleSize.width, 0);
+
+	energyLabel = rscm->getLabel("Energy: 100", 24);
+	//energyLabel->setSystemFontSize(24);
+	energyLabel->setAnchorPoint(Vec2(1, 0));
+	energyLabel->setPosition(visibleSize.width - 64, 0);
+
+	timerModel = ProgressTimer::create(Sprite::create("UI/Screen/Timer.png"));
+	timerModel->setType(ProgressTimer::Type::BAR);
+	timerModel->setScale(4);
+	timerModel->setAnchorPoint(Vec2(1, 1));
+	timerModel->setPosition(visibleSize.width, visibleSize.height);
+	timerModel->setPercentage(100);
+
 	gameTime = GameTime::getInstance();
-	gameTimeLabel = cocos2d::Label::createWithSystemFont(gameTime->toString(), "Consolas", 32);
-	gameTimeLabel->setPosition(1000, 640);
-	this->addChild(gameTimeLabel);
+	gameTimeLabel = rscm->getLabel(gameTime->toString(), 26);
+	gameTimeLabel->setAnchorPoint(Vec2(1, 1));
+	gameTimeLabel->setPosition(visibleSize.width + 72, visibleSize.height - 20);
 	this->schedule([this](float dt) {
 		updateGameTimeHUD();
 		}, 1.0f, "Game_time_update_key");
 
-	auto strengthBarBackground = cocos2d::Sprite::create("UI/Buttons/CreateButton.png");
-	strengthBarBackground->setPosition(150, 550);
-	strengthBar = cocos2d::ProgressTimer::create(cocos2d::Sprite::create("UI/Buttons/ExitButton.png"));
-	strengthBar->setType(cocos2d::ProgressTimer::Type::BAR);
-	strengthBar->setMidpoint(cocos2d::Vec2(0, 0));
-	strengthBar->setBarChangeRate(cocos2d::Vec2(1, 0));
-	strengthBar->setPercentage(100);
-	strengthBar->setPosition(150, 550);
-	strengthBar->setColor(cocos2d::Color3B(0, 255, 0));
-	strengthLabel = cocos2d::Label::createWithSystemFont("Strength: 100", "Consolas", 24);
-	strengthLabel->setPosition(100, 500);
-	this->addChild(strengthBarBackground);
-	this->addChild(strengthBar);
-	this->addChild(strengthLabel);
+	this->addChild(energyBarBackground, 0);
+	this->addChild(energyLabel, 1);
+	this->addChild(timerModel, 0);
+	this->addChild(gameTimeLabel, 1);
 
 	updateStrengthBarHUD();
 
@@ -72,8 +88,8 @@ void HUD::updateGameTimeHUD()
 
 void HUD::updateStrengthBarHUD()
 {
-	strengthBar->setPercentage(100.0 / PLAYER_MAX_STRENGTH * Player::getInstance()->getStrength());
-	strengthLabel->setString("Strength: " + std::to_string(Player::getInstance()->getStrength()));
+	timerModel->setPercentage(100.0 / PLAYER_MAX_STRENGTH * Player::getInstance()->getEnergy());
+	energyLabel->setString("Energy: " + std::to_string(Player::getInstance()->getEnergy()));
 }
 
 void HUD::toggleVisibility(bool visible)

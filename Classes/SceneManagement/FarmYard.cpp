@@ -1,4 +1,5 @@
-#include "FarmYardScene.h"
+#include "FarmYard.h"
+
 #include "InputControl/InputManager.h"
 #include "Player/PlayerController.h"
 #include "UI/UIManager.h"
@@ -6,16 +7,16 @@
 USING_NS_CC;
 
 
-Scene* FarmYardScene::createScene()
+Scene* FarmYard::createScene()
 {
 	auto scene = Scene::create();
-	auto layer = FarmYardScene::create();
+	auto layer = FarmYard::create();
 	scene->addChild(layer);
 	return scene;
 }
 
-void FarmYardScene::initConstants()
+void FarmYard::initConstants()
 {
-	sceneName = "FarmYard";
+	mapName = MapName::FarmYard;
 	tileMapPath = Texture::Beach;
 }

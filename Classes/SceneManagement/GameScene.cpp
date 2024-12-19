@@ -14,52 +14,57 @@ bool GameScene::init()
 
     initConstants();
 
-    // 创建摄像机
-    _camera = Camera::create();
-    _camera->setCameraFlag(CameraFlag::USER1);
-    this->addChild(_camera);
-
     // 加载瓦片地图
-    auto FarmYard = TMXTiledMap::create(tileMapPath);
-    if (!FarmYard) {
+    tilemap = TMXTiledMap::create(tileMapPath);
+    if (!tilemap) {
         CCLOG("Failed to load tile map");
         return false;
     }
+    this->addChild(tilemap);
+    tilemap->setPosition(0, 0);
+    tilemap->setCameraMask(unsigned short(CameraFlag::USER1));
 
-    auto tileLayer = FarmYard->getLayer("Meta");
+    // 创建摄像机
+    auto winSize = Director::getInstance()->getWinSize();
+    float zeye = Director::getInstance()->getZEye();
+
+    camera = Camera::createPerspective(fov, winSize.width / winSize.height, 10, zeye + winSize.height / 2.0f);
+    camera->setCameraFlag(CameraFlag::USER1);
+    this->addChild(camera);
+    // 初始化摄像机高度
+    Vec3 currentCameraPos = camera->getPosition3D();
+    currentCameraPos.z = CAMERA_Z;
+    Vec3 targetCameraPos(currentCameraPos.x, currentCameraPos.y, currentCameraPos.z);
+    camera->setPosition3D(currentCameraPos.lerp(targetCameraPos, 0.0f));
+
+    // 设置 Meta 为不可见层
+    auto tileLayer = tilemap->getLayer("Meta");
     tileLayer->setVisible(false);
     tileLayer->setLocalZOrder(255); 
 
-    this->addChild(FarmYard, 0, sceneName);
-    FarmYard->setPosition(0, 0);
-    FarmYard->setCameraMask(unsigned short(CameraFlag::USER1));
-
-    // 获取地图的基础属性
-    auto mapCenter = Vec2(FARMYARD_MAP_WIDTH * MAP_TILE_WIDTH / 2, FARMYARD_MAP_HEIGHT * MAP_TILE_HEIGHT / 2);
-
-    auto objectGroup = FarmYard->getObjectGroup("Event");
+    // 加载出生点
+    auto objectGroup = tilemap->getObjectGroup("Event");
     if (!objectGroup) {
         CCLOG("Failed to load object layer: Event");
         return false;
     }
-
     auto spawnPoint = objectGroup->getObject("SpawnPoint");
     if (spawnPoint.empty()) {
         CCLOG("SpawnPoint not found in Event layer.");
         return false;
     }
-
     // 提取出生点的 x 和 y 坐标
     float spawnX = spawnPoint["x"].asFloat();
     float spawnY = spawnPoint["y"].asFloat();
     CCLOG("Spawn point coordinates: (%f, %f)", spawnX, spawnY);
 
+    // 在出生点创建玩家
     auto player = Player::getInstance();
     this->addChild(player, 1, "player");
     player->setPosition(spawnX, spawnY);
     player->setCameraMask(unsigned short(CameraFlag::USER1));
 
-    // UI
+    // UI 调用
     auto camera = Camera::create();
     camera->setCameraFlag(CameraFlag::DEFAULT);
     this->addChild(camera);
@@ -81,16 +86,56 @@ bool GameScene::init()
 
 void GameScene::initConstants()
 {
-    sceneName = "name of this scene";
+    mapName = MapName::Null;
     tileMapPath = "path/to/tilemap.tmx";
 }
 
 Vec2 GameScene::convertToTileCoords(const Vec2& pos)
 {
     // 将玩家的新位置转换为瓦片坐标
-    Vec2 tile = Vec2(int(pos.x / MAP_TILE_WIDTH), int((50 * MAP_TILE_HEIGHT - pos.y) / MAP_TILE_HEIGHT));
+    Size tilemapSize = tilemap->getMapSize();
+    Vec2 tile = Vec2(int(pos.x / MAP_TILE_WIDTH), 
+                     int((tilemapSize.height * MAP_TILE_HEIGHT - pos.y) / MAP_TILE_HEIGHT));
 
     return tile;
+}
+
+bool GameScene::setCameraCenter(const Vec3& currentCameraPos)
+{
+    // 计算摄像头目标位置 并 平滑移动摄像机
+    Vec2 leftUpMargin, rightDownMargin, 
+        target(Player::getInstance()->getPosition().x, Player::getInstance()->getPosition().y);
+
+    const auto& mapblock = tilemap->getMapSize();
+    const auto& tilesize = tilemap->getTileSize();
+    const auto& winSize = Director::getInstance()->getWinSize();
+    auto mapsize = Size(mapblock.width * tilesize.width, mapblock.height * tilesize.height);
+
+    // default fov = 60 deg
+    const auto& aspect_ratio = winSize.width / winSize.height;
+    const auto& fov2z = 2 * currentCameraPos.z * tan(60.0/180 * 3.14 / 2);
+    Size visibleSize = Size(fov2z * aspect_ratio, fov2z);
+    leftUpMargin = visibleSize / 2;
+    rightDownMargin = mapsize - visibleSize / 2;
+
+    if (leftUpMargin.x > rightDownMargin.x || leftUpMargin.y > rightDownMargin.y)
+        return false;
+
+    if (target.x < leftUpMargin.x) {
+        target.x = leftUpMargin.x;
+    } else if (target.x > rightDownMargin.x) {
+        target.x = rightDownMargin.x;
+    }
+    if (target.y < leftUpMargin.y) {
+        target.y = leftUpMargin.y;
+    }
+    else if (target.y > rightDownMargin.y) {
+        target.y = rightDownMargin.y;
+    }
+
+    Vec3 targetCameraPos(target.x, target.y, currentCameraPos.z);
+    camera->setPosition3D(currentCameraPos.lerp(targetCameraPos, 1.0f)); // 平滑系数
+    return true;
 }
 
 void GameScene::registerMouseScrollListener()
@@ -109,14 +154,16 @@ void GameScene::onMouseScroll(cocos2d::EventMouse* event)
     auto scrollDelta = event->getScrollY(); // 获取滚动增量
     CCLOG("Mouse Scroll Delta: %f", scrollDelta);
     // 计算摄像机的位置
-    Vec3 currentCameraPos = _camera->getPosition3D();
+    Vec3 currentCameraPos = camera->getPosition3D();
     // 计算摄像头目标位置
     currentCameraPos.z += 15 * scrollDelta;
-    if (currentCameraPos.z > 750.0)currentCameraPos.z = 750.0;
-    else if (currentCameraPos.z < 250.0)currentCameraPos.z = 250.0;
+    if (!setCameraCenter(currentCameraPos))
+        currentCameraPos.z -= 15 * scrollDelta;
+    if (currentCameraPos.z < 128.0)
+        currentCameraPos.z = 128.0;
     Vec3 targetCameraPos(currentCameraPos.x, currentCameraPos.y, currentCameraPos.z);
     // 平滑移动摄像机
-    _camera->setPosition3D(currentCameraPos.lerp(targetCameraPos, 0.1f));
+    camera->setPosition3D(currentCameraPos.lerp(targetCameraPos, 0.8f));
 }
 
 // 鼠标点击事件回调
@@ -125,12 +172,10 @@ void GameScene::onMouseClick(cocos2d::EventMouse::MouseButton mouseButton)
     Player* player = Player::getInstance();
     InputManager* inputManager = InputManager::getInstance();
 
-    // 获取地图对象
-    auto tileMap = (TMXTiledMap*)this->getChildByName(sceneName);
 
     // 获取瓦片图层
-    auto tileLayer = tileMap->getLayer("Meta");
-    auto groundLayer = tileMap->getLayer("Ground");
+    auto tileLayer = tilemap->getLayer("Meta");
+    auto groundLayer = tilemap->getLayer("Ground");
     if (!tileLayer || !groundLayer) {
         CCLOG("Layer not found");
         return;
@@ -174,7 +219,7 @@ void GameScene::onMouseClick(cocos2d::EventMouse::MouseButton mouseButton)
         // 如果 GID 不为空，表示该位置可以交互
         if (mouseGID) {
             // 获取瓦片属性
-            auto properties = tileMap->getPropertiesForGID(mouseGID).asValueMap();
+            auto properties = tilemap->getPropertiesForGID(mouseGID).asValueMap();
             if (!properties.empty()) {
                 // 判断瓦片是否具有 "Plowable" 属性且为 true
                 if (properties["Plowable"].asBool()) {
@@ -199,20 +244,15 @@ void GameScene::update(float delta)
     PlayerController::getInstance()->update();
     Player* player = Player::getInstance();
 
-    // 获取 FarmYard 地图对象
-    auto tileMap = (TMXTiledMap*)this->getChildByName(sceneName);
-
-    // 计算摄像机的位置
-    Vec3 currentCameraPos = _camera->getPosition3D();
 
     // 获取瓦片图层
-    auto tileLayer = tileMap->getLayer("Meta");
+    auto tileLayer = tilemap->getLayer("Meta");
     if (!tileLayer) {
         CCLOG("Layer not found");
         return;
     }
 
-
+    // 玩家移动
     if (player->getDirection().x) {
         // 获得玩家的当前位置并转换为瓦片坐标
         Vec2 currentPosition = player->getPosition();
@@ -229,7 +269,7 @@ void GameScene::update(float delta)
             player->setPosition(newPosition);
         }
         else {
-            auto xxx = tileMap->getPropertiesForGID(tileGID).asValueMap();
+            auto xxx = tilemap->getPropertiesForGID(tileGID).asValueMap();
             if (xxx.find(TILE_COLLIDABLE) == xxx.end()) {
                 player->setPosition(newPosition);
             }
@@ -253,17 +293,14 @@ void GameScene::update(float delta)
             player->setPosition(newPosition);
         }
         else {
-            auto xxx = tileMap->getPropertiesForGID(tileGID).asValueMap();
+            auto xxx = tilemap->getPropertiesForGID(tileGID).asValueMap();
             if (xxx.find("Collidable") == xxx.end()) {
                 player->setPosition(newPosition);
             }
         }
     }
-
-
-    // 计算摄像头目标位置
-    Vec3 targetCameraPos(player->getPosition().x, player->getPosition().y, currentCameraPos.z);
-
-    // 平滑移动摄像机
-    _camera->setPosition3D(currentCameraPos.lerp(targetCameraPos, 1.0f)); // 平滑系数
+    
+    // 计算摄像机的位置
+    Vec3 currentCameraPos = camera->getPosition3D();
+    setCameraCenter(currentCameraPos);
 }

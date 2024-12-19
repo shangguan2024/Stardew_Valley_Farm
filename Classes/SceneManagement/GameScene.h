@@ -2,7 +2,9 @@
 #define __GAME_SCENE_H__
 
 #include "cocos2d.h"
+#include "ResourceManagement/Constant.h"
 #include "ResourceManagement/Texture.h"
+#include <cmath>
 
 class GameScene : public cocos2d::Scene {
 protected:
@@ -22,11 +24,14 @@ protected:
 
     // 转变坐标成瓦片坐标
     cocos2d::Vec2 convertToTileCoords(const cocos2d::Vec2& pos);
+    bool setCameraCenter(const cocos2d::Vec3&);
 
     // 定义摄像机
-    cocos2d::Camera* _camera;
+    float fov = CAMERA_FOV;
+    cocos2d::Camera* camera;
+    cocos2d::TMXTiledMap* tilemap;
 
-    std::string sceneName;
+    MapName mapName; // enum class MapName
     std::string tileMapPath;
 };
 

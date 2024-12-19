@@ -57,7 +57,7 @@ bool Player::init()
 
 	// 创建裁剪出来的精灵帧
 	auto frame = SpriteFrame::createWithTexture(texture, rect);
-	frame->setAnchorPoint(Vec2(0.5, 0));
+	frame->setAnchorPoint(Vec2(0.5, 0.1));
 
 	if (frame) {
 		// 设置精灵的初始图像为裁剪出来的部分
@@ -137,7 +137,7 @@ void Player::setStrength(const int strength)
 	HUD::getInstance()->updateStrengthBarHUD();
 }
 
-int Player::getStrength() const
+int Player::getEnergy() const
 {
 	return _strength;
 }
