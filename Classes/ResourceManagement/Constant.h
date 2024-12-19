@@ -106,4 +106,7 @@ const std::string SEED_RADISH_DESCRIPTION = " ";
 const std::string SEED_POTATO_DESCRIPTION = " ";
 const std::string SEED_WHRAT_DESCRIPTION = " ";
 
+// µÿÕºÕﬂ∆¨ Ù–‘
+const std::string TILE_COLLIDABLE = "Collidable";
+
 #endif // _CONSTANT_H_

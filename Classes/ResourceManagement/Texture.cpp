@@ -59,9 +59,9 @@ const std::string Texture::houses          = "World/houses..png";
 const std::string Texture::Mill            = "World/Mill..png";
 const std::string Texture::Well            = "World/Well..png";
 const std::string Texture::fall_outdoorsTileSheet    = "World/fall_outdoorsTileSheet..png";
-const std::string Texture::fall_beach                = "World/fall_beach..png";
+const std::string Texture::fall_beach                = "World/beach/fall_beach..png";
 const std::string Texture::fall_town                 = "World/fall_town..png";
 
 // Tile Maps
 const std::string Texture::FarmYardScene    = "World/FarmYardScene.tmx";
-const std::string Texture::Beach            = "World/fall_beach.tmx";
+const std::string Texture::Beach            = "World/beach/fall_beach.tmx";

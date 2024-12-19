@@ -31,9 +31,6 @@
     <Filter Include="Classes\UI">
       <UniqueIdentifier>{144980ae-2d91-4629-9ab2-de03ec5012e1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\Utils">
-      <UniqueIdentifier>{365a8721-0347-4e48-b0fe-d14a37baea83}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes\AppDelegate">
       <UniqueIdentifier>{3a2412f4-e656-42b7-8352-b451bc6a82d9}</UniqueIdentifier>
     </Filter>
@@ -110,12 +107,6 @@
     </ClCompile>
     <ClCompile Include="..\Classes\UI\UIManager.cpp">
       <Filter>Classes\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Utils\Logger.cpp">
-      <Filter>Classes\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Utils\Timer.cpp">
-      <Filter>Classes\Utils</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\AppDelegate\AppDelegate.cpp">
       <Filter>Classes\AppDelegate</Filter>
@@ -214,12 +205,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\UI\UIManager.h">
       <Filter>Classes\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Utils\Logger.h">
-      <Filter>Classes\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Utils\Timer.h">
-      <Filter>Classes\Utils</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\AppDelegate\AppDelegate.h">
       <Filter>Classes\AppDelegate</Filter>
