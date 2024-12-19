@@ -101,18 +101,22 @@ void InventoryUI::updateUI()
 void InventoryUI::click(Vec2 pos)
 {
 	auto RC = convertXYToRC(pos);
-	if (RC.x < 0 || RC.x > 11 || RC.y < 0 || RC.y > 2)
+	if (RC.x < 0 || RC.x > 2 || RC.y < 0 || RC.y > 11)
 		return;
 	Inventory::getInstance()->click(RC.x, RC.y);
 	updateUI();
 	// »æÖÆÐü¹ÒÎïÆ·
 	Inventory::Slot attachedSlot = inventory->getAttached();
+	attached->removeAllChildrenWithCleanup(true);
+	// attached->getTag() is the id of the last attached item
 	if (attachedSlot != Item::NIL) {
+
 		auto attachedItem = rscm->getItem(attachedSlot.id);
 		attachedItem->setAnchorPoint(cocos2d::Vec2(0, 1));
 		attachedItem->setScale(3.5);
 
 		attached->addChild(attachedItem);
+		attached->setTag(attachedSlot.id);
 
 		if (attachedSlot.num != 1)
 		{
@@ -125,9 +129,6 @@ void InventoryUI::click(Vec2 pos)
 			attached->addChild(attachedLabel);
 		}
 	}
-	else {
-		detach();
-	}
 }
 
 void InventoryUI::attach(Vec2 pos)
@@ -137,7 +138,9 @@ void InventoryUI::attach(Vec2 pos)
 
 void InventoryUI::detach()
 {
-	attached->removeAllChildrenWithCleanup(true); // Don't release
+	attached->removeAllChildrenWithCleanup(true);
+	inventory->detach();
+	updateUI();
 }
 
 // Convert row and col in inventory into displayer coord

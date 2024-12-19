@@ -67,11 +67,23 @@ void Inventory::click(int row, int col)
 
 }
 
-void Inventory::detach()
+bool Inventory::detach()
 {
-
 	if (attached != Item::NIL) {
-		std::swap(attached, inventory[lastClickRow][lastClickCol]);
+		if (inventory[lastClickRow][lastClickCol] == Item::NIL) {
+			std::swap(attached, inventory[lastClickRow][lastClickCol]);
+			return true;
+		}
+		else {
+			for (int i = 0; i < 3; ++i)
+				for (int j = 0; j < 11; ++j)
+					if (inventory[i][j] == Item::NIL)
+					{
+						std::swap(attached, inventory[i][j]);
+						return true;
+					}
+		}
+		return false;
 	}
 }
 
@@ -114,7 +126,7 @@ bool Inventory::init()
 	// 在此可以进行初始化操作
 	inventory[0][0] = Slot(1, 2);
 	inventory[0][1] = Slot(2, 1);
-	inventory[1][0] = Slot(2, 1);
+	inventory[1][9] = Slot(2, 1);
 	inventory[2][0] = Slot(2, 2);
 	return true;
 }

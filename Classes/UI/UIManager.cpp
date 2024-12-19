@@ -123,6 +123,7 @@ void UIManager::hideInventoryUI()
         CCLOG("UIManager::hideInventoryUI : inventoryUI doesn't exists.");
         return;
     }
+    inventoryUI->detach();           // È¡ÏûÐü¹Ò
     inventoryUI->setVisible(false);  // Òþ²Ø±³°üUI
     popMouseClickCallBackFunc();
     toggleUIActiveState(false);

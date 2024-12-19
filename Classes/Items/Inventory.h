@@ -31,7 +31,7 @@ public:
 
 
     void click(int row, int col);  // 点击物品槽位，更新悬挂物品
-    void detach();    // 解除悬挂物品，还原位置
+    bool detach();    // 解除悬挂物品，还原位置
     void merge(int row, int col, int num);
     Slot getAttached();
     bool pick(Item::id item, size_t num);
