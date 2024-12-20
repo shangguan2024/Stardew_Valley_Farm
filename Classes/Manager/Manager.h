@@ -26,6 +26,9 @@ public:
     // 添加耕地
     void addFarmland(const FarmLand& land);
 
+    // 管理更新每一个元素
+    void update();
+
     // 保存游戏状态
     void saveGameState(const std::string& filename);
 

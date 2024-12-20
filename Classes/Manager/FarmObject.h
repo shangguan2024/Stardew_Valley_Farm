@@ -24,6 +24,12 @@ public:
 	// 析构函数
 	~FarmObject();
 
+	// 是否成熟
+	bool ismature();
+
+	// 成长
+	void update();
+
 	// 对象的种类
 	ObjectType objecttype;
 
@@ -33,14 +39,20 @@ public:
 	// 当前阶段
 	int currstate;
 
-
-
 private:
 	// 最大阶段
 	int maxstate;
 
+#if 0
     // 产量
 	std::vector<Item> harvests;
+#endif
+
+	// 成长率
+	float growthrate;
+
+	// 成长速度
+	float growthspeed;
 
 };
 

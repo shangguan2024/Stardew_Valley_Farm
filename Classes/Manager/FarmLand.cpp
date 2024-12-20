@@ -8,3 +8,19 @@
 
 #include "FarmLand.h"
 
+FarmLand::FarmLand(float x, float y)
+{
+
+}
+
+FarmLand::~FarmLand(){}
+
+void FarmLand::update()
+{
+
+}
+
+void FarmLand::watering()
+{
+
+}

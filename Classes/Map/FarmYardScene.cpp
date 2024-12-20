@@ -77,7 +77,7 @@ bool FarmYardScene::init()
 	player->setCameraMask(unsigned short(CameraFlag::USER1));
 	this->addChild(player, 1, "player");
 
-	targettile = cocos2d::Sprite::create("ImageElements/FarmLand/DrySoil.png");
+	targettile = Sprite::create("ImageElements/TargetTile.png");
 	targettile->setAnchorPoint(Vec2(0, 0));
 	targettile->setCameraMask(unsigned short(CameraFlag::USER1));
 	this->addChild(targettile, 1, "targettile");
@@ -94,84 +94,6 @@ bool FarmYardScene::init()
 	this->scheduleUpdate();
 
 	return true;
-}
-
-Vec2 FarmYardScene::convertToTileCoords(const Vec2& pos)
-{
-	// 将玩家的新位置转换为瓦片坐标
-	Vec2 tile = Vec2(int(pos.x / MAP_TILE_WIDTH), int((FARMYARD_MAP_HEIGHT * MAP_TILE_HEIGHT - pos.y) / MAP_TILE_HEIGHT));
-
-	return tile;
-}
-
-void FarmYardScene::registerMouseScrollListener()
-{
-	// 创建鼠标事件监听器
-	auto listener = EventListenerMouse::create();
-	listener->onMouseScroll = CC_CALLBACK_1(FarmYardScene::onMouseScroll, this);
-
-	// 获取事件分发器并添加监听器
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
-}
-
-// 鼠标滚轮事件回调
-void FarmYardScene::onMouseScroll(cocos2d::EventMouse* event)
-{
-	auto scrollDelta = event->getScrollY();  // 获取滚动增量
-	CCLOG("Mouse Scroll Delta: %f", scrollDelta);
-	// 计算摄像机的位置
-	Vec3 currentCameraPos = camera->getPosition3D();
-
-	if ((currentCameraPos.z <= MIN_VIEW_HEIGHT && scrollDelta < 0) ||
-		(currentCameraPos.z >= MAX_VIEW_HEIGHT && scrollDelta > 0))
-		return;
-
-	// 计算摄像头目标位置
-	Vec3 targetCameraPos(currentCameraPos.x, currentCameraPos.y, currentCameraPos.z + 100 * scrollDelta);
-	// 平滑移动摄像机
-	camera->setPosition3D(currentCameraPos.lerp(targetCameraPos, 0.1f));
-}
-
-// 注册鼠标点击监听器
-void FarmYardScene::registerMouseClickListener()
-{
-	// 创建鼠标点击事件监听器
-	auto listener = EventListenerMouse::create();
-	listener->onMouseDown = CC_CALLBACK_1(FarmYardScene::onMouseClick, this);
-
-	// 获取事件分发器并添加监听器
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
-}
-
-// 鼠标点击事件回调
-void FarmYardScene::onMouseClick(cocos2d::EventMouse* event)
-{
-	Player* player = Player::getInstance();
-
-	// 获取 FarmYard 地图对象
-	auto FarmYard = (TMXTiledMap*)this->getChildByName("FarmYard");
-
-	// 获取瓦片图层
-	auto tileLayer = FarmYard->getLayer("Meta");
-	auto groundLayer = FarmYard->getLayer("Ground");
-	if (!tileLayer || !groundLayer) {
-		CCLOG("Layer not found");
-		return;
-	}
-
-	// 判断鼠标点击的按钮
-	auto mouseButton = event->getMouseButton();
-	if (mouseButton == EventMouse::MouseButton::BUTTON_LEFT) {
-		CCLOG("Left mouse button clicked");
-		// 执行左键点击相关操作
-	}
-	else if (mouseButton == EventMouse::MouseButton::BUTTON_RIGHT) {
-		CCLOG("Right mouse button clicked");
-		// 执行右键点击相关操作
-	}
-
-	// 丰富交互逻辑
-
 }
 
 void FarmYardScene::update(float delta)
@@ -238,4 +160,78 @@ void FarmYardScene::update(float delta)
 	Vec3 targetCameraPos(newPosition.x, newPosition.y, currentCameraPos.z);
 	// 平滑移动摄像机
 	camera->setPosition3D(currentCameraPos.lerp(targetCameraPos, 0.1f));// 平滑系数
+}
+
+void FarmYardScene::registerMouseScrollListener()
+{
+	// 创建鼠标事件监听器
+	auto listener = EventListenerMouse::create();
+	listener->onMouseScroll = CC_CALLBACK_1(FarmYardScene::onMouseScroll, this);
+
+	// 获取事件分发器并添加监听器
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+}
+
+// 鼠标滚轮事件回调
+void FarmYardScene::onMouseScroll(cocos2d::EventMouse* event)
+{
+	auto scrollDelta = event->getScrollY();  // 获取滚动增量
+	CCLOG("Mouse Scroll Delta: %f", scrollDelta);
+	// 计算摄像机的位置
+	Vec3 currentCameraPos = camera->getPosition3D();
+
+	if ((currentCameraPos.z <= MIN_VIEW_HEIGHT && scrollDelta < 0) ||
+		(currentCameraPos.z >= MAX_VIEW_HEIGHT && scrollDelta > 0))
+		return;
+
+	// 计算摄像头目标位置
+	Vec3 targetCameraPos(currentCameraPos.x, currentCameraPos.y, currentCameraPos.z + 100 * scrollDelta);
+	// 平滑移动摄像机
+	camera->setPosition3D(currentCameraPos.lerp(targetCameraPos, 0.1f));
+}
+
+// 注册鼠标点击监听器
+void FarmYardScene::registerMouseClickListener()
+{
+	// 创建鼠标点击事件监听器
+	auto listener = EventListenerMouse::create();
+	listener->onMouseDown = CC_CALLBACK_1(FarmYardScene::onMouseClick, this);
+
+	// 获取事件分发器并添加监听器
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+}
+
+// 鼠标点击事件回调
+void FarmYardScene::onMouseClick(cocos2d::EventMouse* event)
+{
+	Player* player = Player::getInstance();
+
+	// 获取 FarmYard 地图对象
+	auto FarmYard = (TMXTiledMap*)this->getChildByName("FarmYard");
+
+	// 获取瓦片图层
+	auto tileLayer = FarmYard->getLayer("Meta");
+	if (!tileLayer) {
+		CCLOG("Layer not found");
+		return;
+	}
+
+	// 判断鼠标点击的按钮
+	auto mouseButton = event->getMouseButton();
+	if (mouseButton == EventMouse::MouseButton::BUTTON_LEFT) {
+		CCLOG("Left mouse button clicked");
+		// 执行左键点击相关操作
+	}
+
+
+	// 丰富交互逻辑
+
+}
+
+Vec2 FarmYardScene::convertToTileCoords(const Vec2& pos)
+{
+	// 将玩家的新位置转换为瓦片坐标
+	Vec2 tile = Vec2(int(pos.x / MAP_TILE_WIDTH), int((FARMYARD_MAP_HEIGHT * MAP_TILE_HEIGHT - pos.y) / MAP_TILE_HEIGHT));
+
+	return tile;
 }

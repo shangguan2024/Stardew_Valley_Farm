@@ -17,9 +17,26 @@
 class FarmLand
 {
 public:
+	// 构造函数
+	FarmLand(float x, float y);
+
+	// 析构函数
+	~FarmLand();
+
 	// 耕地的状态
 	LandState landstate;
 
+	// 更新函数
+	void update();
+
+	// 浇水
+	void watering();
+
+	// 耕地所在位置
+	float x, y;
+
+	// 当前干旱时间
+	int dryTime;
 
 };
 

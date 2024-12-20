@@ -19,12 +19,24 @@ Manager* Manager::getInstance()
 
 void Manager::addObject(const FarmObject& obj)
 {
-
+	objects.push_back(obj);
 }
 
 void Manager::addFarmland(const FarmLand& land)
 {
+	lands.push_back(land);
+}
 
+void Manager::update()
+{
+    for (auto& land : lands) {
+        // 更新逻辑
+        land.update();
+    }
+    for (auto& obj : objects) {
+        // 更新逻辑
+        obj.update();
+    }
 }
 
 void Manager::saveGameState(const std::string& filename)

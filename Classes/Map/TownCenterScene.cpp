@@ -56,8 +56,14 @@ bool TownCenterScene::init()
 
 	auto spawnPoint = objectGroup->getObject("SpawnPoint");
 	auto townToYard = objectGroup->getObject("TownToYard");
-	if (spawnPoint.empty() || townToYard.empty()) {
-		CCLOG("SpawnPoint not found in Event layer.");
+	// 获取NPC位置
+	auto abigail= objectGroup->getObject("Abigail");
+	auto alex = objectGroup->getObject("Alex");
+	auto caroline = objectGroup->getObject("Caroline");
+	auto lewis = objectGroup->getObject("Lewis");
+	if (spawnPoint.empty() || townToYard.empty() ||
+		abigail.empty() || alex.empty() || caroline.empty() || lewis.empty()) {
+		CCLOG("Event not found in Event layer.");
 		return false;
 	}
 
@@ -68,7 +74,33 @@ bool TownCenterScene::init()
 	player->init();
 	player->setPosition(spawnPoint["x"].asFloat(), spawnPoint["y"].asFloat());
 	player->setCameraMask(unsigned short(CameraFlag::USER1));
-	this->addChild(player, 1, "player");
+	this->addChild(player, 2, "player");
+
+	// 创建NPC
+	Abigail = Sprite::create("NPC/Abigail.png");
+	Abigail->setAnchorPoint(Vec2(0.5, 0));
+	Abigail->setPosition(abigail["x"].asFloat(), abigail["y"].asFloat());
+	Abigail->setCameraMask(unsigned short(CameraFlag::USER1));
+	Alex = Sprite::create("NPC/Alex.png");
+	Alex->setAnchorPoint(Vec2(0.5, 0));
+	Alex->setPosition(alex["x"].asFloat(), alex["y"].asFloat());
+	Alex->setCameraMask(unsigned short(CameraFlag::USER1));
+	Caroline = Sprite::create("NPC/Caroline.png");
+	Caroline->setAnchorPoint(Vec2(0.5, 0));
+	Caroline->setPosition(caroline["x"].asFloat(), caroline["y"].asFloat());
+	Caroline->setCameraMask(unsigned short(CameraFlag::USER1));
+	Lewis = Sprite::create("NPC/Lewis.png");
+	Lewis->setAnchorPoint(Vec2(0.5, 0));
+	Lewis->setPosition(lewis["x"].asFloat(), lewis["y"].asFloat());
+	Lewis->setCameraMask(unsigned short(CameraFlag::USER1));
+	this->addChild(Abigail, 1, "Abigail");
+	this->addChild(Alex, 1, "Alex");
+	this->addChild(Caroline, 1, "Caroline");
+	this->addChild(Lewis, 1, "Lewis");
+
+	// 创建并注册鼠标滚轮和鼠标点击事件监听器
+	registerMouseScrollListener();
+	registerMouseClickListener();
 
 	// 启动每帧更新函数
 	this->scheduleUpdate();
@@ -116,11 +148,89 @@ void TownCenterScene::update(float delta)
 		Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, FarmYardScene::createScene(), cocos2d::Color3B::WHITE));
 	}
 
+	Vec2 newtile = convertToTileCoords(newPosition);
+	Vec2 faceto = player->getFaceto();
+	targetRect.setRect((newtile.x + faceto.x) * MAP_TILE_WIDTH, (TOWNCENTER_MAP_HEIGHT - newtile.y + faceto.y) * MAP_TILE_HEIGHT, MAP_TILE_WIDTH, MAP_TILE_HEIGHT);
+
 	// 计算摄像头目标位置
 	Vec3 targetCameraPos(newPosition.x, newPosition.y, currentCameraPos.z);
 	// 平滑移动摄像机
 	camera->setPosition3D(currentCameraPos.lerp(targetCameraPos, 0.1f));// 平滑系数
 
+}
+
+// 鼠标滚动监听器
+void TownCenterScene::registerMouseScrollListener()
+{
+	// 创建鼠标事件监听器
+	auto listener = EventListenerMouse::create();
+	listener->onMouseScroll = CC_CALLBACK_1(TownCenterScene::onMouseScroll, this);
+
+	// 获取事件分发器并添加监听器
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+}
+
+void TownCenterScene::onMouseScroll(cocos2d::EventMouse* event)
+{
+	auto scrollDelta = event->getScrollY();  // 获取滚动增量
+	CCLOG("Mouse Scroll Delta: %f", scrollDelta);
+	// 计算摄像机的位置
+	Vec3 currentCameraPos = camera->getPosition3D();
+
+	if ((currentCameraPos.z <= MIN_VIEW_HEIGHT && scrollDelta < 0) ||
+		(currentCameraPos.z >= MAX_VIEW_HEIGHT && scrollDelta > 0))
+		return;
+
+	// 计算摄像头目标位置
+	Vec3 targetCameraPos(currentCameraPos.x, currentCameraPos.y, currentCameraPos.z + 100 * scrollDelta);
+	// 平滑移动摄像机
+	camera->setPosition3D(currentCameraPos.lerp(targetCameraPos, 0.1f));
+}
+
+// 鼠标点击监听器
+void TownCenterScene::registerMouseClickListener()
+{
+	// 创建鼠标点击事件监听器
+	auto listener = EventListenerMouse::create();
+	listener->onMouseDown = CC_CALLBACK_1(TownCenterScene::onMouseClick, this);
+
+	// 获取事件分发器并添加监听器
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+}
+
+void TownCenterScene::onMouseClick(cocos2d::EventMouse* event)
+{
+	Player* player = Player::getInstance();
+
+	// 获取 FarmYard 地图对象
+	auto TownCentre = (TMXTiledMap*)this->getChildByName("TownCentre");
+
+	// 判断鼠标点击的按钮
+	auto mouseButton = event->getMouseButton();
+	if (mouseButton == EventMouse::MouseButton::BUTTON_RIGHT) {
+		CCLOG("Right mouse button clicked");
+		// 执行右键点击相关操作
+		if (targetRect.containsPoint(Abigail->getPosition())) {
+			CCLOG("Abigail");
+
+
+		}
+		else if(targetRect.containsPoint(Alex->getPosition())) {
+			CCLOG("Alex");
+
+
+		}
+		else if (targetRect.containsPoint(Caroline->getPosition())) {
+			CCLOG("Caroline");
+
+
+		}
+		else if (targetRect.containsPoint(Lewis->getPosition())) {
+			CCLOG("Lewis");
+
+
+		}
+	}
 }
 
 Vec2 TownCenterScene::convertToTileCoords(const Vec2& pos)

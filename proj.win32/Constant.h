@@ -55,7 +55,7 @@ constexpr int FARMHOUSE_MAP_HEIGHT = 14;                                        
 constexpr int TOWNCENTER_MAP_WIDTH = 60;                                                     // TownCenter地图宽度
 constexpr int TOWNCENTER_MAP_HEIGHT = 50;                                                    // TownCenter地图高度
 
-constexpr int TIME_DIPLAY_OFFSET_X = -300;                                                    // 时间显示背景X轴偏移量
+constexpr int TIME_DIPLAY_OFFSET_X = -300;                                                   // 时间显示背景X轴偏移量
 constexpr int TIME_DIPLAY_OFFSET_Y = -50;                                                    // 时间显示背景Y轴偏移量
 
 constexpr int DEFAULT_CAPACITY = 30;                                                         // 默认背包容量
@@ -114,11 +114,25 @@ enum ObjectType
     CROP,
 };
 
+constexpr int OBJECT_TREE_WIDTH = 16;
+constexpr int OBJECT_TREE_HEIGHT = 16;
+constexpr int OBJECT_WEED_WIDTH = 16;
+constexpr int OBJECT_WEED_HEIGHT = 16;
+constexpr int OBJECT_STONE_WIDTH = 16;
+constexpr int OBJECT_STONE_HEIGHT = 16;
+constexpr int OBJECT_CROP_WIDTH = 16;
+constexpr int OBJECT_CROP_HEIGHT = 16;
+
+
+
 enum LandState
 {
     DRY, 
     WET,
 };
+
+constexpr int DRY_THRESHOLD = 100;
+constexpr int WATERING_TIME = 100;
 
 // NPC的种类
 enum NPCType
