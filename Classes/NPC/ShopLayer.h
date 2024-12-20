@@ -77,7 +77,7 @@ public:
 		{
 			case RADISH_SEED:return "RADISH_SEED";
 			case POTATO_SEED:return "POTATO_SEED";
-			case WHRAT_SEED:return "WHRAT_SEED";
+			case WHEAT_SEED:return "WHRAT_SEED";
 			default:return "something wrong in SeedType";
 		}
 	}

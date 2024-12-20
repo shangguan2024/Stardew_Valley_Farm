@@ -18,6 +18,12 @@
 class FarmObject
 {
 public:
+	// 构造函数
+	FarmObject(ObjectType type, float x, float y);
+
+	// 析构函数
+	~FarmObject();
+
 	// 对象的种类
 	ObjectType objecttype;
 
@@ -26,6 +32,8 @@ public:
 
 	// 当前阶段
 	int currstate;
+
+
 
 private:
 	// 最大阶段

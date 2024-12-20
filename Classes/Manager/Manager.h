@@ -33,8 +33,8 @@ public:
     void loadGameState(const std::string& filename);
 
 private:
-    std::vector<FarmObject> objects;      // 非耕地物体
-    std::vector<FarmLand> farmlands;  // 耕地物体
+    std::vector<FarmObject> objects;     // 非耕地物体
+    std::vector<FarmLand> lands;         // 耕地物体
 
     // 私有构造函数，禁止外部实例化
     Manager();

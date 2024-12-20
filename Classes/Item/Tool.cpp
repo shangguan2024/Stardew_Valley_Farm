@@ -12,7 +12,7 @@ Tool::Tool(const ToolType _tooltype, std::string _image, int _maxstack, int _pri
 	:Item(ItemType::TOOL, _image, _maxstack, _price), tooltype(_tooltype) {
 }
 
-std::string Tool::getDescription() const
+const std::string Tool::getDescription()
 {
 	switch (tooltype) {
 		case  HOE:

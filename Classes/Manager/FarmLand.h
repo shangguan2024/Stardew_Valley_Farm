@@ -10,9 +10,16 @@
 #define _FARMLAND_
 
 #include "cocos2d.h"
+#include "FarmLand.h"
+#include "FarmObject.h"
+#include "proj.win32/Constant.h"
 
 class FarmLand
 {
+public:
+	// 耕地的状态
+	LandState landstate;
+
 
 };
 

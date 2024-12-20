@@ -171,6 +171,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Music\AudioPlayer.cpp" />
     <ClCompile Include="..\Classes\NPC\ChatLayer.cpp" />
     <ClCompile Include="..\Classes\NPC\NPC.cpp" />
+    <ClCompile Include="..\Classes\NPC\ShopLayer.cpp" />
     <ClCompile Include="..\Classes\Player\Player.cpp" />
     <ClCompile Include="..\Classes\Scene\MenuScene.cpp" />
     <ClCompile Include="..\Classes\Scene\SaveLoadScene.cpp" />
@@ -198,6 +199,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Music\AudioPlayer.h" />
     <ClInclude Include="..\Classes\NPC\ChatLayer.h" />
     <ClInclude Include="..\Classes\NPC\NPC.h" />
+    <ClInclude Include="..\Classes\NPC\ShopLayer.h" />
     <ClInclude Include="..\Classes\Player\Player.h" />
     <ClInclude Include="..\Classes\Scene\MenuScene.h" />
     <ClInclude Include="..\Classes\Scene\SaveLoadScene.h" />

@@ -18,14 +18,14 @@
    eJztnUFy00AQRWXiC1Ch2LDJHkI2HMBH8VGywkcIG4wvkBA2OEuvDBSHCERsuEEgoopupI4nzciypZG6R+pX1SVbcjmT+f7T0yNZPj9IkvMOYw1xAfEJ4jsEcZPvW8CxBbxm0WWbNMbJOA98/L7os0vnMd/69u265VoQsG9BmjR5f01b7MMPTtDzXTShfsb++gLxOeDWfezTwtWEv76PWzYWLMgLVeOI0Q5sLHigx7VpIYKrieuNa9NCDNLkKfPHL9NCjAz6/gfzxzfTQ4wU+v7rgflDC+iPP+YPNZg/dJFa/lCFb7wyf8iB/uDzXfOHHL75boz+eDSSbkEYfPk8Fn+c1TymmTRfr7o/z6DdH036OQaN+DqWFn+UjT91+vRNo5Zs6GpMJE00++PMCe2E0O1GWf7w9XsoLWLJ/Vr9EUv/heROmT+IS+kGCAD5YwX5Y6XRHzHki5Dc5ecDVxeOHpr8EZIYtM3y+mO1VuqPZ4FyR6j3aRut9XnZZ/lVg36NYV5g67u60OqP0ISq0dumb+u7u+YJep22HJ/29Py5m2e09fk2Ms/5KE3+CDUv+hnmbVqnT+fPY+nzbWSefA714fS3Uk34nLXJ/FcjPH/gte23yjXpM9wfpMdtnkcm0u1rQiw1uQvPH6TJ4/G/PDKRbt/Q4PU55ZBCD6Nj+PVX5g9ZeH1u/pDFt36FWmBoqguHAs8f7vdqje5x/WHfq5XHzR+mhTxufW5ayOOu734cJVPp9gwdtz5HZqPkSLRBA8ddv0Jm5hFRUqbHcpSs5hBvIUQbNlAyNl4RS9NEBHd+xTFNusedX/kwTbqFz698UE6ZmTatw+dXVWCNYpq0x7b8UYb5pT329QfH/BKWXfJHFVbThyOrMV5xYPw6Mo+EIa2Y7+7K1SiZmCbNKavP64C5ZGa6NIKvX4WAdJnbWtjehMgfVSyLuXF7f6E/tOGPMmztpZqQ+WMXUJN3pkspderzEJhX/FSt77aJ1fb/E6I+b4L55CFN169CYLXkBqn8wbGxK0eDPwjTRD5/cK6Kun6oumgZrzhDzSmS890qXoMei4Fdn9flekkdhpZTul4vqcOQrvPWmj84Q9DEvY+ldj2QbZrgfSAPIQ8+yeMUHp/GdH8J0gLvnah9vHLxXTtB/8sxaIHxsgi85wccm3bfyv1wtVhH5A9kzjzi/i/H481v72LAvilqcpj7hbxz7x/aV3Xc8zzoa6j9xT1eo9IDr2Whc/T8c3XC9ECPvCg8Q1vc97x4rum4+zvO9HupsQC1YgJ6lH6uYg3+O8J/AUDh29Y=
   </data>
  </layer>
- <objectgroup id="3" name="Event">
+ <objectgroup id="3" name="Event" visible="0">
   <object id="4" name="SpawnPoint" x="799.667" y="512.834" width="16" height="16"/>
   <object id="5" name="YardToHouse" x="799.001" y="397.667" width="16" height="16"/>
   <object id="6" name="YardToTown" x="1567.5" y="288.833" width="16" height="48"/>
  </objectgroup>
  <layer id="7" name="Meta" width="100" height="80">
   <data encoding="base64" compression="zlib">
-   eJzt2zEOwjAQAMG0vDsfBwoaJKACr48Z6fpztglEPi/HcRpzm2er9/nneWX1XtXhN7To0aJHixY9WvRo0aNFjxY9WvRo0aNFjxY9WvRomdJjwhnuJvSY9p/ozueY+M1gxzNM/qa24/5Te+y6vx4terTo0fJp793O86BHy649ptKjRY8WPVr0aJnwzj7JlN9RU+jRokeLHi16tOjRokeLFi16tGjRokWLDi16tOjRokeLHi16tOjRokeLHi16tOjRokeLHi16tOjRokeLHi16tOjRokeLHi16tOjRokeLHi16tOjRokeLHi16tOjRokeHezgd7kV1TLgz+O6e9oTZzern9e25AogNsTA=
+   eJzt2sFuwjAQAFGufDflv1sfkGiIEyIcdnY9I/lu9zXCdnK7Xi43h+NvLIuez8yjV/S8qMPOTQteWvDSgpcerPRgpQcrPVjpwUoPVnqw0oOVHqz0YFXJo8IaWhU8Kv1ftTKvo+I9dcY1VH6Pk3H+VT2yzr+iR+b568FKD1Z78862npYerDJ7VEwPVnqw0oOVHqwq7NkrVeUcVSU9WOnBSg9WJI+fa9ygpIcevfTgWLT00COLR0R6cCxaerxa3EFzmzE9WOnBas3jrktYvf2VJjGt7as0iau3z9Ukpq1zx9pvijbntncO9Hflux05l/u8nN/RexKfl3P75N7KM+T4Pr1H9BkZ2wgPTcY14p7du5ZxjXrv0bsD0+dYo99Dbd2F6bLf2e8F3Rsf61vvaX1W3uub7819VvaL+I5Bk35R35Vosl7kdz6avBb93ZUm/4v2eJ6DJgyP53nMvh+meCznMqsJyePRzCZEj9asJlSP1owmZI/WTCbLe3Fq75is3fOT17Qs29y3vp3oWWRYVyvzvJceexaZB73leTH676XHXOMXxWfKsg==
   </data>
  </layer>
 </map>

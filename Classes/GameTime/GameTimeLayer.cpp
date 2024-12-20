@@ -22,12 +22,12 @@ bool GameTimeLayer::init()
 	// 设置时间
 	timeLabel = Label::createWithSystemFont(GameTime::getInstance()->toString(), "Arial", 30);
 	timeLabel->setColor(ccc3(0, 0, 0));
-	timeLabel->setAnchorPoint(Vec2(0,0.5));
-	timeLabel->setPosition(Vec2(50, 50)); // 固定图标位置
-
+	timeLabel->setAnchorPoint(Vec2(0, 0));
+	timeLabel->setPosition(Vec2(DESIGN_RESOLUTION_WIDTH + TIME_DIPLAY_OFFSET_X, DESIGN_RESOLUTION_HEIGHT + TIME_DIPLAY_OFFSET_Y)); // 固定图标位置
+	
 	// 设置时间显示背景
 	timeIcon = Sprite::create("chatlayerbackground2.png");
-	timeIcon->setAnchorPoint(Vec2(0, 0.5));
+	timeIcon->setAnchorPoint(Vec2(0, 0));
 	timeIcon->setContentSize(timeLabel->getContentSize() + Size(0,5));
 	timeIcon->setPosition(timeLabel->getPosition());
 	this->addChild(timeIcon);

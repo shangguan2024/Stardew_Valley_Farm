@@ -95,8 +95,7 @@ bool ChatLayer::init(NPC* npc)
 ChatLayer* ChatLayer::create(NPC* npc)
 {
     ChatLayer* layer = new(std::nothrow) ChatLayer();
-    if (layer && layer->init(npc)) 
-    {
+    if (layer && layer->init(npc)) {
         layer->autorelease();
         return layer;
     }
@@ -123,6 +122,7 @@ void ChatLayer::chatButtonCallBack(Ref* pSender)
 {
     updateDialog();
 }
+
 void ChatLayer::eventButtonCallBack(Ref* pSender)
 {
     // 如果事件窗口未打开
@@ -144,15 +144,16 @@ void ChatLayer::eventButtonCallBack(Ref* pSender)
 
         // 打开商店
         auto shop = ShopLayer::create();
-#if 1
+#if 0
         auto npc = NPC::create("Player/Sandy.png", ALEX);
         this->addChild(npc);
-#endif
+
         shop->setNPC(npc);
         auto item = new Item(CROP, "defaulthead.png", 64, 1);
         shop->InsertShopItems(item, 10);
         shop->UpdateShopItems();
         this->addChild(shop, 3,"shop");
+#endif
 
     }
     else 

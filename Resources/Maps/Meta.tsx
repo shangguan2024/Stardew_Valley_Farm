@@ -11,4 +11,9 @@
    <property name="Plowable" type="bool" value="true"/>
   </properties>
  </tile>
+ <tile id="2">
+  <properties>
+   <property name="FishAllowed" type="bool" value="true"/>
+  </properties>
+ </tile>
 </tileset>

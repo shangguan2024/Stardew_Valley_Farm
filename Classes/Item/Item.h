@@ -22,11 +22,11 @@ public:
   
     virtual ~Item() = default;
 
-    // 获取物品基本信息 子类可覆盖
-    virtual const ItemType& getType() const;
+    // 获取物品基本信息
+    virtual const ItemType& getType();
 
-    // 获得描述 子类可覆盖
-    virtual std::string getDescription() const;
+    // 获得描述 子类必须覆盖
+    virtual const std::string getDescription() = 0;
 
     // 获得基础属性
     int getMaxStack() const;

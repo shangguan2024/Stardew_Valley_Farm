@@ -29,7 +29,7 @@ bool ShopLayer::init()
     {
         return false;
     }
-
+    return true;
 }
 
 // 设置对话/交易/委托/赠送的NPC

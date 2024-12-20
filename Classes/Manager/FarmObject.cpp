@@ -8,3 +8,14 @@
 
 #include "FarmObject.h"
 
+USING_NS_CC;
+
+FarmObject::FarmObject(ObjectType type, float x, float y)
+{
+	objecttype = type;
+
+	objectsize.setRect(x, y, 16, 16);
+	currstate = 0;
+}
+
+FarmObject::~FarmObject(){}

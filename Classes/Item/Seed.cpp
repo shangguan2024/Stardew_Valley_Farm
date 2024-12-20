@@ -12,7 +12,7 @@ Seed::Seed(const SeedType _seedtype, std::string _image, int _maxstack, int _pri
 	:Item(ItemType::SEED, _image, _maxstack, _price), seedtype(_seedtype) {
 }
 
-std::string Seed::getDescription() const
+const std::string Seed::getDescription()
 {
 	switch (seedtype) {
 		case  RADISH_SEED:
