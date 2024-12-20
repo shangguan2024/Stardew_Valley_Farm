@@ -12,12 +12,12 @@ USING_NS_CC;
 
 Manager* Manager::instance = nullptr;
 
-Manager& Manager::getInstance()
+Manager* Manager::getInstance()
 {
-
+	return instance;
 }
 
-void Manager::addObject(const Object& obj)
+void Manager::addObject(const FarmObject& obj)
 {
 
 }

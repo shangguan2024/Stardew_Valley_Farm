@@ -164,7 +164,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Item\Tool.cpp" />
     <ClCompile Include="..\Classes\Manager\FarmLand.cpp" />
     <ClCompile Include="..\Classes\Manager\Manager.cpp" />
-    <ClCompile Include="..\Classes\Manager\Object.cpp" />
+    <ClCompile Include="..\Classes\Manager\FarmObject.cpp" />
     <ClCompile Include="..\Classes\Map\FarmHouseScene.cpp" />
     <ClCompile Include="..\Classes\Map\FarmYardScene.cpp" />
     <ClCompile Include="..\Classes\Map\TownCenterScene.cpp" />
@@ -191,7 +191,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Item\Tool.h" />
     <ClInclude Include="..\Classes\Manager\FarmLand.h" />
     <ClInclude Include="..\Classes\Manager\Manager.h" />
-    <ClInclude Include="..\Classes\Manager\Object.h" />
+    <ClInclude Include="..\Classes\Manager\FarmObject.h" />
     <ClInclude Include="..\Classes\Map\FarmHouseScene.h" />
     <ClInclude Include="..\Classes\Map\FarmYardScene.h" />
     <ClInclude Include="..\Classes\Map\TownCenterScene.h" />
@@ -203,6 +203,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Scene\SaveLoadScene.h" />
     <ClInclude Include="..\Classes\SkillTree\SkillTree.h" />
     <ClInclude Include="Constant.h" />
+    <ClInclude Include="Json.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\cocos2d\cocos\2d\libcocos2d.vcxproj">

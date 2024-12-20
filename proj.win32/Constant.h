@@ -63,13 +63,13 @@ enum ItemType
 {
 	SEED,          // 种子
 	TOOL,          // 工具
- 	OHTER,         // 其他 
+ 	OTHER,         // 其他 
 };
 
 // 每种物品的具体描述
 const std::string SEED_DESCRIPTION = " ";
 const std::string TOOL_DESCRIPTION = " ";
-const std::string OHTER_DESCRIPTION = " ";
+const std::string OTHER_DESCRIPTION = " ";
 
 // 工具类型枚举
 enum ToolType 
@@ -95,13 +95,13 @@ enum SeedType
 {
     RADISH_SEED,
     POTATO_SEED,
-    WHRAT_SEED,
+    WHEAT_SEED,
 };
 
 // 每种种子的具体描述
 const std::string SEED_RADISH_DESCRIPTION = " ";
 const std::string SEED_POTATO_DESCRIPTION = " ";
-const std::string SEED_WHRAT_DESCRIPTION = " ";
+const std::string SEED_WHEAT_DESCRIPTION = " ";
 
 enum ObjectType
 {

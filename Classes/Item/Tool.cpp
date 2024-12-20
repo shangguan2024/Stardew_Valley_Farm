@@ -14,17 +14,28 @@ Tool::Tool(const ToolType _tooltype, std::string _image, int _maxstack, int _pri
 
 std::string Tool::getDescription() const
 {
-	if (tooltype == HOE)
-		return TOOL_HOE_DESCRIPTION;
-	else if(tooltype == WATERING_CAN)
-		return TOOL_WATERING_CAN_DESCRIPTION;
-	else if (tooltype == PICKAXE)
-		return TOOL_PICKAXE_DESCRIPTION;
-	else if (tooltype == AXE)
-		return TOOL_AXE_DESCRIPTION;
-	else if (tooltype == SCYTHE)
-		return TOOL_SCYTHE_DESCRIPTION;
-	else if (tooltype == FISHING_ROD)
-		return TOOL_FISHING_ROD_DESCRIPTION;
+	switch (tooltype) {
+		case  HOE:
+			return TOOL_HOE_DESCRIPTION;
+			break;
+		case WATERING_CAN:
+			return TOOL_WATERING_CAN_DESCRIPTION;
+			break;
+		case   PICKAXE:
+			return TOOL_PICKAXE_DESCRIPTION;
+			break;
+		case  AXE:
+			return TOOL_AXE_DESCRIPTION;
+			break;
+		case  SCYTHE:
+			return TOOL_SCYTHE_DESCRIPTION;
+			break;
+		case FISHING_ROD:
+			return TOOL_FISHING_ROD_DESCRIPTION;
+			break;
+		default:
+			return " ";
+			break;
+	}
 }
 

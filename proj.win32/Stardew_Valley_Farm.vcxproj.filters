@@ -43,11 +43,11 @@
     <Filter Include="Classes\GameTime">
       <UniqueIdentifier>{7f0b0786-e012-4aa7-8b98-9a4b6d31c9eb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\Inventory">
-      <UniqueIdentifier>{b918723f-da05-4c7f-b4aa-2213bffc5742}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes\Manager">
       <UniqueIdentifier>{34c40644-4a22-44b8-bf06-f4ccae4c5386}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Inventory">
+      <UniqueIdentifier>{b918723f-da05-4c7f-b4aa-2213bffc5742}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -120,7 +120,7 @@
     <ClCompile Include="..\Classes\Manager\Manager.cpp">
       <Filter>Classes\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Manager\Object.cpp">
+    <ClCompile Include="..\Classes\Manager\FarmObject.cpp">
       <Filter>Classes\Manager</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Manager\FarmLand.cpp">
@@ -197,11 +197,14 @@
     <ClInclude Include="..\Classes\Manager\Manager.h">
       <Filter>Classes\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Manager\Object.h">
+    <ClInclude Include="..\Classes\Manager\FarmObject.h">
       <Filter>Classes\Manager</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Manager\FarmLand.h">
       <Filter>Classes\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Json.hpp">
+      <Filter>Win32</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

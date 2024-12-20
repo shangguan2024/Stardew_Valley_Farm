@@ -1,19 +1,10 @@
 /****************************************************************
  * Project Name:  Stardew_Valley_Farm
- * File Name:     Object.h
- * File Function: Object类的定义
+ * File Name:     Object.cpp
+ * File Function: Object类的实现
  * Author:        张翔
  * Update Date:   2024/12/19
  ****************************************************************/
 
-#ifndef _OBJECT_
-#define _OBJECT_
+#include "FarmObject.h"
 
-#include "cocos2d.h"
-
-class Object
-{
-
-};
-
-#endif // _OBJECT_
