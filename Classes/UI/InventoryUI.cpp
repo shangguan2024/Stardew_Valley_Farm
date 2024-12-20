@@ -108,7 +108,7 @@ void InventoryUI::click(Vec2 pos)
 	// »æÖÆÐü¹ÒÎïÆ·
 	Inventory::Slot attachedSlot = inventory->getAttached();
 	attached->removeAllChildrenWithCleanup(true);
-	// attached->getTag() is the id of the last attached item
+	// attached->getTag() is the ID of the last attached item
 	if (attachedSlot != Item::NIL) {
 
 		auto attachedItem = rscm->getItem(attachedSlot.id);

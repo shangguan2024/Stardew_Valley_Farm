@@ -13,7 +13,7 @@
 
 // Items
 #include "Items/Item.h"
-#include "Items/Block.h"
+#include "Items/ItemManager.h"
 
 class ResourceManager
 {
@@ -41,10 +41,8 @@ public:
     void loadResouces();
     void loadUIPath();
 
-    cocos2d::Sprite* getItem(Item::id id);
+    cocos2d::Sprite* getItem(Item::ID id);
     inline cocos2d::Sprite* getItem(std::string name);
-    cocos2d::Sprite* getBlock(Block::id id);
-    inline cocos2d::Sprite* getBlock(std::string name);
     cocos2d::Label* getLabel(const std::string& text, const int SystemFontSize = 24);
     cocos2d::ui::Button* getButton(ButtonType bfd);
 
@@ -55,7 +53,7 @@ private:
     static ResourceManager* instance;
 
     // A Rectangent region of some Texture in where the required item is
-    // the index is id
+    // the index is ID
     static cocos2d::Rect itemRect[1024];
     static cocos2d::Rect blockRect[1024];
 

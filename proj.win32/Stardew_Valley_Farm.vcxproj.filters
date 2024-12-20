@@ -7,9 +7,6 @@
     <Filter Include="Win32">
       <UniqueIdentifier>{84a8ebd7-7cf0-47f6-b75e-d441df67da40}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\Audio">
-      <UniqueIdentifier>{b679ac17-224a-4ae0-9086-645e06d4a539}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes\Entities">
       <UniqueIdentifier>{1c17a68b-7e6d-4ef6-a7d5-d308d9ea7bb9}</UniqueIdentifier>
     </Filter>
@@ -48,12 +45,6 @@
     <ClCompile Include="Main.cpp">
       <Filter>Win32</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Audio\AudioManager.cpp">
-      <Filter>Classes\Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Audio\SoundEffect.cpp">
-      <Filter>Classes\Audio</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Entities\Animal.cpp">
       <Filter>Classes\Entities</Filter>
     </ClCompile>
@@ -68,9 +59,6 @@
     </ClCompile>
     <ClCompile Include="..\Classes\InputControl\InputManager.cpp">
       <Filter>Classes\InputControl</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Items\FoodItem.cpp">
-      <Filter>Classes\Items</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Items\Inventory.cpp">
       <Filter>Classes\Items</Filter>
@@ -114,9 +102,6 @@
     <ClCompile Include="..\Classes\UI\HoverButton.cpp">
       <Filter>Classes\UI</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\ResourceManagement\AudioClip.cpp">
-      <Filter>Classes\ResourceManagement</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\ResourceManagement\ResourceManager.cpp">
       <Filter>Classes\ResourceManagement</Filter>
     </ClCompile>
@@ -128,9 +113,6 @@
     </ClCompile>
     <ClCompile Include="..\Classes\UI\InventoryUI.cpp">
       <Filter>Classes\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Items\Block.cpp">
-      <Filter>Classes\Items</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\GameTime\GameTime.cpp">
       <Filter>Classes\GameTime</Filter>
@@ -150,14 +132,20 @@
     <ClCompile Include="..\Classes\Map\FarmYardMap.cpp">
       <Filter>Classes\Map</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\ResourceManagement\Audio.cpp">
+      <Filter>Classes\ResourceManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ResourceManagement\AudioManager.cpp">
+      <Filter>Classes\ResourceManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Items\ItemManager.cpp">
+      <Filter>Classes\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Items\Behaviour.cpp">
+      <Filter>Classes\Items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Classes\Audio\AudioManager.h">
-      <Filter>Classes\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Audio\SoundEffect.h">
-      <Filter>Classes\Audio</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Entities\Animal.h">
       <Filter>Classes\Entities</Filter>
     </ClInclude>
@@ -172,9 +160,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\InputControl\InputManager.h">
       <Filter>Classes\InputControl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Items\FoodItem.h">
-      <Filter>Classes\Items</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Items\Inventory.h">
       <Filter>Classes\Items</Filter>
@@ -218,9 +203,6 @@
     <ClInclude Include="..\Classes\UI\HoverButton.h">
       <Filter>Classes\UI</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\ResourceManagement\AudioClip.h">
-      <Filter>Classes\ResourceManagement</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\ResourceManagement\ResourceManager.h">
       <Filter>Classes\ResourceManagement</Filter>
     </ClInclude>
@@ -229,9 +211,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\UI\InventoryUI.h">
       <Filter>Classes\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Items\Block.h">
-      <Filter>Classes\Items</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\GameTime\GameTime.h">
       <Filter>Classes\GameTime</Filter>
@@ -256,6 +235,18 @@
     </ClInclude>
     <ClInclude Include="..\Classes\SceneManagement\BeachScene.h">
       <Filter>Classes\SceneManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ResourceManagement\Audio.h">
+      <Filter>Classes\ResourceManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ResourceManagement\AudioManager.h">
+      <Filter>Classes\ResourceManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Items\ItemManager.h">
+      <Filter>Classes\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Items\Behaviour.h">
+      <Filter>Classes\Items</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

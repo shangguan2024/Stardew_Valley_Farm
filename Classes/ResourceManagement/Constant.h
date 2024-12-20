@@ -69,27 +69,41 @@ enum class PlayerEnterType {
 	FROM_PORTAL
 };
 
+
 // 物品种类枚举
-enum class ItemType {
-	SEED, // 种子
-	TOOL, // 工具
-	CROP  // 作物
+enum class ItemTag {
+	Behaviour, // Default Type - NULL
+	Block, // Placeable
+	Food,
+	Tool,
+	Weapon,
+
+	Fruit,
+	Seed,
+	Fish
+
+	//SaltyFish // SaltyFish = Food + Weapon
+
 };
 
-// 每种物品的具体描述
-const std::string SEED_DESCRIPTION = " ";
-const std::string TOOL_DESCRIPTION = " ";
-const std::string CROP_DESCRIPTION = " ";
-
-// 工具类型枚举
-enum class ToolType {
-	HOE,          // 锄头
-	WATERING_CAN, // 浇水壶
-	PICKAXE,      // 镐子
-	AXE,          // 斧头
-	SCYTHE,       // 镰刀
-	FISHING_ROD   // 钓鱼竿
-};
+//// 每种物品的具体描述
+//const std::string SEED_DESCRIPTION = " ";
+//const std::string TOOL_DESCRIPTION = " ";
+//const std::string CROP_DESCRIPTION = " ";
+//
+//// 工具类型枚举
+//enum class ToolType {
+//	Hoe,
+//	Scythe,
+//	WateringCan,
+//	FishingRod
+//	//HOE,          // 锄头
+//	//WATERING_CAN, // 浇水壶
+//	//PICKAXE,      // 镐子
+//	//AXE,          // 斧头
+//	//SCYTHE,       // 镰刀
+//	//FISHING_ROD   // 钓鱼竿
+//};
 
 // 每种功能的具体描述
 const std::string TOOL_HOE_DESCRIPTION = " ";
@@ -99,12 +113,33 @@ const std::string TOOL_AXE_DESCRIPTION = " ";
 const std::string TOOL_SCYTHE_DESCRIPTION = " ";
 const std::string TOOL_FISHING_ROD_DESCRIPTION = " ";
 
-// 种子类型枚举
-enum class SeedType {
-	RADISH_SEED,
-	POTATO_SEED,
-	WHRAT_SEED
+enum class BehaviourType {
+	Behaviour,
+	// Inheritance Depth: 1
+	Block,
+	Food,
+	Tool,
+	Weapon,
+	// Block : Inheritance Depth: 2
+	Seed,
+	// Food : Inheritance Depth: 2
+	Fruit,
+	Fish,
+	// Tool : Inheritance Depth: 2
+	Hoe,
+	WateringCan,
+	FishingRod,
+	Scythe,
+	// Fish & Weapon : (max) Inheritance Depth: 3
+	SaltyFish
 };
+
+//// 种子类型枚举
+//enum class SeedType {
+//	RADISH_SEED,
+//	POTATO_SEED,
+//	WHRAT_SEED
+//};
 
 // 每种种子的具体描述
 const std::string SEED_RADISH_DESCRIPTION = " ";

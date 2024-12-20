@@ -60,7 +60,7 @@ void ResourceManager::loadUIPath()
 	inventory = "UI/Inventory.png";
 }
 
-cocos2d::Sprite* ResourceManager::getItem(Item::id id)
+cocos2d::Sprite* ResourceManager::getItem(Item::ID id)
 {
 	cocos2d::Texture2D* texture = itemRsc[id];
 	const Rect region = itemRect[id];
@@ -71,21 +71,7 @@ cocos2d::Sprite* ResourceManager::getItem(Item::id id)
 
 inline cocos2d::Sprite* ResourceManager::getItem(std::string name)
 {
-	return getBlock(Item::idTable[name]);
-}
-
-Sprite* ResourceManager::getBlock(Block::id id)
-{
-	Texture2D* texture = blockRsc[id];
-	const Rect region = blockRect[id];
-	auto spriteFrame = SpriteFrame::createWithTexture(texture, region);
-	return Sprite::createWithSpriteFrame(spriteFrame);
-}
-
-
-inline Sprite* ResourceManager::getBlock(std::string name)
-{
-	return getBlock(Block::idTable[name]);
+	return getItem(ItemManager::idTable[name]);
 }
 
 Label* ResourceManager::getLabel(const std::string& text, const int SystemFontSize)

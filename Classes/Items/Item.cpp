@@ -2,5 +2,33 @@
 
 USING_NS_CC;
 
-std::unordered_map<std::string, Item::id> Item::idTable;
-std::unordered_map<Item::id, std::string> Item::nameTable;
+Item::Item()
+    : Item(Item::NIL, "") {}
+
+Item::Item(Item::ID new_id)
+    : Item(new_id, "") {}
+
+Item::Item(Item::ID new_id, std::string new_name)
+    : id(new_id), 
+    name(new_name),
+    description(""),
+    flag(ItemTag::Behaviour)
+{
+}
+
+Item::Item(Item&& other)
+{
+    name = std::move(other.name);
+    description = std::move(other.description);
+    id = other.id;
+    flag = other.flag;
+}
+
+Item& Item::operator=(Item&& other)
+{
+    name = std::move(other.name);
+    description = std::move(other.description);
+    id = other.id;
+    flag = other.flag;
+    return *this;
+}

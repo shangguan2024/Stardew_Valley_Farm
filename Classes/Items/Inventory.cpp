@@ -26,7 +26,7 @@ Inventory* Inventory::getInstance()
 	return instance;
 }
 
-Item::id Inventory::getItemId(int row, int col)
+Item::ID Inventory::getItemId(int row, int col)
 {
 	return inventory[row][col].id;
 }
@@ -97,7 +97,7 @@ Inventory::Slot Inventory::getAttached()
 	return attached;
 }
 
-bool Inventory::pick(Item::id item, size_t num)
+bool Inventory::pick(Item::ID item, size_t num)
 {
 	for (int i = 0; i < 3; ++i) {
 		for (int j = 0; j < 12; ++j) {
