@@ -26,7 +26,7 @@ private:
 
     static HUD* instance;
 
-    static ResourceManager* rscm;
+    static ResourceManager* resourceManager;
 
     // ¸üÐÂ HUD ÄÚÈÝ
     void updateGameTimeHUD();
@@ -34,7 +34,7 @@ private:
     GameTime* gameTime;
     cocos2d::Label* gameTimeLabel;
 
-    cocos2d::ProgressTimer* timerModel;
+    cocos2d::ProgressTimer* energyBar;
     cocos2d::Label* energyLabel;
 };
 

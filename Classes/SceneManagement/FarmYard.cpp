@@ -17,6 +17,5 @@ Scene* FarmYard::createScene()
 
 void FarmYard::initConstants()
 {
-	mapName = MapName::FarmYard;
-	tileMapPath = Texture::Beach;
+	// tileMap = new 
 }

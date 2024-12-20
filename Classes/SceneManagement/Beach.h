@@ -13,7 +13,6 @@ protected:
     void initConstants() override;
 
 private:
-    // 实现 FarmYardScene 类的 create 方法
     CREATE_FUNC(Beach);
 };
 

@@ -144,6 +144,9 @@
     <ClCompile Include="..\Classes\Map\MapManager.cpp">
       <Filter>Classes\Map</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Map\BeachMap.cpp">
+      <Filter>Classes\Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\Audio\AudioManager.h">
@@ -243,6 +246,9 @@
       <Filter>Classes\Map</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Map\MapManager.h">
+      <Filter>Classes\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Map\BeachMap.h">
       <Filter>Classes\Map</Filter>
     </ClInclude>
   </ItemGroup>

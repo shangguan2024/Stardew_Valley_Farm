@@ -116,7 +116,7 @@ std::string GameTime::toString() const
 	_time += (month < 10) ? "0" + std::to_string(month) : std::to_string(month);
 	_time += "/";
 	_time += (day < 10) ? "0" + std::to_string(day) : std::to_string(day);
-	_time += " ";
+	_time += "\n\n";
 	_time += (hour < 10) ? "0" + std::to_string(hour) : std::to_string(hour);
 	_time += ":";
 	_time += (minute < 10) ? "0" + std::to_string(minute) : std::to_string(minute);

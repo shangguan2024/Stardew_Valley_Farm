@@ -2,9 +2,9 @@
 #include "InputControl/InputManager.h"
 #include "Player/PlayerController.h"
 #include "UI/UIManager.h"
+#include "Map/BeachMap.h"
 
 USING_NS_CC;
-
 
 Scene* Beach::createScene()
 {
@@ -16,6 +16,5 @@ Scene* Beach::createScene()
 
 void Beach::initConstants()
 {
-	mapName = MapName::Beach;
-	tileMapPath = Texture::Beach;
+	tileMap = new BeachMap();
 }
