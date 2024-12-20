@@ -11,27 +11,29 @@
 
 #include "vector"
 #include "cocos2d.h"
-#include "Object.h"
+#include "FarmObject.h"
 #include "FarmLand.h"
 
 class Manager
 {
 public:
     // 获取单例指针
-	static Manager& getInstance();
+	static Manager* getInstance();
 
     // 添加对象
-    void addObject(const Object& obj);
+    void addObject(const FarmObject& obj);
 
     // 添加耕地
     void addFarmland(const FarmLand& land);
 
+    // 保存游戏状态
     void saveGameState(const std::string& filename);
 
+    // 加载游戏数据
     void loadGameState(const std::string& filename);
 
 private:
-    std::vector<Object> objects;      // 非耕地物体
+    std::vector<FarmObject> objects;      // 非耕地物体
     std::vector<FarmLand> farmlands;  // 耕地物体
 
     // 私有构造函数，禁止外部实例化

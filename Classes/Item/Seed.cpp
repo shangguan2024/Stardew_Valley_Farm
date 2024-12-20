@@ -14,11 +14,19 @@ Seed::Seed(const SeedType _seedtype, std::string _image, int _maxstack, int _pri
 
 std::string Seed::getDescription() const
 {
-	if (seedtype == RADISH_SEED)
-		return SEED_RADISH_DESCRIPTION;
-	else if (seedtype == POTATO_SEED)
-		return SEED_POTATO_DESCRIPTION;
-	else if (seedtype == WHRAT_SEED)
-		return SEED_WHRAT_DESCRIPTION;
+	switch (seedtype) {
+		case  RADISH_SEED:
+			return SEED_RADISH_DESCRIPTION;
+			break;
+		case POTATO_SEED:
+			return SEED_POTATO_DESCRIPTION;
+			break;
+		case  WHEAT_SEED:
+			return SEED_WHEAT_DESCRIPTION;
+			break;
+		default:
+			return " ";
+			break;
+	}
 }
 

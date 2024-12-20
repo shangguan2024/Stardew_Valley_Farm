@@ -14,14 +14,20 @@ Item::Item(ItemType _type, std::string _image, int _maxstack, int _price)
 
 std::string Item::getDescription() const
 {
-	if (this->type == SEED)
-		return SEED_DESCRIPTION;
-	else if (this->type == TOOL)
-		return TOOL_DESCRIPTION;
-	else if (this->type == CROP)
-		return CROP_DESCRIPTION;
-	else
-		return " ";
+	switch (this->type){
+		case SEED:
+			return SEED_DESCRIPTION;
+			break;
+		case TOOL:
+			return TOOL_DESCRIPTION;
+			break;
+		case OTHER:
+			return OTHER_DESCRIPTION;
+			break;
+		default:
+			return "Unknown item.";
+			break;
+	}
 }
 
 const ItemType& Item::getType() const
