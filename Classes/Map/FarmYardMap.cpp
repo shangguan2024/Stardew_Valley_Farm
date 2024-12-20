@@ -1,11 +1,11 @@
-#include "BeachMap.h"
+#include "FarmYardMap.h"
 
-BeachMap::BeachMap()
+FarmYardMap::FarmYardMap()
 {
     init();
 }
 
-BeachMap::~BeachMap()
+FarmYardMap::~FarmYardMap()
 {
     if (tileMap) {
         // Ïú»Ù TMXTiledMap ¶ÔÏó
@@ -14,8 +14,8 @@ BeachMap::~BeachMap()
     }
 }
 
-void BeachMap::initContants()
+void FarmYardMap::initContants()
 {
-	mapName = MapName::Beach;
-	tileMapPath = Resources::BeachMap;
+	mapName = MapName::FarmYard;
+	tileMapPath = Resources::FarmYardMap;
 }

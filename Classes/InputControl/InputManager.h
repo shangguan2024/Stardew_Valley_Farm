@@ -12,6 +12,7 @@ public:
 	bool init();  // 返回bool值，指示是否初始化成功
 
 	void registerEventListeners();
+	void unRegisterEventListeners();
 
 	// 注册回调函数
 	void registerKeyCallbackFunc(KeyControlMode mode, std::function<void(cocos2d::EventKeyboard::KeyCode)> callback);
@@ -38,6 +39,8 @@ public:
 	bool isMousePressed(cocos2d::EventMouse::MouseButton button, MouseControlMode mode);
 	bool isMouseReleased(cocos2d::EventMouse::MouseButton button, MouseControlMode mode);
 	const cocos2d::Vec2* getMousePosition(MouseControlMode mode) const;
+
+	void clearPollingStates();
 
 	static InputManager* getInstance();
 

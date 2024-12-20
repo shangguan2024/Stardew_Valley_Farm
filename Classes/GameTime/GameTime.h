@@ -48,6 +48,7 @@ private:
 	// 年月日
 	int year, month, day;
 	int hour, minute;
+	int weekday;
 	int timeStamp;
 
 	// 时间流动速度

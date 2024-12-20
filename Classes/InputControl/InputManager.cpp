@@ -12,18 +12,11 @@ InputManager::InputManager() :
 
 InputManager::~InputManager()
 {
-	// 注销事件监听器
-	if (keyboardListener) {
-		cocos2d::Director::getInstance()->getEventDispatcher()->removeEventListener(keyboardListener);
-	}
-	if (mouseListener) {
-		cocos2d::Director::getInstance()->getEventDispatcher()->removeEventListener(mouseListener);
-	}
+	unRegisterEventListeners();
 }
 
 bool InputManager::init()
 {
-	// 注册输入事件
 	registerEventListeners();
 	return true;
 }
@@ -42,6 +35,17 @@ void InputManager::registerEventListeners()
 	mouseListener->onMouseDown = CC_CALLBACK_1(InputManager::onMouseDown, this);
 	mouseListener->onMouseUp = CC_CALLBACK_1(InputManager::onMouseUp, this);
 	cocos2d::Director::getInstance()->getEventDispatcher()->addEventListenerWithFixedPriority(mouseListener, 1);
+}
+
+void InputManager::unRegisterEventListeners()
+{
+	// 注销事件监听器
+	if (keyboardListener) {
+		cocos2d::Director::getInstance()->getEventDispatcher()->removeEventListener(keyboardListener);
+	}
+	if (mouseListener) {
+		cocos2d::Director::getInstance()->getEventDispatcher()->removeEventListener(mouseListener);
+	}
 }
 
 void InputManager::registerKeyCallbackFunc(KeyControlMode mode, std::function<void(cocos2d::EventKeyboard::KeyCode)> callback)
@@ -85,7 +89,7 @@ void InputManager::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d
 {
 	CCLOG("Key pressed: %d", keyCode);
 	keyStates[keyCode] = true;
-	if (keyCallbackFuncs[keyControlMode.top()]) {
+	if (!keyControlMode.empty() && keyCallbackFuncs[keyControlMode.top()]) {
 		keyCallbackFuncs[keyControlMode.top()](keyCode);
 	}
 }
@@ -117,7 +121,7 @@ void InputManager::onMouseDown(cocos2d::Event* event)
 	auto mouseEvent = static_cast<cocos2d::EventMouse*>(event);
 	CCLOG("Mouse button pressed: %d", mouseEvent->getMouseButton());
 	mouseButtonStates[mouseEvent->getMouseButton()] = true;
-	if (mouseCallbackFuncs[mouseControlMode.top()]) {
+	if (!mouseControlMode.empty() && mouseCallbackFuncs[mouseControlMode.top()]) {
 		mouseCallbackFuncs[mouseControlMode.top()](mouseEvent->getMouseButton());
 	}
 }
@@ -171,6 +175,12 @@ const cocos2d::Vec2* InputManager::getMousePosition(MouseControlMode mode) const
 		return nullptr;
 	}
 	return &mousePosition;
+}
+
+void InputManager::clearPollingStates()
+{
+	keyStates.clear();
+	mouseButtonStates.clear();
 }
 
 InputManager* InputManager::getInstance()

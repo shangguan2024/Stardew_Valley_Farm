@@ -3,7 +3,6 @@
 
 #include "cocos2d.h"
 #include "ResourceManagement/Constant.h"
-#include "ResourceManagement/Texture.h"
 
 class MapBase : public cocos2d::Node {
 public:

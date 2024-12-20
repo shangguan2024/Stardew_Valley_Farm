@@ -22,14 +22,24 @@ public:
 	// 销毁实例
 	static void destroyInstance();
 
+	PlayerEnterType enterType();
+	void setEnterType(const PlayerEnterType& playerEnterType);
+
 	// 设置速度
 	void setSpeed(const float speed);
 	float getSpeed() const;
+	bool isFreeze() const;
+	void freeze();
+	void unFreeze();
 
 	// strength
 	void setStrength(const int strength = PLAYER_MAX_STRENGTH);
 	int getEnergy() const;
-	void addStrength(const int strength);
+	void addEnergy(const int strength);
+
+protected:
+	void onEnter() override;
+	void onExit() override;
 
 private:
 	Player();  // 构造函数私有化
@@ -41,11 +51,14 @@ private:
 
 	static Player* _instance; // 静态实例指针
 
-	cocos2d::Vec2 _direction;     // 玩家移动方向向量
-	float _speed;                 // 玩家速度
 	size_t _currentAnimationHash; // 当前播放的动画
 
-	int _strength;
+	PlayerEnterType playerEnterType;
+	cocos2d::Vec2 _direction;     // 玩家移动方向向量
+	float _speed;                 // 玩家速度
+	bool _isFreeze;
+
+	int energy;
 };
 
 #endif

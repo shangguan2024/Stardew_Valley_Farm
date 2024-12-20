@@ -9,8 +9,7 @@
 
 #include "AppDelegate.h"
 #include "ResourceManagement/Constant.h"
-#include "../SceneManagement/SceneManager.h"
-#include "../SceneManagement/MainMenuScene.h"
+#include "SceneManagement/MainMenuScene.h"
 
 // #define USE_AUDIO_ENGINE 1
 // #define USE_SIMPLE_AUDIO_ENGINE 1
@@ -112,8 +111,6 @@ bool AppDelegate::applicationDidFinishLaunching()
 
     // run
     director->runWithScene(scene);
-
-    SceneManager::init();
 
     return true;
 }

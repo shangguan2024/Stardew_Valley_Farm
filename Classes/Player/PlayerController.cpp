@@ -16,6 +16,7 @@ PlayerController* PlayerController::getInstance()
 
 void PlayerController::update()
 {
+	if (player->isFreeze())return;
 	updateDirection();
 }
 
@@ -48,11 +49,13 @@ void PlayerController::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode)
 		toggleInventory();
 		break;
 	case cocos2d::EventKeyboard::KeyCode::KEY_T:
-		player->addStrength(-1);
+		player->addEnergy(-1);
 		break;
 	default:
 		break;
 	}
+
+	Player::getInstance()->unFreeze();
 }
 
 void PlayerController::updateDirection()

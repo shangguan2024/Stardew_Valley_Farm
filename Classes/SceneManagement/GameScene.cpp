@@ -2,8 +2,35 @@
 #include "InputControl/InputManager.h"
 #include "Player/PlayerController.h"
 #include "UI/UIManager.h"
+#include "SceneManager.h"
+#include "FarmYardScene.h"
+#include "BeachScene.h"
 
 USING_NS_CC;
+
+void GameScene::onEnter()
+{
+	Scene::onEnter();
+
+	// 创建并注册鼠标滚轮和鼠标点击事件监听器
+	registerMouseScrollListener();
+	// InputManager::getInstance()->registerMouseCallbackFunc(MouseControlMode::SCENE, [this](cocos2d::EventMouse::MouseButton mouseButton) {
+	//	this->onMouseClick(mouseButton);
+	//	});
+	// InputManager::getInstance()->setCurrentMouseControlMode(MouseControlMode::SCENE);
+
+	// 启动每帧更新函数
+	this->scheduleUpdate();
+}
+
+void GameScene::onExit()
+{
+	Scene::onExit();
+
+	unRegisterMouseScrollListener();
+	// InputManager::getInstance()->popCurrentMouseControlMode();
+	this->unscheduleUpdate();
+}
 
 // 初始化场景
 bool GameScene::init()
@@ -14,12 +41,7 @@ bool GameScene::init()
 
 	initConstants();
 
-	// 加载瓦片地图
-	// tileMap = TMXTiledMap::create(tileMapPath);
-	if (!tileMap) {
-		CCLOG("Failed to load tile map");
-		return false;
-	}
+	// 瓦片地图
 	this->addChild(tileMap->tileMap);
 	tileMap->tileMap->setPosition(0, 0);
 	tileMap->tileMap->setCameraMask(static_cast<unsigned short>(CameraFlag::USER1));
@@ -42,26 +64,33 @@ bool GameScene::init()
 	tileLayer->setVisible(false);
 	tileLayer->setLocalZOrder(255);
 
-	// 加载出生点
-	auto objectGroup = tileMap->getObjectGroup("Spawn");
-	if (!objectGroup) {
-		CCLOG("Failed to load object layer: Spawn");
-		return false;
-	}
-	auto spawnPoint = objectGroup->getObject("SpawnPoint");
-	if (spawnPoint.empty()) {
-		CCLOG("SpawnPoint not found in Event layer.");
-		return false;
-	}
-	// 提取出生点的 x 和 y 坐标
-	float spawnX = spawnPoint["x"].asFloat();
-	float spawnY = spawnPoint["y"].asFloat();
-	CCLOG("Spawn point coordinates: (%f, %f)", spawnX, spawnY);
 
-	// 在出生点创建玩家
 	auto player = Player::getInstance();
+	auto& enterPosition = PlayerController::getInstance()->enterPosition;
+	// 在出生点创建玩家
+	if (player->enterType() == PlayerEnterType::SPAWN) {
+		// 加载出生点
+		auto objectGroup = tileMap->getObjectGroup("Spawn");
+		if (!objectGroup) {
+			CCLOG("Failed to load object layer: Spawn");
+			return false;
+		}
+		auto spawnPoint = objectGroup->getObject("SpawnPoint");
+		if (spawnPoint.empty()) {
+			CCLOG("SpawnPoint not found in Event layer.");
+			return false;
+		}
+		// 提取出生点的 x 和 y 坐标
+		float spawnX = spawnPoint["x"].asFloat();
+		float spawnY = spawnPoint["y"].asFloat();
+		CCLOG("Spawn point coordinates: (%f, %f)", spawnX, spawnY);
+		enterPosition = Vec2(spawnX, spawnY);
+	}
+	else if (player->enterType() == PlayerEnterType::FROM_PORTAL) {
+		CCLOG("Player enter from portal.");
+	}
 	this->addChild(player, 1, "player");
-	player->setPosition(spawnX, spawnY);
+	player->setPosition(enterPosition);
 	player->setCameraMask(unsigned short(CameraFlag::USER1));
 	setCameraCenter();
 
@@ -72,16 +101,6 @@ bool GameScene::init()
 	this->addChild(UIManager::getInstance());
 	UIManager::getInstance()->setCameraMask(static_cast<unsigned short>(CameraFlag::DEFAULT));
 
-	// 创建并注册鼠标滚轮和鼠标点击事件监听器
-	registerMouseScrollListener();
-	InputManager::getInstance()->registerMouseCallbackFunc(MouseControlMode::SCENE, [this](cocos2d::EventMouse::MouseButton mouseButton) {
-		this->onMouseClick(mouseButton);
-		});
-	InputManager::getInstance()->setCurrentMouseControlMode(MouseControlMode::SCENE);
-
-	// 启动每帧更新函数
-	this->scheduleUpdate();
-
 	return true;
 }
 
@@ -89,8 +108,14 @@ Vec2 GameScene::convertToTileCoords(const Vec2 pos)
 {
 	// 将玩家的新位置转换为瓦片坐标
 	Size tilemapSize = tileMap->getMapSize();
-	Vec2 tile = Vec2(int(pos.x / MAP_TILE_WIDTH),
-		int((tilemapSize.height * MAP_TILE_HEIGHT - pos.y) / MAP_TILE_HEIGHT));
+	Vec2 tile = Vec2(static_cast<int>(pos.x / MAP_TILE_WIDTH),
+		static_cast<int>((tilemapSize.height * MAP_TILE_HEIGHT - pos.y) / MAP_TILE_HEIGHT));
+
+	// 输出调试信息
+	CCLOG("Position: (%f, %f)", pos.x, pos.y);
+	CCLOG("Tile: (%d, %d)", (int)tile.x, (int)tile.y);
+	CCLOG("Tilemap Size: (%f, %f)", tilemapSize.width, tilemapSize.height);
+	CCLOG("Map Tile Width: %d, Map Tile Height: %d", MAP_TILE_WIDTH, MAP_TILE_HEIGHT);
 
 	return tile;
 }
@@ -138,12 +163,21 @@ bool GameScene::setCameraCenter()
 
 void GameScene::registerMouseScrollListener()
 {
-	// 创建鼠标事件监听器
-	auto listener = EventListenerMouse::create();
-	listener->onMouseScroll = CC_CALLBACK_1(GameScene::onMouseScroll, this);
+	// 创建鼠标滚动事件监听器
+	mouseScrollListener = EventListenerMouse::create();
+	mouseScrollListener->onMouseScroll = CC_CALLBACK_1(GameScene::onMouseScroll, this);
 
 	// 获取事件分发器并添加监听器
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(mouseScrollListener, this);
+}
+
+void GameScene::unRegisterMouseScrollListener()
+{
+	// 移除鼠标滚动事件监听器
+	if (mouseScrollListener) {
+		_eventDispatcher->removeEventListener(mouseScrollListener);
+		mouseScrollListener = nullptr;
+	}
 }
 
 // 鼠标滚轮事件回调
@@ -207,8 +241,9 @@ void GameScene::onMouseClick(cocos2d::EventMouse::MouseButton mouseButton)
 
 void GameScene::update(float delta)
 {
-	PlayerController::getInstance()->update();
 	Player* player = Player::getInstance();
+	if (player->isFreeze())return;
+	PlayerController::getInstance()->update();
 
 	// 获取瓦片图层
 	auto tileLayer = tileMap->getLayer("Meta");
@@ -237,8 +272,8 @@ void GameScene::update(float delta)
 			playerMoved = true;
 		}
 		else {
-			auto xxx = tileMap->getPropertiesForGID(tileGID);
-			if (xxx.find(TILE_COLLIDABLE) == xxx.end()) {
+			auto properties = tileMap->getPropertiesForGID(tileGID);
+			if (properties.find(TILE_COLLIDABLE) == properties.end()) {
 				player->setPosition(newPosition);
 				playerMoved = true;
 			}
@@ -262,8 +297,8 @@ void GameScene::update(float delta)
 			playerMoved = true;
 		}
 		else {
-			auto xxx = tileMap->getPropertiesForGID(tileGID);
-			if (xxx.find("Collidable") == xxx.end()) {
+			auto properties = tileMap->getPropertiesForGID(tileGID);
+			if (properties.find("Collidable") == properties.end()) {
 				player->setPosition(newPosition);
 				playerMoved = true;
 			}
@@ -297,8 +332,22 @@ void GameScene::checkPlayerEnterPortal(const Vec2 position)
 			float spawnY = portalData["spawn_y"].asFloat();
 			CCLOG("Player entered portal to map: %s", targetMap.c_str());
 
+			// 先这么写着
 			// 切换到目标地图
 			// switchToMap(targetMap, spawnX, spawnY);
+			Player::getInstance()->freeze();
+			Player::getInstance()->removeFromParent();
+			PlayerController::getInstance()->enterPosition = Vec2(spawnX, spawnY);
+			Player::getInstance()->setEnterType(PlayerEnterType::FROM_PORTAL);
+			UIManager::getInstance()->removeFromParent();
+			Scene* scene = nullptr;
+			if(targetMap == "FarmYard") {
+				scene = FarmYardScene::createScene();
+			}
+			else {
+				scene = BeachScene::createScene();
+			}
+			Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, scene, cocos2d::Color3B::WHITE));
 			break;
 		}
 	}

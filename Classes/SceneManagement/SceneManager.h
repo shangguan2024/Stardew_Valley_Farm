@@ -1,3 +1,5 @@
+// useless
+
 #ifndef __SCENEMANAGER_H__
 #define __SCENEMANAGER_H__
 
@@ -12,15 +14,13 @@ public:
     static void cleanup();  // 清理当前场景和资源
 
     // 设置场景切换的过渡效果
-    static void setSceneTransition(cocos2d::TransitionScene* transition);
+    static cocos2d::TransitionScene* setSceneTransition(cocos2d::TransitionScene* transition);
 
     // 获取当前场景
     static cocos2d::Scene* getCurrentScene();
 
 private:
     static cocos2d::Director* director;  // Cocos2d 的 Director 对象
-    static cocos2d::Scene* currentScene;  // 当前场景
-    static cocos2d::Scene* previousScene; // 上一个场景
     static cocos2d::TransitionScene* currentTransition;  // 当前场景过渡
 };
 

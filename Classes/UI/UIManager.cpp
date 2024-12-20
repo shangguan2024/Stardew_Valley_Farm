@@ -14,13 +14,6 @@ UIManager::UIManager()
 
 UIManager::~UIManager()
 {
-    // ×¢ÏúÊÂ¼þ¼àÌýÆ÷
-    if (_keyboardListener) {
-        cocos2d::Director::getInstance()->getEventDispatcher()->removeEventListener(_keyboardListener);
-    }
-    if (_mouseListener) {
-        cocos2d::Director::getInstance()->getEventDispatcher()->removeEventListener(_mouseListener);
-    }
 }
 
 UIManager* UIManager::getInstance()
@@ -39,10 +32,6 @@ bool UIManager::init()
     this->addChild(hud);
     showHUD();
 
-    // ×¢²á UI ÊÂ¼þ¼àÌýÆ÷
-    registerUIListeners();
-    this->scheduleUpdate();
-
     return true;
 }
 
@@ -60,6 +49,16 @@ void UIManager::registerUIListeners()
     _mouseListener->onMouseUp = CC_CALLBACK_1(UIManager::onMouseUp, this);
     _mouseListener->onMouseMove = CC_CALLBACK_1(UIManager::onMouseMove, this);
     cocos2d::Director::getInstance()->getEventDispatcher()->addEventListenerWithFixedPriority(_mouseListener, 2);
+}
+
+void UIManager::unRegisterUIListeners(){
+    // ×¢ÏúÊÂ¼þ¼àÌýÆ÷
+    if (_keyboardListener) {
+        cocos2d::Director::getInstance()->getEventDispatcher()->removeEventListener(_keyboardListener);
+    }
+    if (_mouseListener) {
+        cocos2d::Director::getInstance()->getEventDispatcher()->removeEventListener(_mouseListener);
+    }
 }
 
 void UIManager::toggleUIActiveState(bool active)
@@ -127,6 +126,28 @@ void UIManager::hideInventoryUI()
     inventoryUI->setVisible(false);  // Òþ²Ø±³°üUI
     popMouseClickCallBackFunc();
     toggleUIActiveState(false);
+}
+
+void UIManager::onEnter()
+{
+    Node::onEnter();
+
+    this->schedule([this](float dt) {
+        hud->updateGameTimeHUD();
+        }, 1.0f, "Game_time_update_key");
+
+    registerUIListeners();
+    this->scheduleUpdate();
+}
+
+void UIManager::onExit()
+{
+    Node::onExit();
+
+    this->unschedule("Game_time_update_key");
+
+    unRegisterUIListeners();
+    this->unscheduleUpdate();
 }
 
 bool UIManager::isUIActive() const

@@ -38,7 +38,7 @@ bool InventoryUI::init()
 	attached = Layer::create();
 
 	auto screenSize = cocos2d::Director::getInstance()->getVisibleSize();
-	auto inventoryMainUI = cocos2d::Sprite::create(Texture::Inventory);
+	auto inventoryMainUI = cocos2d::Sprite::create(Resources::Inventory);
 	inventoryMainUI->setPosition(screenSize.width / 2, screenSize.height * 0.4);
 
 	closeButton = ResourceManager::getInstance()->getButton(BUTTON_HIDE_INVENTORY);

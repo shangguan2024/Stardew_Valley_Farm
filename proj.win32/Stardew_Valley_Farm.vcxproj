@@ -165,6 +165,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Items\Inventory.cpp" />
     <ClCompile Include="..\Classes\Items\Item.cpp" />
     <ClCompile Include="..\Classes\Map\BeachMap.cpp" />
+    <ClCompile Include="..\Classes\Map\FarmYardMap.cpp" />
     <ClCompile Include="..\Classes\Map\MapBase.cpp" />
     <ClCompile Include="..\Classes\Map\MapManager.cpp" />
     <ClCompile Include="..\Classes\Player\Player.cpp" />
@@ -174,8 +175,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\ResourceManagement\AudioClip.cpp" />
     <ClCompile Include="..\Classes\ResourceManagement\ResourceManager.cpp" />
     <ClCompile Include="..\Classes\ResourceManagement\Texture.cpp" />
-    <ClCompile Include="..\Classes\SceneManagement\FarmYard.cpp" />
-    <ClCompile Include="..\Classes\SceneManagement\Beach.cpp" />
+    <ClCompile Include="..\Classes\SceneManagement\FarmYardScene.cpp" />
+    <ClCompile Include="..\Classes\SceneManagement\BeachScene.cpp" />
     <ClCompile Include="..\Classes\SceneManagement\GameScene.cpp" />
     <ClCompile Include="..\Classes\SceneManagement\MainMenuScene.cpp" />
     <ClCompile Include="..\Classes\SceneManagement\SceneManager.cpp" />
@@ -201,6 +202,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Items\Inventory.h" />
     <ClInclude Include="..\Classes\Items\Item.h" />
     <ClInclude Include="..\Classes\Map\BeachMap.h" />
+    <ClInclude Include="..\Classes\Map\FarmYardMap.h" />
     <ClInclude Include="..\Classes\Map\MapBase.h" />
     <ClInclude Include="..\Classes\Map\MapManager.h" />
     <ClInclude Include="..\Classes\Player\Player.h" />
@@ -211,8 +213,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\ResourceManagement\Constant.h" />
     <ClInclude Include="..\Classes\ResourceManagement\ResourceManager.h" />
     <ClInclude Include="..\Classes\ResourceManagement\Texture.h" />
-    <ClInclude Include="..\Classes\SceneManagement\FarmYard.h" />
-    <ClInclude Include="..\Classes\SceneManagement\Beach.h" />
+    <ClInclude Include="..\Classes\SceneManagement\BeachScene.h" />
+    <ClInclude Include="..\Classes\SceneManagement\FarmYardScene.h" />
     <ClInclude Include="..\Classes\SceneManagement\GameScene.h" />
     <ClInclude Include="..\Classes\SceneManagement\MainMenuScene.h" />
     <ClInclude Include="..\Classes\SceneManagement\SceneManager.h" />

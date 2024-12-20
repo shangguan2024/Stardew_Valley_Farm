@@ -14,9 +14,11 @@ public:
     static HUD* getInstance();
 
     bool init() override;
+    void start();
 
     // 更新 HUD 内容
     void updateStrengthBarHUD();
+    void updateGameTimeHUD();
 
     // 显示/隐藏 HUD
     void toggleVisibility(bool visible);
@@ -28,8 +30,6 @@ private:
 
     static ResourceManager* resourceManager;
 
-    // 更新 HUD 内容
-    void updateGameTimeHUD();
 
     GameTime* gameTime;
     cocos2d::Label* gameTimeLabel;

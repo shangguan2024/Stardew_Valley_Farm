@@ -2,9 +2,8 @@
 #include "MainMenuScene.h"
 #include "UI/HoverButton.h"
 #include "GameScene.h"
-// #include "../Music/AudioPlayer.h"
 #include "ResourceManagement/Constant.h"
-#include "Beach.h"
+#include "BeachScene.h"
 
 USING_NS_CC;
 
@@ -50,23 +49,25 @@ bool MainMenuScene::init()
 	// 为按钮添加事件处理器
 	newGameButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
 		if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
-			auto scene = Beach::createScene();
-			SceneManager::setSceneTransition(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, scene, cocos2d::Color3B::WHITE));
-			SceneManager::switchToScene(scene);
-		} });
-		loadGameButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
-			if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
+			auto scene = BeachScene::createScene();
+			Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, scene, cocos2d::Color3B::WHITE));
+		}
+		});
+	loadGameButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
+		if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
 
-			} });
-			exitGameButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
-				if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
-					Director::getInstance()->end();
-				} });
+		}
+		});
+	exitGameButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
+		if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
+			Director::getInstance()->end();
+		}
+		});
 
-				// 将按钮加入场景
-				this->addChild(newGameButton);
-				this->addChild(loadGameButton);
-				this->addChild(exitGameButton);
+	// 将按钮加入场景
+	this->addChild(newGameButton);
+	this->addChild(loadGameButton);
+	this->addChild(exitGameButton);
 
-				return true;
+	return true;
 }

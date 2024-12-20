@@ -3,36 +3,41 @@
 
 #include "cocos2d.h"
 #include "ResourceManagement/Constant.h"
-#include "ResourceManagement/Texture.h"
 #include "Map/MapBase.h"
 
 class GameScene : public cocos2d::Scene {
 protected:
-    // 初始化场景
-    virtual bool init();
-    virtual void initConstants() = 0;
+	void onEnter() override;
+	void onExit() override;
 
-    // 鼠标滚动监听器
-    void registerMouseScrollListener();
-    void onMouseScroll(cocos2d::EventMouse* event);
+	// 初始化场景
+	virtual bool init();
+	virtual void initConstants() = 0;
 
-    // 鼠标点击监听器
-    void onMouseClick(cocos2d::EventMouse::MouseButton mouseButton);
+	// 鼠标滚动监听器
+	void registerMouseScrollListener();
+	void unRegisterMouseScrollListener();
+	void onMouseScroll(cocos2d::EventMouse* event);
 
-    // 每一帧被自动调用的 update 方法
-    virtual void update(float delta);
+	// 鼠标点击监听器
+	void onMouseClick(cocos2d::EventMouse::MouseButton mouseButton);
 
-    void checkPlayerEnterPortal(const cocos2d::Vec2 position);
+	// 每一帧被自动调用的 update 方法
+	virtual void update(float delta);
 
-    // 转变坐标成瓦片坐标
-    cocos2d::Vec2 convertToTileCoords(const cocos2d::Vec2 pos);
-    bool setCameraCenter();
+	void checkPlayerEnterPortal(const cocos2d::Vec2 position);
 
-    // 定义摄像机
-    float fov = CAMERA_FOV;
-    cocos2d::Camera* camera;
+	// 转变坐标成瓦片坐标
+	cocos2d::Vec2 convertToTileCoords(const cocos2d::Vec2 pos);
+	bool setCameraCenter();
 
-    MapBase* tileMap;
+	cocos2d::EventListenerMouse* mouseScrollListener;
+
+	// 定义摄像机
+	float fov = CAMERA_FOV;
+	cocos2d::Camera* camera;
+
+	MapBase* tileMap;
 };
 
 #endif

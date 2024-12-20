@@ -1,82 +1,50 @@
+// useless
+
 #include "SceneManager.h"
+#include "Player/Player.h"
 
 cocos2d::Director* SceneManager::director = nullptr;
-cocos2d::Scene* SceneManager::currentScene = nullptr;
-cocos2d::Scene* SceneManager::previousScene = nullptr;
 cocos2d::TransitionScene* SceneManager::currentTransition = nullptr;
 
 void SceneManager::init()
 {
-    director = cocos2d::Director::getInstance();
-    currentScene = director->getRunningScene();
-    previousScene = nullptr;
-    currentTransition = nullptr;
+	director = cocos2d::Director::getInstance();
+	currentTransition = nullptr;
 }
 
 void SceneManager::switchToScene(cocos2d::Scene* scene)
 {
-    if (scene != nullptr) {
-        // 释放当前场景的资源
-        if (currentScene != nullptr) {
-            currentScene->onExit();
-            director->purgeCachedData();
-        }
-
-        // 设置新场景
-        previousScene = currentScene;
-        currentScene = scene;
-
-        // 切换场景
-        if (currentTransition != nullptr) {
-            director->replaceScene(currentTransition);
-        }
-        else {
-            director->replaceScene(currentScene);
-        }
-
-        // 调用新场景的初始化
-        currentScene->onEnter();
-    }
+	director->replaceScene(scene);
 }
 
+// 在当前场景之上添加新场景
 void SceneManager::pushScene(cocos2d::Scene* scene)
 {
-    if (scene != nullptr) {
-        // 保存当前场景
-        previousScene = currentScene;
-        currentScene = scene;
-
-        // 在当前场景之上添加新场景
-        director->pushScene(currentScene);
-    }
+	director->pushScene(scene);
 }
 
+// 如果存在上一个场景，则弹出当前场景并返回上一个场景
 void SceneManager::popScene()
 {
-    // 如果存在上一个场景，则弹出当前场景并返回上一个场景
-    if (previousScene != nullptr) {
-        director->popScene();
-        currentScene = previousScene;
-    }
+	director->popScene();
 }
 
+// 清理当前场景资源
 void SceneManager::cleanup()
 {
-    // 清理当前场景资源
-    if (currentScene != nullptr) {
-        currentScene->onExit();
-        director->purgeCachedData();
-        currentScene = nullptr;
-        previousScene = nullptr;
-    }
+	auto currentScene = getCurrentScene();
+	if (currentScene != nullptr) {
+		currentScene->onExit();
+		director->purgeCachedData();
+	}
 }
 
-void SceneManager::setSceneTransition(cocos2d::TransitionScene* transition)
+cocos2d::TransitionScene* SceneManager::setSceneTransition(cocos2d::TransitionScene* transition)
 {
-    currentTransition = transition;
+	return currentTransition = transition;
 }
 
 cocos2d::Scene* SceneManager::getCurrentScene()
 {
-    return currentScene;
+	return director->getRunningScene();
 }

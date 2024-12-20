@@ -22,10 +22,12 @@ Player* Player::getInstance()
 
 // 构造函数
 Player::Player() :
+	_currentAnimationHash(0),
+	playerEnterType(PlayerEnterType::SPAWN),
 	_direction(Vec2::ZERO),
 	_speed(NOMAL_PLAYER_SPEED),
-	_currentAnimationHash(0),
-	_strength(PLAYER_MAX_STRENGTH)
+	_isFreeze(false),
+	energy(PLAYER_MAX_STRENGTH)
 {
 }
 
@@ -100,9 +102,6 @@ bool Player::init()
 		AnimationCache::getInstance()->addAnimation(animation, key);
 	}
 
-	// 注册 update
-	this->scheduleUpdate();
-
 	return true;
 }
 
@@ -131,22 +130,53 @@ float Player::getSpeed() const
 	return _speed;
 }
 
+bool Player::isFreeze() const
+{
+	return _isFreeze;
+}
+
+void Player::freeze()
+{
+	_isFreeze = true;
+	setDirection(Vec2::ZERO);
+	InputManager::getInstance()->clearPollingStates();
+}
+
+void Player::unFreeze()
+{
+	_isFreeze = false;
+}
+
 void Player::setStrength(const int strength)
 {
-	_strength = strength;
+	energy = strength;
 	HUD::getInstance()->updateStrengthBarHUD();
 }
 
 int Player::getEnergy() const
 {
-	return _strength;
+	return energy;
 }
 
-void Player::addStrength(const int strength)
+void Player::addEnergy(const int _energy)
 {
-	_strength += strength;
-	_strength = std::max(std::min(_strength, PLAYER_MAX_STRENGTH), 0);
+	energy += _energy;
+	energy = std::max(std::min(energy, PLAYER_MAX_STRENGTH), 0);
 	HUD::getInstance()->updateStrengthBarHUD();
+}
+
+void Player::onEnter()
+{
+	Sprite::onEnter();
+
+	this->scheduleUpdate();
+}
+
+void Player::onExit()
+{
+	Sprite::onExit();
+
+	this->unscheduleUpdate();
 }
 
 // 每帧更新
@@ -201,4 +231,14 @@ void Player::destroyInstance()
 {
 	InputManager::getInstance()->popCurrentKeyControlMode();
 	CC_SAFE_DELETE(_instance);
+}
+
+PlayerEnterType Player::enterType()
+{
+	return playerEnterType;
+}
+
+void Player::setEnterType(const PlayerEnterType& enterType)
+{
+	playerEnterType = enterType;
 }

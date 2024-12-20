@@ -79,9 +79,6 @@ bool HUD::init()
 	gameTimeLabel = resourceManager->getLabel(gameTime->toString(), 22);
 	gameTimeLabel->setAnchorPoint(Vec2(1, 1));
 	gameTimeLabel->setPosition(visibleSize.width - 42, visibleSize.height - 20);
-	this->schedule([this](float dt) {
-		updateGameTimeHUD();
-		}, 1.0f, "Game_time_update_key");
 	this->addChild(gameTimeBackground, 0);
 	this->addChild(gameTimeLabel, 1);
 

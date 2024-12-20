@@ -12,6 +12,8 @@ public:
 
     void update();
 
+    cocos2d::Vec2 enterPosition;
+
 private:
     PlayerController();
     ~PlayerController();

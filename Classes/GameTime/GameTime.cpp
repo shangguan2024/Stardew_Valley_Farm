@@ -27,7 +27,7 @@ GameTime* GameTime::getInstance()
 }
 
 GameTime::GameTime(int y, int m, int d, int h, int min, int timeStamp, double speed) :
-	year(y), month(m), day(d), hour(h), minute(min), timeStamp(timeStamp), timeSpeed(speed)
+	year(y), month(m), day(d), hour(h), minute(min), weekday(1), timeStamp(timeStamp), timeSpeed(speed)
 {
 	normalize();
 }
@@ -35,6 +35,8 @@ GameTime::GameTime(int y, int m, int d, int h, int min, int timeStamp, double sp
 // 更新时间
 void GameTime::normalize()
 {
+	auto dow = [](int m, int d, int y) { y -= m < 3; return(y + y / 4 - y / 100 + y / 400 + "-bed=pen+mad."[m] + d) % 7; };
+
 	// 闰年判断函数
 	auto isLeapYear = [](int year) {
 		return (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
@@ -80,6 +82,9 @@ void GameTime::normalize()
 			break; // 如果天数合适，退出循环
 		}
 	}
+
+	weekday = dow(month, day, year);
+	if (!weekday)weekday = 7;
 }
 
 void GameTime::setTimeSpeed(double speed)
@@ -120,5 +125,7 @@ std::string GameTime::toString() const
 	_time += (hour < 10) ? "0" + std::to_string(hour) : std::to_string(hour);
 	_time += ":";
 	_time += (minute < 10) ? "0" + std::to_string(minute) : std::to_string(minute);
+	_time += "\n\nweekday : ";
+	_time += std::to_string(weekday);
 	return _time;
 }
