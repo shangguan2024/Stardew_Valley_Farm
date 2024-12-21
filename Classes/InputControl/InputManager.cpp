@@ -119,7 +119,7 @@ void InputManager::onMouseDown(cocos2d::Event* event)
 		return;
 	}
 	auto mouseEvent = static_cast<cocos2d::EventMouse*>(event);
-	CCLOG("Mouse button pressed: %d", mouseEvent->getMouseButton());
+	CCLOG("Mouse button %d pressed at : (%f, %f)", mouseEvent->getMouseButton(), mouseEvent->getCursorX(), mouseEvent->getCursorY());
 	mouseButtonStates[mouseEvent->getMouseButton()] = true;
 	if (mouseControlMode != "" && mouseCallbackFuncs[mouseControlMode]) {
 		mouseCallbackFuncs[mouseControlMode](mouseEvent->getMouseButton());
@@ -166,14 +166,8 @@ bool InputManager::isMouseReleased(cocos2d::EventMouse::MouseButton button, cons
 	return mouseControlMode == name && !mouseButtonStates[button];
 }
 
-const cocos2d::Vec2* InputManager::getMousePosition(const std::string& name) const
+const cocos2d::Vec2* InputManager::getMousePosition() const
 {
-	if (mouseControlMode.empty()) {
-		return nullptr;
-	}
-	if (mouseControlMode != name) {
-		return nullptr;
-	}
 	return &mousePosition;
 }
 

@@ -89,17 +89,22 @@ void MapBase::setTileState(const Vec2& position, TileType tileType)
 // player using tool type : pass
 void MapBase::interactTile(const Vec2& curPos, const Vec2& interactPos, EventMouse::MouseButton interactType)
 {
-	float distance = curPos.distance(interactPos);
-	if (distance > 2) {
-		CCLOG("Too far to interact");
-		return;
-	}
-	int GID = tileMap->getLayer("Meta")->getTileGIDAt(interactPos);
-	auto properties = getPropertiesForGID(GID);
-	if (properties.size() > 1) {
-		CCLOG("PASS");
-		return;
-	}
+	// int GID = tileMap->getLayer("Meta")->getTileGIDAt(interactPos);
+	// if (!GID) {
+	//	CCLOG("GID is NULL.");
+	//	return;
+	// }
+	// float distance = curPos.distance(interactPos);
+	// if (distance > 2) {
+	//	CCLOG("Too far to interact");
+	//	return;
+	// }
+	// auto properties = getPropertiesForGID(GID);
+	// if (properties.size() > 1) {
+	//	CCLOG("PASS");
+	//	return;
+	// }
+
 	//pass
 	//refs:
 	// 计算玩家和鼠标之间的瓦片距离

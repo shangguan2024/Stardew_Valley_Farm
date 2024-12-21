@@ -38,7 +38,7 @@ public:
 
 	bool isMousePressed(cocos2d::EventMouse::MouseButton button, const std::string& name);
 	bool isMouseReleased(cocos2d::EventMouse::MouseButton button, const std::string& name);
-	const cocos2d::Vec2 * getMousePosition(const std::string& name) const;
+	const cocos2d::Vec2 * getMousePosition() const;
 
 	void clearPollingStates();
 

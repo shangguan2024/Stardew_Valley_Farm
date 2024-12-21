@@ -67,9 +67,8 @@ bool GameScene::init()
 
 	auto player = Player::getInstance();
 	auto& enterPosition = PlayerController::getInstance()->enterPosition;
-	// 在出生点创建玩家
 	if (player->enterType() == PlayerEnterType::SPAWN) {
-		// 加载出生点
+		// 在出生点创建玩家
 		auto objectGroup = tileMap->getObjectGroup("Spawn");
 		if (!objectGroup) {
 			CCLOG("Failed to load object layer: Spawn");
@@ -77,7 +76,7 @@ bool GameScene::init()
 		}
 		auto spawnPoint = objectGroup->getObject("SpawnPoint");
 		if (spawnPoint.empty()) {
-			CCLOG("SpawnPoint not found in Event layer.");
+			CCLOG("SpawnPoint not found in Spawn layer.");
 			return false;
 		}
 		// 提取出生点的 x 和 y 坐标
@@ -92,19 +91,19 @@ bool GameScene::init()
 	this->addChild(player, 1, "player");
 	player->setPosition(enterPosition);
 	player->setCameraMask(unsigned short(CameraFlag::USER1));
-	setCameraCenter();
+	setCameraCenter(camera->getPosition3D());
 
 	// UI
-	auto camera = Camera::create();
-	camera->setCameraFlag(CameraFlag::DEFAULT);
-	this->addChild(camera);
+	auto UICamera = Camera::create();
+	UICamera->setCameraFlag(CameraFlag::DEFAULT);
+	this->addChild(UICamera);
 	this->addChild(UIManager::getInstance());
 	UIManager::getInstance()->setCameraMask(static_cast<unsigned short>(CameraFlag::DEFAULT));
 
 	return true;
 }
 
-Vec2 GameScene::convertToTileCoords(const Vec2 pos)
+Vec2 GameScene::convertGLPosToTileCoord(const Vec2 pos)
 {
 	// 将玩家的新位置转换为瓦片坐标
 	Size tilemapSize = tileMap->getMapSize();
@@ -114,28 +113,39 @@ Vec2 GameScene::convertToTileCoords(const Vec2 pos)
 	// 输出调试信息
 	CCLOG("Position: (%f, %f)", pos.x, pos.y);
 	CCLOG("Tile: (%d, %d)", (int)tile.x, (int)tile.y);
-	CCLOG("Tilemap Size: (%f, %f)", tilemapSize.width, tilemapSize.height);
-	CCLOG("Map Tile Width: %d, Map Tile Height: %d", MAP_TILE_WIDTH, MAP_TILE_HEIGHT);
+	// CCLOG("Tilemap Size: (%f, %f)", tilemapSize.width, tilemapSize.height);
+	// CCLOG("Map Tile Width: %d, Map Tile Height: %d", MAP_TILE_WIDTH, MAP_TILE_HEIGHT);
 
 	return tile;
 }
 
-bool GameScene::setCameraCenter()
+Vec2 GameScene::getMouseTileCoord()
 {
-	Vec3 currentCameraPos = camera->getPosition3D();
+	auto cameraPos = camera->getPosition3D();
+	Vec2 cameraPos2D(cameraPos.x, cameraPos.y);
+	Vec2 winSize = Director::getInstance()->getWinSize();
+	auto aspect_ratio = winSize.x / winSize.y;
+	auto fov2z = 2 * cameraPos.z * tan(60.0 / 180 * acos(-1) / 2);
+	Vec2 visibleSize = Size(fov2z * aspect_ratio, fov2z);
+	auto mousePos = *InputManager::getInstance()->getMousePosition();
+	Vec2 resCoord = cameraPos2D + (mousePos - winSize * 0.5) / winSize.length() * visibleSize.length();
 
-	// 计算摄像头目标位置 并 平滑移动摄像机
-	Vec2 leftUpMargin, rightDownMargin,
-		target(Player::getInstance()->getPosition().x, Player::getInstance()->getPosition().y);
+	return convertGLPosToTileCoord(resCoord);
+}
 
-	const auto& mapblock = tileMap->getMapSize();
-	const auto& tilesize = tileMap->getTileSize();
+bool GameScene::setCameraCenter(const Vec3& cameraPos)
+{
+	// 计算摄像头目标位置 并平滑移动摄像机
+	Vec2 leftUpMargin, rightDownMargin, target(Player::getInstance()->getPosition().x, Player::getInstance()->getPosition().y);
+
+	const auto& mapSize = tileMap->getMapSize();
+	const auto& tileSize = tileMap->getTileSize();
 	const auto& winSize = Director::getInstance()->getWinSize();
-	auto mapsize = Size(mapblock.width * tilesize.width, mapblock.height * tilesize.height);
+	auto mapsize = Size(mapSize.width * tileSize.width, mapSize.height * tileSize.height);
 
 	// default fov = 60 deg
 	const auto& aspect_ratio = winSize.width / winSize.height;
-	const auto& fov2z = 2 * currentCameraPos.z * tan(60.0 / 180 * 3.14 / 2);
+	const auto& fov2z = 2 * cameraPos.z * tan(60.0 / 180 * acos(-1) / 2);
 	Size visibleSize = Size(fov2z * aspect_ratio, fov2z);
 	leftUpMargin = visibleSize / 2;
 	rightDownMargin = mapsize - visibleSize / 2;
@@ -156,8 +166,8 @@ bool GameScene::setCameraCenter()
 		target.y = rightDownMargin.y;
 	}
 
-	Vec3 targetCameraPos(target.x, target.y, currentCameraPos.z);
-	camera->setPosition3D(currentCameraPos.lerp(targetCameraPos, 1.0f)); // 平滑系数
+	Vec3 targetCameraPos(target.x, target.y, cameraPos.z);
+	camera->setPosition3D(cameraPos.lerp(targetCameraPos, 1.0f)); // 平滑系数
 	return true;
 }
 
@@ -194,14 +204,13 @@ void GameScene::onMouseScroll(cocos2d::EventMouse* event)
 	Vec3 currentCameraPos = camera->getPosition3D();
 	// 计算摄像头目标位置
 	currentCameraPos.z += 16.0f * scrollDelta;
-	if (currentCameraPos.z > 384.0f)
-		currentCameraPos.z = 384.0f;
-	if (currentCameraPos.z < 128.0f)
-		currentCameraPos.z = 128.0f;
+	if (!setCameraCenter(currentCameraPos))return;
+	if (currentCameraPos.z > 384.0f)currentCameraPos.z = 384.0f;
+	if (currentCameraPos.z < 128.0f)currentCameraPos.z = 128.0f;
 	Vec3 targetCameraPos(currentCameraPos.x, currentCameraPos.y, currentCameraPos.z);
 	// 平滑移动摄像机
 	camera->setPosition3D(currentCameraPos.lerp(targetCameraPos, 0.8f));
-	setCameraCenter();
+	setCameraCenter(currentCameraPos);
 }
 
 // 鼠标点击事件回调
@@ -210,33 +219,24 @@ void GameScene::onMouseClick(cocos2d::EventMouse::MouseButton mouseButton)
 	Player* player = Player::getInstance();
 	InputManager* inputManager = InputManager::getInstance();
 
-
 	// 获取瓦片图层
 	auto tileLayer = tileMap->getLayer("Meta");
 
 	// 获得玩家的当前位置并转换为瓦片坐标
-	Vec2 currentPosition = player->getPosition();
-	Vec2 currenttile = convertToTileCoords(currentPosition);
+	auto playerTileCoord = convertGLPosToTileCoord(player->getPosition());
 
 	// 获取鼠标点击位置
-	auto Location = inputManager->getMousePosition(sceneName);
-	// 计算偏移量
-	Vec2 screenCenter = Vec2(Director::getInstance()->getVisibleSize().width / 2, Director::getInstance()->getVisibleSize().height / 2);
-	Vec2 offset = Vec2(currentPosition.x - screenCenter.x, currentPosition.y + screenCenter.y);
-	offset.x += Location->x;
-	offset.y -= Location->y;
-	// 将鼠标的位置转换为瓦片坐标
-	Vec2 mousetile = convertToTileCoords(offset);
+	auto mouseTileCoord = getMouseTileCoord();
 
 	// 判断鼠标点击的按钮
 	if (mouseButton == EventMouse::MouseButton::BUTTON_LEFT) {
-		CCLOG("Left mouse button clicked at: (%f, %f)", mousetile.x, mousetile.y);
+		CCLOG("Left mouse button clicked at: (%f, %f)", mouseTileCoord.x, mouseTileCoord.y);
 	}
 	else if (mouseButton == EventMouse::MouseButton::BUTTON_RIGHT) {
-		CCLOG("Right mouse button clicked at: (%f, %f)", mousetile.x, mousetile.y);
+		CCLOG("Right mouse button clicked at: (%f, %f)", mouseTileCoord.x, mouseTileCoord.y);
 	}
 
-	tileMap->interactTile(currentPosition, mousetile, mouseButton);
+	tileMap->interactTile(playerTileCoord, mouseTileCoord, mouseButton);
 }
 
 void GameScene::update(float delta)
@@ -252,62 +252,36 @@ void GameScene::update(float delta)
 		return;
 	}
 
-	bool playerMoved = false;
-
 	// 玩家移动
-	if (player->getDirection().x) {
+	auto tryMove = [&](const Vec2& direction) -> bool {
+		if (direction == Vec2::ZERO)return false;
 		// 获得玩家的当前位置并转换为瓦片坐标
 		Vec2 currentPosition = player->getPosition();
-		Vec2 currenttile = convertToTileCoords(currentPosition);
+		Vec2 currenttile = convertGLPosToTileCoord(currentPosition);
 
 		// 计算更新后的位置
-		Vec2 newPosition = player->getPosition() + Vec2(player->getDirection().x, 0) * player->getSpeed() * delta;
+		Vec2 newPosition = player->getPosition() + direction * player->getSpeed() * delta;
 
 		// 获取玩家目标位置的瓦片GID
-		int tileGID = tileLayer->getTileGIDAt(convertToTileCoords(newPosition));
+		int tileGID = tileLayer->getTileGIDAt(convertGLPosToTileCoord(newPosition));
 
 		// 如果该瓦片可通行，则更新玩家位置
 		if (!tileGID) {
 			player->setPosition(newPosition);
-			playerMoved = true;
-		}
-		else {
-			auto properties = tileMap->getPropertiesForGID(tileGID);
-			if (properties.find(TILE_COLLIDABLE) == properties.end()) {
-				player->setPosition(newPosition);
-				playerMoved = true;
-			}
-		}
-	}
-
-	if (player->getDirection().y) {
-		// 获得玩家的当前位置并转换为瓦片坐标
-		Vec2 currentPosition = player->getPosition();
-		Vec2 currenttile = convertToTileCoords(currentPosition);
-
-		// 计算更新后的位置
-		Vec2 newPosition = player->getPosition() + Vec2(0, player->getDirection().y) * player->getSpeed() * delta;
-
-		// 获取玩家目标位置的瓦片GID
-		int tileGID = tileLayer->getTileGIDAt(convertToTileCoords(newPosition));
-
-		// 如果该瓦片可通行，则更新玩家位置
-		if (!tileGID) {
-			player->setPosition(newPosition);
-			playerMoved = true;
+			return true;
 		}
 		else {
 			auto properties = tileMap->getPropertiesForGID(tileGID);
 			if (properties.find("Collidable") == properties.end()) {
 				player->setPosition(newPosition);
-				playerMoved = true;
+				return true;
 			}
 		}
-	}
+		};
 
-	if (playerMoved) {
-		// 计算摄像机的位置
-		setCameraCenter();
+	Vec2 moveX(player->getDirection().x, 0), moveY(0, player->getDirection().y);
+	if (tryMove(moveX) | tryMove(moveY)) {
+		setCameraCenter(camera->getPosition3D());
 		checkPlayerEnterPortal(player->getPosition());
 	}
 }
@@ -341,7 +315,7 @@ void GameScene::checkPlayerEnterPortal(const Vec2 position)
 			Player::getInstance()->setEnterType(PlayerEnterType::FROM_PORTAL);
 			UIManager::getInstance()->removeFromParent();
 			Scene* scene = nullptr;
-			if(targetMap == "FarmYard") {
+			if (targetMap == "FarmYard") {
 				scene = FarmYardScene::createScene();
 			}
 			else {

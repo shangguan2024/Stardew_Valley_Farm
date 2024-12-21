@@ -27,9 +27,9 @@ protected:
 
 	void checkPlayerEnterPortal(const cocos2d::Vec2 position);
 
-	// 转变坐标成瓦片坐标
-	cocos2d::Vec2 convertToTileCoords(const cocos2d::Vec2 pos);
-	bool setCameraCenter();
+	cocos2d::Vec2 convertGLPosToTileCoord(const cocos2d::Vec2 pos);
+	cocos2d::Vec2 getMouseTileCoord();
+	bool setCameraCenter(const cocos2d::Vec3& cameraPos);
 
 	const std::string& getSceneName() const;
 
