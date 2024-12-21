@@ -23,32 +23,28 @@ bool FishingGame::init()
     Size winSize = Director::getInstance()->getWinSize();
 
     // 设置背景
-    fishingBar = Sprite::create("chatlayerbackground2.png");
+    fishingBar = Sprite::create("fishing_bar.png");
     fishingBar->setAnchorPoint(Vec2(0.5, 0.5));
     fishingBar->setPosition(Vec2(winSize.width / 2, winSize.height / 2));
     this->addChild(fishingBar, 0, "fishingBar");
-    if (fishingBar == nullptr) 
-    {
-        CCLOG("ji");
-    }
-    // 设置鱼竿位置
-    fishingRod = Sprite::create("fishing_rod.png");
-    fishingRod->setContentSize(Size(fishingRod->getContentSize().width, fishingBar->getContentSize().height));
-    fishingRod->setPosition(Vec2(fishingBar->getPosition().x-0.3 * fishingBar->getContentSize().width, fishingBar->getPosition().y));
-    this->addChild(fishingRod, 2, "fishingRod");
     // 设置钓鱼条
     auto fishingPos = Sprite::create("close.png");
+    fishingPos->setColor(ccc3(0, 0, 255));
+    fishingPos->setContentSize(Size(fishingPos->getContentSize().width, fishingPos->getContentSize().height - 30));
     fishingPos->setPosition(fishingBar->getPosition());
     this->addChild(fishingPos, 1, "fishingPos");
+    // 设置鱼竿位置
+    fishingRod = Sprite::create("fishing_rod.png");
+    fishingRod->setContentSize(Size(fishingRod->getContentSize().width, fishingPos->getContentSize().height));
+    fishingRod->setPosition(Vec2(fishingBar->getPosition().x-0.3 * fishingBar->getContentSize().width, fishingBar->getPosition().y));
+    this->addChild(fishingRod, 2, "fishingRod");
 
     // 创建背景
     auto menu = Menu::create();
     menu->setPosition(Vec2(0, 0));
     this->addChild(menu, 0, "menu");
     // 设置钓鱼按钮
-    auto fishingButton = HoverButton::create("Buttons/MenuSceneButtons/LoadButton.png",
-        "Buttons/MenuSceneButtons/LoadButton.png",
-        "Buttons/MenuSceneButtons/LoadButton.png");
+    auto fishingButton = HoverButton::create("Slot.png","Slot.png","Slot.png");
     fishingButton->setAnchorPoint(Vec2(0.5, 0));
     fishingButton->setPosition(Vec2(fishingBar->getPosition().x, fishingBar->getPosition().y + fishingBar->getContentSize().height/2));
     fishingButton->addTouchEventListener([this](Ref* sender, cocos2d::ui::Widget::TouchEventType type) mutable {
@@ -60,19 +56,29 @@ bool FishingGame::init()
         }
         });
     this->addChild(fishingButton, 0, "fishingButton");
+
+    auto fishingButtonContent = Label::create("PRESS TO PULL HARD!!!!!", "", 40);
+    fishingButtonContent->setColor(ccc3(255, 0, 0));
+    fishingButtonContent->setPosition(fishingButton->getPosition() + Vec2(300,0));
+    fishingButtonContent->setRotation(30);
+    this->addChild(fishingButtonContent, 1, "fishingButtonContent");
     // 设置进度条
     auto loadingBar = ui::LoadingBar::create("close.png");
     loadingBar->setDirection(ui::LoadingBar::Direction::LEFT);
-    loadingBar->setPosition(fishingBar->getPosition() - Vec2(0, fishingBar->getContentSize().height) / 2);
+    loadingBar->setPosition(fishingBar->getPosition() - Vec2(0, fishingBar->getContentSize().height) / 2  + Vec2(0,25));
+    loadingBar->setScaleX(2.6);
+    loadingBar->setScaleY(0.2);
+    loadingBar->setColor(ccc3(0, 255, 255));
     loadingBar->setPercent(1);
     this->addChild(loadingBar, 2, "loadingBar");
     // 设置剩余时间显示
-    auto lasttime = Label::create(std::to_string(fishingTime), "", 40);
-    lasttime->setPosition(fishingButton->getPosition());
+    auto lasttime = Label::create("last time: " + std::to_string(fishingTime) + "s", "", 40);
+    lasttime->setAnchorPoint(Vec2(0, 0.5));
+    lasttime->setRotation(-10);
+    lasttime->setPosition(fishingButton->getPosition() - Vec2(fishingBar->getContentSize().width / 2, 0));
     lasttime->setColor(ccc3(0, 0, 0));
     this->addChild(lasttime, 3, "lasttime");
 
-    this->setCameraMask(unsigned short(CameraFlag::USER1));
     return true;
 }
 
@@ -97,13 +103,13 @@ bool FishingGame::fishingUpdate(float delta)
     {
         fishingTime--;
         auto lasttime = dynamic_cast<Label*>(this->getChildByName("lasttime"));
-        lasttime->setString(std::to_string(fishingTime));
+        lasttime->setString("last time: " + std::to_string(fishingTime) + "s");
         
         if (this->getChildByName("fishingRod")->getPosition().x >= this->getChildByName("fishingBar")->getPosition().x - this->getChildByName("fishingBar")->getContentSize().width / 2)
         {
             auto moveAction = MoveBy::create(1.0f, Vec2(-60, 0));
             this->getChildByName("fishingRod")->runAction(moveAction);
-            //this->getChildByName("fishingRod")->setPosition(this->getChildByName("fishingRod")->getPosition() - Vec2(15, 0));
+            
         }
         if (this->getChildByName("fishingRod")->getPosition().x <= this->getChildByName("fishingPos")->getPosition().x + this->getChildByName("fishingPos")->getContentSize().width / 2 && this->getChildByName("fishingRod")->getPosition().x >= this->getChildByName("fishingPos")->getPosition().x - this->getChildByName("fishingPos")->getContentSize().width / 2)
         {

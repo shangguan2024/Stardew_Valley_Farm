@@ -41,9 +41,7 @@ public:
 * FishingGame示例
 * 添加到FarmYardScene.cpp的init中生效
     auto fishing = FishingGame::create();
-    fishing->setPosition(Vec2(0,0));
     this->addChild(fishing, 10, "fishing");
-    fishing->setCameraMask(unsigned short(CameraFlag::USER1));
 
     schedule([this](float delta)
         {
@@ -58,11 +56,14 @@ public:
             }
         }, 1.0f, "fishing_update_key");
 
+
 *添加到update中终止运行
-            if (this->getChildByName("fishing") == nullptr)
+
+    if (this->getChildByName("fishing") == nullptr)
     {
         unschedule("fishing_update_key");
     }
+
 
 
 */
