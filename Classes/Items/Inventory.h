@@ -28,8 +28,6 @@ public:
     bool init();
 
     // Getters
-    Item::ID getItemId(int row, int col);
-    size_t getItemNum(int row, int col);
     Slot getSlot(int row, int col);
 
     // Helper Functions
@@ -39,7 +37,7 @@ public:
     
     // Interface
     void click(int row, int col);    // 点击物品槽位，更新悬挂物品
-    bool pick(Item::ID item, size_t num);    // 捡起物品
+    bool pick(const Slot&);    // 捡起物品
     bool detach();    // 解除悬挂物品，还原位置
 
 private:

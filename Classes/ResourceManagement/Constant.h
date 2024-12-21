@@ -72,7 +72,7 @@ enum class PlayerEnterType {
 
 // 物品种类枚举
 enum class ItemTag {
-	Behaviour, // Default Type - NULL
+	Default, // Default Type - NULL
 	Block, // Placeable
 	Food,
 	Tool,

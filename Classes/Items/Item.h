@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "ResourceManagement/Constant.h"
+#include "ResourceManagement/Texture.h"
 #include "Behaviour.h"
 
 
@@ -23,13 +24,17 @@ public:
     Item(Item&&); // move constructor
 
     Item& operator=(Item&&);
+    void clear();
 
-private:
-    const std::string* icon;
+public:
+
     std::string name;
     std::string description;
     ID id;
     ItemTag flag;
+
+    const std::string* icon_path;
+    TextureTile icon_frame;
 
     //std::string icon;
     std::unordered_map<BehaviourType, Behaviour*> behaviour_table;

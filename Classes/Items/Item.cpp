@@ -9,21 +9,24 @@ Item::Item(Item::ID new_id)
     : Item(new_id, "") {}
 
 Item::Item(Item::ID new_id, std::string new_name)
-    : icon(nullptr),
-    id(new_id), 
+    : id(new_id), 
     name(new_name),
     description(""),
-    flag(ItemTag::Behaviour)
+    flag(ItemTag::Default),
+    icon_path(nullptr),
+    icon_frame()
 {
 }
 
 Item::Item(Item&& other)
-    : icon(icon),
-    name(std::move(other.name)),
-    description(std::move(other.description))
+    : name(std::move(other.name)),
+    description(std::move(other.description)),
+    id(other.id),
+    flag(other.flag),
+    icon_path(std::move(other.icon_path)),
+    icon_frame(other.icon_frame),
+    behaviour_table(std::move(other.behaviour_table))
 {
-    id = other.id;
-    flag = other.flag;
 }
 
 Item& Item::operator=(Item&& other)
@@ -32,5 +35,18 @@ Item& Item::operator=(Item&& other)
     description = std::move(other.description);
     id = other.id;
     flag = other.flag;
+    icon_path = std::move(other.icon_path);
+    icon_frame = other.icon_frame;
+    behaviour_table = std::move(other.behaviour_table);
     return *this;
+}
+
+void Item::clear()
+{
+    name = "";
+    description = "";
+    id = Item::NIL;
+    flag = ItemTag::Default;
+    icon_path = nullptr;
+    icon_frame = TextureTile();
 }

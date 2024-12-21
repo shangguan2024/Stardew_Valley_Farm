@@ -26,16 +26,6 @@ Inventory* Inventory::getInstance()
 	return instance;
 }
 
-Item::ID Inventory::getItemId(int row, int col)
-{
-	return inventory[row][col].id;
-}
-
-size_t Inventory::getItemNum(int row, int col)
-{
-	return inventory[row][col].num;
-}
-
 Inventory::Slot Inventory::getSlot(int row, int col)
 {
 	return inventory[row][col];
@@ -70,8 +60,8 @@ void Inventory::click(int row, int col)
 bool Inventory::detach()
 {
 	if (attached != Item::NIL) {
-		if (inventory[lastClickRow][lastClickCol] == Item::NIL) {
-			std::swap(attached, inventory[lastClickRow][lastClickCol]);
+		if (pick(attached)) {
+			attached = Slot();
 			return true;
 		}
 		else {
@@ -97,12 +87,12 @@ Inventory::Slot Inventory::getAttached()
 	return attached;
 }
 
-bool Inventory::pick(Item::ID item, size_t num)
+bool Inventory::pick(const Slot& discarded)
 {
 	for (int i = 0; i < 3; ++i) {
 		for (int j = 0; j < 12; ++j) {
-			if (inventory[i][j] == item /* && item.stackable */) {
-				merge(i, j, num);
+			if (inventory[i][j] == discarded /* && item.stackable */) {
+				merge(i, j, discarded.num);
 				return true;
 			}
 		}
@@ -111,7 +101,7 @@ bool Inventory::pick(Item::ID item, size_t num)
 	for (int i = 0; i < 3; ++i) {
 		for (int j = 0; j < 12; ++j) {
 			if (inventory[i][j] == Item::NIL) {
-				inventory[i][j] = Slot(item, num);
+				inventory[i][j] = discarded;
 				return true;
 			}
 		}
@@ -126,7 +116,11 @@ bool Inventory::init()
 	// 在此可以进行初始化操作
 	inventory[0][0] = Slot(1, 2);
 	inventory[0][1] = Slot(2, 1);
-	inventory[1][9] = Slot(2, 1);
-	inventory[2][0] = Slot(2, 2);
+	inventory[0][2] = Slot(2, 1);
+	inventory[0][3] = Slot(2, 2);
+	inventory[0][4] = Slot(3, 2);
+	inventory[0][5] = Slot(4, 2);
+	inventory[0][6] = Slot(5, 2);
+	inventory[0][7] = Slot(6, 2);
 	return true;
 }

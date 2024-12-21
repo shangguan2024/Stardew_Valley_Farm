@@ -4,15 +4,12 @@
 
 USING_NS_CC;
 
-ResourceManager* ResourceManager::instance = nullptr;
+ResourceManager* ResourceManager::instance	= nullptr;
 
-
-Rect ResourceManager::itemRect[1024];
-Rect ResourceManager::blockRect[1024];
-Texture2D* ResourceManager::itemRsc[1024] = {};
-Texture2D* ResourceManager::blockRsc[1024] = {};
-Texture2D* ResourceManager::springobjects = nullptr;
-Texture2D* ResourceManager::blockTexture = nullptr;
+Texture2D* ResourceManager::springobjects	= nullptr;
+Texture2D* ResourceManager::crops			= nullptr;
+Texture2D* ResourceManager::hoeDirt			= nullptr;
+Texture2D* ResourceManager::tools			= nullptr;
 
 std::string ResourceManager::inventory;
 
@@ -34,25 +31,27 @@ ResourceManager* ResourceManager::getInstance()
 bool ResourceManager::init()
 {
 	loadResouces();
-	updateRect();
 
 	return true;
 }
 
-void ResourceManager::updateRect()
-{
-	itemRect[1] = Tile(5, 12, 1, 1).toRect();    // Bream
-	itemRsc[1] = springobjects;
-	itemRect[2] = Tile(9, 0, 1, 1).toRect();    // Bread
-	itemRsc[2] = springobjects;
 
-
+Texture2D* load(const std::string& filename) {
+	return Director::getInstance()->getTextureCache()->addImage(filename);
 }
-
 
 void ResourceManager::loadResouces()
 {
-	springobjects = Director::getInstance()->getTextureCache()->addImage("World/springobjects..png");
+	//enum class Texture {
+	//	NIL,
+	//	springobjects,
+	//	crops,
+	//	hoeDirt,
+	//	tools,
+	//};
+
+	springobjects = load("World/springobjects..png");
+	tools = load("Items/tools..png");
 }
 
 void ResourceManager::loadUIPath()
@@ -62,9 +61,11 @@ void ResourceManager::loadUIPath()
 
 cocos2d::Sprite* ResourceManager::getItem(Item::ID id)
 {
-	cocos2d::Texture2D* texture = itemRsc[id];
-	const Rect region = itemRect[id];
-	auto spriteFrame = SpriteFrame::createWithTexture(texture, region);
+	auto texture = ItemManager::itemTable[id].icon_path;
+	auto region = ItemManager::itemTable[id].icon_frame.toRect();
+
+	//  * If the filename was not previously loaded, it will create a new Texture2D.
+	auto spriteFrame = SpriteFrame::createWithTexture(load(*texture), region);
 	auto itemSprite = Sprite::createWithSpriteFrame(spriteFrame);
 	return itemSprite;
 }

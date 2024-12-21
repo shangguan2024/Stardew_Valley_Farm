@@ -1,5 +1,5 @@
-#ifndef _RESOURCEMANAGER_H_
-#define _RESOURCEMANAGER_H_
+#ifndef __RESOURCE_MANAGER_H__
+#define __RESOURCE_MANAGER_H__
 
 #include "cocos2d.h"
 #include "UI/CocosGUI.h"
@@ -15,29 +15,14 @@
 #include "Items/Item.h"
 #include "Items/ItemManager.h"
 
+// 负责统一加载素材文件，再分配矩形到各成分
 class ResourceManager
 {
 public:
-    struct Tile
-    {
-        int row;
-        int col;
-        int width;
-        int height;
-
-        Tile(int r, int c, int w, int h)
-            : row(r), col(c), width(w), height(h) {}
-
-        cocos2d::Rect toRect()
-        {
-            return cocos2d::Rect(col*16, row*16, width*16, height*16);
-        }
-    };
 
     static ResourceManager* getInstance();
     bool init();
 
-    void updateRect();
     void loadResouces();
     void loadUIPath();
 
@@ -52,17 +37,19 @@ public:
 private:
     static ResourceManager* instance;
 
-    // A Rectangent region of some Texture in where the required item is
-    // the index is ID
-    static cocos2d::Rect itemRect[1024];
-    static cocos2d::Rect blockRect[1024];
-
-    // Texture in where the required item is (Rsc : Resource)
-    static cocos2d::Texture2D* itemRsc[1024];
-    static cocos2d::Texture2D* blockRsc[1024];
-
+    //enum class Texture {
+    //	NIL,
+    //	springobjects,
+    //	crops,
+    //	hoeDirt,
+    //	tools,
+    //};
+    static cocos2d::Texture2D* Nil;
     static cocos2d::Texture2D* springobjects;
-    static cocos2d::Texture2D* blockTexture;
+    static cocos2d::Texture2D* crops;
+    static cocos2d::Texture2D* hoeDirt;
+    static cocos2d::Texture2D* tools;
+
 
     static std::string inventory;
 

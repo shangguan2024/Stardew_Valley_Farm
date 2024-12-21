@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "ResourceManagement/Constant.h"
+#include "ResourceManagement/Texture.h"
 
 /// 
 /// 每种 Behaviour 代表 Item 可能的附加属性，观念上在分类物品时总是会找大
@@ -47,6 +48,8 @@ struct Behaviour
     const BehaviourType type = BehaviourType::Behaviour;
     const char depth = 0;
 
+    bool stackable = true;
+    bool disposable = true;
     //static std::unordered_map<BlockType, Block> behaviour_map;
     
 };
@@ -62,8 +65,8 @@ public:
     cocos2d::Size area = cocos2d::Size(0, 0); // measured in tile, (row, col)
     bool passable = false;
 
-    std::string placedImage;
-
+    Texture placed_icon_path;
+    TextureTile placed_icon_frame;
     //static std::unordered_map<BlockType, Block> block_map;
 
 };
@@ -74,7 +77,7 @@ struct Food : public Behaviour
     const BehaviourType type = BehaviourType::Food;
     bool init();
 
-    int energySupply = 0;
+    int energy_supply = 0;
     //static std::unordered_map<FoodType, Food> food_map;
 };
 
@@ -82,9 +85,16 @@ struct Tool : public Behaviour // Branch Struct
 {
     using this_type = Tool;
     const BehaviourType type = BehaviourType::Tool;
-    bool init();
+    bool init()
+    {
+        stackable = false;
+        disposable = false;
+    }
 
     //int durability; // disabled
+    Texture use_image; // store the anime assets when you use it
+    TextureTile use_frame[5]; // 5 frames of anime, each frame has a texture frame...
+    
     //static std::unordered_map<ToolType, Tool> tool_map;
 };
 
@@ -95,7 +105,7 @@ struct Weapon : public Behaviour
     bool init();
 
     int damage = 0;
-    float knockback = .0f;
+    float knockback = 0.0f;
 };
 
 // Block
@@ -107,10 +117,9 @@ struct Seed : public Block
     {
         area = cocos2d::Size(1, 1);
         passable = true;
+
+        placed_icon_path = Texture::crops;
     }
-
-
-    std::string placedImage = "";
 };
 
 // Food
@@ -133,24 +142,67 @@ struct Fish : public Food
 // Tools
 struct Hoe : public Tool
 {
+    enum TilledDirt // Please Don't change the order in it.
+    {
+        Single, UpLeft, FlatUp, UpRight,
+        Up, FlatLeft, Center, FlatRight,
+        Vertical, DownLeft, FlatDown, DownRight,
+        Down, Left, Horizontal, Right,
+    };
+
     using this_type = Hoe;
     const BehaviourType type = BehaviourType::Hoe;
-    bool init();
-
-
-    const std::string tilledImage = "";
+    bool init()
+    {
+        use_image = Texture::tools;
+        for (int i = 0; i < 5; ++i)
+        {
+            use_frame[i] = TextureTile(1, i + 14, 2, 1);    // +14 means steel
+        }
+        for (int i = 0; i < 16; ++i)
+        {
+            tilled_frame[i] = TextureTile(i / 4, i % 4, 1, 1);
+        }
+    }
+    
+    const Texture tilled_image = Texture::hoeDirt;
+    TextureTile tilled_frame[15];
 };
 
 struct WateringCan : public Tool
 {
+    using WateredDirt = Hoe::TilledDirt;
+    enum WaterDir {
+        FrontFirst,
+        FrontSecond,
+        RightFirst,
+        RightSecond,
+        Back
+    };
+
     using this_type = WateringCan;
     const BehaviourType type = BehaviourType::WateringCan;
-    bool init();
 
-    const std::string wateredImage = "";
+    bool init()
+    {
+        use_image = Texture::tools;
+        for (int i = 0; i < 5; ++i)
+        {
+            use_frame[i] = TextureTile(13, i + 14, 2, 1);    // +14 means steel
+        }
+        for (int i = 0; i < 16; ++i)
+        {
+            tilled_frame[i] = TextureTile(i / 4, i % 4, 1, 1);
+        }
+    }
+
+    const Texture tilled_image = Texture::hoeDirt;
+    TextureTile tilled_frame[15];
+    int storage = 16;
 
 };
 
+// Not implemented.
 struct Scythe : public Tool
 {
     using this_type = Scythe;
@@ -160,6 +212,7 @@ struct Scythe : public Tool
     // use -> 收小麦等农作物、除草
 };
 
+// Not implemented.
 struct FishingRod : public Tool
 {
     using this_type = FishingRod;

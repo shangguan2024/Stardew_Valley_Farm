@@ -4,10 +4,12 @@
 USING_NS_CC;
 
 Inventory* InventoryUI::inventory = nullptr;
-ResourceManager* InventoryUI::rscm = nullptr;
+ItemManager* InventoryUI::im = nullptr;
+ResourceManager* InventoryUI::rm = nullptr;
 
 InventoryUI::InventoryUI() :
-	closeButton(nullptr)
+	itemLayer(nullptr),
+	attached(nullptr)
 {
 }
 
@@ -32,21 +34,25 @@ InventoryUI* InventoryUI::create()
 bool InventoryUI::init()
 {
 	inventory = Inventory::getInstance();
-	rscm = ResourceManager::getInstance();
+	im = ItemManager::getInstance();
+	rm = ResourceManager::getInstance();
 
-	itemLayer = Layer::create();
-	attached = Layer::create();
+	if (!(inventory && im && rm))
+		return false;
 
-	auto screenSize = cocos2d::Director::getInstance()->getVisibleSize();
 	auto inventoryMainUI = cocos2d::Sprite::create(Resources::Inventory);
+	auto screenSize = cocos2d::Director::getInstance()->getVisibleSize();
 	inventoryMainUI->setPosition(screenSize.width / 2, screenSize.height * 0.4);
 
-	closeButton = ResourceManager::getInstance()->getButton(BUTTON_HIDE_INVENTORY);
+	cocos2d::ui::Button* closeButton = rm->getButton(BUTTON_HIDE_INVENTORY);
 	closeButton->setScale(4);
 	closeButton->setPosition(Vec2(screenSize * 0.8 + Size(64, 0)));
 	closeButton->addClickEventListener([this](Ref* sender) {
 		UIManager::getInstance()->hideInventoryUI();  // 点击关闭时隐藏背包
 		});
+
+	itemLayer = Layer::create();
+	attached = Layer::create();
 
 	this->addChild(inventoryMainUI);
 	this->addChild(closeButton);
@@ -68,13 +74,13 @@ void InventoryUI::updateUI()
 	for (int row = 0; row < 3; ++row) {
 		for (int col = 0; col < 12; ++col) {
 			// 无物品则跳过
-			auto itemId = inventory->getItemId(row, col);
-			auto itemNum = inventory->getItemNum(row, col);
+			auto itemId = inventory->getSlot(row, col).id;
+			auto itemNum = inventory->getSlot(row, col).num;
 			if (itemId == Item::NIL)
 				continue;
 
 			// 物品图像显示
-			auto itemSprite = rscm->getItem(itemId);
+			auto itemSprite = rm->getItem(itemId);
 			itemSprite->setAnchorPoint(cocos2d::Vec2(0, 0));
 			itemSprite->setScale(3.5);
 			itemSprite->setPosition(convertRCToXY(Vec2(row, col)));
@@ -87,7 +93,7 @@ void InventoryUI::updateUI()
 			// Turn a interger into string
 			char buffer[8];
 			snprintf(buffer, sizeof(buffer), "%d", itemNum);
-			auto numLabel = rscm->getLabel(buffer);
+			auto numLabel = rm->getLabel(buffer);
 			numLabel->setAnchorPoint(Vec2(0,0));
 			numLabel->setPosition(convertRCToXY(Vec2(row, col)) 
 									+ Vec2(16*2.7, -4));
@@ -111,18 +117,19 @@ void InventoryUI::click(Vec2 pos)
 	// attached->getTag() is the ID of the last attached item
 	if (attachedSlot != Item::NIL) {
 
-		auto attachedItem = rscm->getItem(attachedSlot.id);
+		auto attachedItem = rm->getItem(attachedSlot.id);
 		attachedItem->setAnchorPoint(cocos2d::Vec2(0, 1));
 		attachedItem->setScale(3.5);
 
 		attached->addChild(attachedItem);
 		attached->setTag(attachedSlot.id);
 
+		// 绘制数字
 		if (attachedSlot.num != 1)
 		{
 			char buffer[8];
 			snprintf(buffer, sizeof(buffer), "%d", attachedSlot.num);
-			auto attachedLabel = rscm->getLabel(buffer);
+			auto attachedLabel = rm->getLabel(buffer);
 			attachedLabel->setAnchorPoint(Vec2(0, 0));
 			attachedLabel->setPosition(Vec2(16*2.7, -16*4 + 4));
 

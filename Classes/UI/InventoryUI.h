@@ -27,12 +27,12 @@ public:
 
 private:
     static Inventory* inventory;
-    static ResourceManager* rscm;
+    static ItemManager* im;
+    static ResourceManager* rm;
 
     cocos2d::Layer* attached;
     // 将所有物品精灵放在该Layer中，便于管理
     cocos2d::Layer* itemLayer;
-    cocos2d::ui::Button* closeButton;
     // 其他UI元素，比如物品格子、分页按钮等
 };
 
