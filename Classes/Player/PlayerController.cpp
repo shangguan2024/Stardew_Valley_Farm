@@ -28,17 +28,17 @@ PlayerController::PlayerController() :
 
 PlayerController::~PlayerController()
 {
-	InputManager::getInstance()->popCurrentKeyControlMode();
+	InputManager::getInstance()->resetCurrentKeyControlMode("player");
 	delete instance;
 }
 
 bool PlayerController::init()
 {
 	player = Player::getInstance();
-	InputManager::getInstance()->registerKeyCallbackFunc(KeyControlMode::PLAYER_CONTROL, [this](cocos2d::EventKeyboard::KeyCode keyCode) {
+	InputManager::getInstance()->registerKeyCallbackFunc("player", [this](cocos2d::EventKeyboard::KeyCode keyCode) {
 		onKeyPressed(keyCode);
 		});
-	InputManager::getInstance()->setCurrentKeyControlMode(KeyControlMode::PLAYER_CONTROL);
+	InputManager::getInstance()->setCurrentKeyControlMode("player");
 	return true;
 }
 
@@ -47,6 +47,9 @@ void PlayerController::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode)
 	switch (keyCode) {
 	case cocos2d::EventKeyboard::KeyCode::KEY_E:
 		toggleInventory();
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_N:
+		GameTime::getInstance()->jumpToNextMorning();
 		break;
 	case cocos2d::EventKeyboard::KeyCode::KEY_T:
 		player->addEnergy(-1);
@@ -63,16 +66,16 @@ void PlayerController::updateDirection()
 	cocos2d::Vec2 dir = cocos2d::Vec2::ZERO;
 	auto inputManager = InputManager::getInstance();
 
-	if (inputManager->isKeyPressed(cocos2d::EventKeyboard::KeyCode::KEY_W, KeyControlMode::PLAYER_CONTROL)) {
+	if (inputManager->isKeyPressed(cocos2d::EventKeyboard::KeyCode::KEY_W, "player")) {
 		dir.y += 1.0f;
 	}
-	if (inputManager->isKeyPressed(cocos2d::EventKeyboard::KeyCode::KEY_A, KeyControlMode::PLAYER_CONTROL)) {
+	if (inputManager->isKeyPressed(cocos2d::EventKeyboard::KeyCode::KEY_A, "player")) {
 		dir.x -= 1.0f;
 	}
-	if (inputManager->isKeyPressed(cocos2d::EventKeyboard::KeyCode::KEY_S, KeyControlMode::PLAYER_CONTROL)) {
+	if (inputManager->isKeyPressed(cocos2d::EventKeyboard::KeyCode::KEY_S, "player")) {
 		dir.y -= 1.0f;
 	}
-	if (inputManager->isKeyPressed(cocos2d::EventKeyboard::KeyCode::KEY_D, KeyControlMode::PLAYER_CONTROL)) {
+	if (inputManager->isKeyPressed(cocos2d::EventKeyboard::KeyCode::KEY_D, "player")) {
 		dir.x += 1.0f;
 	}
 

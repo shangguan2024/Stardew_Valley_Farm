@@ -54,15 +54,6 @@ constexpr int DEFAULT_BAR = 12;      // 默认物品栏容量
 
 constexpr int PLAYER_MAX_STRENGTH = 100;
 
-// 键鼠控制状态
-enum class KeyControlMode {
-	PLAYER_CONTROL
-};
-enum class MouseControlMode {
-	INVENTORY_CONTROL,
-	SCENE
-};
-
 // 人物位置生成方式
 enum class PlayerEnterType {
 	SPAWN,

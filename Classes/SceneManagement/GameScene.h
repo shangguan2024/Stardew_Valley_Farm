@@ -31,6 +31,8 @@ protected:
 	cocos2d::Vec2 convertToTileCoords(const cocos2d::Vec2 pos);
 	bool setCameraCenter();
 
+	const std::string& getSceneName() const;
+
 	cocos2d::EventListenerMouse* mouseScrollListener;
 
 	// ∂®“Â…„œÒª˙
@@ -38,6 +40,8 @@ protected:
 	cocos2d::Camera* camera;
 
 	MapBase* tileMap;
+
+	std::string sceneName;
 };
 
 #endif

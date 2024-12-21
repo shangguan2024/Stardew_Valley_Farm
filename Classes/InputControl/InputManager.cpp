@@ -48,40 +48,40 @@ void InputManager::unRegisterEventListeners()
 	}
 }
 
-void InputManager::registerKeyCallbackFunc(KeyControlMode mode, std::function<void(cocos2d::EventKeyboard::KeyCode)> callback)
+void InputManager::registerKeyCallbackFunc(const std::string& name, std::function<void(cocos2d::EventKeyboard::KeyCode)> callback)
 {
-	if (keyCallbackFuncs[mode]) {
+	if (keyCallbackFuncs[name]) {
 		return;
 	}
-	keyCallbackFuncs[mode] = callback;
+	keyCallbackFuncs[name] = callback;
 }
 
-void InputManager::registerMouseCallbackFunc(MouseControlMode mode, std::function<void(cocos2d::EventMouse::MouseButton)> callback)
+void InputManager::registerMouseCallbackFunc(const std::string& name, std::function<void(cocos2d::EventMouse::MouseButton)> callback)
 {
-	if (mouseCallbackFuncs[mode]) {
+	if (mouseCallbackFuncs[name]) {
 		return;
 	}
-	mouseCallbackFuncs[mode] = callback;
+	mouseCallbackFuncs[name] = callback;
 }
 
-void InputManager::setCurrentKeyControlMode(KeyControlMode mode)
+void InputManager::setCurrentKeyControlMode(const std::string& name)
 {
-	keyControlMode.push(mode);
+	keyControlMode = name;
 }
 
-void InputManager::setCurrentMouseControlMode(MouseControlMode mode)
+void InputManager::setCurrentMouseControlMode(const std::string& name)
 {
-	mouseControlMode.push(mode);
+	mouseControlMode = name;
 }
 
-void InputManager::popCurrentKeyControlMode()
+void InputManager::resetCurrentKeyControlMode(const std::string& name)
 {
-	keyControlMode.pop();
+	if (keyControlMode == name)keyControlMode = "";
 }
 
-void InputManager::popCurrentMouseControlMode()
+void InputManager::resetCurrentMouseControlMode(const std::string& name)
 {
-	mouseControlMode.pop();
+	if (mouseControlMode == name)mouseControlMode = "";
 }
 
 // 处理键盘按下事件
@@ -89,8 +89,8 @@ void InputManager::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d
 {
 	CCLOG("Key pressed: %d", keyCode);
 	keyStates[keyCode] = true;
-	if (!keyControlMode.empty() && keyCallbackFuncs[keyControlMode.top()]) {
-		keyCallbackFuncs[keyControlMode.top()](keyCode);
+	if (keyControlMode != "" && keyCallbackFuncs[keyControlMode]) {
+		keyCallbackFuncs[keyControlMode](keyCode);
 	}
 }
 
@@ -121,8 +121,8 @@ void InputManager::onMouseDown(cocos2d::Event* event)
 	auto mouseEvent = static_cast<cocos2d::EventMouse*>(event);
 	CCLOG("Mouse button pressed: %d", mouseEvent->getMouseButton());
 	mouseButtonStates[mouseEvent->getMouseButton()] = true;
-	if (!mouseControlMode.empty() && mouseCallbackFuncs[mouseControlMode.top()]) {
-		mouseCallbackFuncs[mouseControlMode.top()](mouseEvent->getMouseButton());
+	if (mouseControlMode != "" && mouseCallbackFuncs[mouseControlMode]) {
+		mouseCallbackFuncs[mouseControlMode](mouseEvent->getMouseButton());
 	}
 }
 
@@ -134,44 +134,44 @@ void InputManager::onMouseUp(cocos2d::Event* event)
 	mouseButtonStates[mouseEvent->getMouseButton()] = false;
 }
 
-bool InputManager::isKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, KeyControlMode mode)
+bool InputManager::isKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, const std::string& name)
 {
 	if (keyControlMode.empty()) {
 		return false;
 	}
-	return keyControlMode.top() == mode && keyStates[keyCode];
+	return keyControlMode == name && keyStates[keyCode];
 }
 
-bool InputManager::isKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, KeyControlMode mode)
+bool InputManager::isKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, const std::string& name)
 {
 	if (keyControlMode.empty()) {
 		return false;
 	}
-	return keyControlMode.top() == mode && !keyStates[keyCode];
+	return keyControlMode == name && !keyStates[keyCode];
 }
 
-bool InputManager::isMousePressed(cocos2d::EventMouse::MouseButton button, MouseControlMode mode)
+bool InputManager::isMousePressed(cocos2d::EventMouse::MouseButton button, const std::string& name)
 {
 	if (mouseControlMode.empty()) {
 		return false;
 	}
-	return mouseControlMode.top() == mode && mouseButtonStates[button];
+	return mouseControlMode == name && mouseButtonStates[button];
 }
 
-bool InputManager::isMouseReleased(cocos2d::EventMouse::MouseButton button, MouseControlMode mode)
+bool InputManager::isMouseReleased(cocos2d::EventMouse::MouseButton button, const std::string& name)
 {
 	if (mouseControlMode.empty()) {
 		return false;
 	}
-	return mouseControlMode.top() == mode && !mouseButtonStates[button];
+	return mouseControlMode == name && !mouseButtonStates[button];
 }
 
-const cocos2d::Vec2* InputManager::getMousePosition(MouseControlMode mode) const
+const cocos2d::Vec2* InputManager::getMousePosition(const std::string& name) const
 {
 	if (mouseControlMode.empty()) {
 		return nullptr;
 	}
-	if (mouseControlMode.top() != mode) {
+	if (mouseControlMode != name) {
 		return nullptr;
 	}
 	return &mousePosition;
