@@ -9,6 +9,8 @@
 #ifndef _INVENTORY_LAYER_H_
 #define _INVENTORY_LAYER_H_
 #include "cocos2d.h"
+#include "Inventory.h"
+#include "Button/HoverButton.h"
 
 class InventoryLayer : public cocos2d::Layer
 {
@@ -19,7 +21,10 @@ public:
 	// 初始化
 	bool init() override;
 
-
+	// 关闭背包
+	void close();
+	
+	void open();
 
 	~InventoryLayer() override;
 };

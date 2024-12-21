@@ -12,6 +12,8 @@
 #include "../Player/Player.h"
 #include "../GameTime/GameTimeLayer.h"
 #include "../Manager/Manager.h"
+#include "../Inventory/Inventory.h"
+#include "../Inventory/InventoryLayer.h"
 
 USING_NS_CC;
 
@@ -83,6 +85,10 @@ bool FarmYardScene::init()
 
 	// 加载从农场中的事物
 	Manager::getInstance()->addToScene(this);
+
+	// 添加背包显示
+	auto inventorylayer = InventoryLayer::create();
+	addChild(inventorylayer, 1, "inventorylayer");
 
 	// 启动每帧更新函数
 	this->scheduleUpdate();

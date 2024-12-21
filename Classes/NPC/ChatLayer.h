@@ -13,6 +13,9 @@
 #include "NPC.h"
 #include "../Button/HoverButton.h"
 #include "../NPC/ShopLayer.h"
+#include "../Item/Item.h"
+#include "../Item/Seed.h"
+#include "../Item/Tool.h"
 
 class ChatLayer:public cocos2d::Layer
 {

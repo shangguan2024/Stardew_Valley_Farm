@@ -21,6 +21,9 @@ public:
 
 	const std::string getDescription() override;
 
+	const SeedType& getSubType();
+
+
 	// 种子
 	SeedType seedtype;
 

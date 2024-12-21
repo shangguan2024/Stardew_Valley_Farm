@@ -26,13 +26,13 @@ public:
     virtual const ItemType& getType();
 
     // 获得描述 子类必须覆盖
-    virtual const std::string getDescription() = 0;
+    virtual const std::string getDescription() = 0 ;
 
     // 获得基础属性
     int getMaxStack() const;
     int getprice() const;
 
-    std::string image;    // 物品素材
+    std::string image = "0";    // 物品素材
 
 protected:
 
