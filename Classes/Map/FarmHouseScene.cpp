@@ -70,10 +70,6 @@ bool FarmHouseScene::init()
 	// 创建一个矩形表示 houseToYard 区域
 	houseToYardRect.setRect(houseToYard["x"].asFloat(), houseToYard["y"].asFloat(), houseToYard["width"].asFloat(), houseToYard["height"].asFloat());
 
-	// 添加背包显示
-	auto inventorylayer = InventoryLayer::create();
-	addChild(inventorylayer, 1, "inventorylayer");
-
 	// 创建玩家
 	auto player = Player::getInstance();
 	player->init();
