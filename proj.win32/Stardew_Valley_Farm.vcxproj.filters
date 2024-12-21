@@ -144,6 +144,12 @@
     <ClCompile Include="..\Classes\Items\Behaviour.cpp">
       <Filter>Classes\Items</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Map\TestMap.cpp">
+      <Filter>Classes\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SceneManagement\TestScene.cpp">
+      <Filter>Classes\SceneManagement</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\Entities\Animal.h">
@@ -247,6 +253,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Items\Behaviour.h">
       <Filter>Classes\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Map\TestMap.h">
+      <Filter>Classes\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SceneManagement\TestScene.h">
+      <Filter>Classes\SceneManagement</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,5 +1,5 @@
 #include "MapBase.h"
-#include "MapManager.h"
+#include "MapDataManager.h"
 
 USING_NS_CC;
 
@@ -12,9 +12,9 @@ MapBase::MapBase() :
 
 void MapBase::update(float deltaTime)
 {
-	auto& tileData = MapManager::getInstacne()->getTileData(mapName);
+	auto& tileData = MapDataManager::getInstacne()->getTileData(mapName);
 	for (auto& data : tileData) {
-		if (MapManager::updateTileData(data)) {
+		if (MapDataManager::updateTileData(data)) {
 			setTileState(data.position, data.tileType);
 		}
 	}
@@ -144,9 +144,9 @@ bool MapBase::init()
 	initContants();
 	tileMap = TMXTiledMap::create(tileMapPath);
 
-	auto& tileData = MapManager::getInstacne()->getTileData(mapName);
+	auto& tileData = MapDataManager::getInstacne()->getTileData(mapName);
 	for (auto& data : tileData) {
-		MapManager::updateTileData(data);
+		MapDataManager::updateTileData(data);
 		setTileState(data.position, data.tileType);
 	}
 

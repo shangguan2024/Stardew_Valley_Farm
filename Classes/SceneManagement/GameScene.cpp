@@ -1,11 +1,13 @@
 #include "GameScene.h"
 #include "InputControl/InputManager.h"
 #include "Player/PlayerController.h"
+#include "ResourceManagement/ResourceManager.h"
+#include "ResourceManagement/AudioManager.h"
 #include "UI/UIManager.h"
 #include "SceneManager.h"
+#include "TestScene.h"
 #include "FarmYardScene.h"
 #include "BeachScene.h"
-#include "ResourceManagement/AudioManager.h"
 
 USING_NS_CC;
 
@@ -280,6 +282,7 @@ void GameScene::update(float delta)
 				return true;
 			}
 		}
+		return false;
 		};
 
 	Vec2 moveX(player->getDirection().x, 0), moveY(0, player->getDirection().y);
@@ -318,11 +321,19 @@ void GameScene::checkPlayerEnterPortal(const Vec2 position)
 			Player::getInstance()->setEnterType(PlayerEnterType::FROM_PORTAL);
 			UIManager::getInstance()->removeFromParent();
 			Scene* scene = nullptr;
-			if (targetMap == "FarmYard") {
+			switch (ResourceManager::getInstance()->stringToMapNameEnum(targetMap)) {
+			case MapName::FarmYard:
 				scene = FarmYardScene::createScene();
-			}
-			else {
+				break;
+			case MapName::Beach:
 				scene = BeachScene::createScene();
+				break;
+			case MapName::Test:
+				scene = TestScene::createScene();
+				break;
+			default:
+				CCLOG("Invalid targetMap.");
+				break;
 			}
 			Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, scene, cocos2d::Color3B::WHITE));
 			break;

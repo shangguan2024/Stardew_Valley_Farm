@@ -67,14 +67,13 @@ bool Inventory::detach()
 		else {
 			for (int i = 0; i < 3; ++i)
 				for (int j = 0; j < 11; ++j)
-					if (inventory[i][j] == Item::NIL)
-					{
+					if (inventory[i][j] == Item::NIL) {
 						std::swap(attached, inventory[i][j]);
 						return true;
 					}
 		}
-		return false;
 	}
+	return false;
 }
 
 void Inventory::merge(int row, int col, int num)

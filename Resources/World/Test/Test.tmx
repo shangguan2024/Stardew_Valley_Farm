@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="27" nextobjectid="121">
+ <editorsettings>
+  <export target="../../fall_beach.tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../Meta.tsx"/>
+ <layer id="26" name="Background" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztmksOgCAMBYkLw/1P7JYYFKT2Y53FrETbkZdIGmsppSqxndCqA/PsDd69SD28e2A/cu6Hdw8AAADQZx8wWnf3rJkaWk4r19peJTWieEhrWHmMMvUVj9G9M9mP7jG7PoLHk3ce2UOaKSsPC7J4/IXevFLjDKB9rtguar3Zs0W2rzwkeOcqw9zvLhfe/eAEAABfJcv3Z3U+Eo1MHuQqDpk8MuQKYmH1L9kBQw1MtQ==
+  </data>
+ </layer>
+ <objectgroup color="#ff00ff" id="18" name="Spawn">
+  <object id="118" name="SpawnPoint" x="410.798" y="392.42"/>
+ </objectgroup>
+ <objectgroup color="#ff55ff" id="13" name="Portals">
+  <object id="52" name="FarmYard" x="366.681" y="-0.411915" width="66.5682" height="18.0909">
+   <properties>
+    <property name="spawn_x" type="float" value="912"/>
+    <property name="spawn_y" type="float" value="40"/>
+    <property name="target_map" value="FarmYard"/>
+   </properties>
+  </object>
+  <object id="119" name="Test" x="-0.727273" y="430.727" width="17.8182" height="66.7273">
+   <properties>
+    <property name="spawn_x" type="float" value="114"/>
+    <property name="spawn_y" type="float" value="514"/>
+    <property name="target_map" value="Test"/>
+   </properties>
+  </object>
+  <object id="120" name="Beach" x="383.818" y="782.545" width="65.4545" height="18.3636">
+   <properties>
+    <property name="spawn_x" type="float" value="300"/>
+    <property name="spawn_y" type="float" value="770"/>
+    <property name="target_map" value="Beach"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <layer id="16" name="Meta" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt2iEOACAMxdAt4f5nRmHQDMrSJl/DEzgyIrJoY1vVOWu/p4OVDlY6WOlgpYOVDlY6WOlgpYOVDlY6WOlg1ckxXl/iQDpYdXJ0eec6OOlgpYOVDlY6WOlgpYOVDlbdHJW79ZdsArwHAOk=
+  </data>
+ </layer>
+</map>

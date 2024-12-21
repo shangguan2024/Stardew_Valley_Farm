@@ -166,6 +166,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Map\FarmYardMap.cpp" />
     <ClCompile Include="..\Classes\Map\MapBase.cpp" />
     <ClCompile Include="..\Classes\Map\MapDataManager.cpp" />
+    <ClCompile Include="..\Classes\Map\TestMap.cpp" />
     <ClCompile Include="..\Classes\Player\Player.cpp" />
     <ClCompile Include="..\Classes\Player\PlayerController.cpp" />
     <ClCompile Include="..\Classes\Quest\Quest.cpp" />
@@ -179,6 +180,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\SceneManagement\GameScene.cpp" />
     <ClCompile Include="..\Classes\SceneManagement\MainMenuScene.cpp" />
     <ClCompile Include="..\Classes\SceneManagement\SceneManager.cpp" />
+    <ClCompile Include="..\Classes\SceneManagement\TestScene.cpp" />
     <ClCompile Include="..\Classes\SceneManagement\TransitionScene.cpp" />
     <ClCompile Include="..\Classes\UI\HoverButton.cpp" />
     <ClCompile Include="..\Classes\UI\HUD.cpp" />
@@ -202,6 +204,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Map\FarmYardMap.h" />
     <ClInclude Include="..\Classes\Map\MapBase.h" />
     <ClInclude Include="..\Classes\Map\MapDataManager.h" />
+    <ClInclude Include="..\Classes\Map\TestMap.h" />
     <ClInclude Include="..\Classes\Player\Player.h" />
     <ClInclude Include="..\Classes\Player\PlayerController.h" />
     <ClInclude Include="..\Classes\Quest\Quest.h" />
@@ -216,6 +219,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\SceneManagement\GameScene.h" />
     <ClInclude Include="..\Classes\SceneManagement\MainMenuScene.h" />
     <ClInclude Include="..\Classes\SceneManagement\SceneManager.h" />
+    <ClInclude Include="..\Classes\SceneManagement\TestScene.h" />
     <ClInclude Include="..\Classes\SceneManagement\TransitionScene.h" />
     <ClInclude Include="..\Classes\UI\HoverButton.h" />
     <ClInclude Include="..\Classes\UI\HUD.h" />

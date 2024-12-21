@@ -97,6 +97,8 @@ MapName ResourceManager::stringToMapNameEnum(const std::string& mapName)
 		return MapName::FarmYard;
 	if (mapName == "Beach")
 		return MapName::Beach;
+	if (mapName == "Test")
+		return MapName::Test;
 	return MapName::Null;
 	//MapName::FarmHouse;
 }

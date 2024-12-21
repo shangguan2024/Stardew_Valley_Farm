@@ -140,10 +140,11 @@ const std::string SEED_WHRAT_DESCRIPTION = " ";
 
 // 地图名称枚举
 enum class MapName {
-    Null,
-    FarmYard,
-    FarmHouse,
-    Beach
+	Null,
+	Test,
+	FarmYard,
+	FarmHouse,
+	Beach
 };
 
 // 地图瓦片属性
@@ -162,7 +163,7 @@ enum ButtonType {
 
 // 摄像机
 constexpr float CAMERA_FOV = 60.0;
-constexpr float CAMERA_Z = 128.0;
+constexpr float CAMERA_Z = 256.0;
 
 // 资源路径
 
@@ -232,7 +233,8 @@ const std::string fall_beach = "World/beach/fall_beach..png";
 const std::string fall_town = "World/fall_town..png";
 
 // Tile Maps
-const std::string FarmYardMap= "World/FarmYard/FarmYardScene.tmx";
+const std::string TestMap = "World/Test/Test.tmx";
+const std::string FarmYardMap = "World/FarmYard/FarmYardScene.tmx";
 const std::string BeachMap = "World/Beach/fall_beach.tmx";
 
 // Map Music

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="100" height="80" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="11">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="100" height="80" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="13">
  <tileset firstgid="1" source="../spring_outdoorsTileSheet.tsx"/>
  <tileset firstgid="1976" source="../Houses.tsx"/>
  <tileset firstgid="2435" source="../Meta.tsx"/>
@@ -15,7 +15,7 @@
  </layer>
  <layer id="7" name="Meta" width="100" height="80">
   <data encoding="base64" compression="zlib">
-   eJztmsGOwyAMBXvtd3f7360PlboUQqJA/GxmJB8j2ZmggM3jfrs9COIdJd75rBwtvPNSDZgLLvTAhR640AMfWuBDC3xogQ8t8KEFPrTAhxb40AIfWuBDi0w+MtRgZPCR6bsyIteRsU8dsYbMc5yI+Wf1ETX/jD4i548PLfChRS/vaPUY+NAiso+M4EMLfGiBDy3woUWGPXsmspyjsoAPLfChBT60UPLxd/cLFfCBjxb40HFh4AMfUXx4gA8dFwY+fl08hXJbEXxogQ8taj6eeHGjtb/CiQ+1fRVO/Gjtc3Hiw9a5o/ZPwc1ceudA/ivXcuRcznqZz9E+CetlLmf6Vpwhx3O2j8gaGcsIHzgZx4g+O72WcYyae7R6YPg5xug51FYvDC99Zs8F2Rsf46o5LWtlH1fOzVkrfTzuMeCkjde9EpzU8bzng5NfvO9d4eQ/3j6+c8CJho/vPFbfD6v4KHNZ1YmSjw8rO1H0YazqRNWHsaITZR/GSk7Kvrgqe53Uev1RiJZ77+5ErZ4IdRmR8y59bHno1bXnWc9QpzwvnqnN+11n8TGqNu93vSde/vHB8g==
+   eJztmtGOAiEMRX31u133uzdkY6IIw0ymTG/LOUkfTW49EqHwuN9uD6f6rcorB/VfNd55Vq4e3rlUC+aCCz1woQcu9MCHFvjQAh9a4EMLfGiBDy3woQU+tMCHFvjQIpOPDD0UMvjI9LsqRO4j45w6Yg+Z73Ei5s/qI2r+jD4i58eHFvjQYpQ7Wj8FfGgR2UdG8KEFPrTAhxb40CLDnj0TWc5RWcCHFvjQAh9aKPn4ufuVCvjARw986Lgo4AMfUXx4gA8dFwV8fLt4CmVbEXxogQ8tWj6eeHGjt7/CiQ+tfRVO/Ojtc3Hiw9a5o/Wfgpu5jM6B/K9cy5FzOetlPkfnJKyXuZyZW3GGtOfsHJE1YouFD5zYYTFnZ9Zih9W9R28Ghp9jWN9Dbc3C8DJm9r0ge+NjXHVPy1rZx5X35qyVMR7vGHDSx+tdCU7aeL7zwck33u+ucPKJt4/3DDjR8PGeY/X9sIqPOsuqTpR8vFjZiaKPwqpOVH0UVnSi7KOwkpN6Lq7KXietWX8UomUfvZ1o9ROhr0Lk3LWPLQ+jvvZ81rPUqc+LZ3rz/q6z+LDqzfu73lN/1TPB/g==
   </data>
  </layer>
  <layer id="9" name="Decorations" width="100" height="80">
@@ -34,6 +34,13 @@
     <property name="spawn_x" type="float" value="300"/>
     <property name="spawn_y" type="float" value="770"/>
     <property name="target_map" value="Beach"/>
+   </properties>
+  </object>
+  <object id="11" name="Test" x="494.5" y="-2.75" width="68.25" height="21">
+   <properties>
+    <property name="spawn_x" type="float" value="114"/>
+    <property name="spawn_y" type="float" value="514"/>
+    <property name="target_map" value="Test"/>
    </properties>
   </object>
  </objectgroup>
