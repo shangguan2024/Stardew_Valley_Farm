@@ -153,6 +153,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\Button\HoverButton.cpp" />
+    <ClCompile Include="..\Classes\FishingGame\FishingGame.cpp" />
     <ClCompile Include="..\Classes\GameTime\GameTime.cpp" />
     <ClCompile Include="..\Classes\GameTime\GameTimeLayer.cpp" />
     <ClCompile Include="..\Classes\Inventory\Inventory.cpp" />
@@ -179,6 +180,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate\AppDelegate.h" />
     <ClInclude Include="..\Classes\Button\HoverButton.h" />
+    <ClInclude Include="..\Classes\FishingGame\FishingGame.h" />
     <ClInclude Include="..\Classes\GameTime\GameTime.h" />
     <ClInclude Include="..\Classes\GameTime\GameTimeLayer.h" />
     <ClInclude Include="..\Classes\Inventory\Inventory.h" />

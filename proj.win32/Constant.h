@@ -133,8 +133,7 @@ enum LandState
     WET,
 };
 
-constexpr int DRY_THRESHOLD = 100;
-constexpr int WATERING_TIME = 100;
+constexpr int DRY_THRESHOLD = 10;
 
 // NPC的种类
 enum NPCType

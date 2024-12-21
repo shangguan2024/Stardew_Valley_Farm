@@ -9,8 +9,8 @@
 #include "TownCenterScene.h"
 #include "FarmYardScene.h"
 #include "../Player/Player.h"
-#include "proj.win32/Constant.h"
 #include "../GameTime/GameTimeLayer.h"
+#include "proj.win32/Constant.h"
 
 USING_NS_CC;
 
@@ -19,6 +19,8 @@ Scene* TownCenterScene::createScene()
 	auto scene = Scene::create();
 	auto layer = TownCenterScene::create();
 	scene->addChild(layer);
+	auto gametimeLayer = GameTimeLayer::create();
+	scene->addChild(gametimeLayer, 10);
 	return scene;
 }
 
@@ -47,10 +49,6 @@ bool TownCenterScene::init()
 	TownCentre->setPosition(0, 0);
 	TownCentre->setCameraMask(unsigned short(CameraFlag::USER1));
 	this->addChild(TownCentre, 0, "TownCentre");
-
-	auto gametimeLayer = GameTimeLayer::create();
-	gametimeLayer->setPosition(Vec2(0, 0));
-	this->addChild(gametimeLayer, 10);
 
 	// 获取地图的基础属性
 	auto objectGroup = TownCentre->getObjectGroup("Event");
@@ -98,6 +96,7 @@ bool TownCenterScene::init()
 	Lewis->setAnchorPoint(Vec2(0.5, 0));
 	Lewis->setPosition(lewis["x"].asFloat(), lewis["y"].asFloat());
 	Lewis->setCameraMask(unsigned short(CameraFlag::USER1));
+
 	this->addChild(Abigail, 1, "Abigail");
 	this->addChild(Alex, 1, "Alex");
 	this->addChild(Caroline, 1, "Caroline");

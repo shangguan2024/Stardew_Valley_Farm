@@ -43,6 +43,9 @@
     <Filter Include="Classes\Inventory">
       <UniqueIdentifier>{b918723f-da05-4c7f-b4aa-2213bffc5742}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\FishingGame">
+      <UniqueIdentifier>{9d198fbe-1be2-4d2e-a50f-2119653fc584}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -116,6 +119,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\NPC\ShopLayer.cpp">
       <Filter>Classes\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\FishingGame\FishingGame.cpp">
+      <Filter>Classes\FishingGame</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -193,6 +199,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\NPC\ShopLayer.h">
       <Filter>Classes\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\FishingGame\FishingGame.h">
+      <Filter>Classes\FishingGame</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

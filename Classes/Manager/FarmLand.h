@@ -22,12 +22,10 @@ public:
 	// 析构函数
 	~FarmLand();
 
-	LandState getState();
-
 	// 更新函数
 	void update();
 
-	// 浇水
+	// 对耕地浇水
 	void watering();
 
 	// 判断是否需要移除
@@ -36,7 +34,14 @@ public:
 	// 设置需要移除
 	void markForRemoval();
 
+	// 获得精灵
 	cocos2d::Sprite* getSprite() const;
+
+	// 修改状态
+	void setLandState(LandState state);
+
+	// 获取状态
+	LandState getLandState() const;
 
 private:
 	cocos2d::Sprite* sprite;   // 对应的精灵

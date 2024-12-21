@@ -19,6 +19,8 @@ Scene* FarmHouseScene::createScene()
 	auto scene = Scene::create();
 	auto layer = FarmHouseScene::create();
 	scene->addChild(layer);
+	auto gametimeLayer = GameTimeLayer::create();
+	scene->addChild(gametimeLayer, 10);
 	return scene;
 }
 

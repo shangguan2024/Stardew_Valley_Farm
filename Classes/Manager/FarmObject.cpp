@@ -18,19 +18,19 @@ FarmObject::FarmObject(ObjectType type, float x, float y) :sprite(nullptr), curr
 	switch (objecttype){
 		case TREE:
 			objectsize.setRect(x, y, 16, 16);
-			sprite = Sprite::create("ImageElements/FarmLand/DrySoil.png");
+			sprite = Sprite::create("ImageElements/FarmLands/DrySoil.png");
 			break;
 		case WEED:
 			objectsize.setRect(x, y, 16, 16);
-			sprite = Sprite::create("ImageElements/FarmLand/DrySoil.png");
+			sprite = Sprite::create("ImageElements/FarmLands/DrySoil.png");
 			break;
 		case STONE:
 			objectsize.setRect(x, y, 16, 16);
-			sprite = Sprite::create("ImageElements/FarmLand/DrySoil.png");
+			sprite = Sprite::create("ImageElements/FarmLands/DrySoil.png");
 			break;
 		case CROP:
 			objectsize.setRect(x, y, 16, 16);
-			sprite = Sprite::create("ImageElements/FarmLand/DrySoil.png");
+			sprite = Sprite::create("ImageElements/FarmLands/DrySoil.png");
 			break;
 		default:
 			break;
@@ -75,4 +75,19 @@ void FarmObject::markForRemoval()
 Sprite* FarmObject::getSprite() const
 {
 	return sprite;
+}
+
+ObjectType FarmObject::getObjectType() const
+{
+	return objecttype;
+}
+
+void FarmObject::setCurrState(int state)
+{
+	currstate = state;
+}
+
+int FarmObject::getCurrState() const
+{
+	return currstate;
 }

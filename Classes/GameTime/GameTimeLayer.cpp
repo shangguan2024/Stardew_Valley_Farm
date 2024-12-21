@@ -16,9 +16,6 @@ bool GameTimeLayer::init()
 	if (!Layer::init()){
 		return false;
 	}
-
-	GameTime::getInstance()->start();
-
 	// 设置时间
 	timeLabel = Label::createWithSystemFont(GameTime::getInstance()->toString(), "Arial", 30);
 	timeLabel->setColor(ccc3(0, 0, 0));
@@ -30,8 +27,8 @@ bool GameTimeLayer::init()
 	timeIcon->setAnchorPoint(Vec2(0, 0));
 	timeIcon->setContentSize(timeLabel->getContentSize() + Size(0,5));
 	timeIcon->setPosition(timeLabel->getPosition());
-	this->addChild(timeIcon);
 
+	this->addChild(timeIcon);
 	this->addChild(timeLabel);
 
 	// 每秒更新一次时间

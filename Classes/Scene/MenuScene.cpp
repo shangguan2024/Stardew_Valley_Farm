@@ -9,6 +9,7 @@
 #include "../Button/HoverButton.h"
 #include "../Map/FarmYardScene.h"
 #include "../Music/AudioPlayer.h"
+#include "../GameTime/GameTime.h"
 #include "SaveLoadScene.h"
 #include "proj.win32/Constant.h"
 
@@ -38,15 +39,15 @@ bool MenuScene::init()
     this->addChild(background);
 
     // 创建按钮
-    auto newGameButton = HoverButton::create("Buttons/MenuSceneButtons/CreateButton.png",
-        "Buttons/MenuSceneButtons/CreateButton.png",
-        "Buttons/MenuSceneButtons/CreateButton.png");
-    auto loadGameButton = HoverButton::create("Buttons/MenuSceneButtons/LoadButton.png",
-        "Buttons/MenuSceneButtons/LoadButton.png",
-        "Buttons/MenuSceneButtons/LoadButton.png");
-    auto exitGameButton = HoverButton::create("Buttons/MenuSceneButtons/ExitButton.png",
-        "Buttons/MenuSceneButtons/ExitButton.png",
-        "Buttons/MenuSceneButtons/ExitButton.png");
+    auto newGameButton = HoverButton::create("Buttons/MenuSceneButtons/CreateDefualtButton.png",
+        "Buttons/MenuSceneButtons/CreateHoverButton.png",
+        "Buttons/MenuSceneButtons/CreateHoverButton.png");
+    auto loadGameButton = HoverButton::create("Buttons/MenuSceneButtons/LoadDefaultButton.png",
+        "Buttons/MenuSceneButtons/LoadHoverButton.png",
+        "Buttons/MenuSceneButtons/LoadHoverButton.png");
+    auto exitGameButton = HoverButton::create("Buttons/MenuSceneButtons/ExitDefaultButton.png",
+        "Buttons/MenuSceneButtons/ExitHoverButton.png",
+        "Buttons/MenuSceneButtons/ExitHoverButton.png");
 
     // 设置按钮位置
     newGameButton->setPosition(Vec2(screenSize.width / 2 + MENU_SCENE_NEW_GAME_BUTTON_OFFSET_X, screenSize.height / 2 + MENU_SCENE_BUTTONS_OFFSET_Y));
@@ -57,7 +58,7 @@ bool MenuScene::init()
     newGameButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
         if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
 
-
+            GameTime::getInstance()->start();
             Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, FarmYardScene::createScene(), cocos2d::Color3B::WHITE));
         }
         });

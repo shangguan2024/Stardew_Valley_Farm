@@ -31,14 +31,20 @@ public:
     // 添加耕地
     void addFarmland(const FarmLand& land, cocos2d::Scene* scene);
 
-    // 管理更新每一个元素
-    void update();
+    // 根据坐标查找耕地
+    FarmLand* findFarmlandByPosition(float x, float y);
+
+    // 根据坐标查找非耕地对象
+    FarmObject* findObjectByPosition(float x, float y);
 
     // 保存游戏状态
     void saveGameState(const std::string& filename);
 
     // 加载游戏数据
     void loadGameState(const std::string& filename);
+
+    // 管理更新每一个元素
+    void update();
 
 private:
     std::vector<FarmObject> objects;     // 非耕地物体

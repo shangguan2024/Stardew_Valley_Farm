@@ -21,6 +21,8 @@ Scene* FarmYardScene::createScene()
 	auto scene = Scene::create();
 	auto farmlayer = FarmYardScene::create();
 	scene->addChild(farmlayer, 0);
+	auto gametimeLayer = GameTimeLayer::create();
+	scene->addChild(gametimeLayer, 10);
 	return scene;
 }
 
@@ -47,21 +49,15 @@ bool FarmYardScene::init()
 		return false;
 	}
 	FarmYard->getLayer("Meta")->setVisible(false);
-	FarmYard->setPosition(0, 0);
 	FarmYard->setCameraMask(unsigned short(CameraFlag::USER1));
 	this->addChild(FarmYard, 0, "FarmYard");
 
 	// 获取地图的基础属性
 	auto objectGroup = FarmYard->getObjectGroup("Event");
-	if (!objectGroup) {
-		CCLOG("Failed to load object layer: Event");
-		return false;
-	}
-
 	auto spawnPoint = objectGroup->getObject("SpawnPoint");
 	auto yardToHouse = objectGroup->getObject("YardToHouse");
 	auto yardToTown = objectGroup->getObject("YardToTown");
-	if (spawnPoint.empty()|| yardToHouse.empty() || yardToTown.empty()) {
+	if (!objectGroup||spawnPoint.empty()|| yardToHouse.empty() || yardToTown.empty()) {
 		CCLOG("Event not found in Event layer.");
 		return false;
 	}
@@ -81,26 +77,24 @@ bool FarmYardScene::init()
 	targettile->setCameraMask(unsigned short(CameraFlag::USER1));
 	this->addChild(targettile, 1, "targettile");
 
-	Manager::getInstance()->addToScene(this);
-
-	auto gametimeLayer = GameTimeLayer::create();
-	gametimeLayer->setPosition(Vec2(0, 0));
-	this->addChild(gametimeLayer, 10);
-
 	// 创建并注册鼠标滚轮和鼠标点击事件监听器
 	registerMouseScrollListener();
 	registerMouseClickListener();
 
+	// 加载从农场中的事物
+	Manager::getInstance()->addToScene(this);
+
 	// 启动每帧更新函数
 	this->scheduleUpdate();
+	this->schedule([=](float deltaTime) {
+		Manager::getInstance()->update();
+		}, 1.0f, "manager_update");
 
 	return true;
 }
 
 void FarmYardScene::update(float delta)
 {
-	Manager::getInstance()->update();
-
 	Player* player = Player::getInstance();
 
 	// 获取 FarmYard 地图对象
@@ -162,7 +156,7 @@ void FarmYardScene::update(float delta)
 	// 计算摄像头目标位置
 	Vec3 targetCameraPos(newPosition.x, newPosition.y, currentCameraPos.z);
 	// 平滑移动摄像机
-	camera->setPosition3D(currentCameraPos.lerp(targetCameraPos, 0.1f));// 平滑系数
+	camera->setPosition3D(currentCameraPos.lerp(targetCameraPos, 0.1f));
 }
 
 void FarmYardScene::registerMouseScrollListener()
@@ -225,13 +219,18 @@ void FarmYardScene::onMouseClick(cocos2d::EventMouse* event)
 		CCLOG("Left mouse button clicked");
 		// 执行左键点击相关操作
 
-		FarmLand land(targettile->getPosition().x, targettile->getPosition().y);
-		Manager::getInstance()->addFarmland(land, this);
+		auto land = Manager::getInstance()->findFarmlandByPosition(targettile->getPosition().x, targettile->getPosition().y);
+		if (land != nullptr) {
+			land->watering();
+		}
+		else {
+			FarmLand newland(targettile->getPosition().x, targettile->getPosition().y);
+			Manager::getInstance()->addFarmland(newland, this);
+		}
 	}
 
-
-	// 丰富交互逻辑
-
+	// 防止事件传播
+	event->stopPropagation();
 }
 
 Vec2 FarmYardScene::convertToTileCoords(const Vec2& pos)

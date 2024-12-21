@@ -40,6 +40,14 @@ public:
 	// 对象的碰撞体积
 	cocos2d::Rect objectsize;
 
+	ObjectType getObjectType() const;
+
+	// 设置当前状态
+	void setCurrState(int state);
+
+	// 获取当前阶段
+	int getCurrState() const;
+
 private:
 	cocos2d::Sprite* sprite;  // 对应的精灵
 	ObjectType objecttype;    // 对象的种类
