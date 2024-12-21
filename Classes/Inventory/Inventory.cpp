@@ -78,23 +78,22 @@ void Inventory::addItem(std::shared_ptr<Item> item, int quantity)
 	// 如果没有那就新增这个物品
 	for (int i = 0; i < slots.size(); i++)
 	{
-		auto slot = slots[i];
 		// 若存在空位
 		if (slots[i].isEmpty()) 
 		{
-			slot.setItem(item, quantity);
+			slots[i].setItem(item, quantity);
 			break;
 		}
 		// 若不为空且找到
-		if (slot.getItem() == item) 
+		if (slots[i].getItem() == item)
 		{
-			if (item->getMaxStack() >= quantity + slot.getQuantity()) 
+			if (item->getMaxStack() >= quantity + slots[i].getQuantity())
 			{
-				slot.changeQuantity(0 - quantity);
+				slots[i].changeQuantity(0 - quantity);
 			}
 			else 
 			{
-				slot.changeQuantity(slot.getQuantity() - item->getMaxStack());
+				slots[i].changeQuantity(slots[i].getQuantity() - item->getMaxStack());
 			}
 		}
 	}
