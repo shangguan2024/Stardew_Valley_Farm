@@ -134,12 +134,12 @@ enum class BehaviourType {
 	SaltyFish
 };
 
-//// 种子类型枚举
-//enum class SeedType {
-//	RADISH_SEED,
-//	POTATO_SEED,
-//	WHRAT_SEED
-//};
+// 种子类型枚举
+enum class SeedType {
+	RADISH_SEED,
+	POTATO_SEED,
+	WHRAT_SEED
+};
 
 // 每种种子的具体描述
 const std::string SEED_RADISH_DESCRIPTION = " ";
@@ -242,6 +242,12 @@ const std::string fall_town = "World/fall_town..png";
 // Tile Maps
 const std::string FarmYardMap= "World/FarmYard/FarmYardScene.tmx";
 const std::string BeachMap = "World/Beach/fall_beach.tmx";
+
+
+// Item Icon
+const std::string NIL = "";
+const std::string Bread = "";
+
 
 }
 

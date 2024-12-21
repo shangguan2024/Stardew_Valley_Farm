@@ -17,7 +17,7 @@ public:
     size_t getFlag();
 
 public:
-    Item() = default;
+    Item();
     Item(Item::ID);
     Item(Item::ID, std::string);
     Item(Item&&); // move constructor
@@ -25,6 +25,7 @@ public:
     Item& operator=(Item&&);
 
 private:
+    const std::string* icon;
     std::string name;
     std::string description;
     ID id;

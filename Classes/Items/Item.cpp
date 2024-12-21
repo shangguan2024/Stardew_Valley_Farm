@@ -9,7 +9,8 @@ Item::Item(Item::ID new_id)
     : Item(new_id, "") {}
 
 Item::Item(Item::ID new_id, std::string new_name)
-    : id(new_id), 
+    : icon(nullptr),
+    id(new_id), 
     name(new_name),
     description(""),
     flag(ItemTag::Behaviour)
@@ -17,9 +18,10 @@ Item::Item(Item::ID new_id, std::string new_name)
 }
 
 Item::Item(Item&& other)
+    : icon(icon),
+    name(std::move(other.name)),
+    description(std::move(other.description))
 {
-    name = std::move(other.name);
-    description = std::move(other.description);
     id = other.id;
     flag = other.flag;
 }
