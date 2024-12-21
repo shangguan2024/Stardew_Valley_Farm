@@ -5,6 +5,7 @@
 #include "SceneManager.h"
 #include "FarmYardScene.h"
 #include "BeachScene.h"
+#include "ResourceManagement/AudioManager.h"
 
 USING_NS_CC;
 
@@ -40,6 +41,8 @@ bool GameScene::init()
 	}
 
 	initConstants();
+
+	AudioManager::getInstance()->playMusic(Audio::beach);
 
 	// ÍßÆ¬µØÍ¼
 	this->addChild(tileMap->tileMap);

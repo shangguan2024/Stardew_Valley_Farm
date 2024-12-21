@@ -50,6 +50,7 @@ protected:
 
     MapName mapName;
     std::string tileMapPath;
+    std::string musicPath;
 
 };
 
