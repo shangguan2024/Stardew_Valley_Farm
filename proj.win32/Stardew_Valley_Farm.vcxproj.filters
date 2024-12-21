@@ -16,6 +16,9 @@
     <Filter Include="Classes\Items">
       <UniqueIdentifier>{ea2bde49-af8d-44ec-8692-609711582245}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Player">
+      <UniqueIdentifier>{ca2f1c21-db79-4a37-a15d-3c82f5605a54}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Classes\Quest">
       <UniqueIdentifier>{52e52d6f-0ae6-40a4-8ed1-bb9a887fe3eb}</UniqueIdentifier>
     </Filter>
@@ -36,9 +39,6 @@
     </Filter>
     <Filter Include="Classes\Map">
       <UniqueIdentifier>{ff0699ff-f8f0-4f61-8494-3799039a6fec}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Classes\Player">
-      <UniqueIdentifier>{ca2f1c21-db79-4a37-a15d-3c82f5605a54}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -123,7 +123,7 @@
     <ClCompile Include="..\Classes\Map\MapBase.cpp">
       <Filter>Classes\Map</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Map\MapManager.cpp">
+    <ClCompile Include="..\Classes\Map\MapDataManager.cpp">
       <Filter>Classes\Map</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Map\BeachMap.cpp">
@@ -224,7 +224,7 @@
     <ClInclude Include="..\Classes\Map\MapBase.h">
       <Filter>Classes\Map</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Map\MapManager.h">
+    <ClInclude Include="..\Classes\Map\MapDataManager.h">
       <Filter>Classes\Map</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Map\BeachMap.h">
