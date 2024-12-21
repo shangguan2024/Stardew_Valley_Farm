@@ -31,6 +31,6 @@ bool SaveLoadScene::init()
     background->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2));
     this->addChild(background);
 
-
+    return true;
 
 }
