@@ -5,6 +5,7 @@
 
 class Audio
 {
+public:
     // Action
     static const std::string door;
     static const std::string forge;

@@ -31,7 +31,10 @@ public:
     cocos2d::Label* getLabel(const std::string& text, const int SystemFontSize = 24);
     cocos2d::ui::Button* getButton(ButtonType bfd);
 
+    MapName stringToMapNameEnum(const std::string& mapName)
+    {
 
+    }
 
 
 private:

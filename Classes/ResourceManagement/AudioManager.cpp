@@ -8,8 +8,8 @@ SimpleAudioEngine* AudioManager::audio      = nullptr;
 
 int   AudioManager::g_backgroundMusicSign       = DEFAULT_MUSIC_SIGN;
 int   AudioManager::g_soundEffectSign           = DEFAULT_MUSIC_SIGN;
-float AudioManager::g_backgroundMusicVolumn     = DEFAULT_MUSIC_VOLUMN;
-float AudioManager::g_soundEffectVolumn         = DEFAULT_MUSIC_VOLUMN;
+float AudioManager::g_backgroundMusicVolumn     = 1.0F; // DEFAULT_MUSIC_VOLUMN;
+float AudioManager::g_soundEffectVolumn         = 1.0F; // DEFAULT_MUSIC_VOLUMN;
 
 AudioManager* AudioManager::getInstance()
 {   
@@ -43,7 +43,7 @@ bool AudioManager::init()
 
 void AudioManager::playMusic(const std::string& audioPath)
 {
-    
+    audio->preloadBackgroundMusic(audioPath.c_str());
     audio->playBackgroundMusic(audioPath.c_str(), false);
 }
 

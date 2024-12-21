@@ -18,4 +18,6 @@ void BeachMap::initContants()
 {
 	mapName = MapName::Beach;
 	tileMapPath = Resources::BeachMap;
+
+    musicPath = Audio::beach;
 }

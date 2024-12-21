@@ -9,6 +9,7 @@
 #ifndef _CONSTANT_H_
 #define _CONSTANT_H_
 #include <string>
+#include "Audio.h"
 
 constexpr int DESIGN_RESOLUTION_WIDTH = 1280;                                            // 设计分辨率宽度
 constexpr int DESIGN_RESOLUTION_HEIGHT = 720;                                            // 设计分辨率高度
@@ -234,6 +235,9 @@ const std::string fall_town = "World/fall_town..png";
 const std::string FarmYardMap= "World/FarmYard/FarmYardScene.tmx";
 const std::string BeachMap = "World/Beach/fall_beach.tmx";
 
+// Map Music
+const std::string FarmYardMusic = "";
+const std::string BeachMusic = "";
 
 // Item Icon
 const std::string NIL = "";

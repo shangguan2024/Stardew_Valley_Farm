@@ -90,3 +90,15 @@ ui::Button* ResourceManager::getButton(ButtonType bfd)
 	}
 	return nullptr;
 }
+
+MapName ResourceManager::stringToMapNameEnum(const std::string& mapName)
+{
+	if (mapName == "FarmYard")
+		return MapName::FarmYard;
+	if (mapName == "Beach")
+		return MapName::Beach;
+	return MapName::Null;
+	//MapName::FarmHouse;
+}
+
+

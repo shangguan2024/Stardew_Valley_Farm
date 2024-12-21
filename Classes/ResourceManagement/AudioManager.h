@@ -19,7 +19,6 @@ public:
     static AudioManager* getInstance();
     bool init();
 
-private:
     void playMusic(const std::string&);
     void playEffect(const std::string&, bool);
 

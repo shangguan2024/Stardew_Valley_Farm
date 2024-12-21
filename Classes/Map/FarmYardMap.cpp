@@ -18,4 +18,5 @@ void FarmYardMap::initContants()
 {
 	mapName = MapName::FarmYard;
 	tileMapPath = Resources::FarmYardMap;
+    musicPath = Audio::spring_am;
 }
