@@ -7,7 +7,11 @@
  ****************************************************************/
 
 #include "cocos2d.h"
-
+#include "../NPC/ChatLayer.h"
+#include "../NPC/ShopLayer.h"
+#include "../NPC/NPC.h"
+#include "../Inventory/Inventory.h"
+#include "../Inventory/InventoryLayer.h"
 class TownCenterScene : public cocos2d::Scene
 {
 public:
@@ -36,10 +40,10 @@ private:
     cocos2d::Vec2 convertToTileCoords(const cocos2d::Vec2& pos);
 
     // NPC
-    cocos2d::Sprite* Abigail;
-    cocos2d::Sprite* Alex;
-    cocos2d::Sprite* Caroline;
-    cocos2d::Sprite* Lewis;
+    NPC* Abigail;
+    NPC* Alex;
+    NPC* Caroline;
+    NPC* Lewis;
 
     // 定义摄像机
     cocos2d::Camera* camera;

@@ -35,6 +35,8 @@ public:
 	// 获取背包当前已经装了多少东西
 	int getTotalItemCount() const;
 
+	int getCurrHeldItem();
+
 	// 修改当前手持物
 	void changeCurrHeldItem(int change);
 

@@ -65,9 +65,13 @@ int Inventory::getTotalItemCount() const
 
 void Inventory::changeCurrHeldItem(int change)
 {
+#if 0
 	currentHeldItemIndex += change;
 	// 更新当前所指的手持物
 	currentHeldItemIndex %= DEFAULT_BAR;
+#endif
+
+	currentHeldItemIndex = change;
 }
 
 
@@ -149,4 +153,9 @@ bool Inventory::isSlotFull()
 			return false;
 	}
 	return true;
+}
+
+int Inventory::getCurrHeldItem() 
+{
+	return currentHeldItemIndex;
 }

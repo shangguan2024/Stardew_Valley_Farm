@@ -30,3 +30,7 @@ const std::string Seed::getDescription()
 	}
 }
 
+const SeedType& Seed::getSubType() 
+{
+	return seedtype;
+}

@@ -39,3 +39,7 @@ const std::string Tool::getDescription()
 	}
 }
 
+const ToolType& Tool::getSubType() 
+{
+	return tooltype;
+}

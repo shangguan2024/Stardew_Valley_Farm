@@ -7,6 +7,8 @@
  ****************************************************************/
 
 #include "ChatLayer.h"
+#include "ShopLayer.h"
+
 #define backpos "chatlayerbackground2.png"
 USING_NS_CC;
 
@@ -95,7 +97,8 @@ bool ChatLayer::init(NPC* npc)
 ChatLayer* ChatLayer::create(NPC* npc)
 {
     ChatLayer* layer = new(std::nothrow) ChatLayer();
-    if (layer && layer->init(npc)) {
+    if (layer && layer->init(npc)) 
+    {
         layer->autorelease();
         return layer;
     }
@@ -122,7 +125,6 @@ void ChatLayer::chatButtonCallBack(Ref* pSender)
 {
     updateDialog();
 }
-
 void ChatLayer::eventButtonCallBack(Ref* pSender)
 {
     // 如果事件窗口未打开
@@ -144,16 +146,19 @@ void ChatLayer::eventButtonCallBack(Ref* pSender)
 
         // 打开商店
         auto shop = ShopLayer::create();
-#if 0
-        auto npc = NPC::create("Player/Sandy.png", ALEX);
-        this->addChild(npc);
+        shop->setNPC(currentNPC);
 
-        shop->setNPC(npc);
-        auto item = new Item(CROP, "defaulthead.png", 64, 1);
-        shop->InsertShopItems(item, 10);
+        auto item1 = std::make_shared<Seed>(POTATO_SEED, "defaulthead.png", 64, 1);
+        shop->InsertShopItems(std::shared_ptr<Item>(item1), 10, SHOP_BUY);
+        auto item2 = std::make_shared<Tool>(HOE, "defaulthead.png", 64, 1);
+        shop->InsertShopItems(std::shared_ptr<Item>(item2), 1, TASK_PAID);
+        auto item3 = std::make_shared<Seed>(POTATO_SEED, "defaulthead.png", 64, 1);
+        shop->InsertShopItems(std::shared_ptr<Item>(item3), 5, TASK_REWARD);
+
+        Inventory::getInstance()->addItem(std::shared_ptr<Item>(item2), 10);
+
         shop->UpdateShopItems();
         this->addChild(shop, 3,"shop");
-#endif
 
     }
     else 

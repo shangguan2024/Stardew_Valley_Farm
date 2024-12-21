@@ -21,6 +21,8 @@ public:
 
 	const std::string getDescription() override;
 
+	const ToolType& getSubType();
+
 	// 工具种类
 	ToolType tooltype;
 

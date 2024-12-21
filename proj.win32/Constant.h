@@ -106,7 +106,15 @@ const std::string SEED_RADISH_DESCRIPTION = " ";
 const std::string SEED_POTATO_DESCRIPTION = " ";
 const std::string SEED_WHEAT_DESCRIPTION = " ";
 
-
+// 商店操作类型枚举
+enum ShopType
+{
+    SHOP_BUY,      // 购买物品
+    SHOP_SELL,     // 卖出物品
+    TASK_REWARD,   // 委托奖励
+    TASK_PAID,     // 委托所需
+    PRESENT,       // 赠送
+};
 
 enum ObjectType
 {

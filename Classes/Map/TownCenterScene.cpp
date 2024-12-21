@@ -80,19 +80,19 @@ bool TownCenterScene::init()
 	this->addChild(player, 2, "player");
 
 	// 创建NPC
-	Abigail = Sprite::create("NPC/Abigail.png");
+	Abigail = NPC::create("NPC/Abigail.png",ABIGAIL);
 	Abigail->setAnchorPoint(Vec2(0.5, 0));
 	Abigail->setPosition(abigail["x"].asFloat(), abigail["y"].asFloat());
 	Abigail->setCameraMask(unsigned short(CameraFlag::USER1));
-	Alex = Sprite::create("NPC/Alex.png");
+	Alex = NPC::create("NPC/Alex.png",ALEX);
 	Alex->setAnchorPoint(Vec2(0.5, 0));
 	Alex->setPosition(alex["x"].asFloat(), alex["y"].asFloat());
 	Alex->setCameraMask(unsigned short(CameraFlag::USER1));
-	Caroline = Sprite::create("NPC/Caroline.png");
+	Caroline = NPC::create("NPC/Caroline.png",CAROLINE);
 	Caroline->setAnchorPoint(Vec2(0.5, 0));
 	Caroline->setPosition(caroline["x"].asFloat(), caroline["y"].asFloat());
 	Caroline->setCameraMask(unsigned short(CameraFlag::USER1));
-	Lewis = Sprite::create("NPC/Lewis.png");
+	Lewis = NPC::create("NPC/Lewis.png",LEWIS);
 	Lewis->setAnchorPoint(Vec2(0.5, 0));
 	Lewis->setPosition(lewis["x"].asFloat(), lewis["y"].asFloat());
 	Lewis->setCameraMask(unsigned short(CameraFlag::USER1));
@@ -101,6 +101,10 @@ bool TownCenterScene::init()
 	this->addChild(Alex, 1, "Alex");
 	this->addChild(Caroline, 1, "Caroline");
 	this->addChild(Lewis, 1, "Lewis");
+
+	// 添加背包显示
+	auto inventorylayer = InventoryLayer::create();
+	addChild(inventorylayer, 1, "inventorylayer");
 
 	// 创建并注册鼠标滚轮和鼠标点击事件监听器
 	registerMouseScrollListener();
@@ -216,21 +220,36 @@ void TownCenterScene::onMouseClick(cocos2d::EventMouse* event)
 		// 执行右键点击相关操作
 		if (targetRect.containsPoint(Abigail->getPosition())) {
 			CCLOG("Abigail");
-
+			auto chatlayer = ChatLayer::create(Abigail);
+			chatlayer->setAnchorPoint(Vec2(0, 0));
+			chatlayer->setPosition(Vec2(0, 0));
+			this->addChild(chatlayer, 1, "chatlayer");
 
 		}
 		else if(targetRect.containsPoint(Alex->getPosition())) {
 			CCLOG("Alex");
+			auto chatlayer = ChatLayer::create(Alex);
+			chatlayer->setAnchorPoint(Vec2(0, 0));
+			chatlayer->setPosition(Vec2(0, 0));
+			this->addChild(chatlayer, 1, "chatlayer");
 
 
 		}
 		else if (targetRect.containsPoint(Caroline->getPosition())) {
 			CCLOG("Caroline");
+			auto chatlayer = ChatLayer::create(Caroline);
+			chatlayer->setAnchorPoint(Vec2(0, 0));
+			chatlayer->setPosition(Vec2(0, 0));
+			this->addChild(chatlayer, 1, "chatlayer");
 
 
 		}
 		else if (targetRect.containsPoint(Lewis->getPosition())) {
 			CCLOG("Lewis");
+			auto chatlayer = ChatLayer::create(Lewis);
+			chatlayer->setAnchorPoint(Vec2(0, 0));
+			chatlayer->setPosition(Vec2(0, 0));
+			this->addChild(chatlayer, 1, "chatlayer");
 
 
 		}

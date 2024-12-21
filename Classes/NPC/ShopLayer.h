@@ -8,18 +8,21 @@
 #include "../Inventory/InventoryLayer.h"
 #include "../Inventory/Slot.h"
 #include "../Button/HoverButton.h"
+#include "../Item/Seed.h"
+#include "../Item/Tool.h"
+
 class ShopLayer : public cocos2d::Layer 
 {
 private:
 	NPC* _currentNPC;
 
-	std::vector<Item*> _ShopItems;       // 商店物品/委托奖励
-	std::vector<int>   _ShopItemsNum;    // 商店格位数量
-	std::vector<Item*> _PaidItems;       // 失去物品/委托物品/赠送物品
+	std::vector<std::shared_ptr<Item>>    _ShopItems;       // 商店物品/委托物品 
+	std::vector<int>      _ShopItemsNum;    // 商店格位数量
+	std::vector<ShopType> _ShopItemsType;   // 商店物品操作类型
 
 	// 将ItemType的枚举转变为字符串
 	template <typename T>
-	std::string enumToString(T _itemtype) { return "Unknown"; }
+	std::string enumToString(const T& _itemtype) { return "Unknown"; }
 
 public:
 	ShopLayer();
@@ -42,7 +45,7 @@ public:
 	void UpdateShopItems();
 
 	// 向商店中_ShopItems添加物品
-	void InsertShopItems(Item* _item,int num);
+	void InsertShopItems(std::shared_ptr<Item> _item, int num, ShopType type);
 
 	// 清除所有组件
 	void DeleteShop();
@@ -53,7 +56,7 @@ public:
 		switch (_itemtype) {
 			case SEED:return "SEED";
 			case TOOL:return "TOOL";
-			case CROP:return "CROP";
+			case OTHER:return "OTHER";
 			default:return "something wrong in ItemType";
 		}
 	}
@@ -77,7 +80,7 @@ public:
 		{
 			case RADISH_SEED:return "RADISH_SEED";
 			case POTATO_SEED:return "POTATO_SEED";
-			case WHEAT_SEED:return "WHRAT_SEED";
+			case WHEAT_SEED:return "WHEAT_SEED";
 			default:return "something wrong in SeedType";
 		}
 	}
