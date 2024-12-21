@@ -17,4 +17,5 @@ Scene* BeachScene::createScene()
 void BeachScene::initConstants()
 {
 	tileMap = new BeachMap();
+	sceneName = "Beach";
 }

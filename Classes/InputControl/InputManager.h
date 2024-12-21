@@ -15,8 +15,8 @@ public:
 	void unRegisterEventListeners();
 
 	// 注册回调函数
-	void registerKeyCallbackFunc(KeyControlMode mode, std::function<void(cocos2d::EventKeyboard::KeyCode)> callback);
-	void registerMouseCallbackFunc(MouseControlMode mode, std::function<void(cocos2d::EventMouse::MouseButton)> callback);
+	void registerKeyCallbackFunc(const std::string & name, std::function<void(cocos2d::EventKeyboard::KeyCode)> callback);
+	void registerMouseCallbackFunc(const std::string & name, std::function<void(cocos2d::EventMouse::MouseButton)> callback);
 
 	// 事件回调函数
 	void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
@@ -27,18 +27,18 @@ public:
 	void onMouseUp(cocos2d::Event* event);
 
 	// 控制输入状态
-	void setCurrentKeyControlMode(KeyControlMode mode);
-	void setCurrentMouseControlMode(MouseControlMode mode);
-	void popCurrentKeyControlMode();
-	void popCurrentMouseControlMode();
+	void setCurrentKeyControlMode(const std::string & name);
+	void setCurrentMouseControlMode(const std::string & name);
+	void resetCurrentKeyControlMode(const std::string& name);
+	void resetCurrentMouseControlMode(const std::string& name);
 
 	// 获取输入状态(polling)
-	bool isKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, KeyControlMode mode);
-	bool isKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, KeyControlMode mode);
+	bool isKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, const std::string & name);
+	bool isKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, const std::string& name);
 
-	bool isMousePressed(cocos2d::EventMouse::MouseButton button, MouseControlMode mode);
-	bool isMouseReleased(cocos2d::EventMouse::MouseButton button, MouseControlMode mode);
-	const cocos2d::Vec2* getMousePosition(MouseControlMode mode) const;
+	bool isMousePressed(cocos2d::EventMouse::MouseButton button, const std::string& name);
+	bool isMouseReleased(cocos2d::EventMouse::MouseButton button, const std::string& name);
+	const cocos2d::Vec2 * getMousePosition(const std::string& name) const;
 
 	void clearPollingStates();
 
@@ -51,8 +51,8 @@ private:
 	cocos2d::EventListenerKeyboard* keyboardListener;
 	cocos2d::EventListenerMouse* mouseListener;
 
-	std::stack<KeyControlMode> keyControlMode;
-	std::stack<MouseControlMode> mouseControlMode;
+	std::string keyControlMode;
+	std::string mouseControlMode;
 
 	// polling
 	std::unordered_map<cocos2d::EventKeyboard::KeyCode, bool> keyStates;
@@ -60,8 +60,8 @@ private:
 	cocos2d::Vec2 mousePosition;
 
 	// 回调
-	std::unordered_map<KeyControlMode,std::function<void(cocos2d::EventKeyboard::KeyCode)>> keyCallbackFuncs;
-	std::unordered_map<MouseControlMode,std::function<void(cocos2d::EventMouse::MouseButton)>> mouseCallbackFuncs;
+	std::unordered_map<std::string,std::function<void(cocos2d::EventKeyboard::KeyCode)>> keyCallbackFuncs;
+	std::unordered_map<std::string,std::function<void(cocos2d::EventMouse::MouseButton)>> mouseCallbackFuncs;
 };
 
 #endif // __INPUT_MANAGER_H__

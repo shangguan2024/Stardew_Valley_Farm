@@ -14,10 +14,10 @@ void GameScene::onEnter()
 
 	// 创建并注册鼠标滚轮和鼠标点击事件监听器
 	registerMouseScrollListener();
-	// InputManager::getInstance()->registerMouseCallbackFunc(MouseControlMode::SCENE, [this](cocos2d::EventMouse::MouseButton mouseButton) {
-	//	this->onMouseClick(mouseButton);
-	//	});
-	// InputManager::getInstance()->setCurrentMouseControlMode(MouseControlMode::SCENE);
+	InputManager::getInstance()->registerMouseCallbackFunc(sceneName, [this](cocos2d::EventMouse::MouseButton mouseButton) {
+		this->onMouseClick(mouseButton);
+		});
+	InputManager::getInstance()->setCurrentMouseControlMode(sceneName);
 
 	// 启动每帧更新函数
 	this->scheduleUpdate();
@@ -28,7 +28,7 @@ void GameScene::onExit()
 	Scene::onExit();
 
 	unRegisterMouseScrollListener();
-	// InputManager::getInstance()->popCurrentMouseControlMode();
+	InputManager::getInstance()->resetCurrentMouseControlMode(sceneName);
 	this->unscheduleUpdate();
 }
 
@@ -161,6 +161,11 @@ bool GameScene::setCameraCenter()
 	return true;
 }
 
+const std::string& GameScene::getSceneName() const
+{
+	return sceneName;
+}
+
 void GameScene::registerMouseScrollListener()
 {
 	// 创建鼠标滚动事件监听器
@@ -184,7 +189,7 @@ void GameScene::unRegisterMouseScrollListener()
 void GameScene::onMouseScroll(cocos2d::EventMouse* event)
 {
 	auto scrollDelta = event->getScrollY(); // 获取滚动增量
-	CCLOG("Mouse Scroll Delta: %f", scrollDelta);
+	// CCLOG("Mouse Scroll Delta: %f", scrollDelta);
 	// 计算摄像机的位置
 	Vec3 currentCameraPos = camera->getPosition3D();
 	// 计算摄像头目标位置
@@ -208,18 +213,13 @@ void GameScene::onMouseClick(cocos2d::EventMouse::MouseButton mouseButton)
 
 	// 获取瓦片图层
 	auto tileLayer = tileMap->getLayer("Meta");
-	auto groundLayer = tileMap->getLayer("Ground");
-	if (!tileLayer || !groundLayer) {
-		CCLOG("Layer not found");
-		return;
-	}
 
 	// 获得玩家的当前位置并转换为瓦片坐标
 	Vec2 currentPosition = player->getPosition();
 	Vec2 currenttile = convertToTileCoords(currentPosition);
 
 	// 获取鼠标点击位置
-	auto Location = inputManager->getMousePosition(MouseControlMode::SCENE);
+	auto Location = inputManager->getMousePosition(sceneName);
 	// 计算偏移量
 	Vec2 screenCenter = Vec2(Director::getInstance()->getVisibleSize().width / 2, Director::getInstance()->getVisibleSize().height / 2);
 	Vec2 offset = Vec2(currentPosition.x - screenCenter.x, currentPosition.y + screenCenter.y);
@@ -248,7 +248,7 @@ void GameScene::update(float delta)
 	// 获取瓦片图层
 	auto tileLayer = tileMap->getLayer("Meta");
 	if (!tileLayer) {
-		CCLOG("Layer not found");
+		CCLOG("Meta layer not found");
 		return;
 	}
 

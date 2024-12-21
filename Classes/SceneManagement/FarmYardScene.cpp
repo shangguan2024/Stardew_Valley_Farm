@@ -18,4 +18,5 @@ Scene* FarmYardScene::createScene()
 void FarmYardScene::initConstants()
 {
 	tileMap = new FarmYardMap();
+	sceneName = "FarmYard";
 }
