@@ -12,30 +12,85 @@ USING_NS_CC;
 
 Manager* Manager::instance = nullptr;
 
+Manager::Manager() {}
+
 Manager* Manager::getInstance()
 {
+    if (instance == nullptr) {
+        instance = new(std::nothrow)Manager();
+        if (!instance || !instance->init()) {
+           
+        }
+    }
 	return instance;
 }
 
-void Manager::addObject(const FarmObject& obj)
+bool Manager::init()
 {
-	objects.push_back(obj);
+
+    return true;
 }
 
-void Manager::addFarmland(const FarmLand& land)
+void Manager::addToScene(Scene* scene)
+{
+    for (auto& land : lands) {
+        if (land.getSprite()) {
+            scene->addChild(land.getSprite(), 1);
+            land.getSprite()->setCameraMask(unsigned short(CameraFlag::USER1));
+        }
+    }
+    for (auto& obj : objects) {
+        if (obj.getSprite()) {
+            scene->addChild(obj.getSprite(), 2);
+            obj.getSprite()->setCameraMask(unsigned short(CameraFlag::USER1));
+        }
+    }
+}
+
+void Manager::addObject(const FarmObject& obj, Scene* scene)
+{
+	objects.push_back(obj);
+    if (obj.getSprite()) {
+        scene->addChild(obj.getSprite());
+        obj.getSprite()->setCameraMask(unsigned short(CameraFlag::USER1));
+    }
+}
+
+void Manager::addFarmland(const FarmLand& land, Scene* scene)
 {
 	lands.push_back(land);
+    if (land.getSprite()) {
+        scene->addChild(land.getSprite());
+        land.getSprite()->setCameraMask(unsigned short(CameraFlag::USER1));
+    }
 }
 
 void Manager::update()
 {
-    for (auto& land : lands) {
-        // 更新逻辑
-        land.update();
+    // 更新耕地
+    for (auto it = lands.begin(); it != lands.end(); ) {
+        if (it->shouldRemove()) {
+            // 从场景中移除精灵
+            it->getSprite()->removeFromParent();
+            it = lands.erase(it);
+        }
+        else {
+            it->update();
+            it++;
+        }
     }
-    for (auto& obj : objects) {
-        // 更新逻辑
-        obj.update();
+
+    // 更新非耕地实体
+    for (auto it = objects.begin(); it != objects.end(); ) {
+        if (it->shouldRemove()) {
+            // 从场景中移除精灵
+            it->getSprite()->removeFromParent();
+            it = objects.erase(it);
+        }
+        else {
+            it->update();
+            it++;
+        }
     }
 }
 

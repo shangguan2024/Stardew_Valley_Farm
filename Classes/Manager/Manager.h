@@ -20,11 +20,16 @@ public:
     // 获取单例指针
 	static Manager* getInstance();
 
+    // 初始化
+    bool init();
+
+    void addToScene(cocos2d::Scene* scene);
+
     // 添加对象
-    void addObject(const FarmObject& obj);
+    void addObject(const FarmObject& obj, cocos2d::Scene* scene);
 
     // 添加耕地
-    void addFarmland(const FarmLand& land);
+    void addFarmland(const FarmLand& land, cocos2d::Scene* scene);
 
     // 管理更新每一个元素
     void update();

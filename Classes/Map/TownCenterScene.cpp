@@ -31,6 +31,7 @@ bool TownCenterScene::init()
 	// 创建摄像机
 	camera = Camera::create();
 	camera->setCameraFlag(CameraFlag::USER1);
+	camera->setDepth(-1);
 	cocos2d::Vec3 currentPos = camera->getPosition3D();
 	currentPos.z = DEFAULT_VIEW_HEIGHT;
 	camera->setPosition3D(currentPos);
@@ -46,6 +47,10 @@ bool TownCenterScene::init()
 	TownCentre->setPosition(0, 0);
 	TownCentre->setCameraMask(unsigned short(CameraFlag::USER1));
 	this->addChild(TownCentre, 0, "TownCentre");
+
+	auto gametimeLayer = GameTimeLayer::create();
+	gametimeLayer->setPosition(Vec2(0, 0));
+	this->addChild(gametimeLayer, 10);
 
 	// 获取地图的基础属性
 	auto objectGroup = TownCentre->getObjectGroup("Event");

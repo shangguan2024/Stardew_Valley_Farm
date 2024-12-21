@@ -38,17 +38,10 @@ private:
     // 转变坐标成瓦片坐标
     cocos2d::Vec2 convertToTileCoords(const cocos2d::Vec2& pos);
 
-    // 定义摄像机
-    cocos2d::Camera* camera;
-
-    // 玩家正在处理的位置
-    cocos2d::Sprite* targettile;
-
-    // 由农场转入房子的判断框
-    cocos2d::Rect yardToHouseRect;
-
-    // 由农场转入城镇的判断框
-    cocos2d::Rect yardToTownRect;
+    cocos2d::Camera* camera;         // 定义摄像机
+    cocos2d::Sprite* targettile;     // 玩家正在处理的位置
+    cocos2d::Rect yardToHouseRect;   // 由农场转入房子的判断框
+    cocos2d::Rect yardToTownRect;    // 由农场转入城镇的判断框
 
 };
 

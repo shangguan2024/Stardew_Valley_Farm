@@ -31,12 +31,6 @@
     <Filter Include="Classes\NPC">
       <UniqueIdentifier>{8abbea65-744d-4d06-83f1-09739050405f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\Animal">
-      <UniqueIdentifier>{49076dce-93f0-4115-a452-e68567641038}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Classes\SkillTree">
-      <UniqueIdentifier>{653b52ae-9ea4-400c-a1c8-9a3db77f57db}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes\Music">
       <UniqueIdentifier>{77b10359-be2d-43f0-8c6f-9657a20f1d7d}</UniqueIdentifier>
     </Filter>
@@ -87,14 +81,8 @@
     <ClCompile Include="..\Classes\NPC\NPC.cpp">
       <Filter>Classes\NPC</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Animal\Animal.cpp">
-      <Filter>Classes\Animal</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\NPC\ChatLayer.cpp">
       <Filter>Classes\NPC</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\SkillTree\SkillTree.cpp">
-      <Filter>Classes\SkillTree</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Music\AudioPlayer.cpp">
       <Filter>Classes\Music</Filter>
@@ -167,14 +155,8 @@
     <ClInclude Include="..\Classes\NPC\NPC.h">
       <Filter>Classes\NPC</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Animal\Animal.h">
-      <Filter>Classes\Animal</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\NPC\ChatLayer.h">
       <Filter>Classes\NPC</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\SkillTree\SkillTree.h">
-      <Filter>Classes\SkillTree</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Music\AudioPlayer.h">
       <Filter>Classes\Music</Filter>

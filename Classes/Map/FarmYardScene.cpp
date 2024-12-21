@@ -10,9 +10,8 @@
 #include "FarmHouseScene.h"
 #include "TownCenterScene.h"
 #include "../Player/Player.h"
-#include "../NPC/ChatLayer.h"
-#include "../NPC/NPC.h"
 #include "../GameTime/GameTimeLayer.h"
+#include "../Manager/Manager.h"
 
 USING_NS_CC;
 
@@ -82,6 +81,8 @@ bool FarmYardScene::init()
 	targettile->setCameraMask(unsigned short(CameraFlag::USER1));
 	this->addChild(targettile, 1, "targettile");
 
+	Manager::getInstance()->addToScene(this);
+
 	auto gametimeLayer = GameTimeLayer::create();
 	gametimeLayer->setPosition(Vec2(0, 0));
 	this->addChild(gametimeLayer, 10);
@@ -98,6 +99,8 @@ bool FarmYardScene::init()
 
 void FarmYardScene::update(float delta)
 {
+	Manager::getInstance()->update();
+
 	Player* player = Player::getInstance();
 
 	// 获取 FarmYard 地图对象
@@ -221,6 +224,9 @@ void FarmYardScene::onMouseClick(cocos2d::EventMouse* event)
 	if (mouseButton == EventMouse::MouseButton::BUTTON_LEFT) {
 		CCLOG("Left mouse button clicked");
 		// 执行左键点击相关操作
+
+		FarmLand land(targettile->getPosition().x, targettile->getPosition().y);
+		Manager::getInstance()->addFarmland(land, this);
 	}
 
 

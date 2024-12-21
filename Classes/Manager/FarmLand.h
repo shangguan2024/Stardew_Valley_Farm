@@ -10,7 +10,6 @@
 #define _FARMLAND_
 
 #include "cocos2d.h"
-#include "FarmLand.h"
 #include "FarmObject.h"
 #include "proj.win32/Constant.h"
 
@@ -23,8 +22,7 @@ public:
 	// 析构函数
 	~FarmLand();
 
-	// 耕地的状态
-	LandState landstate;
+	LandState getState();
 
 	// 更新函数
 	void update();
@@ -32,11 +30,20 @@ public:
 	// 浇水
 	void watering();
 
-	// 耕地所在位置
-	float x, y;
+	// 判断是否需要移除
+	bool shouldRemove() const;
 
-	// 当前干旱时间
-	int dryTime;
+	// 设置需要移除
+	void markForRemoval();
+
+	cocos2d::Sprite* getSprite() const;
+
+private:
+	cocos2d::Sprite* sprite;   // 对应的精灵
+	LandState landstate;       // 耕地的状态
+	int dryTime;               // 当前干旱时间
+	FarmObject* obj;           // 该块耕地上的作物
+	bool toRemove;             // 是否要删除
 
 };
 

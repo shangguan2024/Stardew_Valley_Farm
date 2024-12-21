@@ -10,7 +10,6 @@
 #define _FARMOBJECT_
 
 #include "cocos2d.h"
-#include "FarmObject.h"
 #include "../Item/Item.h"
 #include "proj.win32/Constant.h"
 #include "vector"
@@ -27,32 +26,28 @@ public:
 	// 是否成熟
 	bool ismature();
 
+	// 判断是否需要移除
+	bool shouldRemove() const;
+
+	// 设置需要移除
+	void markForRemoval();
+
 	// 成长
 	void update();
 
-	// 对象的种类
-	ObjectType objecttype;
+	cocos2d::Sprite* getSprite() const;
 
 	// 对象的碰撞体积
 	cocos2d::Rect objectsize;
 
-	// 当前阶段
-	int currstate;
-
 private:
-	// 最大阶段
-	int maxstate;
-
-#if 0
-    // 产量
-	std::vector<Item> harvests;
-#endif
-
-	// 成长率
-	float growthrate;
-
-	// 成长速度
-	float growthspeed;
+	cocos2d::Sprite* sprite;  // 对应的精灵
+	ObjectType objecttype;    // 对象的种类
+	int currstate;            // 当前阶段
+	int maxstate;             // 最大阶段
+	float growthrate;         // 成长率
+	float growthspeed;        // 成长速度
+	bool toRemove;            // 是否需要删除
 
 };
 

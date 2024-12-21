@@ -21,6 +21,9 @@ public:
 	// 为空格子添加物品
 	void setItem(std::shared_ptr<Item> _item, int _quantity);
 
+	// 获取当前物品的种类
+	std::shared_ptr<Item> getItem() const;
+
 	// 删去物品
 	void clearSlot();
 
@@ -29,9 +32,6 @@ public:
 
 	// 修改物品的数量
 	void changeQuantity(int amount);
-
-	// 获取当前物品的种类
-	std::shared_ptr<Item> getItem() const;
 
 	// 获取当前物品的数量
 	int getQuantity() const;

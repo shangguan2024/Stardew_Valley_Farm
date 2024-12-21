@@ -99,6 +99,7 @@ void Inventory::addItem(std::shared_ptr<Item> item, int quantity)
 	}
 
 }
+
 #if 0
 
 bool Inventory::isItemEnough(std::shared_ptr<Item> item, int quantity)
